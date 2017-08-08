@@ -5,6 +5,29 @@
         img {
             height: 40px;
             margin: 10px 0;
+            margin-left: @grid-gutter-width / 2;
         }
+    }
+}
+
+.vertical-row {
+    display: table;
+    height: 100%;
+}
+
+.vertical-column {
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+
+.content-row {
+    padding: 40px 0;
+}
+
+.hero {
+    padding-top: 80px;
+    img {
+        width: 100%;
     }
 }
