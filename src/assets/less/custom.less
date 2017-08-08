@@ -10,6 +10,11 @@
     }
 }
 
+body {
+    background: url("../img/bg-diagonal-gray.svg#svgView(preserveAspectRatio(none))") no-repeat;
+    background-size: 100% 100%;
+}
+
 .vertical-row {
     display: table;
     height: 100%;
@@ -30,4 +35,18 @@
     img {
         width: 100%;
     }
+}
+
+.btn-primary {
+    &:hover, &:active {
+        border: 1px solid @brand-primary;
+        background-color: @brand-primary;
+        color: #fff;
+    }
+}
+
+.btn-cta {
+    .btn-lg();
+    .btn-primary();
+    padding: 10px 48px;
 }
