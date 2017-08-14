@@ -39,12 +39,6 @@ body {
 }
 
 .event {
-    box-shadow: 0 14px 38px rgba(44,44,44,.01), 0 3px 8px rgba(44,44,44,.03);
-    padding: 25px;
-    background-color: #fff;
-    margin-bottom: 25px;
-    border-radius: @border-radius-base;
-    border: 1px solid rgba(44,44,44,.1);
     .event-inner {
         display: flex;
         align-items: center;
@@ -101,5 +95,26 @@ body {
 }
 
 .content-row-title {
+    margin-bottom: @grid-gutter-width;
+}
+
+.card {
+    box-shadow: 0 14px 38px rgba(44,44,44,.01), 0 3px 8px rgba(44,44,44,.03);
+    background-color: #fff;
     margin-bottom: 25px;
+    border-radius: @border-radius-base;
+    border: 1px solid rgba(44,44,44,.1);
+    &.card-grid {
+        margin-bottom: @grid-gutter-width;
+    }
+    .card-content {
+        padding: 25px;
+    }
+    .card-image {
+        width: 100%;
+        object-fit: cover;
+        &.card-image-low {
+            max-height: 200px;
+        }
+    }
 }
