@@ -13,7 +13,7 @@
 
 body {
     background: url("../img/bg-diagonal-gray.svg#svgView(preserveAspectRatio(none))") no-repeat;
-    background-size: 100% 100%;
+    background-size: 100%;
 }
 
 .vertical-row {
@@ -28,26 +28,78 @@ body {
 }
 
 .content-row {
-    padding: 40px 0;
+    padding: 80px 0;
 }
 
 .hero {
-    padding-top: 80px;
+    padding-top: 40px;
     img {
         width: 100%;
     }
 }
 
-.btn-primary {
-    &:hover, &:active {
-        border: 1px solid @brand-primary;
-        background-color: @brand-primary;
-        color: #fff;
+.event {
+    box-shadow: 0 14px 38px rgba(44,44,44,.01), 0 3px 8px rgba(44,44,44,.03);
+    padding: 25px;
+    background-color: #fff;
+    margin-bottom: 25px;
+    border-radius: @border-radius-base;
+    border: 1px solid rgba(44,44,44,.1);
+    .event-inner {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+        .event-date {
+            display: inline-block;
+            .event-day {
+                line-height: 0.8;
+                font-size: 3.3em;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+            .event-month {
+                line-height: 1.2;
+                font-size: 2.1em;
+                text-transform: uppercase;
+            }
+        }
+        .event-content {
+            white-space:nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            margin-left: 20px;
+            .event-title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 2em;
+            }
+            p {
+                line-height: 1.2;
+            }
+        }
+        p {
+
+            box-sizing: border-box;
+            width: 100%;
+            display:block;
+            white-space: pre-wrap;
+            margin: 0;
+            max-width: 100%;
+            text-overflow: ellipsis;
+        }
     }
 }
 
-.btn-cta {
-    .btn-lg();
-    .btn-primary();
-    padding: 10px 48px;
+.hero-logo {
+    @media (max-width: @screen-sm-max) {
+        .responsive-invisibility();
+    }
+}
+
+.content-row-title {
+    margin-bottom: 25px;
 }
