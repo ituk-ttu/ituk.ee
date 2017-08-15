@@ -1,32 +1,22 @@
 .content-row
     h2.text-center.content-row-title Tulevased üritused
-    .event.card
+    .text-center(v-if="events == null"): i.fa.fa-refresh.fa-spin-fast.fa-2x
+    p.text-center(v-if="events != null && events[0] == undefined") Üritusi pole :(
+    .event.card(v-for="event in events")
         .card-content
             .event-inner
                 .event-date
-                    p.event-day 24
-                    p.event-month sep
+                    p.event-day {{ getDateDay(event.start.dateTime) }}
+                    p.event-month {{ getDateMonth(event.start.dateTime) }}
                 .event-content
-                    p.event-time 12:00 - 19:00
-                    p.event-title ITÜKi infoõhtu
-                    p.event-location ICT-315
-    .event.card
-        .card-content
-            .event-inner
-                .event-date
-                    p.event-day 27
-                    p.event-month sep
-                .event-content
-                    p.event-time 17:00 - 19:00
-                    p.event-title A Hackers Guide to World Domination
-                    p.event-location ICT-312
-    .event.card
-        .card-content
-            .event-inner
-                .event-date
-                    p.event-day 31
-                    p.event-month sep
-                .event-content
-                    p.event-time 11:00 - 12:00
-                    p.event-title Researching Giraffes
-                    p.event-location ICT-101
+                    p.event-time
+                        span(v-if="isSingleDayEvent(event)")
+                            | {{ getDateClock(event.start.dateTime) }}
+                            | -
+                            | {{ getDateClock(event.end.dateTime) }}
+                        span(v-if="!isSingleDayEvent(event)")
+                            | {{ getDateDateAndClock(event.start.dateTime) }}
+                            | -
+                            | {{ getDateDateAndClock(event.end.dateTime) }}
+                    p.event-title {{ event.summary }}
+                    p.event-location {{ event.location }}

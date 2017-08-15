@@ -4,8 +4,8 @@ p.lead
     br
     | Kui soovid olla kursis ITÜKis toimuvaga ning saada parimaid töö- ja praktikapakkumisi, siis liitu meie tudengite
     | infolistiga siin:
-.form-group
+form.form-group(v-on:submit.prevent="newsletter.signup()")
     .input-group.input-group-lg
-        input.form-control(placeholder="example@example.com")
+        input.form-control(placeholder="example@example.com" v-model="newsletter.email" type="email" required)
         span.input-group-btn
             button.btn.btn-primary liitu
