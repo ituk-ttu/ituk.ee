@@ -3,15 +3,22 @@ var app = new Vue({
     data: {
         newsletter: {
             email: "",
-            status: "waiting",
-            signup: function () {
-                console.log(this.newsletter.email)
-            }
+            status: "waiting"
         },
         events: null,
         blogPosts: null
     },
     methods: {
+        joinNewsletter: function () {
+            this.newsletter.status = "working";
+            this.$http.post("https://ituk.ee/mailing-list-api/signup", {
+                body: {
+                    email: this.newsletter.email
+                }
+            }).then(function (response) {
+                this.newsletter.status = "success";
+            });
+        },
         getDateDay: function (date) {
             return moment(date).format("DD");
         },
@@ -42,8 +49,10 @@ var app = new Vue({
         }).then(function (response) {
             this.events = response.body.items;
         });
-        this.$http.get("https://blog.ituk.ee/ghost/api/v1.5.0/posts", {
+        this.$http.get("https://blog.ituk.ee/ghost/api/v0.1/posts", {
             params: {
+                client_id: "ghost-frontend",
+                client_secret: "1f4a86e4ab06",
                 limit: 3
             }
         }).then(function (response) {

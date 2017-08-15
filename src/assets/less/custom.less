@@ -37,6 +37,10 @@ body {
     img {
         width: 100%;
     }
+    .input-group {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 .event {
@@ -45,7 +49,7 @@ body {
         align-items: center;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space:nowrap;
+        white-space: nowrap;
         .event-date {
             display: inline-block;
             .event-day {
@@ -61,7 +65,7 @@ body {
             }
         }
         .event-content {
-            white-space:nowrap;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             display: block;
@@ -80,7 +84,7 @@ body {
 
             box-sizing: border-box;
             width: 100%;
-            display:block;
+            display: block;
             margin: 0;
             max-width: 100%;
             text-overflow: ellipsis;
@@ -99,22 +103,21 @@ body {
 }
 
 .card {
-    box-shadow: 0 14px 38px rgba(44,44,44,.01), 0 3px 8px rgba(44,44,44,.03);
+    box-shadow: 0 14px 38px rgba(44, 44, 44, .01), 0 3px 8px rgba(44, 44, 44, .03);
     background-color: #fff;
     margin-bottom: 25px;
     border-radius: @border-radius-base;
-    border: 1px solid rgba(44,44,44,.1);
+    border: 1px solid rgba(44, 44, 44, .1);
     &.card-grid, &:last-of-type {
         margin-bottom: @grid-gutter-width;
     }
     &.ghost-card {
-        min-height: 300px;
-        box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+        box-shadow: 8px 14px 38px rgba(39, 44, 49, .06), 1px 3px 8px rgba(39, 44, 49, .03);
         transition: all .5s ease;
         &:hover {
-            box-shadow: 0 0 1px rgba(39,44,49,.1), 0 3px 16px rgba(39,44,49,.07);
+            box-shadow: 0 0 1px rgba(39, 44, 49, .1), 0 3px 16px rgba(39, 44, 49, .07);
             transition: all .3s ease;
-            transform: translate3D(0,-1px,0);
+            transform: translate3D(0, -1px, 0);
         }
     }
     .card-content {
@@ -138,4 +141,24 @@ input:focus {
     // prevent chrome from doing weird things
     border-color: @brand-primary !important;
     box-shadow: none !important;
+}
+
+.footer {
+    text-align: center;
+    width: 100%;
+    background-color: #EFEFEF;
+    padding: @grid-gutter-width 0;
+    .footer-social {
+        a {
+            margin-right: 20px;
+            &:last-child {
+                margin-right: 0;
+            }
+
+        }
+    }
+}
+
+.inline {
+    display: inline-block;
 }
