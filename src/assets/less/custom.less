@@ -28,11 +28,12 @@ body {
 }
 
 .content-row {
-    padding: 80px 0;
+    padding: 20px 0;
 }
 
 .hero {
-    padding-top: 40px;
+    padding-top: 80px;
+    margin-bottom: @grid-gutter-width * 1.5;
     img {
         width: 100%;
     }
@@ -104,8 +105,18 @@ body {
     margin-bottom: 25px;
     border-radius: @border-radius-base;
     border: 1px solid rgba(44,44,44,.1);
-    &.card-grid {
+    &.card-grid, &:last-of-type {
         margin-bottom: @grid-gutter-width;
+    }
+    &.ghost-card {
+        min-height: 300px;
+        box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+        transition: all .5s ease;
+        &:hover {
+            box-shadow: 0 0 1px rgba(39,44,49,.1), 0 3px 16px rgba(39,44,49,.07);
+            transition: all .3s ease;
+            transform: translate3D(0,-1px,0);
+        }
     }
     .card-content {
         padding: 25px;
@@ -117,4 +128,10 @@ body {
             max-height: 200px;
         }
     }
+}
+
+input:focus {
+    // prevent chrome from doing weird things
+    border-color: @brand-primary !important;
+    box-shadow: none !important;
 }

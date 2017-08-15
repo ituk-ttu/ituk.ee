@@ -16,14 +16,8 @@ var dir = {
 };
 
 gulp.task("js", function() {
-    es.concat(
-            gulp.src(dir.src + dir.assets + "js/**/*.js")
-    )
-        .pipe(plumber())
-        .pipe(sourcemaps.init())
-        .pipe(concat("app.js"))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(dir.dest + dir.assets + "js/"));
+    gulp.src(dir.src + dir.assets + 'js/**/*.js')
+        .pipe(gulp.dest(dir.dest + dir.assets + 'js/'))
 });
 
 gulp.task("jade", function () {

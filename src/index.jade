@@ -2,8 +2,10 @@ include partials/head
 html
     body
         include partials/navbar
-        .container
+        .container#app
             include partials/hero
             include partials/nextEvents
-            include partials/midaTeeme
+            include content/midaTeeme
+            include partials/latestBlogPosts
+script(src="assets/js/index.js")
 
