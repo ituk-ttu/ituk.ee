@@ -1,8 +1,8 @@
 .content-row
     h2.text-center.content-row-title Tulevased üritused
     .text-center(v-if="events == null"): i.fa.fa-refresh.fa-spin-fast.fa-2x
-    p.text-center(v-if="events != null && events[0] == undefined") Üritusi pole :(
-    .event.card(v-for="event in events")
+    p.text-center(v-if="events != null && events[0] == undefined" v-cloak) Üritusi pole :(
+    .event.card(v-for="event in events" v-cloak)
         .card-content
             .event-inner
                 .event-date
