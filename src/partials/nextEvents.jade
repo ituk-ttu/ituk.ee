@@ -20,3 +20,4 @@
                             | {{ getDateDateAndClock(event.end.dateTime) }}
                     p.event-title {{ event.summary }}
                     p.event-location {{ event.location }}
+                    a.event-link(v-bind:href="event.description") Vaata veel...
