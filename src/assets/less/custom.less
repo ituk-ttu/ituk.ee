@@ -122,6 +122,12 @@ body {
     }
     .card-content {
         padding: 25px;
+        &.limit-length > h3 {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            hyphenate-character: "-";
+        }
     }
     .card-image {
         width: 100%;
