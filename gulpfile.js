@@ -48,7 +48,7 @@ gulp.task("less", function() {
 });
 
 gulp.task("img", function () {
-    gulp.src(dir.src + dir.assets + 'img/**/*.{jpg,png,svg}')
+    gulp.src(dir.src + dir.assets + 'img/**/*.{jpg,JPG,png,svg}')
         .pipe(gulp.dest(dir.dest + dir.assets + 'img/'))
 });
 
@@ -64,7 +64,7 @@ gulp.task("default", ["jade", "js", "less", "img"], function() {
     gulp.watch(dir.src + "/**/*.jade", function() {
         gulp.run("jade");
     });
-    gulp.watch(dir.src + dir.assets + "img/**/*.{jpg,png,svg}", function() {
+    gulp.watch(dir.src + dir.assets + "img/**/*.{jpg,JPG,png,svg}", function() {
         gulp.run("img");
     });
 });
