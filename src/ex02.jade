@@ -1,0 +1,235 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                div(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title EX02 Coordinates
+                    #app.columns.assignment-columns
+                        .column.is-two-thirds.assignment-content.content
+                            p
+                                | Fail:
+                                code ex02_coordinates/polar.py
+                            p
+                                | Ülesande eesmärk on teha programm, mis suudab teha teisendusi rist- ja polaarkoordinaatide vahel.
+                            a(name='rist-ehk-karteesiuse-koordinaadid')
+                            h2 Rist- ehk karteesiuse koordinaadid
+                            p
+                                | Ristkoordinaadid on koolimatemaatikast tuttav koordinaatide süsteem,
+                                | mille määramisel on aluseks kaks teineteisega ristuvat kiirt.
+                            p
+                                | Horisontaalset kiirt kutsutakse
+                                strong abstsissteljeks
+                                |  ehk
+                                strong x-teljeks
+                                |  ja
+                                | vertikaalset
+                                strong ordinaatteljeks
+                                |  ehk
+                                strong y-teljeks
+                                | .
+                            p
+                                | Nende telgede ristumispunkti nimetakse
+                                strong koordinaatide alguspunktiks
+                                |  ehk
+                                strong nullpunktiks
+                                | .
+                            p Iga punkti asukoha määrab arvupaar (x, y).
+                            img(alt='https://ained.ttu.ee/pydoc/images/ex02_carteesian.png', src='https://ained.ttu.ee/pydoc/images/ex02_carteesian.png')
+                            a(name='polaarkoordinaadid')
+                            h2 Polaarkoordinaadid
+                            p
+                                a(href='https://et.wikipedia.org/wiki/Polaarkoordinaadid', rel='nofollow noreferrer noopener', target='_blank') Polaarkoordinaadid
+                                | on kahemõõtmeline koordinaatide süsteem,
+                                | kus iga tasandi punkt on määratud kaugusega fikseeritud punktist (
+                                em koordinaatide alguspunktist
+                                |  ehk
+                                em poolusest
+                                | )
+                                | ja nurgaga fikseeritud suunast (
+                                em x-teljest
+                                |  ehk
+                                em polaarteljest
+                                | ).
+                            p
+                                | Kaugust poolusest
+                                em r
+                                |  nimetatakse
+                                strong radiaalkoordinaadiks
+                                |  ehk
+                                strong polaarraadiuseks
+                                | .
+                            p
+                                | Nurka
+                                em θ
+                                |  kohavektori ja polaartelje vahel nimetatakse
+                                strong nurgakoordinaadiks
+                                |  ehk
+                                strong polaarnurgaks
+                                | .
+                            img(alt='https://ained.ttu.ee/pydoc/images/ex02_polar.png', src='https://ained.ttu.ee/pydoc/images/ex02_polar.png')
+                            p
+                                | Polaarkoordinaate kasutatakse näiteks geograafias, kus määratakse asimuut (
+                                em polaarnurk
+                                | ) ning mingi objekti kaugus (
+                                em raadius
+                                | ).
+                            a(name='ulesanne')
+                            h2 Ülesanne
+                            p
+                                | Programmis peab olema defineeritud 2
+                                a(href='https://ained.ttu.ee/pydoc/func_overview.html', rel='nofollow noreferrer noopener', target='_blank') funktsiooni
+                                | .
+                                | Funktsioonid peavad andma täpse tulemuse vähemalt 2 komakohani. Ümardamise kohta saab lugeda
+                                a(href='https://ained.ttu.ee/pydoc/math.html#umardamine', rel='nofollow noreferrer noopener', target='_blank') siit
+                                | .
+                            a(name='convert-polar-to-cartesian-r-phi')
+                            h3
+                                code convert_polar_to_cartesian(r, phi)
+                            p
+                                | Teisenda polaarkoordinaadid ristkoordinaatideks. Funktsioon võtab vastu 2 parameetrit
+                                code r
+                                |  (raadius) ja
+                                code fii
+                                |  (
+                                em phi
+                                |  ehk φ - nurgakoordinaat).
+                                | Fii on antud kraadides (
+                                em degree
+                                | ).
+                                | Funktsioon peab tagastama
+                                a(href='https://ained.ttu.ee/pydoc/tuple.html', rel='nofollow noreferrer noopener', target='_blank') enniku
+                                |  x- ja y-koordinaadiga.
+                            p Teisenduseks saab kasutada kahte valemit:
+                            ul
+                                li
+                                    img(alt='https://wikimedia.org/api/rest_v1/media/math/render/svg/2ec84f3b8f3196698a3693a21f258e47f270302f', src='https://wikimedia.org/api/rest_v1/media/math/render/svg/2ec84f3b8f3196698a3693a21f258e47f270302f')
+                                li
+                                    img(alt='https://wikimedia.org/api/rest_v1/media/math/render/svg/134779a8ff7881855e5fee80bf520c212414de56', src='https://wikimedia.org/api/rest_v1/media/math/render/svg/134779a8ff7881855e5fee80bf520c212414de56')
+                            p
+                                | Siinuse ja koosinuse arvutamiseks tuleb need
+                                a(href='https://ained.ttu.ee/pydoc/math.html', rel='nofollow noreferrer noopener', target='_blank') matemaatika moodulist
+                                |  importida.
+                            pre.
+                                from math import sin, cos, pi
+                                var = sin(pi/2)  # math.sin() accepts radians not degrees!
+                                print(var)  # --> 1.0
+                            p
+                                | Radiaanide ja kraadide teisendamiseks on matemaatika moodulis defineeritud meetodid
+                                code radians()
+                                |  ja
+                                code degrees()
+                                | .
+                            pre.
+                                from math import radians, degrees, pi
+                                rad = radians(45)
+                                print(rad)  #  -> 0.7853981633974483
+
+                                deg = degrees(rad)
+                                print(deg)  # -> 45.0
+                            p Koodinäide enniku tagastamisest:
+                            pre.
+                                def this_and_that():
+                                    """Get this and that."""
+                                    this = 2 * 3 * 7  # calculate this
+                                    that = "".join(chr(i) for i in [116, 104, 97, 116])  # calculate that
+                                    return this, that # return tuple of this and that
+                                print(this_and_that())  # -> (42, 'that')
+                            a(name='def-convert-cartesian-to-polar-x-y')
+                            h3
+                                code def convert_cartesian_to_polar(x, y)
+                            p
+                                | Teisenda ristkoordinaadid polaarkoordinaatideks. Funktsioon võtab vastu 2 parameetrit
+                                code x
+                                |  ja
+                                code y
+                                | .
+                                | Funktsioon peab tagastama enniku raadiusest ja polaarnurgast θ kraadides.
+                            p Polaarnurk peab jääma poollõiku (−180°; 180°].
+                            p Raadiuse arvutamiseks saab kasutada Pythagorase teoreemi:
+                            img(alt='https://wikimedia.org/api/rest_v1/media/math/render/svg/afb6708667a514df6ee012f596de9a17240affd7', src='https://wikimedia.org/api/rest_v1/media/math/render/svg/afb6708667a514df6ee012f596de9a17240affd7')
+                            p
+                                | Polaarnurga θ arvutamiseks tuleb kasutada keerulisemat valemit, mis arvestab sellega, millises tasandi veerandis punkt asub.
+                            img(alt='https://wikimedia.org/api/rest_v1/media/math/render/svg/63e66b43be777ee916f4629b9472919506254a96', src='https://wikimedia.org/api/rest_v1/media/math/render/svg/63e66b43be777ee916f4629b9472919506254a96')
+                            p
+                                | Valem annab polaarnurga radiaanides, kus väärtus jääb poollõiku (−π, π], seda väärtust kraaditesse teisendades saabki sobiva väärtuse kraadides poollõigus (−180°; 180°].
+                            p
+                                | Valemi jaoks vajaliku
+                                code arctan(x)
+                                |  funktsiooni leiab matemaatika moodulist
+                                code atan
+                                |  nime alt.
+                                strong
+                                    | NB! lahenduses ei tohi kasutada math mooduli atan2 funktsiooni ning cmath moodulit.
+                            a(name='soovitusi-lahendamiseks')
+                            h3 Soovitusi lahendamiseks
+                            p
+                                | Keerulise polaarnurga θ arvutamiseks mõeldud valem tasub viia eraldi funktsiooni,
+                                | näiteks
+                                code def arctan2(x, y)
+                                | . Nii jääb kood paremini loetav ja
+                                a(href='https://ained.ttu.ee/pydoc/debug.html', rel='nofollow noreferrer noopener', target='_blank') parandatav
+                                |  (
+                                em debug
+                                | ).
+                            a(name='mall')
+                            h3 Mall
+                            pre.
+                                """Polar and cartesian points converter."""
+                                from math import cos, sin, pi, atan, degrees, radians, sqrt
+
+                                def convert_polar_to_cartesian(r, phi):
+                                    """
+                                    Convert point from polar coordinates to cartesian coordinates.
+
+                                :param r: radius, the distance from pole to point.
+                                :param phi: polar angle, or azimuth in degrees.
+                                :return: tuple, of x- and y-coordinate of the point
+                                """
+                                pass
+
+                                def convert_cartesian_to_polar(x, y):
+                                """
+                                Convert point from cartesian coordinates to polar coordinates.
+
+                                Radius is equal to the length of vector from pole (0, 0) to the point (x, y).
+                                Calculated as in the Pythagorean theorem.
+
+                                Polar angle is the angle between positive x-axis and the ray from the pole (0, 0) to the point (x, y).
+                                Calculated using atan2 function, the angle is float (φ) in range −180° < φ ≤ 180°.
+
+                                :param x: x-coordinate of given point
+                                :param y: y-coordinate of given point
+                                :return: tuple, of polar radius and polar angle in degrees.
+                                """
+                                pass
+
+                                if __name__ == '__main__':
+                                print("to polar")
+                                print(convert_cartesian_to_polar(1, 1))  # (1.41, 45.0)
+                                print(convert_cartesian_to_polar(0, 0))  # (0.0, 0.0)
+                                print(convert_cartesian_to_polar(0, 1))  # (1.0, 90.0)
+                                print(convert_cartesian_to_polar(-3, -4))  # (5.0, -126.87)
+
+                                print("\nto cartesian")
+                                print(convert_polar_to_cartesian(1, 90))  # (0.0, 1.0)
+                                print(convert_polar_to_cartesian(0, 0))  # (0.0, 0.0)
+                                print(convert_polar_to_cartesian(2, 60))  # (1.0, 1.73)
+                                print(convert_polar_to_cartesian(3, -40))  # (2.3, -1.93)
+                            a(name='lugemist-pydocist')
+                            h2 Lugemist PyDocist
+                            ul
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/func_overview.html', rel='nofollow noreferrer noopener', target='_blank') funktsiooni mõiste
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/func.html', rel='nofollow noreferrer noopener', target='_blank') funktsioon ja argumendid
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/tuple.html', rel='nofollow noreferrer noopener', target='_blank') ennik
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/math.html', rel='nofollow noreferrer noopener', target='_blank') matemaatilised avaldised
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/debug.html', rel='nofollow noreferrer noopener', target='_blank') koodi silumine
+        include partials/footer

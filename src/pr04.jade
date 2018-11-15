@@ -1,0 +1,88 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                div(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title PR04 Vowels
+                    #app.columns.assignment-columns
+                        .column.is-two-thirds.assignment-content.content
+                            p
+                                | Fail:
+                                code pr04_vowels/vowels.py
+                            p
+                                | Ülesande eesmärgiks on luua programm, mis sorteerib (ehk järjestab) sõnede järjendi sõnedes olevate täishäälikute arvu järgi.
+                            a(name='funktsioonid')
+                            h2 Funktsioonid:
+                            p
+                                code number_of_vowels(string)
+                                |  - Sisendiks on string ehk sõne. Funktsioon peab tagastama täishäälikute arvu selles sõnes. Ülesande lihtsustamiseks jätab täpitähed välja.
+                                | Funktsioon peab arvestama nii suur- kui väiketähtedega.
+                            p
+                                code word_with_most_vowels(string_list)
+                                |  - Saab sisendiks sõnedest koosneva järjendi. Funktsioon peab tagastama järjendist sõne, milles on kõige rohkem täishäälikuid.
+                                | kui kahel sõnel on sama palju täishäälikuid, siis tagastada sõne, mis paikneb järjendis eespool. Selles funktsioonis tuleks ära kasutada funktsiooni
+                                code number_of_vowels()
+                                | .
+                            p
+                                code sort_list(string_list)
+                                |  Sisendiks on sõnedest koosnev järjend. Funktsioon peab tagastama sama järjendi sorteeritult täishäälikute arvu järgi. Sorteerimiseks tuleb kasutada
+                                code word_with_most_vowels()
+                                |  funktsiooni. Tühja järjendi sisendiks saamisel tagastada tühi järjend.
+                            a(name='mall')
+                            h2 Mall:
+                            pre.
+                                """Sorting."""
+
+                                def number_of_vowels(string: str):
+                                    """
+                                    Find the number of vowels(a, e, i, o, u) in word.
+
+
+                                :param string:
+                                :return: number of vowels in string
+                                """
+                                pass
+
+
+                                def word_with_most_vowels(string_list: list):
+                                """
+                                Find and return the string with most vowels in the list.
+
+                                :param string_list:
+                                :return: The string with most vowels in the list.
+                                """
+                                pass
+
+
+                                def sort_list(string_list: list):
+                                """
+                                Sort the list by the number of vowels in the string.
+
+                                :param string_list: List of strings that need to be sorted.
+                                :return: List of strings sorted by the number of vowels.
+                                """
+                                pass
+                            a(name='naited')
+                            h2 Näited
+                            pre.
+                                if __name__ == '__main__':
+                                    print(number_of_vowels("aAe"))  # -> 3
+                                    print(number_of_vowels("klm124"))  # -> 0
+                                    print(word_with_most_vowels(['Now', "there", "are", 'two', "of", "them"]))  # -> there
+                                    print(sort_list(['Now', "there", "are", 'two', "of", "them"]))  # -> ['there', 'are', 'Now', 'two', 'of', 'them']
+                                    print(word_with_most_vowels(["ssh", "n0", "v0w3ls"]))  # -> ssh
+                                    print(sort_list(["ssh", "n0", "v0w3ls"]))  # -> ['ssh', 'n0', 'v0w3ls']
+                            a(name='kasulikud-lingid')
+                            h2 Kasulikud lingid:
+                            ul
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/string.html', rel='nofollow noreferrer noopener', target='_blank') sõne (string)
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/loop.html', rel='nofollow noreferrer noopener', target='_blank') tsükkel järjendi läbi käimiseks
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/list.html', rel='nofollow noreferrer noopener', target='_blank') Järjend (list)
+        include partials/footer

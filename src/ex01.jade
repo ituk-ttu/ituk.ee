@@ -1,0 +1,163 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                #yui_3_17_2_1_1542312825384_22(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title EX01 Hello
+                    #app.columns.assignment-columns
+                        #yui_3_17_2_1_1542312825384_21.column.is-two-thirds.assignment-content.content
+                            p
+                                | Fail:
+                                code ex01_hello/hello.py
+                            p
+                                | Ülesande eesmärk on teha programm, mis küsib sisendit(input) ja prindib vastavalt sisendile vastused.
+                            a(name='ulesanne')
+                            h2 Ülesanne
+                            dl#yui_3_17_2_1_1542312825384_28
+                                dt
+                                    strong 1.  Programm küsib sisendit: (input)
+                                dd
+                                    | "What's your name?:" ja "Where do you study?:"
+                                    | Nimi ja kool on nõutud(Ei tohi olla tühjad). Kui nimi on puudu peab programm printima "Name was not inserted!", kui kooli nimi on puudu tuleb printida "School was not inserted!"
+                                    | Lõpus peaks programm printima
+                                    | "(Sisestatud nimi), welcome to (sisestatud kool)"
+                                dt
+                                    strong 2.  Arvuta kehamassi indeks kasutades sisendit (input)
+                                    | .
+                                dd#yui_3_17_2_1_1542312825384_27
+                                    p
+                                        | Üks sisend on
+                                        strong mass
+                                        |  (kg)
+                                        | teine sisend
+                                        strong height
+                                        |  (m). Lõpuks peab programm printima "(kehamassiindeks), (kehamassitüüp)"
+                                        strong kehamassitüüp printida väikeste tähtedega!
+                                    img(alt='https://ained.ttu.ee/pydoc/images/ex01_bmi.png', src='https://ained.ttu.ee/pydoc/images/ex01_bmi.png')
+                                    p Kehamassi tüübid:
+                                    p
+                                        strong < 18.5 -> alakaaluline
+                                    p
+                                        strong 18.5 - 24.9 normaalkaal
+                                    p
+                                        strong 25.0 ja üle ülekaaluline
+                            a(name='naidisvaljund')
+                            h2 Näidisväljund
+                            pre.
+                                What's your name?:Zaphod Beeblebrox
+                                Where do you study?:Betelgeuse University
+                                Zaphod Beeblebrox, welcome to Betelgeuse University
+                                Mass (kg):80
+                                Height (m):2
+                                20.0, normaalkaal
+                            a(name='vajalikud-teadmised-kodutoo-lahendamiseks')
+                            h2 Vajalikud teadmised ülesande lahendamiseks
+                            a(name='print')
+                            h3
+                                code print
+                            p
+                                code print
+                                |  funktsioon võimaldab printida erinevaid väärtusi konsooli.
+                            pre.
+                                print("Hello") # prints "Hello" to the console
+                            a(name='muutuja')
+                            h3
+                                a(href='https://ained.ttu.ee/pydoc/variable.html', rel='nofollow noreferrer noopener', target='_blank') Muutuja
+                            p Muutujasse on võimalik salvestada erinevaid väärtusi.
+                            pre.
+                                number = 42 # saves int 12 to variable named named number
+                                print(number) # prints 42 to the console
+                            a(name='sisendi-lugemine-standardsisendist-input')
+                            h3
+                                a(href='https://ained.ttu.ee/pydoc/input.html', rel='nofollow noreferrer noopener', target='_blank') Sisendi lugemine standardsisendist
+                                |  (
+                                code input
+                                | )
+                            p
+                                code input
+                                |  funktsiooniga saab küsida kasutajalt sisendit. Sisendit
+                                | küsides tuleb tähele panna, et muutujasse salvestatakse sisestatud
+                                | väärtus
+                                strong sõnena
+                                |  (
+                                code str
+                                | ).
+                            p
+                                | Näide, kus küsimuse "How old are you" vastus salvestatakse muutujasse
+                                code age
+                                | .
+                            pre.
+                                age = input("How old are you?") # waits for user to enter age.
+                            a(name='sone-konverteerimine-ujukomaarvuks')
+                            h3
+                                a(href='https://ained.ttu.ee/pydoc/string.html?highlight=konvertida', rel='nofollow noreferrer noopener', target='_blank') Sõne
+                                |  konverteerimine ujukomaarvuks.
+                            pre.
+                                number = float("12.2") # now I can to math with 12.2
+                                print(number + 3) # prints 15.2
+                            p
+                                | Kui me ei muuda eelnevalt numbreid ujukomaarvuks
+                                code float
+                                |  või
+                                | täisarvuks
+                                code int
+                                |  võib kood visata erindi või käituda veidralt.
+                            pre.
+                                a = "12" + "3"
+                                print(a) # prints "123"
+                            a(name='tingimuslause-if-elif-else')
+                            h3
+                                a(href='https://ained.ttu.ee/pydoc/if_statements.html', rel='nofollow noreferrer noopener', target='_blank') Tingimuslause
+                                |  (
+                                code if-elif-else
+                                | )
+                            p
+                                | Tingimuslause võimaldab käivitada mingit koodi osa, kui on täitetud
+                                | mingi kindel tingimus.
+                            p
+                                | Kõige lihtsam tingimuslause sisaldab võtmesõna
+                                code if
+                                |  ja tingimust,
+                                | mille tõeseks osutumisel käivitatakse koodiblokk, mis järgneb tingimuslausele.
+                                | olev kood. Näiteks.
+                            pre#yui_3_17_2_1_1542312825384_20.
+                                this = "that"
+                                if this == "that":
+                                    print("This is that.")
+                            p
+                                | Kui me soovime tingimuse mitte täitumisel mingit muud koodi käivitada
+                                | siis kasutame võtmesõna
+                                code else
+                                | .
+                            pre.
+                                this = "not that"
+                                if this == "that": # but this is "not that" so this does not equal "that"
+                                    print("This is that.") # this line is not printed
+                                else:
+                                    print("This is not that.") # this line is printed
+                            p
+                                | Kui me soovime tingimuse mitte täitumisel proovida, kas mõni muu
+                                | tingimus on täitetud kasutame võtmesõna
+                                code elif
+                                | .
+                            pre.
+                                number = 13
+                                if number > 30:
+                                    print("Number is bigger than 30.")
+                                elif number <= 0:
+                                    print("Number is less or equal than zero")
+                                else:
+                                    print("Number is is between 0 and 30.")
+                            a(name='viited')
+                            h2 Viited:
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/input.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/input.html
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/if_statements.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/if_statements.html
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/style.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/style.html
+        include partials/footer

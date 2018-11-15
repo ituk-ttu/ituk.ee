@@ -1,0 +1,532 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                div(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title EX03 ID code validity
+                    #app.columns.assignment-columns
+                        .column.is-two-thirds.assignment-content.content
+                            p
+                                | Fail:
+                                code ex03_id/id_code.py
+                            p
+                                | Ülesande eesmärk on teha programm, mis võimaldab kontrollida antud isikukoodi
+                                | korrektsust.
+                            p
+                                strong Ülesande tekstis on kaks malli - need mõlemad lähevad samasse faili
+                                code id_code.py
+                                | .
+                            a(name='isikukoodi-numbrid-nende-tahendused-ja-piirangud')
+                            h2 Isikukoodi numbrid, nende tähendused ja piirangud
+                            p
+                                | Isikukood koosneb täpselt
+                                strong 11
+                                |  numbrist ehk antud sõne pikkus ei saa ületada
+                                | 11.
+                                | Numbrite tähendused:
+                            p
+                                strong esimene
+                                |  number:
+                            ul
+                                li
+                                    strong 1
+                                    |  - aastail 1800-1899 sündinud mees
+                                li
+                                    strong 2
+                                    |  - aastail 1800-1899 sündinud naine
+                                li
+                                    strong 3
+                                    |  - aastail 1900-1999 sündinud mees
+                                li
+                                    strong 4
+                                    |  - aastail 1900-1999 sündinud naine
+                                li
+                                    strong 5
+                                    |  - aastail 2000-2099 sündinud mees
+                                li
+                                    strong 6
+                                    |  - aastail 2000-2099 sündinud naine
+                            p
+                                strong teine
+                                |  ja
+                                strong kolmas
+                                |  number:
+                            ul
+                                li
+                                    | sünniaasta
+                                    strong 2
+                                    |  viimast numbrit
+                                    em (nt 01, 75 jne kuni 99)
+                            p
+                                strong neljas
+                                |  ja
+                                strong viies
+                                |  number:
+                            ul
+                                li
+                                    | sünnikuu number
+                                    em (nt jaanuar - 01, veebruar - 02 jne, kuni 12)
+                            p
+                                strong kuues
+                                |  ja
+                                strong seitsmes
+                                |  number:
+                            ul
+                                li
+                                    | sünnikuupäeva number
+                                    em
+                                        | (nt 01, 08, 20 jne kuni 28, 29, 30 või 31 vastavalt
+                                        | sünnikuule)
+                            p
+                                strong kaheksas
+                                | ,
+                                strong üheksas
+                                |  ja
+                                strong kümnes
+                                |  number:
+                            ul
+                                li
+                                    | sellel päeval sündinu järjekorranumber
+                                    em (nt 000, 012 jne kuni 999)
+                            p
+                                strong üheteistkümnes
+                                |  number:
+                            ul
+                                li
+                                    | kontrollnumber, millel on täpne vahemik
+                                    em (0 kuni 9)
+                                    | , aga selleks on olemas
+                                    a(href='#kontrollnumbri-arvutamise-algoritm') Kontrollnumbri arvutamise algoritm
+                            a(name='ulesanne')
+                            h2 Ülesanne
+                            p
+                                | Programm koosneb mitmetest funktsioonidest, mis kontrollivad isikukoodi
+                                | erinevaid koostisosi ning mõned koostavad mingi osa sõnumist, kui küsitakse
+                                | infot inimese kohta antud isikukoodiga.
+                            ul
+                                li
+                                    code check_your_id(id_code: str)
+                                    |  - peamine funktsioon, mis kasutab teisi ehk
+                                    | kontroll-funktsioone, tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    |  peale kõiki tulemusi
+                                    | kättesaamist. Sisendiks on isikukood sõne kujul;
+                                li
+                                    code check_gender_number(gender_number: int)
+                                    |  - kontrollib soo numbrit, tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                                li
+                                    code check_year_number_two_digits(year_number: int)
+                                    |  - kontrollib aasta numbrit,
+                                    | tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                                li
+                                    code check_month_number(month_number: int)
+                                    |  - kontrollib kuu numbrit, tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                                li
+                                    code check_day_number(year_number: int, month_number: int, day_number: int)
+                                    |  -
+                                    | kontrollib kuupäeva numbrit; peab kindlasti vaatama seda, millises kuus on 30
+                                    | või 31 päeva ja arvestama ka veebruari päevade arvu muutmisega, tagastab
+                                    code True
+                                    | või
+                                    code False
+                                    | ;
+                                    strong
+                                        | NB! Kontrollides, kas kuus on 30 või 31 päeva, ei tohi lihtsalt
+                                        | kirja panna kõik sobivad kuud tingimuslausete sisse, proovige leida kuu numbri
+                                        | ja päevade arvu sõltuvust.
+                                    strong
+                                        | NB! Enne liigasta kontrollimist tuleb koostada isikukoodis antud aasta
+                                        | kahest viimastest numbritest aasta terve neljakohaline number. Selleks võib
+                                        | kasutada funktsioone, mis on mõeldud sõnumi koostamiseks!
+                                li
+                                    code check_leap_year(year_number: int)
+                                    |  - abifunktsioon, mis aitab aru saada, kas
+                                    | tegemist on liigaastaga või mitte. Selle funktsiooni sisendiks on juba
+                                    strong neljakohaline
+                                    |  aasta number. Tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                                li
+                                    code check_born_order(born_order: int)
+                                    |  - kontrollib sündinu järjenumbrit, tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                                li
+                                    code check_control_number(id_code: str)
+                                    |  - kontrollib kontrollnumbri
+                                    | korrektsust, aga kasutades algoritmi, millega luuakse need numbrid
+                                    | (
+                                    a(href='#kontrollnumbri-arvutamise-algoritm') Kontrollnumbri arvutamise algoritm
+                                    | ), tagastab
+                                    code True
+                                    |  või
+                                    code False
+                                    | ;
+                            a(name='mall')
+                            h3 Mall
+                            pre.
+                                """Check if given ID code is valid."""
+
+                                def check_your_id(id_code: str):
+                                    """
+                                    Check if given ID code is valid and return the result.
+
+                                :param id_code: str
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_gender_number(gender_number: int):
+                                """
+                                Check if given value is correct for gender number in ID code.
+
+                                :param gender_number: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_year_number_two_digits(year_number: int):
+                                """
+                                Check if given value is correct for year number in ID code.
+
+                                :param year_number: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_month_number(month_number: int):
+                                """
+                                Check if given value is correct for month number in ID code.
+
+                                :param month_number: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_day_number(year_number: int, month_number: int, day_number: int):
+                                """
+                                Check if given value is correct for day number in ID code.
+                                Also, consider leap year and which month has 30 or 31 days.
+
+                                :param year_number: int
+                                :param month_number: int
+                                :param day_number: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_leap_year(year_number: int):
+                                """
+                                Check if given year is a leap year.
+
+                                :param year_number: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_born_order(born_order: int):
+                                """
+                                Check if given value is correct for born order number in ID code.
+
+                                :param born_order: int
+                                :return: boolean
+                                """
+                                pass
+
+
+                                def check_control_number(id_code: str):
+                                """
+                                Check if given value is correct for control number in ID code.
+                                Use algorithm made for creating this number.
+
+                                :param id_code: string
+                                :return: boolean
+                                """
+                                pass
+
+                                if __name__ == '__main__':
+                                print("Overall ID check::")
+                                print(check_your_id("49808270244"))  # -> True
+                                personal_id = input()  # type your own id in command prompt
+                                print(check_your_id(personal_id))  # -> True
+                                print(check_your_id("12345678901"))  # -> False
+                                print("\nGender number:")
+                                for i in range(9):
+                                print(f"{i} {check_gender_number(i)}")
+                                # 0 -> False
+                                # 1...6 -> True
+                                # 7...8 -> False
+                                print("\nYear number:")
+                                print(check_year_number_two_digits(100))  # -> False
+                                print(check_year_number_two_digits(50))  # -> true
+                                print("\nMonth number:")
+                                print(check_month_number(2))  # -> True
+                                print(check_month_number(15)) # -> False
+                                print("\nDay number:")
+                                print(check_day_number(2005, 12, 25))  # -> True
+                                print(check_day_number(1910, 8, 32))  # -> False
+                                print(check_leap_year(1804))  # -> True
+                                print(check_leap_year(1800))  # -> False
+                                print("\nFebruary check:")
+                                print(check_day_number(1996, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
+                                print(check_day_number(2099, 2, 29))  # -> False (February contains 29 days only during leap year)
+                                print(check_day_number(2008, 2, 29))  # -> True
+                                print("\nMonth contains 30 or 31 days check:")
+                                print(check_day_number(1822, 4, 31))  # -> False (April contains max 30 days)
+                                print(check_day_number(2018, 10, 31))  # -> True
+                                print(check_day_number(1915, 9, 31))  # -> False (September contains max 30 days)
+                                print("\nBorn order number:")
+                                print(check_born_order(0))  # -> True
+                                print(check_born_order(850))  # -> True
+                                print("\nControl number:")
+                                print(check_control_number("49808270244"))  # -> True
+                                print(check_control_number("60109200187"))  # -> False, it must be 6
+                            a(name='funktsioonid-luhikese-info-sonumi-koostamiseks')
+                            h3 Funktsioonid lühikese info sõnumi koostamiseks
+                            p
+                                strong NB! Kõigepealt on soovitav lugeda
+                                a(href='https://ained.ttu.ee/pydoc/string.html?highlight=format#vormindamise-stiil-f-string', rel='nofollow noreferrer noopener', target='_blank') sõne vormindamisest
+                            p
+                                | Sõnumi koostamine on ka ülesande kohustuslik osa, ilma selleta ei saa teste
+                                | edukalt läbida! Lisaks, mõned nendest võivad olla abiks põhiülesande lahendamisel.
+                            p Näidis:
+                            pre.
+                                def introduce_yourself(your_name):
+                                    """
+                                    Insert given name into the template to get the greeting.
+                                :param your_name: string
+                                :return: string
+                                """
+                                return f"Hello everyone, my name is {your_name}"
+
+
+                                if __name__ == '__main__':
+                                print(introduce_yourself("Bob") -> # Hello everyone, my name is Bob
+                            ul
+                                li
+                                    p
+                                        code get_data_from_id(id_code: str)
+                                        |  - peamine funktsioon, mis kogub infot
+                                        | abifunktsioonidest, tagastab
+                                        code string
+                                        |  -
+                                        strong
+                                            | This is a (sugu) born on
+                                            | (sünnikuupäev kujul DD.MM.YYYY)
+                                        | ;
+                                    p
+                                        strong NB!
+                                        em
+                                            | Kindlasti tuleb veenduda, et antud isikukood on korrektne enne
+                                            | sõnumi koostamist (teil on selleks juba olemas funktsioon ``check_your_id``.
+                                        | Kui isikukood ei ole korrektne, funktsioon peab tagastama -
+                                        strong Given invalid ID code!
+                                li
+                                    p
+                                        code get_gender(gender_number: int)
+                                        |  - tuvastab sugu isikukoodi esimese numbri põhjal,
+                                        | tagastab
+                                        code string
+                                        |  -
+                                        strong female
+                                        |  või
+                                        strong male
+                                        | ;
+                                li
+                                    p
+                                        code get_full_year(gender_number: int, year: int)
+                                        |  - tuvastab isikukoodi aasta ja soo numbrite
+                                        | abil 4-kohalist aastanumbrit -
+                                        strong 18--
+                                        | ,
+                                        strong 19--
+                                        |  või
+                                        strong 20--
+                                        | ;
+                            a(name='id1')
+                            h3 Mall
+                            pre.
+                                def get_data_from_id(id_code: str):
+                                    """
+                                    Get possible information about the person.
+                                    Use given ID code and return a short message.
+                                    Follow the template - This is a (gender) born on (DD.MM.YYYY).
+                                :param id_code: str
+                                :return: str
+                                """
+                                pass
+
+                                def get_gender(gender_number: int):
+                                """
+                                Define the gender according to the number from ID code.
+
+                                :param gender_number: int
+                                :return: str
+                                """
+                                pass
+
+
+                                def get_full_year(gender_number: int, year: int):
+                                """
+                                Define the 4-digit year when given person was born.
+                                Person gender and year numbers from ID code must help.
+                                Given year has only two last digits.
+
+                                :param gender_number: int
+                                :param year: int
+                                :return: int
+                                """
+                                pass
+
+
+                                if __name__ == '__main__':
+                                print("\nFull message:")
+                                print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998"
+                                print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
+                                print(get_full_year(1, 28))  # -> 1828
+                                print(get_full_year(4, 85))  # -> 1985
+                                print(get_full_year(5, 1))  # -> 2001
+                                print(get_gender(2))  # -> "female"
+                                print(get_gender(5))  # -> "male"
+                            a(name='kontrollnumbri-arvutamise-algoritm')
+                            h2 Kontrollnumbri arvutamise algoritm
+                            p
+                                | Liidetakse kokku esimese kümne numbri
+                                strong 1, 2, 3, 4, 5, 6, 7, 8, 9
+                                |  korrutised
+                                | igale arvule vastava järjekorranumbriga
+                                em
+                                    | (nt 1×4 + 2×9 + 3×8 jne kuni kümnes
+                                    | number × jälle 1)
+                                |  ning leitakse saadud summast
+                                strong jääk
+                                |  jagamisel
+                                strong 11-ga
+                                | .
+                                | See jääk ongi kontrollnumber.
+                            p
+                                | Juhul, kui jääk on võrdne 10-ga, tehakse arvutus uuesti ning võetakse
+                                | teguriteks, millega isikukoodi numbreid korrutada, vastavalt
+                                strong 3, 4, 5, 6, 7, 8, 9, 1, 2, 3
+                                | . Leitakse jääk
+                                | jagamisel 11-ga. Ja see ongi kontrollnumber.
+                            p
+                                | Kui jääk jälle võrdub 10ga, siis määratakse kontrollnumbriks
+                                strong 0
+                                | .
+                            p
+                                | Näide:
+                                | isikukoodi 49808270244 kontrollnumber peab olema 4.
+                                | 1) Summa 1×4 + 2×9 + 3×8 + 4×0 + 5×8 + 6×2 + 7×7 + 8×0 + 9×2 + 1×4 = 169
+                                | 2) 169 ÷ 11 = 15, jääk 4
+                            p Seega on kaks komplekti kordajaid, mida kontrollnumbri leidmisel tuleb kasutada:
+                            ul
+                                li kordajad_1 = (1,2,3,4,5,6,7,8,9,1)
+                                li kordajad_2 = (3,4,5,6,7,8,9,1,2,3)
+                            a(name='vihjed-ja-soovitused')
+                            h2 Vihjed ja soovitused
+                            p
+                                strong 1. Kuupäevade arv igas kuus:
+                            ul
+                                li Jaanuar 31
+                                li Veebruar 28/29
+                                li Märts 31
+                                li Aprill 30
+                                li Mai 31
+                                li Juuni 30
+                                li Juuli 31
+                                li August 31
+                                li September 30
+                                li Oktoober 31
+                                li November 30
+                                li Detsember 31
+                            p
+                                strong 2. int
+                                |  või
+                                strong string
+                            p
+                                | Kuna isikukood antakse
+                                code string
+                                |  tüübi sisendina, välja lõigatud numbrid
+                                | jäävad ka selliseks. Kui abifunktsioonis on kindlasti teada, et ei pea
+                                | opereerima
+                                code int
+                                |  tüübi objektiga, siis pole mõtet seda numbrit konvertida
+                            p
+                                strong 3. Liigaasta
+                                |  ja selle leidmine
+                            p
+                                | Aasta on liigaasta, kui aastaarv jagub 4-ga, välja arvatud juhul, kui ta jagub
+                                | 100-ga, ent mitte 400-ga.
+                                | Natukene lühidam seletus:
+                            ol
+                                li
+                                    | Kõikide aastade numbrid, mis jaguvad
+                                    strong 400-ga
+                                    | , kõik need
+                                    strong on
+                                    |  kindlasti
+                                    strong liigaastad
+                                li
+                                    | Kõik ülejäänude aastade numbrid, mis jaguvad
+                                    strong 100-ga
+                                    | ,
+                                    strong ei ole
+                                    |  liigaastad
+                                li
+                                    | Kõik ülejäänud aastade numbrid, mis jaguvad
+                                    strong 4-ga
+                                    | , kõik need
+                                    strong on
+                                    |  ka
+                                    strong liigaastad
+                            p
+                                | Liigaastad
+                                strong on
+                                | : 4, 40, 2016, 2000, 1600
+                            p
+                                | Liigaastad
+                                strong pole
+                                | : 3, 41, 2018, 1900, 1800
+                            a(name='kasulikud-lingid')
+                            h2 Kasulikud lingid
+                            ul
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/string.html', rel='nofollow noreferrer noopener', target='_blank') sõne (string)
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/math.html', rel='nofollow noreferrer noopener', target='_blank') matemaatilised avaldised
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/func.html', rel='nofollow noreferrer noopener', target='_blank') funktsiooni argumendid ja parameetrid
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/if_statements.html', rel='nofollow noreferrer noopener', target='_blank') tingimuslause
+                                li
+                                    a(href='https://ained.ttu.ee/pydoc/loop.html', rel='nofollow noreferrer noopener', target='_blank') tsükkel
+        include partials/footer

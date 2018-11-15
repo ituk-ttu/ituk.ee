@@ -12,5 +12,8 @@
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
     "bootstrap-less": "^3.3.8"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
   }
 }

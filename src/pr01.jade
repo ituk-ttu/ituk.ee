@@ -1,0 +1,93 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                #yui_3_17_2_1_1542312828622_21(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title PR01 ITÜK
+                    #app.columns.assignment-columns
+                        #yui_3_17_2_1_1542312828622_20.column.is-two-thirds.assignment-content.content
+                            h1
+                                br
+                            h4 1. samm: Hello world
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/hello_world.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/hello_world.html
+                            pre.
+                                print("Hello world!")
+                            br
+                            h4 2. samm: Muutuja kasutamine + stringide liitmine
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/variable.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/variable.html
+                            pre.
+                                name = "Kati"
+                                print("Hello " + name + "!")
+                            br
+                            h4 3. samm: Inputi kasutamine
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/input.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/input.html
+                            pre#yui_3_17_2_1_1542312828622_19.
+                                name = input()
+                                print("Hello " + name + "!")
+                            br
+                            h4 4. samm: Inputi kasutamine 2
+                            pre.
+                                name = input("What's your name? ")
+                                print("Hello " + name + "!")
+                            br
+                            h4 5. samm: f-string
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/string.html#vormindamise-stiil-f-string', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/string.html#vormindamise-stiil-f-string
+                            pre.
+                                name = input("What's your name? ")
+                                print(f"Hello {name}!")
+                            br
+                            h4 6. samm: Tingimuslause
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/if_statements.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/if_statements.html
+                            pre.
+                                greeting = "hi"
+                                if greeting == "hi":
+                                    print("Hi!")
+                                elif greeting == "hey":
+                                    print("Hey!")
+                                else:
+                                    print("Wat?")
+                            p ---
+                            a(name='ulesanne')
+                            h2 Ülesanne
+                            p
+                                | Fail:
+                                code pr01_ityk/ityk.py
+                            ol
+                                li
+                                    | Kuva ekraanile tervitus
+                                    code Welcome to itük!
+                                    | .
+                                li Küsi kasutajalt nime ja salvesta see muutujasse
+                                li
+                                    | Kuva ekraanile:
+                                    code Hi there, [name]!
+                                    | .
+                                li
+                                    | Küsi kasutajalt,
+                                    code Would you like to join itük?
+                                    | .
+                                    | Salvesta see muutujasse
+                                li
+                                    | Kui kasutaja vastas
+                                    code Yes!
+                                    | , kuvab programm ekraanile
+                                    code Welcome to the club!
+                                li
+                                    | Kui kasutaja vastas
+                                    code No.
+                                    | , kuvab programm ekraanile
+                                    code Why tho?
+                                li
+                                    | Muul juhul kuvab programm ekraanile
+                                    code Ok, see you next year!
+                                    | .
+        include partials/footer
