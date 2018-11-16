@@ -1,0 +1,81 @@
+include partials/head
+html
+    body
+        include partials/navbar
+        .container
+            .content-row
+                div(role='main')
+                    span#maincontent
+                    link(href='/mod/charon/plugin/public/css/assignment.css', rel='stylesheet')
+                    h1.title PR02 Triangle
+                    #app.columns.assignment-columns
+                        .column.is-two-thirds.assignment-content.content
+                            p
+                                | Fail Gitis:
+                                code pr02_triangle/pr02_triangle.py
+                            p
+                                | Realiseerida programm, mis võtab sisse kolmnurga kolme külje pikkused ja selle põhjal väljastab kolmnurga ümbermõõdu, pindala, tüübi külgede pikkuse ja tüübi nurkade järgi.
+                            p
+                                | Võimalikud tüübid külgede pikkuse järgi:
+                                code Equilateral
+                                | ,
+                                code Isosceles
+                                | ,
+                                code Scalene
+                            p
+                                | Võimalikud tüübid nurkade järgi:
+                                code right
+                                | ,
+                                code obtuse
+                                | ,
+                                code acute
+                            p
+                                | Programm peab printima vastavalt sisendis antud väärtustele teksti kujul:
+                                code
+                                    | {type_by_length} {type_by_angle} triangle with perimeter of {perimeter} units and area of {area} units
+                            p
+                                | Sisendisse antud väärtused on alati suuruse järjekorras
+                                code 0 < a <= b <= c
+                                | .
+                            p
+                                | Väljundväärtustel peaks olema max kaks kohta peale koma.
+                                br
+                            p
+                                strong Mall
+                            p
+                                code pr02_triangle.py
+                            pre.
+                                """Triangle info."""
+                                import math
+
+                                def find_triangle_info(a, b, c):
+                                    """
+                                    Write a function which finds perimeter, area and type(eg: isosceles right triangle) of triangle based on given side lengths. (Note: a <= b <= c).
+
+                                    The function should print "{type_by_length} {type_by_angle} triangle with perimeter of {perimeter} units and area of {area} units".
+                                    IE: sides 3, 4, 5 should print "Scalene right triangle with perimeter of 12.0 units and area of 6.0 units".
+                                :return: None
+                                """
+                                # YOUR CODE GOES HERE!!!
+
+
+                                if __name__ == "__main__":  # <- This line is needed for automatic testing
+                                find_triangle_info(4, 5, 6)  # Scalene acute triangle with perimeter of 15.0 units and area of 9.92 units
+                                find_triangle_info(4, 4, 6)  # Isosceles obtuse triangle with perimeter of 14.0 units and area of 7.94 units
+                            a(name='vihjed')
+                            h2 Vihjed
+                            p
+                                a(href='https://ained.ttu.ee/pydoc/math.html', rel='nofollow noreferrer noopener', target='_blank') https://ained.ttu.ee/pydoc/math.html
+                            p
+                                a(href='https://docs.python.org/3/library/math.html', rel='nofollow noreferrer noopener', target='_blank') https://docs.python.org/3/library/math.html
+                            p
+                                a(href="https://en.wikipedia.org/wiki/Heron's_formula", rel='nofollow noreferrer noopener', target='_blank') https://en.wikipedia.org/wiki/Heron's_formula
+                            p
+                                a(href='https://en.wikipedia.org/wiki/Triangle#Types_of_triangle', rel='nofollow noreferrer noopener', target='_blank') https://en.wikipedia.org/wiki/Triangle#Types_of_triangle
+                            p Erikülgse kolmnurga pindala valem:
+                            img(alt='https://puu.sh/Br9MY/785ef1f057.png', src='https://puu.sh/Br9MY/785ef1f057.png')
+                            p
+                                a(href='https://en.wikipedia.org/wiki/Pythagorean_theorem#Converse', rel='nofollow noreferrer noopener', target='_blank') https://en.wikipedia.org/wiki/Pythagorean_theorem#Converse
+                            img(alt='https://puu.sh/Br9PT/caeb102cc9.png', src='https://puu.sh/Br9PT/caeb102cc9.png')
+                            img(alt='https://puu.sh/Br9Xn/996c7f1a9b.png', src='https://puu.sh/Br9Xn/996c7f1a9b.png')
+        include partials/footer
