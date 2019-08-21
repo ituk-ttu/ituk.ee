@@ -22,7 +22,7 @@ Start your favorite web server in `build` folder.
 Install dependencies:
 ```npm install```
 
-Run Gulp (watch files):
+Run Gulp (don't watch files):
 ```gulp compile```
 
 (Optional) If necessary, install Gulp globally:
