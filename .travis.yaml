@@ -1,0 +1,16 @@
+addons:
+  apt:
+    packages:
+    - rsync
+    - sshpass
+sudo: true
+dist: trusty
+node_js: "stable"
+install: npm install
+branches:
+  only:
+  - master
+  - release
+script: npm run build
+after_success:
+- test $TRAVIS_BRANCH = "release" && rsync -chavzP --rsh="sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no -l $SSH_USERNAME" build/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
