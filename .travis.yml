@@ -11,6 +11,6 @@ branches:
   only:
   - master
   - release
-script: gulp compile
+script: npm run build
 after_success:
 - test $TRAVIS_BRANCH = "release" && rsync -chavzP --rsh="sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no -l $SSH_USERNAME" build/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
