@@ -1,7 +1,7 @@
 .content-row
-    h2.text-center.content-row-title Tulevased üritused
+    h2.text-center.content-row-title #{$i18n.events}
     .text-center(v-if="events == null"): i.fa.fa-refresh.fa-spin-fast.fa-2x
-    p.text-center(v-if="events != null && events[0] == undefined" v-cloak) Üritusi pole :(
+    p.text-center(v-if="events != null && events[0] == undefined" v-cloak) #{$i18n.no_events}
     .event.card(v-for="event in events" v-cloak)
         .card-content
             .event-inner
@@ -20,4 +20,4 @@
                             | {{ getDateDateAndClock(event.end.dateTime) }}
                     p.event-title {{ event.summary }}
                     p.event-location {{ event.location }}
-                    a.event-link(v-bind:href="event.description" v-if="event.description") Vaata veel...
+                    a.event-link(v-bind:href="event.description" v-if="event.description") #{$i18n.show_more}

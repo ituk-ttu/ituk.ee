@@ -1,0 +1,40 @@
+#navbar
+home: "avaleht"
+join: "liitu"
+rent: "rent"
+contact: "kontakt"
+
+#hero
+greeting_title: "Hei IT-tudeng!"
+greeting: "Tere tulemast TalTech IT-teaduskonna üliõpilaskogu kodulehele!"
+
+
+#events
+events: "Tulevased üritused"
+no_events: "Üritusi pole :("
+show_more: "Vaata veel…"
+
+#what do we do
+what_do: "Millega ITÜK tegeleb?"
+what_do_card_title_presentation: "Esindamine"
+what_do_card_content_presentation:
+  "ITÜK esindab IT-tudengeid teaduskonna tasandil. Oleme olemas selleks, et tudengite sõna pääseks võimule,
+   et tudengite mured ja rõõmud kuuldud saaks ning õppimiskeskkond oleks võimalikult stressivaba."
+what_do_card_title_education: "Hariduse edendamine"
+what_do_card_content_education: "ITÜK korraldab nii organisatsioonisiseselt kui ka kõigile teaduskonna tudengitele harivaid projekte,
+  et pakkuda vaheldusrikkamaid õppimisvõimalusi erinevate workshoppide või koosõppimiste näol."
+what_do_card_title_entertainment: "Meelelahutus"
+what_do_card_content_entertainment: "Vahelduseks õppimisele saab osa võtta ITÜKi poolt korraldatud meelelahutuslikest sündmustest
+  nagu Tudengibaar, teaduskondade vaheline jõulupidu või IT-rebaste sügispidu."
+
+address: "Akadeemia tee 15a, ICT-314"
+
+#kontakt
+map: "Asukoht kaardil"
+contact_with_capital: "Kontakt"
+
+
+
+
+
+

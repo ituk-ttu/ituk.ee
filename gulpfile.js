@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-var jade = require("gulp-jade");
+var pug = require('gulp-pug');
 var less = require("gulp-less");
 var plumber = require("gulp-plumber");
 var sourcemaps = require("gulp-sourcemaps");
@@ -7,6 +7,7 @@ var uglify = require("gulp-uglify");
 var concat = require("gulp-concat");
 var watch = require("gulp-watch");
 var es = require('event-stream');
+var pugi18n = require('gulp-pug-i18n');
 
 var dir = {
     assets: "assets/",
@@ -20,17 +21,17 @@ gulp.task("js", function() {
         .pipe(gulp.dest(dir.dest + dir.assets + 'js/'))
 });
 
-gulp.task("jade", function () {
+gulp.task('views', function buildHTML() {
     var locations = [
         {
-            src: "*.jade",
+            src: "*.pug",
             dest: ""
         }
     ];
     for(var i = 0; i < locations.length; i++) {
         gulp.src(dir.src + locations[i].src)
             .pipe(plumber())
-            .pipe(jade({
+            .pipe(pug({
                 pretty: true,
                 doctype: "HTML"
             }))
@@ -52,19 +53,34 @@ gulp.task("img", function () {
         .pipe(gulp.dest(dir.dest + dir.assets + 'img/'))
 });
 
-gulp.task("compile", ["jade", "js", "less", "img"]);
+gulp.task("compile", ["views", "js", "less", "img", "translate"]);
 
-gulp.task("default", ["jade", "js", "less", "img"], function() {
+gulp.task("default", ["views", "js", "less", "img", "translate"], function() {
     gulp.watch(dir.src + dir.assets + "js/**/*.js", function() {
         gulp.run("js");
     });
     gulp.watch(dir.src + dir.assets + "less/**/*.less", function() {
         gulp.run("less");
     });
-    gulp.watch(dir.src + "/**/*.jade", function() {
-        gulp.run("jade");
+    gulp.watch(dir.src + "/**/*.pug", function() {
+        gulp.run("views");
     });
     gulp.watch(dir.src + dir.assets + "img/**/*.{jpg,JPG,png,svg}", function() {
         gulp.run("img");
     });
+
 });
+
+gulp.task("translate", function(){
+    gulp.src('src/**/*.pug')
+        .pipe(pugi18n({
+            i18n: {
+                locales: 'src/locales/*', // locales: en.yml, de.json,
+                filename: '{{basename}}.{{lang}}.html',
+                },
+            pretty: true // Pug option
+        }))
+        .pipe(gulp.dest(dir.dest));
+});
+
+

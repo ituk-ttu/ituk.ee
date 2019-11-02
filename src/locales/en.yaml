@@ -1,0 +1,34 @@
+
+#navbar
+home: "home"
+join: "join"
+rent: "rent"
+contact: "contact"
+
+#hero
+greeting_title: "Hey IT student!"
+greeting: "Welcome to the Student Council of School of Information Technology homepage!"
+
+#events
+events: "Upcoming events"
+no_events: "No upcoming events :("
+show_more: "Show more…"
+
+#what do we do
+what_do: "What do we do?"
+what_do_card_title_presentation: "Academic Representation"
+what_do_card_content_presentation:
+  "ITÜK represents IT students at the faculty level. We exist to give voice to the students,
+   so that all of their troubles and joys could be heard and the learning environment would be free of stress."
+what_do_card_title_education: "Promoting education"
+what_do_card_content_education: "ITÜK organizes educational events both within the organization and for students faculty wide
+to provide a more varied learning experience through different workshops or collaborative learning."
+what_do_card_title_entertainment: "Entertainment"
+what_do_card_content_entertainment: "To take a break from studying, you can take part in fun events organized by ITÜK,
+such as Student Bar, TalTech Christmas party or an IT Freshmen Autumn party."
+
+address: "Akadeemia tee 15a, ICT-314"
+
+#kontakt
+map: "Location on the map"
+
