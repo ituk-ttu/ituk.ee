@@ -4,21 +4,21 @@
     .col-xs-12(v-if="blogPosts != null && blogPosts[0] != undefined" v-cloak)
         .card.ghost-card
             img.card-image.card-image-low(v-if="blogPosts[0].feature_image != null"
-                    v-bind:src="'https://blog.ituk.ee' + blogPosts[0].feature_image")
+                    v-bind:src="blogPosts[0].feature_image")
             .card-content.limit-length
                 h3 {{ blogPosts[0].title }}
-                a(v-bind:href="'https://blog.ituk.ee' + blogPosts[0].url") Loe edasi...
+                a(v-bind:href="blogPosts[0].url") Loe edasi...
     .col-xs-12.col-sm-7.col-md-7(v-if="blogPosts != null && blogPosts[1] != undefined")
         .card.ghost-card
             img.card-image.card-image-low(v-if="blogPosts[1].feature_image != null"
-                    v-bind:src="'https://blog.ituk.ee' + blogPosts[1].feature_image")
+                    v-bind:src="blogPosts[1].feature_image")
             .card-content.limit-length
                 h3 {{ blogPosts[1].title }}
-                a(v-bind:href="'https://blog.ituk.ee' + blogPosts[1].url") Loe edasi...
+                a(v-bind:href="blogPosts[1].url") Loe edasi...
     .col-xs-12.col-sm-5.col-md-5(v-if="blogPosts != null && blogPosts[2] != undefined")
         .card.ghost-card
             img.card-image.card-image-low(v-if="blogPosts[2].feature_image != null"
-                    v-bind:src="'https://blog.ituk.ee' + blogPosts[2].feature_image")
+                    v-bind:src="blogPosts[2].feature_image")
             .card-content.limit-length
                 h3 {{ blogPosts[2].title }}
-                a(v-bind:href="'https://blog.ituk.ee' + blogPosts[2].url") Loe edasi...
+                a(v-bind:href="blogPosts[2].url") Loe edasi...

@@ -49,7 +49,7 @@ var app = new Vue({
         }).then(function (response) {
             this.events = response.body.items;
         });
-        this.$http.get("https://blog.ituk.ee/ghost/api/v3/content/posts/?key=40f4bf1195234ef97153aea589&limit=3").then(function (response) {
+        this.$http.get("https://blog.ituk.ee/ghost/api/v2/content/posts/?key=40f4bf1195234ef97153aea589&limit=3").then(function (response) {
             this.blogPosts = response.body.posts;
         });
     }
