@@ -6,8 +6,8 @@ addons:
     packages:
     - rsync
 sudo: true
-dist: trusty
-node_js: stable
+dist: bionic
+node_js: 18
 install: npm install
 before_install:
   - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
