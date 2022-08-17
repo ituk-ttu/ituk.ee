@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary-color: #870042;
+  --primary-dark: #4c4c4e;
+  --secondary-color: #870042;
+  --secondary-dark:#4c4c4e;
+  --overlay: rgba(0,0,0,.7);  
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+code {
+  font-family: "Raleway";
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  padding: 17px 28px;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--primary-dark);
+  border: 1px solid var(--primary-dark);
+}
+
+.line {
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: var(--primary-color);
+}
+
+@media screen and (max-width:940px) {
+  .body  {
+    width: 100vw;
+  }
+  }
