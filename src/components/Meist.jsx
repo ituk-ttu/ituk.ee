@@ -38,7 +38,7 @@ const About = () => {
               Eelkõige tegelebki ITÜK ehk IT-teaduskonna üliõpilaskogu tudengite
               esindamise, hariduse edendamise ning meelelahutusega. Meie
               populaarseimad hariduslikud üritused on: IT-ametite päev,
-              Praktikakohvik, Konfluence. Meelelahutust pakuvad{DDIT},
+              Praktikakohvik, Konfluence. Meelelahutust pakuvad {DDIT},{" "}
               {tudengibaar}, {Technoo_jooks} ja {rebaste_ristimine}.
             </p>
             <p class="text-xl font-medium  pt-4">
