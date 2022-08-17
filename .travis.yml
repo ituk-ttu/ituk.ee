@@ -1,4 +1,3 @@
-language: node_js
 addons:
   ssh_known_hosts:
     - ituk.ee
@@ -6,8 +5,8 @@ addons:
     packages:
     - rsync
 sudo: true
-dist: bionic
-node_js: 18
+dist: trusty
+node_js: stable
 install: npm install
 before_install:
   - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
@@ -17,6 +16,6 @@ before_install:
 branches:
   only:
   - master
-script: npm run build
+script: npm run build -prod
 after_success:
 - rsync -chavzP --rsh="ssh -l $SSH_USERNAME" build/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
