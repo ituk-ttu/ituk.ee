@@ -39,12 +39,14 @@ body{
 .hero .content p:first-child {
     font-size: 5rem;
     font-weight: 700;
+    margin-bottom: 1rem;
 
 }
 
 .hero .content p:nth-child(2) {
     font-size: 2.2rem;
     font-style: italic;
+    margin-bottom: 2rem;
 }
 
 
@@ -62,12 +64,22 @@ body{
 }
 
 @media screen and (max-width:940px) {
-    .hero .content p:nth-child(3) {
+
+    .hero {
+        height: 90vh;
+    }
+  
+    .hero .content p:nth-child(1) {
         font-size: 2.6rem;
+        margin-bottom: 1rem;
+        
     }
 
-    .hero .content p:nth-child(4) {
+    .hero .content p:nth-child(2) {
         font-size: 1.6rem;
+    }
+    .hero .button {
+        margin-top: 5rem;
     }
 }
 

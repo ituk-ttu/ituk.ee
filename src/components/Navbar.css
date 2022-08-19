@@ -2,11 +2,8 @@
     position: fixed;
     height: 80px;
     width: 100%;
-    top: 0;
-    left: 0;
     z-index: 1;
     transition: .3s ease-in;
-    overflow: hidden;
     background-color: rgba(0,0,0,.9);
 }
 
@@ -16,10 +13,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1240px;
     margin: auto;
+    max-width: 1240px;
     height: 100%;
-    padding: 0 1rem;
+
 }
 
 .header .nav-menu a {
@@ -28,15 +25,24 @@
 
 .header .navbar img {
     width: 200px;
+    margin: auto;
+   
+    
+    
 }
 
 .header .nav-menu {
     display: flex;
+
+    
 }
+
 
 .header .nav-item {
     padding: 1rem;
     font-weight: 500;
+    
+    
 }
 
 .header .nav-item a:hover {
@@ -57,22 +63,19 @@
 
 @media screen and (max-width:940px) {
     .header {
-        max-width: 100vh;
         background-color: rgba(0,0,0,.9);
     }
 
     .header .nav-logo {
-    margin-bottom: auto;
+        margin-left: 1rem;
+        margin-right: 8rem;
     
 }
-
-    .header .navbar {
-        max-width: auto;
-    }
 
     .hamburger {
         position: relative;
         display: block;
+        justify-content: right;
     }
 
     .nav-menu {

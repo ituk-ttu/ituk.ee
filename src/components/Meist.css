@@ -2,7 +2,7 @@
 .about {
     
     margin: auto;
-    padding: 4rem 1rem 0 1rem;
+    padding: 3rem 0rem 0rem 0rem;
     width: 100%;
 }
 
@@ -38,7 +38,7 @@
     margin: 2rem 0;
 }
 
-.about .col-2 p:nth-child(4) {
+.about .col-2 p:nth-child(2) {
     font-size: 1.8rem;
     font-style: italic;
     font-weight: 600;
@@ -47,18 +47,19 @@
 
 @media screen and (max-width:940px) {
     .about .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 3fr;
     }
 
     .about .container {
         width: 100%;
     }
 
-    .about .container img {
-        padding: 0rem;
-        width: 90vw;
+    .about .col-span-1{
+
+        
     }
 
+   
   
 }
 

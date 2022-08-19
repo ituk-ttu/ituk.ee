@@ -21,12 +21,12 @@ const About = () => {
   return (
     <div className="about" id="about">
       <div className="container">
-        <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14 ">
-          <div class="col-span-1 grid place-content-center pb-10 gap-10">
+        <div class="grid grid-cols-1 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3  ">
+          <div class="col-span-1 grid justif-center p-6">
             <video src={tukk} autoPlay loop muted />
           </div>
 
-          <div class="col-span-2 pl-8">
+          <div class="col-span-2 p-5">
             <h2>Meist</h2>
             <span className="line"></span>
             <p class="text-xl font-medium  pt-4">
