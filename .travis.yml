@@ -19,4 +19,3 @@ branches:
 script: npm run build -prod
 after_success:
 - rsync -chavzP --rsh="ssh -l $SSH_USERNAME" build/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
-g
