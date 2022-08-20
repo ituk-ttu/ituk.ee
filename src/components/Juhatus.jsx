@@ -42,6 +42,12 @@ const Cards = () => {
       job: "Meelelahutusvaldkonna juht",
       email: "sander.pluks@ituk.ee",
     },
+    {
+      image: meelelahutus,
+      name: "Sander Plukš",
+      job: "Meelelahutusvaldkonna juht",
+      email: "sander.pluks@ituk.ee",
+    },
     // {
     //   image: turundus,
     //   name: "Marion Martin",
@@ -75,7 +81,7 @@ const Cards = () => {
     <div className="juhatus" id="juhatus">
       <h2>Juhatus</h2>
       <span className="line"></span>
-      <div class="container p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 flex items-center">
+      <div class="container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 gap-5 ">
         {cardInfo.map(renderCard)}
       </div>
     </div>

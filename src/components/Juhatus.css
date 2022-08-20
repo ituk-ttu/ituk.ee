@@ -10,7 +10,8 @@
   padding: 0rem 1rem;
   padding-top: 2rem;
   padding-bottom: 4rem;
-  
+  display: grid;
+	grid-template-columns: repeat( 6, 1fr )
 
 
 }
@@ -39,6 +40,9 @@
   width: 400px;
 }
 
+.card {
+	grid-column: span 2;
+}
 
 .juhatus .card a {
   color: #787878;
@@ -64,7 +68,6 @@
 
 .juhatus .container .content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   margin: 3rem 0;
 }
@@ -82,13 +85,32 @@
   transform: translateY(-10px);
 }
 
+.card:nth-last-child(1) {
+
+	grid-column:  3 / span 2;
+
+}
+
 @media screen and (max-width: 960px) {
-  .juhatus .container  {
-    width: 100%;
+  .juhatus .container {
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat( 1, 1fr )
   }
 
-  .juhatus .container .content {
-    grid-template-columns: 2fr;
+  .juhatus .card{
+      grid-column: span 2;
+    
   }
+
+
+
+  
+ 
+
+
+
+
+
 
 }

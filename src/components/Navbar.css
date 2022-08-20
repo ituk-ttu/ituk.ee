@@ -1,10 +1,13 @@
 .header {
     position: fixed;
+    width: auto;
+    margin: auto;
     height: 80px;
     width: 100%;
     z-index: 1;
     transition: .3s ease-in;
     background-color: rgba(0,0,0,.9);
+ 
 }
 
 
@@ -16,6 +19,7 @@
     margin: auto;
     max-width: 1240px;
     height: 100%;
+    width: 100%;
 
 }
 
@@ -62,15 +66,26 @@
 
 
 @media screen and (max-width:940px) {
+  
     .header {
         background-color: rgba(0,0,0,.9);
+        width: 100;
+                
+    }
+
+    
+    .header .navbar {
+        align-items: center;
+        margin: auto;
+        
+       
     }
 
     .header .nav-logo {
         margin-left: 1rem;
         margin-right: 8rem;
     
-}
+    }
 
     .hamburger {
         position: relative;

@@ -15,15 +15,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
+
+  
 }
 
 body {
-  margin: 0;
+
   font-family: "Raleway";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.2rem;
   line-height: 1.2;
+
+  
 }
 
 code {
@@ -63,8 +68,10 @@ a {
   background-color: var(--primary-color);
 }
 
-@media screen and (max-width:940px) {
+@media screen and (max-width:940px) {s
+
   .body  {
     width: 100vw;
+  
   }
   }

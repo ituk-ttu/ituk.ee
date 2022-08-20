@@ -77,13 +77,13 @@ const Cards = () => {
     <div className="yritused" id="yritused">
       <h2>Üritused</h2>
       <span className="line"></span>
-      <div class="container  ">
-        <div class="wrapper">{cardInfo.map(renderCard)}</div>
+      <div class="container ">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3 ">
+          {cardInfo.map(renderCard)}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Cards;
-
-// {cardInfo.map(renderCard)}
