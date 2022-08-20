@@ -85,11 +85,6 @@
   transform: translateY(-10px);
 }
 
-.card:nth-last-child(1) {
-
-	grid-column:  3 / span 2;
-
-}
 
 @media screen and (max-width: 960px) {
   .juhatus .container {

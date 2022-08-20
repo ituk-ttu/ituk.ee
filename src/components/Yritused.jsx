@@ -49,7 +49,6 @@ const Cards = () => {
       title: "Robocode 2022",
       text: "marion.martin@ituk.ee",
     },
-
     {
       id: "https://www.facebook.com/events/271426701503553",
       image: Technoo_jooks,

@@ -42,12 +42,7 @@ const Cards = () => {
       job: "Meelelahutusvaldkonna juht",
       email: "sander.pluks@ituk.ee",
     },
-    {
-      image: meelelahutus,
-      name: "Sander Plukš",
-      job: "Meelelahutusvaldkonna juht",
-      email: "sander.pluks@ituk.ee",
-    },
+
     // {
     //   image: turundus,
     //   name: "Marion Martin",
