@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Yritused from "./components/Yritused";
 import Juhatus from "./components/Juhatus";
 import About from "./components/Meist";
+import Sponsorid from "./components/Sponsorid";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <About />
       <Yritused />
       <Juhatus />
+      <Sponsorid />
       <Kontakt />
       <Footer />
     </div>

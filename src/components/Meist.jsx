@@ -23,7 +23,13 @@ const About = () => {
       <div className="container">
         <div class="grid grid-cols-1 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3  ">
           <div class="col-span-1 grid justif-center p-6">
-            <video src={tukk} autoPlay loop muted />
+            <video
+              class="w-full max-w-full h-auto"
+              src={tukk}
+              autoPlay
+              loop
+              muted
+            />
           </div>
 
           <div class="col-span-2 p-5">

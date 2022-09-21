@@ -11,19 +11,8 @@ Install dependencies:
 ```npm install --force```
 
 
-(Optional) If necessary, install Gulp globally:
-```npm install -g gulp```
-
 Start your favorite web server in `build` folder. 
 
 ### Compiling for production
 Install dependencies:
-```npm install```
-
-Run Gulp (don't watch files):
-```gulp compile```
-
-(Optional) If necessary, install Gulp globally:
-```npm install -g gulp```
-
-Compiled files will be in `build` folder.
+```npm install --force```

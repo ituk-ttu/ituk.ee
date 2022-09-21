@@ -1,84 +1,123 @@
 import * as React from "react";
-
 import "./Yritused.css";
-import Konfluence from "./images/events/konfluence.jpg";
-import Tudengibaar from "./images/events/tudengibaar.jpg";
-import Praktikakohvik from "./images/events/praktikakohvik.jpg";
-import It_ametitepaev from "./images/events/it-ametitepaev.jpg";
-import DDIT from "./images/events/DDIT.jpg";
-import Robocode from "./images/events/robocode.jpg";
-import Technoo_jooks from "./images/events/technoo_jooks.jpg";
-
-import { CardActionArea } from "@mui/material";
-
+import Meelelahutus from "./images/events/DDIT2022.jpg";
+import Haridus from "./images/events/konfluence.jpg";
+import Siseüritus from "./images/pannakas.jpg";
 const Cards = () => {
-  const cardInfo = [
-    {
-      id: "https://www.facebook.com/events/1382287772193543",
-      image: Konfluence,
-      title: "Konfluence",
-      text: "margareth.lasn@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/590488846050321",
-      image: Tudengibaar,
-      title: "Tudengibaar",
-      text: "rasmus.serg@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/341219044677369",
-      image: Praktikakohvik,
-      title: "Praktikakohvik",
-      text: "lauraliis.jarvela@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/1131315427395904/",
-      image: It_ametitepaev,
-      title: "IT-ametite päev",
-      text: "kart.annus@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/657009918604465",
-      image: DDIT,
-      title: "Don't do IT",
-      text: "sander.pluks@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/4953795681347259",
-      image: Robocode,
-      title: "Robocode 2022",
-      text: "marion.martin@ituk.ee",
-    },
-    {
-      id: "https://www.facebook.com/events/271426701503553",
-      image: Technoo_jooks,
-      title: "Technöö jooks",
-      text: "elias.ehasalu@cybexeracademy.com",
-    },
-  ];
-
-  const renderCard = (card) => {
-    return (
-      // <div class="item" onClick={routeChange}>
-
-      <div class="item">
-        <CardActionArea href={card.id}>
-          <div class="polaroid" onClick={card.id}>
-            <img src={card.image} alt="event" />
-            <div class="caption">{card.title}</div>
-          </div>
-        </CardActionArea>
-      </div>
-    );
-  };
-
   return (
     <div className="yritused" id="yritused">
       <h2>Üritused</h2>
       <span className="line"></span>
-      <div class="container ">
-        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3 ">
-          {cardInfo.map(renderCard)}
+      <div className="container">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3 gap-5  self-center p-2 ">
+          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+              <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
+            </a>
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight  text-center text-[#870042] dark:text-white">
+                Haridus
+              </h5>
+
+              <li>
+                <a
+                  href="https://www.facebook.com/events/341219044677369"
+                  class="mr-4 hover:underline md:mr-6 "
+                >
+                  Praktikakohvik
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/1131315427395904/"
+                  class="mr-4 hover:underline md:mr-6"
+                >
+                  IT-ametite päev
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/1382287772193543"
+                  class="mr-4 hover:underline md:mr-6 "
+                >
+                  Konfluence
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/4953795681347259"
+                  class="mr-4 hover:underline md:mr-6"
+                >
+                  Robocode
+                </a>
+              </li>
+              <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">
+                  Firma külastused
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/1078881162836003"
+                  class="mr-4 hover:underline md:mr-6"
+                >
+                  Õpiõhtud
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
+            <img class="rounded-t-lg h-48 w-96" src={Meelelahutus} alt="" />
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042] dark:text-white">
+                Meelelahutus
+              </h5>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/590488846050321"
+                  class="mr-4 hover:underline md:mr-6 "
+                >
+                  Tudengibaar
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/751480919440687"
+                  class="mr-4 hover:underline md:mr-6"
+                >
+                  IT-teaduskonna rebaste ristimine
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/271426701503553/"
+                  class="mr-4 hover:underline md:mr-6 "
+                >
+                  TechnÖÖ Jooks
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/events/1096342120997436"
+                  class="mr-4 hover:underline md:mr-6"
+                >
+                  Don’t Do IT
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+              <img class="rounded-t-lg   h-48 w-96" src={Siseüritus} alt="" />
+            </a>
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042]  dark:text-white">
+                Siseüritused
+              </h5>
+              <li>Suve- ja talvepäevad </li>
+              <li>Pannkoogihommikud</li>
+            </div>
+          </div>
         </div>
       </div>
     </div>
