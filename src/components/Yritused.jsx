@@ -11,9 +11,8 @@ const Cards = () => {
       <div className="container">
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3 gap-5  self-center p-2 ">
           <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-              <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
-            </a>
+            <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
+
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight  text-center text-[#870042] dark:text-white">
                 Haridus
@@ -51,11 +50,7 @@ const Cards = () => {
                   Robocode
                 </a>
               </li>
-              <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">
-                  Firma külastused
-                </a>
-              </li>
+              <li>Firma külastused</li>
               <li>
                 <a
                   href="https://www.facebook.com/events/1078881162836003"
@@ -107,9 +102,7 @@ const Cards = () => {
             </div>
           </div>
           <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-              <img class="rounded-t-lg   h-48 w-96" src={Siseüritus} alt="" />
-            </a>
+            <img class="rounded-t-lg   h-48 w-96" src={Siseüritus} alt="" />
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042]  dark:text-white">
                 Siseüritused
