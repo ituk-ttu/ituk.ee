@@ -30,6 +30,27 @@ body {
   
 }
 
+.container {
+  width: 1240px;
+  margin: 0rem auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+
+
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+h5 {
+  font-size: 1.5rem;
+  padding-top: 1rem;
+  text-align: left;
+}
+
 code {
   font-family: "Raleway";
 }
@@ -67,16 +88,17 @@ a {
   background-color: var(--primary-color);
 }
 
-h2 {
-  font-size: 3rem;
-  text-align: center;
-
-}
-
 @media screen and (max-width:940px) {s
 
   .body  {
     width: 100vw;
   
   }
+
+  .container {
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat( 1, 1fr )
+  }
+
   }

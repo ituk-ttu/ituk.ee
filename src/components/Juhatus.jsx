@@ -6,7 +6,7 @@ import finants from "./juhatus/2022/laura.jpg";
 import haridus from "./juhatus/2022/kart.jpg";
 import meelelahutus from "./juhatus/2022/sander.jpg";
 import turundus from "./juhatus/2022/elias.jpg";
-import abi from "./juhatus/2022/elias.jpg";
+// import abi from "./juhatus/2022/elias.jpg";
 import "tw-elements";
 import { MdEmail } from "react-icons/md";
 
@@ -48,7 +48,7 @@ const Cards = () => {
       name: "Elias Ehasalu",
       job: "Turundus- ja kommunikatsioonivaldkonna juht",
       email: "elias.ehasalu@ituk.ee",
-    }
+    },
 
     // {
     //   image: abi,
