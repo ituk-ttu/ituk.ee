@@ -3,7 +3,7 @@ import NetGroup from "./images/sponsorid/NetGroup_Logo.png";
 
 const Sponsorid = () => {
   return (
-    <div className="about" id="about">
+    <div className="sponsorid" id="sponsorid">
       <div className="container">
         <h2>Sponsorid</h2>
         <span className="line"></span>

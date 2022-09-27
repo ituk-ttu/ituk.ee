@@ -67,6 +67,12 @@ a {
   background-color: var(--primary-color);
 }
 
+h2 {
+  font-size: 3rem;
+  text-align: center;
+
+}
+
 @media screen and (max-width:940px) {s
 
   .body  {

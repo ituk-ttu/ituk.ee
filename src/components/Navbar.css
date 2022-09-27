@@ -10,16 +10,16 @@
  
 }
 
-
-
 .header .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: auto;
+    /* cursor: pointer; */
     max-width: 1240px;
     height: 100%;
     width: 100%;
+    
 
 }
 
@@ -44,6 +44,7 @@
 
 .header .nav-item {
     padding: 1rem;
+    cursor: pointer;
     font-weight: 500;
     
     

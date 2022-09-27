@@ -5,7 +5,7 @@ import hr from "./juhatus/2022/rasmus.jpg";
 import finants from "./juhatus/2022/laura.jpg";
 import haridus from "./juhatus/2022/kart.jpg";
 import meelelahutus from "./juhatus/2022/sander.jpg";
-// import turundus from "./juhatus/2022/marion.jpg";
+import turundus from "./juhatus/2022/elias.jpg";
 import abi from "./juhatus/2022/elias.jpg";
 import "tw-elements";
 import { MdEmail } from "react-icons/md";
@@ -43,19 +43,19 @@ const Cards = () => {
       email: "sander.pluks@ituk.ee",
     },
 
-    // {
-    //   image: turundus,
-    //   name: "Marion Martin",
-    //   job: "Turundus- ja kommunikatsioonivaldkonna juht",
-    //   email: "marion.martin@ituk.ee",
-    // },
-
     {
-      image: abi,
+      image: turundus,
       name: "Elias Ehasalu",
-      job: "Juhiabi",
+      job: "Turundus- ja kommunikatsioonivaldkonna juht",
       email: "elias.ehasalu@ituk.ee",
-    },
+    }
+
+    // {
+    //   image: abi,
+    //   name: "Elias Ehasalu",
+    //   job: "Juhiabi",
+    //   email: "elias.ehasalu@ituk.ee",
+    // },
   ];
 
   const renderCard = (card) => {

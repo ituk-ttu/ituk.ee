@@ -109,6 +109,8 @@ const Cards = () => {
               </h5>
               <li>Suve- ja talvepäevad </li>
               <li>Pannkoogihommikud</li>
+              <li>Postitantsu koolitus</li>
+              <li>Filmiõhtud</li>
             </div>
           </div>
         </div>

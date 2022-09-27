@@ -7,6 +7,8 @@ const Hero = () => {
       <div className="content">
         <p>Hei, IT-tudeng!</p>
         <p>Tere tulemast TalTech IT-teaduskonna üliõpilaskogu kodulehele!</p>
+        <div class="grid grid-cols-1">
+        <div class="col-span-1 ">
         <button
           type="button"
           onClick={(e) => {
@@ -17,6 +19,8 @@ const Hero = () => {
         >
           Liitu meiega!
         </button>
+      </div>
+      </div>
       </div>
     </div>
   );

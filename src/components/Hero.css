@@ -52,7 +52,6 @@ body{
 
 .hero .button {
     margin: 1rem 0;
-    width: 300px;
     background-color: var(--secondary-color);
     border: 1px solid var(--secondary-color);
     color: #ffffff;
@@ -62,6 +61,20 @@ body{
     background-color: var(--secondary-dark);
     border: 1px solid var(--secondary-dark);
 }
+
+@media screen and (min-width:940px) {
+
+    .hero .button {
+        margin: 1rem 0;
+    
+        background-color: var(--secondary-color);
+        border: 1px solid var(--secondary-color);
+        color: #ffffff;
+    }
+    
+}
+
+
 
 @media screen and (max-width:940px) {
 
@@ -78,9 +91,7 @@ body{
     .hero .content p:nth-child(2) {
         font-size: 1.6rem;
     }
-    .hero .button {
-        margin-top: 5rem;
-    }
+  
 }
 
 
