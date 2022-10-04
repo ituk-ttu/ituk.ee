@@ -9,7 +9,7 @@ const Cards = () => {
       <h2>Üritused</h2>
       <span className="line"></span>
       <div className="container">
-        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3 gap-5  self-center p-2 ">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 m-3">
           <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
 

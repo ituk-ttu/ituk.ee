@@ -6,7 +6,7 @@ import finants from "./juhatus/2022/laura.jpg";
 import haridus from "./juhatus/2022/kart.jpg";
 import meelelahutus from "./juhatus/2022/sander.jpg";
 import turundus from "./juhatus/2022/elias.jpg";
-// import abi from "./juhatus/2022/elias.jpg";
+import abi from "./juhatus/2022/kaisa.jpg";
 import "tw-elements";
 import { MdEmail } from "react-icons/md";
 
@@ -50,12 +50,12 @@ const Cards = () => {
       email: "elias.ehasalu@ituk.ee",
     },
 
-    // {
-    //   image: abi,
-    //   name: "Elias Ehasalu",
-    //   job: "Juhiabi",
-    //   email: "elias.ehasalu@ituk.ee",
-    // },
+    {
+      image: abi,
+      name: "Kaisa-Mari Veinberg",
+      job: "Juhiabi",
+      email: "kaisamari.veinberg@ituk.ee",
+    },
   ];
 
   const renderCard = (card) => {
@@ -76,7 +76,7 @@ const Cards = () => {
     <div className="juhatus" id="juhatus">
       <h2>Juhatus</h2>
       <span className="line"></span>
-      <div class="container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-4  xl:grid-cols-4 gap-5 ">
+      <div class="container flex gap-5  ">
         {cardInfo.map(renderCard)}
       </div>
     </div>

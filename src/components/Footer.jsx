@@ -48,7 +48,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://drive.google.com/drive/folders/0B4D74GdBqxxJZTYwcU9GM0VnQUk?usp=sharing"
+              href="https://drive.google.com/drive/folders/0B83Fndj2U7wVRFhrSmNQN3hSYmM?resourcekey=0--_ipTl05zOHo_8OIx_peyg&usp=sharing"
               class="text-white hover:text-[#870042]"
             >
               <FaGoogleDrive size={30} />

@@ -5,21 +5,23 @@
 }
 
 .juhatus .container {
-  width: 1240px;
+  width: 1400px;
   margin: 0rem auto;
   padding: 0rem 1rem;
   padding-top: 2rem;
   padding-bottom: 4rem;
-  display: grid;
-	grid-template-columns: repeat( 6, 1fr )
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
 
 }
 
 .wrapper {
-  width: auto;
+  width: 300px;
   padding: 0 1rem;
   text-align: center;
+ 
 }
 
 .juhatus h2 {
@@ -43,6 +45,7 @@
 .card {
 	grid-column: span 2;
 }
+
 
 .juhatus .card a {
   color: #787878;
@@ -69,7 +72,10 @@
   display: grid;
   grid-gap: 20px;
   margin: 3rem 0;
+
+  
 }
+
 
 .juhatus .card {
   border: 2px solid #eee;
@@ -87,9 +93,8 @@
 
 @media screen and (max-width: 960px) {
   .juhatus .container {
-    display: grid;
+    display: flex;
     width: auto;
-    grid-template-columns: repeat( 1, 1fr )
   }
 
   .juhatus .card{
