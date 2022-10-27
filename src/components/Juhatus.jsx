@@ -15,7 +15,7 @@ const Cards = () => {
     {
       image: esimees,
       name: "Margareth Lasn",
-      job: "Juhatuse esimees",
+      job: "Juhatuse esinaine",
       email: "margareth.lasn@ituk.ee",
     },
     {
@@ -76,9 +76,7 @@ const Cards = () => {
     <div className="juhatus" id="juhatus">
       <h2>Juhatus</h2>
       <span className="line"></span>
-      <div class="container flex gap-5  ">
-        {cardInfo.map(renderCard)}
-      </div>
+      <div class="container flex gap-5  ">{cardInfo.map(renderCard)}</div>
     </div>
   );
 };
