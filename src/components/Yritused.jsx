@@ -18,47 +18,12 @@ const Cards = () => {
                 Haridus
               </h5>
 
-              <li>
-                <a
-                  href="https://www.facebook.com/events/341219044677369"
-                  class="mr-4 hover:underline md:mr-6 "
-                >
-                  Praktikakohvik
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/1131315427395904/"
-                  class="mr-4 hover:underline md:mr-6"
-                >
-                  IT-ametite päev
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/1382287772193543"
-                  class="mr-4 hover:underline md:mr-6 "
-                >
-                  Konfluence
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/4953795681347259"
-                  class="mr-4 hover:underline md:mr-6"
-                >
-                  Robocode
-                </a>
-              </li>
+              <li>Praktikakohvik</li>
+              <li>IT-ametite päev</li>
+              <li>Konfluence</li>
+              <li>Robocode</li>
               <li>Firma külastused</li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/1078881162836003"
-                  class="mr-4 hover:underline md:mr-6"
-                >
-                  Õpiõhtud
-                </a>
-              </li>
+              <li>Õpiõhtud</li>
             </div>
           </div>
           <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
@@ -67,38 +32,11 @@ const Cards = () => {
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042] dark:text-white">
                 Meelelahutus
               </h5>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/590488846050321"
-                  class="mr-4 hover:underline md:mr-6 "
-                >
-                  Tudengibaar
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/751480919440687"
-                  class="mr-4 hover:underline md:mr-6"
-                >
-                  IT-teaduskonna rebaste ristimine
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/271426701503553/"
-                  class="mr-4 hover:underline md:mr-6 "
-                >
-                  TechnÖÖ Jooks
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/events/1096342120997436"
-                  class="mr-4 hover:underline md:mr-6"
-                >
-                  Don’t Do IT
-                </a>
-              </li>
+              <li>Tudengibaar</li>
+              <li>IT-teaduskonna rebaste ristimine</li>
+              <li>TechnÖÖ Jooks</li>
+
+              <li>Don’t Do IT</li>
             </div>
           </div>
           <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
@@ -113,6 +51,16 @@ const Cards = () => {
               <li>Filmiõhtud</li>
             </div>
           </div>
+        </div>
+        <div class="flex items-center mt-10">
+          <h1 class="mb-2 text-2xl tracking-tight text-center   dark:text-white">
+            Rohkem infot ürituste kohta meie
+          </h1>
+          <a href="https://www.facebook.com/ituk.taltech/events">
+            <h1 class="ml-2 mb-2 text-2xl tracking-tight text-center text-[#870042] dark:text-white">
+              Facebooki eventide lehelt
+            </h1>
+          </a>
         </div>
       </div>
     </div>

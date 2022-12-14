@@ -21,6 +21,7 @@
   width: 300px;
   padding: 0 1rem;
   text-align: center;
+
  
 }
 
@@ -36,16 +37,18 @@
 }
 
 .juhatus img {
-  border-radius: 4px;
-  object-fit: cover;
-  height: 350px;
-  width: 400px;
+ 
+  
 }
 
 .card {
 	grid-column: span 2;
 }
 
+.juhatus .card img {
+
+  
+}
 
 .juhatus .card a {
   color: #787878;
@@ -72,6 +75,7 @@
   display: grid;
   grid-gap: 20px;
   margin: 3rem 0;
+  
 
   
 }
@@ -83,6 +87,7 @@
   box-shadow: 0 3px 15px rgb(0, 0, 0, .2);
   padding: 1rem;
   transition: transform 250ms;
+  
 
 }
 
