@@ -3,6 +3,16 @@ import "./Yritused.css";
 import Meelelahutus from "./images/events/DDIT2022.jpg";
 import Haridus from "./images/events/konfluence.jpg";
 import Siseüritus from "./images/pannakas.jpg";
+
+var events = (
+  <a
+    class=" text-[#870042]"
+    href="https://www.facebook.com/ituk.taltech/events"
+  >
+    Facebooki eventide lehelt.
+  </a>
+);
+
 const Cards = () => {
   return (
     <div className="yritused" id="yritused">
@@ -54,13 +64,8 @@ const Cards = () => {
         </div>
         <div class="flex items-center mt-10">
           <h1 class="mb-2 text-2xl tracking-tight text-center   dark:text-white">
-            Rohkem infot ürituste kohta meie
+            Rohkem infot ürituste kohta meie {events}
           </h1>
-          <a href="https://www.facebook.com/ituk.taltech/events">
-            <h1 class="ml-2 mb-2 text-2xl tracking-tight text-center text-[#870042] dark:text-white">
-              Facebooki eventide lehelt
-            </h1>
-          </a>
         </div>
       </div>
     </div>
