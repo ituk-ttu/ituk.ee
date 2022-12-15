@@ -1,12 +1,12 @@
 import React from "react";
 import "./Juhatus.css";
-import esimees from "./juhatus/2022/marga_ituk.jpg";
-import hr from "./juhatus/2022/rasmus_ituk.jpg";
-import finants from "./juhatus/2022/laura_ituk.jpg";
-import haridus from "./juhatus/2022/kart_ituk.jpg";
-import meelelahutus from "./juhatus/2022/sander_ituk.jpg";
-import turundus from "./juhatus/2022/elias_ituk.jpg";
-import abi from "./juhatus/2022/kaisa_ituk.jpg";
+import esimees from "./juhatus/2022/marga_ituk-min.jpg";
+import hr from "./juhatus/2022/rasmus_ituk-min.jpg";
+import finants from "./juhatus/2022/laura_ituk-min.jpg";
+import haridus from "./juhatus/2022/kart_ituk-min.jpg";
+import meelelahutus from "./juhatus/2022/sander_ituk-min.jpg";
+import turundus from "./juhatus/2022/elias_ituk-min.jpg";
+import abi from "./juhatus/2022/kaisa_ituk-min.jpg";
 import "tw-elements";
 
 const Cards = () => {
@@ -20,32 +20,32 @@ const Cards = () => {
     {
       image: hr,
       name: "Rasmus Serg",
-      job: "Inimressursside valdkonna juht",
+      job: "Inimressursside juht",
       email: "rasmus.serg@ituk.ee",
     },
     {
       image: finants,
       name: "Laura-Liis Järvela",
-      job: "Finantsvaldkonna juht",
+      job: "Finants juht",
       email: "lauraliis.jarvela@ituk.ee",
     },
     {
       image: haridus,
       name: "Kärt Annus",
-      job: "Haridusvaldkonna juht",
+      job: "Haridus juht",
       email: "kart.annus@ituk.ee",
     },
     {
       image: meelelahutus,
       name: "Sander Plukš",
-      job: "Meelelahutusvaldkonna juht",
+      job: "Meelelahutuse juht",
       email: "sander.pluks@ituk.ee",
     },
 
     {
       image: turundus,
       name: "Elias Ehasalu",
-      job: "Turundus- ja kommunikatsioonivaldkonna juht",
+      job: "Turundus- ja kommunikatsiooni juht",
       email: "elias.ehasalu@ituk.ee",
     },
 
@@ -57,23 +57,9 @@ const Cards = () => {
     },
   ];
 
-  // const renderCard = (card) => {
-  //   return (
-  //     <div class="card ">
-  //       <img src={card.image} alt="user1" />
-  //       <h5 class="font-bold text-lg mb-2">{card.name}</h5>
-  //       <span>{card.job}</span>
-  //       <div className="email">
-  //         <MdEmail />
-  //         <a href={`mailto:${card.email}`}>{card.email}</a>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   const renderCard = (card) => {
     return (
-      <div class="h-fit w-80 p-3 colums-3 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div class="transform transition duration-500 hover:scale-105 h-fit w-80 p-3 colums-3 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <img
           class="object-scale-down rounded-lg h-auto "
           src={card.image}

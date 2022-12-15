@@ -19,8 +19,8 @@ const Cards = () => {
       <h2>Üritused</h2>
       <span className="line"></span>
       <div className="container">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 m-3">
-          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class=" grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 m-3">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
 
             <div class="p-5">
@@ -36,7 +36,7 @@ const Cards = () => {
               <li>Õpiõhtud</li>
             </div>
           </div>
-          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
             <img class="rounded-t-lg h-48 w-96" src={Meelelahutus} alt="" />
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042] dark:text-white">
@@ -49,7 +49,7 @@ const Cards = () => {
               <li>Don’t Do IT</li>
             </div>
           </div>
-          <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg   h-48 w-96" src={Siseüritus} alt="" />
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042]  dark:text-white">
