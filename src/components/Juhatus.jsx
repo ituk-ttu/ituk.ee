@@ -26,13 +26,13 @@ const Cards = () => {
     {
       image: finants,
       name: "Laura-Liis Järvela",
-      job: "Finants juht",
+      job: "Finantsjuht",
       email: "lauraliis.jarvela@ituk.ee",
     },
     {
       image: haridus,
       name: "Kärt Annus",
-      job: "Haridus juht",
+      job: "Haridusjuht",
       email: "kart.annus@ituk.ee",
     },
     {
@@ -45,7 +45,7 @@ const Cards = () => {
     {
       image: turundus,
       name: "Elias Ehasalu",
-      job: "Turundus- ja kommunikatsiooni juht",
+      job: "Turundus- ja kommunikatsioonijuht",
       email: "elias.ehasalu@ituk.ee",
     },
 
