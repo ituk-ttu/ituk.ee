@@ -6,7 +6,7 @@ const Sponsorid = () => {
   return (
     <div className="sponsorid m-2" id="sponsorid">
       <div className="container">
-        <h2>Sponsorid</h2>
+        <h2>Koostööpartnerid</h2>
         <span className="line"></span>
         <div class=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-3  self-center p-2 pt-10 pb-10">
           <div class="transform transition duration-500 hover:scale-105 col-span-1 justify-center p-6">
