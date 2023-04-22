@@ -117,7 +117,7 @@ const Footer = () => {
           </div>
         </div>
         <span className="line"></span>
-        <p>2022 IT-teaduskonna üliõpilaskogu</p>
+        <p>&copy; {new Date().getFullYear()} IT-teaduskonna üliõpilaskogu</p>
       </div>
     </div>
   );
