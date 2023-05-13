@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ituk.ee
+    runs-on: self-hosted
 
     steps:
     - name: Set SSH permissions
