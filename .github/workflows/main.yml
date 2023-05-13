@@ -10,6 +10,13 @@ jobs:
     runs-on: ituk.ee
 
     steps:
+    - name: Set SSH permissions
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        touch ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+
     - name: Checkout code
       uses: actions/checkout@v2
 
