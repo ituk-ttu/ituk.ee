@@ -10,13 +10,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Set SSH permissions
-      run: |
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-        touch ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
-
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -32,6 +25,10 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.0
       with:
         ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+        
+    - name: Debug
+      run: |
+        echo "${{ secrets.DEPLOY_KEY }}" | ssh-keygen -y -f /dev/stdin
 
     - name: Deploy to ituk.ee
       run: |
