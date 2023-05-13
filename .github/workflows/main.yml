@@ -23,7 +23,7 @@ jobs:
         
     - name: Deploy to ituk.ee
       run: |
-        rsync -chavzP --rsh="ssh -l $SSH_USERNAME" _work/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
+        rsync -chavzP --rsh="ssh -l $SSH_USERNAME" _work/ituk.ee/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
       env:
         SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
