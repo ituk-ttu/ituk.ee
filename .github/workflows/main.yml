@@ -7,39 +7,24 @@ on:
 
 env:
   SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-  SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_RSA }}
 
 jobs:
   build:
     runs-on: self-hosted
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 17
-
+        node-version: '17'
     - name: Install dependencies
       run: npm install --force
-
-    - name: Decrypt private key
-      run: echo "$SSH_PRIVATE_KEY" | base64 -d > deploy_rsa
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_RSA }}
-
-    - name: Add SSH key
-      uses: webfactory/ssh-agent@v0.5.0
+    - name: Decrypt deploy key
+      uses: webfactory/ssh-agent@v0.4.1
       with:
-        ssh-private-key: ./deploy_rsa
-
-    - name: Install rsync
-      run: sudo apt-get install rsync
-
-    - name: Build project
+        ssh-private-key: ${{ secrets.DEPLOY_RSA }}
+    - name: Build
       run: npm run build -prod
-
-    - name: Deploy to server
-      run: rsync -chavzP --rsh="ssh -l $SSH_USERNAME" _work/ituk.ee/* $SSH_USERNAME@ituk.ee:/var/ituk.ee/build
+    - name: Deploy
+      run: rsync -chavzP --rsh="ssh -l ${{ secrets.SSH_USERNAME }}" build/* ${{ secrets.SSH_USERNAME }}@ituk.ee:/var/ituk.ee/build
