@@ -22,7 +22,6 @@ jobs:
           chmod 600 deploy_rsa
           eval "$(ssh-agent -s)"
           ssh-add deploy_rsa
-
       - name: Build project
         run: npm run build
 
@@ -35,3 +34,6 @@ jobs:
           remote-dir: /var/ituk.ee/build
           ssh-host: ${{ secrets.SSH_HOST }}
           ssh-username: ${{ secrets.SSH_USERNAME }}
+          
+      - name: Build project
+        run: npm run build
