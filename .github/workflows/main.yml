@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Deploy to ituk.ee
 
 on:
   push:
@@ -6,28 +6,33 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '17'
 
-      - name: Decrypt deploy key
-        run: |
+    - name: Install dependencies
+      run: npm install --force
+        
+
+    - name: Decrypt deploy key
+      run: |
           openssl aes-256-cbc -K ${{ secrets.DEPLOY_KEY_K }} -iv ${{ secrets.DEPLOY_KEY_IV }} -in deploy_rsa.enc -out deploy_rsa -d
           chmod 600 deploy_rsa
           eval "$(ssh-agent -s)"
           ssh-add deploy_rsa
-      - name: Build project
-        run: npm run build
+          
 
-      - name: Deploy to remote server
-        uses: easingthemes/ssh-deploy@v2
-        with:
+    - name: Deploy to remote server
+      uses: easingthemes/ssh-deploy@v2
+      with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
           args: -chavzP
           local-dir: _work/ituk.ee/*
@@ -35,5 +40,5 @@ jobs:
           ssh-host: ${{ secrets.SSH_HOST }}
           ssh-username: ${{ secrets.SSH_USERNAME }}
           
-      - name: Build project
-        run: npm run build
+    - name: Build project
+      run: npm run build
