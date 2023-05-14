@@ -27,4 +27,4 @@ jobs:
     - name: Build
       run: npm run build -prod
     - name: Deploy
-      run: rsync -chavzP --rsh="ssh -l deploy" _work/* deploy@ituk.ee:/var/ituk.ee/build
+      run: rsync -chavzP --rsh="ssh -l deploy" build/* deploy@ituk.ee:/var/ituk.ee/build
