@@ -25,7 +25,7 @@ const Kontakt = () => {
               </li>
               <li>
                 <AiFillPhone />
-                <p>+372 5691 2899</p>
+                <p>+372 5621 8221</p>
               </li>
               <li>
                 <MdLocationPin />
