@@ -20,11 +20,9 @@ jobs:
         node-version: '17'
     - name: Install dependencies
       run: npm install --force
-    - name: Decrypt deploy key
-      uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_RSA }}
     - name: Build
       run: npm run build -prod
     - name: Deploy
       run: rsync -chavzP --rsh="ssh -l deploy" build/* deploy@ituk.ee:/var/ituk.ee/build
+      env:
+        ssh-private-key: ${{ secrets.DEPLOY_RSA }}
