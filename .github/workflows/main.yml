@@ -20,11 +20,14 @@ jobs:
         node-version: '17'
     - name: Install dependencies
       run: npm install --force
-    - name: Decrypt deploy key
-      uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_RSA }}
+    - name: install ssh keys
+    # check this thread to understand why its needed:
+    # https://stackoverflow.com/a/70447517
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.DEPLOY_RSA }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
     - name: Build
       run: npm run build -prod
     - name: Deploy
-      run: rsync -chavzP --rsh="ssh -l deploy" build/* deploy@ituk.ee:/var/ituk.ee/build
+      run: rsync -chavzP --rsh="ssh -l $SSH_USERNAME" build/* $SSH_USERNAME@$SSH_HOST:/var/ituk.ee/build
