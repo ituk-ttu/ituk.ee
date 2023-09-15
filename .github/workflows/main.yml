@@ -25,7 +25,7 @@ jobs:
         known_hosts: unnecessary
 
     - name: Adding Known Hosts
-      run: ssh-keyscan -H deploy >> ~/.ssh/known_hosts
+      run: ssh-keyscan -H ituk.ee >> ~/.ssh/known_hosts
     - name: Build
       run: npm run build -prod
     - name: Deploy
