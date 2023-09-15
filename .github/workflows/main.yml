@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,17 +14,19 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '17'
+        node-version: '17' # Adjust to the appropriate Node.js version
     - name: Install dependencies
       run: npm install --force
-    - name: install ssh keys
-    # check this thread to understand why its needed:
-    # https://stackoverflow.com/a/70447517
+    - name: Install SSH keys
       run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        mkdir -p ~/.ssh
+        touch ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
         echo "${{ secrets.DEPLOY_RSA }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+        ssh-keyscan -H ituk.ee > ~/.ssh/known_hosts
     - name: Build
       run: npm run build -prod
     - name: Deploy
-      run: rsync -chavzP --rsh="ssh -l $SSH_USERNAME" build/* $SSH_USERNAME@$SSH_HOST:/var/ituk.ee/build
+      run: rsync -chavzP --rsh="ssh -l deploy" build/* deploy@ituk.ee:/var/ituk.ee/build
+    - name: Cleanup SSH keys
+      run: rm ~/.ssh/id_rsa
