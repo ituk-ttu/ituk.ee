@@ -1,59 +1,59 @@
 import React from "react";
 import "./Juhatus.css";
-import esimees from "./juhatus/2023/esimees-min.jpg";
-import hr from "./juhatus/2023/hr-min.jpg";
-import finants from "./juhatus/2023/finants-min.jpg";
-import haridus from "./juhatus/2023/haridus-min.jpg";
-import meelelahutus from "./juhatus/2023/meelelahutus-min.jpg";
-import turundus from "./juhatus/2023/turundus-min.jpg";
-import abi from "./juhatus/2023/abi-min.jpg";
+import esimees from "./juhatus/2024/sass.jpg";
+import hr from "./juhatus/2024/merely.jpg";
+import finants from "./juhatus/2024/kaspar.jpg";
+import haridus from "./juhatus/2024/karlis.jpg";
+import meelelahutus from "./juhatus/2024/georg.jpg";
+import turundus from "./juhatus/2024/bel.jpg";
+import abi from "./juhatus/2024/annemari.jpg";
 import "tw-elements";
 
 const Cards = () => {
   const cardInfo = [
     {
       image: esimees,
-      name: "Sandra Lubi",
+      name: "Alexander Rein Robas",
       job: "Juhatuse esimees",
-      email: "sandra.lubi@ituk.ee",
+      email: "esimees@ituk.ee",
     },
     {
       image: hr,
-      name: "Gert Persidski",
+      name: "Merely Laast",
       job: "Inimressursside juht",
-      email: "gert.persidski@ituk.ee",
+      email: "hr@ituk.ee",
     },
     {
       image: finants,
-      name: "Marcus Bindevald",
+      name: "Kaspar Sibul",
       job: "Finantsjuht",
-      email: "marcus.bindevald@ituk.ee",
+      email: "finants@ituk.ee",
     },
     {
       image: haridus,
-      name: "Kerttu Filippov",
+      name: "Karlis Saarna",
       job: "Haridusjuht",
-      email: "kerttu.filippov@ituk.ee",
+      email: "haridus@ituk.ee",
     },
     {
       image: meelelahutus,
-      name: "Kristian Erik Papp",
+      name: "Georg Lee",
       job: "Meelelahutuse juht",
-      email: "kristian.papp@ituk.ee",
+      email: "meelelahutus@ituk.ee",
     },
 
     {
       image: turundus,
-      name: "Robin Nook",
+      name: "Anabel Kalamees",
       job: "Turundus- ja kommunikatsioonijuht",
-      email: "robin.nook@ituk.ee",
+      email: "sponsorlus@ituk.ee",
     },
 
     {
       image: abi,
-      name: "Merely Laast",
+      name: "Annemari Riisimäe",
       job: "Juhiabi",
-      email: "merely.laast@ituk.ee",
+      email: "juhiabi@ituk.ee",
     },
   ];
 
