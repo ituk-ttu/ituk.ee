@@ -5,13 +5,23 @@ Source code for https://ituk.ee
 * Node.js
 * NPM
 
-### Development setup
-Install dependencies:
-```npm install ```
+### Installing node.js and npm
+
+https://nodejs.org/en/download/package-manager
 
 
-Start your favorite web server in `build` folder. 
 
-### Compiling for production
-Install dependencies:
-```npm install```
+### Install dependencies
+
+in repo directory
+
+```
+npm install 
+```
+
+
+### Start local web server
+
+```
+npm start
+```

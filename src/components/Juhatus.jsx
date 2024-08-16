@@ -46,7 +46,7 @@ const Cards = () => {
       image: turundus,
       name: "Anabel Kalamees",
       job: "Turundus- ja kommunikatsioonijuht",
-      email: "sponsorlus@ituk.ee",
+      email: "turundus@ituk.ee",
     },
 
     {
