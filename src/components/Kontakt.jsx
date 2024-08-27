@@ -37,19 +37,19 @@ const Kontakt = () => {
               <br />
               <li>
                 <MdFacebook />
-                <a href="https://facebook.com/ituk.taltech">
+                <a href="https://facebook.com/ituk.taltech" target="_blank" rel="noopener noreferrer">
                   facebook.com/ituk.taltech
                 </a>
               </li>
               <li>
                 <FaInstagram />
-                <a href="https://www.instagram.com/ituk.taltech">
+                <a href="https://www.instagram.com/ituk.taltech" target="_blank" rel="noopener noreferrer">
                   instagram.com/ituk.taltech
                 </a>
               </li>
               <li>
                 <FaGithub />
-                <a href="https://www.github.com/ituk-ttu">
+                <a href="https://www.github.com/ituk-ttu" target="_blank" rel="noopener noreferrer">
                   github.com/ituk-ttu
                 </a>
               </li>

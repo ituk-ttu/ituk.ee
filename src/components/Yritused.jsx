@@ -8,7 +8,8 @@ var events = (
   <a
     class=" text-[#870042]"
     href="https://www.facebook.com/ituk.taltech/events"
-  >
+    target="_blank" 
+    rel="noopener noreferrer">
     Facebooki eventide lehelt.
   </a>
 );
