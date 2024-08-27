@@ -2,18 +2,24 @@ import React from "react";
 import "./Meist.css";
 import tukk from "./assets/videos/tukk.mp4";
 
-var tudengibaar = (
-  <a href="https://www.facebook.com/events/590488846050321">Tudengibaar</a>
-);
-var Technoo_jooks = (
-  <a href="https://www.facebook.com/events/271426701503553">TechnÖÖ Jooks</a>
-);
+var ITAP = (
+  <a href="https://www.facebook.com/events/982662606348269/" target="_blank" rel="noopener noreferrer">IT-ametite päev</a>
+)
+var praktikakohvik = (
+  <a href="https://www.facebook.com/events/915553479977551/" target="_blank" rel="noopener noreferrer">Praktikakohvik</a>
+)
+var taltech_gamecamp = (
+  <a href="https://www.facebook.com/events/941131616967946" target="_blank" rel="noopener noreferrer">TalTech GameCamp</a>
+)
 var DDIT = (
-  <a href="https://www.facebook.com/events/657009918604465">Don't Do IT</a>
+  <a href="https://www.facebook.com/events/331427035946834/" target="_blank" rel="noopener noreferrer">Don't Do IT</a>
+);
+var tudengibaar = (
+  <a href="https://www.facebook.com/events/1004681697465978/" target="_blank" rel="noopener noreferrer">Tudengibaar</a>
 );
 var rebaste_ristimine = (
-  <a href="https://www.facebook.com/events/308989330958977">
-    IT-rebaste ristimine
+  <a href="https://www.facebook.com/events/818282410416468/" target="_blank" rel="noopener noreferrer">
+    IT-teaduskonna rebaste ristimine
   </a>
 );
 
@@ -43,9 +49,9 @@ const About = () => {
             <p class="text-xl font-medium  pt-4">
               Eelkõige tegelebki ITÜK ehk IT-teaduskonna üliõpilaskogu tudengite
               esindamise, hariduse edendamise ning meelelahutusega. Meie
-              populaarseimad hariduslikud üritused on: IT-ametite päev,
-              Praktikakohvik, Konfluence. Meelelahutust pakuvad {DDIT},{" "}
-              {tudengibaar}, {Technoo_jooks} ja {rebaste_ristimine}.
+              populaarseimad hariduslikud üritused on: {ITAP},
+              {praktikakohvik} ja {taltech_gamecamp}. Meelelahutust pakuvad {DDIT},{" "}
+              {tudengibaar} ja {rebaste_ristimine}.
             </p>
             <p class="text-xl font-medium  pt-4">
               Lisaks suurüritustele korraldame ka oma liikmetele vahvaid
