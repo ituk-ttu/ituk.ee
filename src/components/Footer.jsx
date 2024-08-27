@@ -30,7 +30,9 @@ const Footer = () => {
           <div class="flex col-span-1  justify-center place-items-center gap-6">
             <a
               href="https://hub.ituk.ee"
-              class="text-white hover:text-[#870042]"
+              class="text-white hover:text-[#870042]" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +50,9 @@ const Footer = () => {
             </a>
             <a
               href="https://facebook.com/ituk.taltech"
-              class="text-white hover:text-[#870042]"
+              class="text-white hover:text-[#870042]" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
               <svg
                 class="w-10 h-10"
@@ -66,7 +70,9 @@ const Footer = () => {
             </a>
             <a
               href="https://www.instagram.com/ituk.taltech"
-              class="text-white hover:text-[#870042] dark:hover:text-white"
+              class="text-white hover:text-[#870042] dark:hover:text-white" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
               <svg
                 class="w-10 h-10"
@@ -84,7 +90,9 @@ const Footer = () => {
             </a>
             <a
               href="https://www.github.com/ituk-ttu"
-              class="text-white hover:text-[#870042] dark:hover:text-white"
+              class="text-white hover:text-[#870042] dark:hover:text-white" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
               <svg
                 class="w-10 h-10"
