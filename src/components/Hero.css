@@ -59,8 +59,9 @@ body{
 }
 
 .hero .button:hover {
-    background-color: var(--secondary-dark);
-    border: 1px solid var(--secondary-dark);
+    color: var(--primary-color);
+    background-color: #fff;
+    border: 1px solid #fff;
 }
 
 
