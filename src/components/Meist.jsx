@@ -40,6 +40,7 @@ const About = () => {
 
           <div class="col-span-2 p-5">
             <h2>Meist</h2>
+            <img src="./images/like.gif"></img>
             <span className="line"></span>
             <p class="text-xl font-medium  pt-4">
               ITÜKi on koondunud erinevatest infotehnoloogia teaduskonna
