@@ -2,8 +2,9 @@
     width: 1240px;
     margin: 1rem auto;
     padding: 2rem 0rem;
-    
- 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 
