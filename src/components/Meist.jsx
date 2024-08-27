@@ -49,7 +49,7 @@ const About = () => {
             <p class="text-xl font-medium  pt-4">
               Eelkõige tegelebki ITÜK ehk IT-teaduskonna üliõpilaskogu tudengite
               esindamise, hariduse edendamise ning meelelahutusega. Meie
-              populaarseimad hariduslikud üritused on: {ITAP},
+              populaarseimad hariduslikud üritused on: {ITAP},{" "}
               {praktikakohvik} ja {taltech_gamecamp}. Meelelahutust pakuvad {DDIT},{" "}
               {tudengibaar} ja {rebaste_ristimine}.
             </p>

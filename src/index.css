@@ -76,8 +76,9 @@ a {
 }
 
 .button:hover {
-  background: var(--primary-dark);
-  border: 1px solid var(--primary-dark);
+  color: var(--primary-color);
+  background: #fff;
+  border: 1px solid #fff;
 }
 
 .line {
