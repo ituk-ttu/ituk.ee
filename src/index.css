@@ -14,20 +14,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
-
-  
 }
 
 body {
-
   font-family: "Raleway";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.2rem;
   line-height: 1.2;
-
-  
 }
 
 .container {
@@ -35,9 +29,6 @@ body {
   margin: 0rem auto;
   margin-top: 3rem;
   margin-bottom: 3rem;
-
-
-
 }
 
 h2 {
@@ -89,13 +80,9 @@ a {
   background-color: var(--primary-color);
 }
 
-
-
-@media screen and (max-width:940px) {s
-
+@media screen and (max-width: 940px) {
   .body  {
     width: 100vw;
-  
   }
 
   .container {
@@ -103,5 +90,4 @@ a {
     width: auto;
     grid-template-columns: repeat( 1, 1fr )
   }
-
-  }
+}
