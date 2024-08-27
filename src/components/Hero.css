@@ -16,7 +16,7 @@ body{
 
 .hero:before {
     content: '';
-    background: url('./images/hero.jpg') no-repeat center center/cover;
+    background: url('./images/hero.png') no-repeat center center/cover;
     height: 100%;
     width: 100%;
     position: absolute;

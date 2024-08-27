@@ -1,6 +1,6 @@
 import React from "react";
 import "./Meist.css";
-import tukk from "./assets/videos/tukk.mp4";
+import tux from "./assets/videos/Tux2024.mp4";
 
 var ITAP = (
   <a href="https://www.facebook.com/events/982662606348269/" target="_blank" rel="noopener noreferrer">IT-ametite päev</a>
@@ -31,7 +31,7 @@ const About = () => {
           <div class="col-span-1 grid justif-center p-6">
             <video
               class="w-full max-w-full h-auto"
-              src={tukk}
+              src={tux}
               autoPlay
               loop
               muted
