@@ -1,6 +1,6 @@
 import React from "react";
 import "./Meist.css";
-import tux from "./assets/videos/Tux2024.mp4";
+import tux from "./assets/videos/tux.mp4";
 
 var ITAP = (
   <a href="https://www.facebook.com/events/982662606348269/" target="_blank" rel="noopener noreferrer">IT-ametite päev</a>
