@@ -9,13 +9,13 @@ var praktikakohvik = (
   <a href="https://www.facebook.com/events/915553479977551/" target="_blank" rel="noopener noreferrer">Praktikakohvik</a>
 )
 var taltech_gamecamp = (
-  <a href="https://www.facebook.com/events/941131616967946" target="_blank" rel="noopener noreferrer">TalTech GameCamp</a>
+  <a href="https://www.facebook.com/events/941131616967946/" target="_blank" rel="noopener noreferrer">TalTech GameCamp</a>
 )
 var DDIT = (
-  <a href="https://www.facebook.com/events/331427035946834/" target="_blank" rel="noopener noreferrer">Don't Do IT</a>
+  <a href="https://www.facebook.com/events/491305987081654/" target="_blank" rel="noopener noreferrer">Don't Do IT</a>
 );
 var tudengibaar = (
-  <a href="https://www.facebook.com/events/1004681697465978/" target="_blank" rel="noopener noreferrer">Tudengibaar</a>
+  <a href="https://www.facebook.com/events/463220342973419/" target="_blank" rel="noopener noreferrer">Tudengibaar</a>
 );
 var rebaste_ristimine = (
   <a href="https://www.facebook.com/events/818282410416468/" target="_blank" rel="noopener noreferrer">

@@ -2,7 +2,7 @@ import * as React from "react";
 import "./Yritused.css";
 import Haridus from "./images/events/gamecamp2024.png";
 import Meelelahutus from "./images/events/ristimine2024.png";
-import Siseüritus from "./images/events/pannakas.jpg";
+import Siseüritus from "./images/events/pannakas2024.png";
 
 var events = (
   <a
