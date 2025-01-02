@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  font-size: 16px;
+  background-color: #131313;
+}
+
+html,
+img,
+h1,
+h2,
+h3,
+h4,
+h5,
+li,
+p,
+a,
+.button-text,
+.big-button-text {
+    color: #eeeeee;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.25em;
+}
+
+.big {
+    font-size: 7.5rem;
+}
+
+.title {
+    font-size: 2.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.875rem;
+}
+
+h4 {
+    font-size: 1.75rem;
+}
+
+h5 {
+    font-size: 1.5rem;
+}
+
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+.button-text,
+.big-button-text {
+    font-weight: bold;
+}
+
+p,
+li,
+img,
+html,
+input,
+select,
+textarea,
+.input-text,
+.button-text {
+    font-size: 1.125rem;
+    font-style: normal;
+}
+
+.big-button-text {
+    font-size: 1.25rem;
+}
+
+.button-text,
+.big-button-text {
+    text-transform: uppercase;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    background-color: #131313;
+}
+
+.main-height {
+    min-height: calc(100vh - 77px);
+}
+
+.main-padding {
+    padding: 6rem 10%;
+}
+
+.img-button {
+    min-height: calc((100vh - 77px)/ 2);
+}
+
+@media screen and (max-width: 640px) {
+
+    .big {
+        font-size: 5rem;
+        }
+
+    .title {
+        font-size: 2.25rem;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    h5 {
+        font-size: 1.25rem;
+    }
+
+    p,
+    li,
+    img,
+    html,
+    input,
+    select,
+    textarea,
+    .input-text,
+    .button-text {
+        font-size: 1rem;
+    }
+
+    .big-button-text {
+        font-size: 1.25rem;
+    }
+
+}
