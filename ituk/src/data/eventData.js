@@ -1,226 +1,109 @@
-export const eventData = [
+const eventData = [
     {
-        title: 'IT-teaduskonna rebaste ristimine',
+        id: 'hazing',
         path: 'it-teaduskonna-rebaste-ristimine',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/ristimine.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'hazingInfo' },
+            et: { description: 'hazingInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/it-rebaste-ristimine-banner.jpg',
     },
     {
-        title: "Don't Do IT",
+        id: 'ddit',
         path: 'dont-do-it',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/ddit.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'dditInfo' },
+            et: { description: 'dditInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/dont-do-it-banner.jpg',
     },
     {
-        title: 'Tudengibaar',
+        id: 'studentBar',
         path: 'tudengibaar',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/tudengibaar.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'studentBarInfo' },
+            et: { description: 'studentBarInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/tudengibaar-banner.jpg',
     },
     {
-        title: 'Päkapikud IT-majast',
+        id: 'elves',
         path: 'pakapikud-it-majast',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/pakapikud.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'elvesInfo' },
+            et: { description: 'elvesInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/pahkapikud-it-majas-banner.jpg',
     },
     {
-        title: 'LanTech / TalTech E-Sport',
-        path: 'lantech-taltech-e-sport',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/esport.jpg',
-        description: 'Description',
-        date: 'Date',
+        id: 'eSport',
+        path: 'taltech-esport',
+        description: {
+            en: { description: 'eSportInfo' },
+            et: { description: 'eSportInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/lantech-taltech-esport-banner.jpg',
     },
     {
-        title: 'Kevadsport',
+        id: 'springSport',
         path: 'kevadsport',
-        category: 'entertainment',
-        bannerImage: 'src/assets/images/events/kevadsport.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'springSportInfo' },
+            et: { description: 'springSportInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
+        ],
+        bannerImage: '/images/kevadsport-banner.jpg',
     },
     {
-        title: 'IT-ametite päev',
+        id: 'itap',
         path: 'it-ametite-paev',
-        category: 'education',
-        bannerImage: 'src/assets/images/events/itap.jpg',
-        description: 'Description',
-        date: 'Date',
+        description: {
+            en: { description: 'itapInfo' },
+            et: { description: 'itapInfo' },
+        },
         links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+            { year: '2024', content: 'https://example.com/example-2024' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'TalTech GameCamp',
-        path: 'taltech-gamecamp',
-        category: 'education',
-        bannerImage: 'src/assets/images/events/gamecamp.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
+        images: [
+            { name: 'Image 1', path: '/images/ituk_banner.jpg' },
         ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Õpiõhtud',
-        path: 'opiohtud',
-        category: 'education',
-        bannerImage: 'src/assets/images/events/opiohtud.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Koolitused',
-        path: 'koolitused',
-        category: 'education',
-        bannerImage: 'src/assets/images/events/koolitused.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Infoõhtud',
-        path: 'infoohtud',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/infoohtud.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Neljapäevased chillid',
-        path: 'neljapaevased-chillid',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/chillid.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Võrkpallitrenn ITÜKiga',
-        path: 'vorkpallitrenn-itukiga',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/vorkpall.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Sporditurniirid',
-        path: 'sporditurniirid',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/sporditurniirid.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Suvepäevad / talvepäevad',
-        path: 'suvepaevad-talvepaevad',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/suvepaevad.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
-    },
-    {
-        title: 'Rektori karikas',
-        path: 'rektori-karikas',
-        category: 'other',
-        bannerImage: 'src/assets/images/events/rektori_karikas.jpg',
-        description: 'Description',
-        date: 'Date',
-        links: [
-            { year: '2024', link: 'https://facebook.com/event1' },
-        ],
-        galleryImages: [
-            { src: "public/ituk_banner.png", name: "Image 1" },
-        ]
+        bannerImage: '/images/it-ametite-paev-banner.jpg',
     },
 ];
+
+export default eventData;

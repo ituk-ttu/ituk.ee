@@ -1,41 +1,16 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { eventData } from '@/data/eventData.js';
-import LinkButton from '@/components/buttons/PrimaryButton.vue';
-import GalleryCard from '@/components/cards/GalleryCard.vue';
-import GalleryOverlay from '@/components/cards/GalleryOverlay.vue';
+import { useI18n } from 'vue-i18n';
+import eventData from '@/data/eventData.js';
 
+const { t, locale } = useI18n();
 const route = useRoute();
-const eventName = route.params.eventName;
-const event = eventData.find(e => e.path === eventName);
+
+const event = eventData.find((e) => e.path === route.params.eventName);
 
 if (!event) {
-    throw new Error(`Event not found: ${eventName}`);
+    throw new Error(`Event not found: ${route.params.eventName}`);
 }
-
-const galleryStates = ref<Record<string, { isOpen: boolean; currentIndex: number }>>({
-    mainGallery: { isOpen: false, currentIndex: 0 },
-});
-
-const setupScrollLock = (lock: boolean) => {
-    document.body.style.overflow = lock ? 'hidden' : '';
-};
-
-const openOverlay = (galleryKey: string, index: number) => {
-    galleryStates.value[galleryKey].isOpen = true;
-    galleryStates.value[galleryKey].currentIndex = index;
-    setupScrollLock(true);
-};
-
-const closeOverlay = (galleryKey: string) => {
-    galleryStates.value[galleryKey].isOpen = false;
-    setupScrollLock(false);
-};
-
-const updateIndex = (galleryKey: string, index: number) => {
-    galleryStates.value[galleryKey].currentIndex = index;
-};
 </script>
 
 <template>
@@ -43,40 +18,28 @@ const updateIndex = (galleryKey: string, index: number) => {
         <div :style="{ backgroundImage: `url(${event.bannerImage})` }" class="absolute inset-0 bg-cover bg-center">
         </div>
         <div class="absolute inset-0 bg-black/50"></div>
-        <h1 class="relative text-white text-center z-10">{{ event.title }}</h1>
+        <h1 class="relative text-white text-center z-10">
+            {{ t(`events.${event.translations[locale].title}`) }}
+        </h1>
     </div>
 
     <div class="main-container main-padding">
         <div class="self-stretch h-full flex-col justify-start items-start gap-16 flex">
             <div class="self-stretch h-full flex-col justify-start items-start gap-8 flex">
-                <!-- Date -->
-                <h2>Toimub: {{ event.date || 'No date provided.' }}</h2>
+                <h2>{{ t('eventDate') }}: {{ event.date || t('noDate') }}</h2>
+                <p>{{ t(`events.${event.translations[locale].description}`) || t('noDescription') }}</p>
 
-                <!-- Description -->
-                <p>{{ event.description || 'No description provided.' }}</p>
-
-                <!-- Links -->
-                <h2>Varasemad üritused</h2>
-                <div v-if="event.links && event.links.length > 0"
-                    class="self-stretch justify-start items-start gap-8 inline-flex">
-                    <LinkButton v-for="link in event.links" :key="link.year" :text="link.year" :href="link.link" />
+                <h2>{{ t('pastEvents') }}</h2>
+                <div v-if="event.links && event.links.length > 0">
+                    <LinkButton v-for="link in event.links" :key="link.year" :text="link.year" :href="link.content" />
                 </div>
-                <p v-else>No links provided.</p>
+                <p v-else>{{ t('noLinks') }}</p>
 
-                <!-- Gallery -->
-                <h2>Galerii</h2>
-                <div v-if="event.galleryImages && event.galleryImages.length > 0"
-                    class="grid min-w-full grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] items-start gap-16">
-                    <GalleryCard v-for="(image, index) in event.galleryImages" :key="`mainGallery-${index}`"
-                        :index="index" :image-src="image.src" :card-name="image.name"
-                        @open-overlay="() => openOverlay('mainGallery', index)" />
+                <h2>{{ t('gallery') }}</h2>
+                <div v-if="event.images && event.images.length > 0">
+                    <GalleryCard v-for="(image, index) in event.images" :key="index" :image-src="image.path" />
                 </div>
-                <p v-else>No images provided.</p>
-
-                <GalleryOverlay v-if="galleryStates['mainGallery'].isOpen" :photos="event.galleryImages"
-                    :currentIndex="galleryStates['mainGallery'].currentIndex"
-                    :isOpen="galleryStates['mainGallery'].isOpen" @close-overlay="() => closeOverlay('mainGallery')"
-                    @update-index="(index) => updateIndex('mainGallery', index)" />
+                <p v-else>{{ t('noImages') }}</p>
             </div>
         </div>
     </div>

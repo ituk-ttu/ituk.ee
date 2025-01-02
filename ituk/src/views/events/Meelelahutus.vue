@@ -3,7 +3,7 @@ import ImageButton from '@/components/buttons/ImageButton.vue';
 </script>
 
 <template>
-    <div class="main main-height flex flex-col">
+    <div class="main-height flex flex-col">
         <div class="flex flex-col 2xl:flex-row">
             <ImageButton class="img-button 2xl:main-height" :text="$t('hazing')"
                 bg-image="src/assets/images/events/ristimine.jpg" to="/:eventName" />

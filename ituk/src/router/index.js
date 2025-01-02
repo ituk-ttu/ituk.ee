@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { eventData } from '@/data/eventData.js';
-
+import translations from '@/locales/index.js';
 import Avaleht from '@/views/Avaleht.vue';
 import Meist from '@/views/Meist.vue';
 import Üritused from '@/views/events/Üritused.vue';
@@ -80,7 +79,7 @@ router.beforeEach((to, from, next) => {
   let title = to.meta.title || 'ITÜK';
 
   if (to.params.eventName) {
-    const event = eventData.find(e => e.path === to.params.eventName);
+    const event = translations.find(e => e.path === to.params.eventName);
 
     if (event) {
       title = title.replace(':eventName', event.title);

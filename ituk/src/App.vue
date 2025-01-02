@@ -5,7 +5,7 @@ import Navbar from './components/Navbar.vue';
 
 <template>
   <Navbar />
-  <main class="main">
+  <main class="main-height">
     <router-view />
   </main>
   <Footer />

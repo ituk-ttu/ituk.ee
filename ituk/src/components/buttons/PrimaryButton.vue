@@ -20,7 +20,7 @@ const handleClick = () => {
 </script>
 
 <template>
-    <button class="min-w-32 h-12 px-8 bg-primary rounded shadow-main text-white 
+    <button class="min-w-32 h-12 px-8 bg-primary rounded shadow-filled text-white 
         flex justify-center items-center transition-colors duration-150 hover:bg-secondary 
         active:bg-white active:text-primary disabled:bg-gray disabled:text-white disabled:cursor-not-allowed"
         :aria-label="props.ariaLabel || props.text" @click.prevent="handleClick">

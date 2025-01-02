@@ -18,7 +18,8 @@ export default {
         'github': '#2dba4e'
       },
       boxShadow: {
-        'main': '3px 3px 10px 0px black, inset 3px 3px 10px 0px black'
+        'filled': '3px 3px 10px 0px black',
+        'nofill': 'inset 3px 3px 10px 0px black, 3px 3px 10px 0px black'
       },
     },
   },

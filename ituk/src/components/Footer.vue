@@ -21,7 +21,7 @@ const changeLanguage = (lang: string) => {
 
 <template>
     <div
-        class="w-screen min-h-72 h-full px-32 py-16 bg-dark shadow-main flex-col justify-between items-center gap-16 flex">
+        class="w-screen min-h-72 h-full px-32 py-16 bg-dark shadow-filled flex-col justify-between items-center gap-16 flex">
         <div class="justify-start items-center gap-8 flex">
             <Facebook link="https://www.facebook.com/ituk.taltech/" />
             <img src="@/assets/icons/separator.svg" alt="/">

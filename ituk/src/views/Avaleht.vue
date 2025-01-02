@@ -6,7 +6,7 @@ import SecondaryButton from '@/components/buttons/SecondaryButton.vue';
 <template>
     <div class="w-screen main-height bg-dark px-[10%] justify-between items-end flex">
         <div class="main-height w-full 2xl:w-1/2 pb-16 flex-col justify-center items-start gap-16 inline-flex">
-            <div class="bg-primary shadow-main px-2 justify-center items-center inline-flex">
+            <div class="bg-primary shadow-filled px-2 justify-center items-center inline-flex">
                 <h1 class="big">>itük_</h1>
             </div>
             <h3>{{ $t('welcome') }}</h3>

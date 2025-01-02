@@ -23,7 +23,7 @@ const setupScrollLock = () => {
 </script>
 
 <template>
-    <div class="w-screen min-h-[72px] px-[10%] py-1 bg-dark shadow-main justify-between items-center inline-flex">
+    <div class="w-screen min-h-[72px] px-[10%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
         <router-link to="/" class="flex sm:hidden items-center cursor-pointer">
             <img src="@/assets/logos/ituk_navbar_symbol.svg" alt="ITÜK | IT-teaduskonna üliõpilaskogu">
         </router-link>
