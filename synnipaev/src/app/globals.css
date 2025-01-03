@@ -77,6 +77,10 @@ textarea,
   font-style: normal;
 }
 
+.underline{
+  text-decoration: underline;
+}
+
 .big-button-text {
   font-size: 1.25rem;
 }
@@ -101,6 +105,124 @@ textarea,
 
 .img-button {
   min-height: calc((100vh - 77px)/ 2);
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 128px;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 64px 128px;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 32px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+}
+
+.other{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+}
+
+.navbar-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.button-tertiary {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.button-tertiary:hover {
+  border-bottom: 4px solid #870042;
+}
+.button-tertiary:active {
+  border-bottom: 4px solid #870042;
+  color: #AD0054;
+}
+
+.hamburger {
+  display: none;
+}
+
+.facebook:hover {
+  filter: invert(38%) sepia(97%) saturate(5168%) hue-rotate(215deg) brightness(103%) contrast(98%);
+}
+
+.instagram:hover {
+  filter: invert(29%) sepia(41%) saturate(2703%) hue-rotate(295deg) brightness(91%) contrast(90%);
+}
+
+.github:hover {
+  filter: invert(57%) sepia(67%) saturate(500%) hue-rotate(82deg) brightness(90%) contrast(92%);
+}
+
+@media screen and (max-width: 1536px) {
+  .hamburger {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 640px) {

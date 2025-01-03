@@ -105,6 +105,16 @@ textarea,
     min-height: calc((100vh - 77px)/ 2);
 }
 
+.navbar {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 128px;
+    gap: 1515px;
+}
+
 @media screen and (max-width: 640px) {
 
     .big {
