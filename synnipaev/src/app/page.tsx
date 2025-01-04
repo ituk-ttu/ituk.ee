@@ -8,14 +8,10 @@ export default function Home() {
     <div>
       <div className="hero">
         <div className="info">
-          <div
-            style={{ backgroundColor: "#870042", padding: 8, paddingRight: 12 }}
-          >
-            <h1 style={{ fontWeight: "bold", fontSize: 192 }}>
-              {"\u003E"}itük_
-            </h1>
+          <div className="bg-primary py-4 px-2">
+            <h1 className="font-bold size-48">{"\u003E"}itük_</h1>
           </div>
-          <p class="title">
+          <p className="title">
             Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja
             toovad tudengiellu unustamatuid elamusi.
           </p>
