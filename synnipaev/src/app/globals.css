@@ -121,10 +121,6 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 64px 128px;
-
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
 
 .footer-row{
@@ -187,21 +183,68 @@ footer {
   padding: 8px 16px;
 }
 
-.button-tertiary {
+/* button classes*/
+.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px 16px;
+  padding: 8px 32px;
+
+  min-width: 128px;
+  border-radius: 4px;
 }
 
-.button-tertiary:hover {
+/* primary button classes*/
+
+.button.primary:hover {
+  background: #AD0054;
+}
+
+.button.primary:active {
+  background: #EEEEEE;
+}
+
+.button.primary:active h1 {
+  color: #870042;
+}
+
+/*secondary button classes*/
+
+.button.secondary {
+  border: 4px solid #870042;
+}
+
+.button.secondary:hover {
+  border: 4px solid #EEEEEE;
+}
+
+.button.secondary:active {
+  background: #EEEEEE;
+  border: 4px solid #EEEEEE;
+}
+
+.button.secondary:active h1 {
+  color: #870042;
+}
+
+/* if button is tertiary */
+
+.button.tertiary:hover {
   border-bottom: 4px solid #870042;
 }
-.button-tertiary:active {
-  border-bottom: 4px solid #870042;
+
+.button.tertiary:active h1{
   color: #AD0054;
 }
+
+/* if button is big */
+
+.button.big {
+  padding: 16px 32px;
+}
+
+/* icons */
 
 .hamburger {
   display: none;
@@ -217,6 +260,149 @@ footer {
 
 .github:hover {
   filter: invert(57%) sepia(67%) saturate(500%) hue-rotate(82deg) brightness(90%) contrast(92%);
+}
+
+
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 64px 128px 0px;
+  gap: 64px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px 0px 64px;
+  gap: 64px;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 128px;
+  gap: 64px;
+}
+
+.statistics-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+}
+
+.statistics-container h1 {
+  font-size: 128px;
+  font-weight: bold;
+}
+
+
+
+.page-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+
+  height: 320px;
+}
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 64px 128px;
+  gap: 64px;
+}
+
+.about-us-purpose {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 128px;
+  gap: 64px;
+}
+
+.board-members {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 128px;
+  gap: 32px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  overflow: hidden;
+
+  width: 284px;
+  height: 384px;
+
+  border-radius: 8px;
+}
+
+.card-image {
+  overflow: hidden;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 16px;
+
+  width: 100%;
+}
+
+.board-member {
+  background: linear-gradient(90.07deg, rgba(75, 0, 110, 0.528) 0.07%, rgba(135, 0, 66, 0.528) 99.94%), #870042;
 }
 
 @media screen and (max-width: 1536px) {
