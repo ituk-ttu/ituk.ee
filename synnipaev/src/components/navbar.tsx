@@ -1,23 +1,58 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import logo from '@/assets/logos/ituk_navbar_logo.svg';
-import Hamburger from './hamburger';
-import Button from './button';
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import logo_large from "@/assets/logos/ituk_navbar_logo.svg";
+import logo_small from "@/assets/logos/ituk_navbar_symbol.svg";
+import Button from "@/components/buttons/button";
+import HamburgerMenu from "./buttons/HamburgerMenu";
 
 export default function Navbar() {
-    return (
-        <header className="navbar dark shadow-filled">
-            <Image src={logo} alt="Logo" height={56}/>
-            <div className="buttons">
-                <Link href="/aboutus"><Button type='tertiary' text='Meist' /></Link>
-                <Link href="/events"><Button type='tertiary' text='Üritused' /></Link>
-                <Link href="/cooperation"><Button type='tertiary' text='Koostöö' /></Link>
-                <Link href="/contact"><Button type='tertiary' text='Kontakt' /></Link>
-                <Link href="/rent"><Button type='tertiary' text='Rent' /></Link>
-                <Link href="/join"><Button type='tertiary' text='Liitu' /></Link>
-            </div>
-            <Hamburger />
-        </header>
-    );
-};
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = isMenuOpen ? "" : "hidden"; // Lock/unlock scroll
+  };
+  return (
+    <header className="sticky top-0 z-20 w-screen min-h-[72px] px-[10%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
+      <a
+        className="flex sm:hidden items-center cursor-pointer"
+        href="/"
+        aria-label="Avaleht"
+      >
+        <Image src={logo_small} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
+      </a>
+      <a
+        className="hidden sm:flex items-center cursor-pointer"
+        href="/"
+        aria-label="Avaleht"
+      >
+        <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
+      </a>
+      <div className="justify-start items-center gap-8 hidden xl:flex">
+        <Button type="tertiary" text="Meist" to="/meist" />
+        <Button type="tertiary" text="Üritused" to="/uritused" />
+        <Button type="tertiary" text="Koostöö" to="/partnerlus" />
+        <Button type="tertiary" text="Kontakt" to="/kontakt" />
+        <Button type="tertiary" text="Rent" to="/rent" />
+        <Button type="primary" text="Liitu" to="https://liitu.ituk.ee/" />
+      </div>
+      <HamburgerMenu
+        className="flex xl:hidden"
+        isOpen={isMenuOpen}
+        onClick={toggleMenu}
+      />
+      {isMenuOpen && (
+        <div className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4">
+          <Button type="tertiary" text="Meist" to="/meist" />
+          <Button type="tertiary" text="Üritused" to="/uritused" />
+          <Button type="tertiary" text="Koostöö" to="/partnerlus" />
+          <Button type="tertiary" text="Kontakt" to="/kontakt" />
+          <Button type="tertiary" text="Rent" to="/rent" />
+          <Button type="primary" text="Liitu" to="/liitu" />
+        </div>
+      )}
+    </header>
+  );
+}

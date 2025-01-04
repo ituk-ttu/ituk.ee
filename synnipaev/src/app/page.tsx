@@ -1,18 +1,31 @@
 import Image from "next/image";
 import tux_cover from "@/assets/images/tux_cover.png";
 import Link from "next/link";
-import Button from "@/components/button";
+import Button from "@/components/buttons/button";
 
 export default function Home() {
   return (
     <div>
       <div className="hero">
         <div className="info">
-          <div style={{backgroundColor: '#870042', padding: 8, paddingRight: 12}}><h1 style={{fontWeight: "bold", fontSize: 192}}>{'\u003E'}itük_</h1></div>
-          <h1>Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.</h1>
+          <div
+            style={{ backgroundColor: "#870042", padding: 8, paddingRight: 12 }}
+          >
+            <h1 style={{ fontWeight: "bold", fontSize: 192 }}>
+              {"\u003E"}itük_
+            </h1>
+          </div>
+          <p class="title">
+            Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja
+            toovad tudengiellu unustamatuid elamusi.
+          </p>
           <div className="buttons">
-            <Link href="/join"><Button type="primary" big={true} text="Liitu meiega" /></Link>
-            <Link href="/aboutus"><Button type="tertiary" big={true} text="Loe meist lähemalt" /></Link>
+            <Link href="/join">
+              <Button type="primary" big={true} text="Liitu meiega" />
+            </Link>
+            <Link href="/aboutus">
+              <Button type="secondary" big={true} text="Loe meist lähemalt" />
+            </Link>
           </div>
         </div>
         <Image src={tux_cover} alt="Tux cover" width={614} height={745} />

@@ -18,6 +18,13 @@ export default {
         'instagram': '#ff0069',
         'github': '#2dba4e',
       },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1344px',
+        '2xl': '1536px',
+      },
       boxShadow: {
         'filled': '3px 3px 10px 0px black',
         'nofill': 'inset 3px 3px 10px 0px black, 3px 3px 10px 0px black'

@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "ituk-ee.firebasestorage.app",
   messagingSenderId: "455024513998",
   appId: "1:455024513998:web:9627ee21490f76ee99d19f",
-  measurementId: "G-2LF75EHY38"
+  measurementId: "G-2LF75EHY38",
 };
 
 // Initialize Firebase
