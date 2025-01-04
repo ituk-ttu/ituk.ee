@@ -3,20 +3,20 @@ import Email from "@/assets/icons/email.svg"
 
 interface CardProps {
     title: string;
-    image: StaticImageData;
+    image: string;
     description: string;
     board: boolean;
-    email: string;
+    email?: string;
     width?: number;
     height?: number;
 }
 
-export default function Card({ title, image, description, board , email, width, height}: CardProps) {
+export default function Card({ title, image, description, board , email = "", width, height}: CardProps) {
     if (board) {
         return (
             <div className="card shadow-filled" style={{width: width, height: height}}>
                 <div className="card-image">
-                    <Image style={{objectFit: "cover", translate: " 0 -30%"}} src={image} alt="Image" />
+                    <Image style={{objectFit: "cover", translate: " 0 -20%"}} src={image} width={width} height={height} alt="Image" />
                 </div>
                 <div className="card-content board-member">
                     <h5>{title}</h5>

@@ -1,15 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBSrC4I459UAlcx06xzkRT68OCO_6HIqlE",
-  authDomain: "ituk-ee.firebaseapp.com",
-  projectId: "ituk-ee",
-  storageBucket: "ituk-ee.firebasestorage.app",
-  messagingSenderId: "455024513998",
-  appId: "1:455024513998:web:9627ee21490f76ee99d19f",
-  measurementId: "G-2LF75EHY38",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -17,5 +16,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Export firestore database
 // It will be imported into your react app whenever it is needed
-const analytics = getAnalytics(app);
 export const db = getFirestore(app);

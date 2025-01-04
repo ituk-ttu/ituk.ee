@@ -1,26 +1,47 @@
+"use client";
+
 import {db} from '@/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-//import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
-import sass from '@/assets/images/board/sass.0d78f2d5c88396651c91.jpg';
 import Card from '@/components/card';
+import Timeline from '@/components/timeline';
 
-/*
-const [members, setMembers] = useState<DocumentData[]>([]);
+interface BoardMember {
+  name: string;
+  position: string;
+  email: string;
+  imagePath: string;
+};
 
-useEffect(() => {
-  const fetchMembers = async () => {
-    const membersRef = collection(db, 'members');
-    const querySnapshot = await getDocs(membersRef);
-    const members = querySnapshot.docs.map(doc => doc.data());
-    setMembers(members);
-  };
 
-  fetchMembers();
-}, []);
-*/
 
 export default function Home() {
+  const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
+
+  const getBoardMembers = async () => {
+    try {
+      const querrySnapshet = await getDocs(collection(db, 'board'));
+      const members: BoardMember[] = querrySnapshet.docs.map((doc) => {
+        const data = doc.data() as DocumentData;
+        return {
+          name: data.name,
+          position: data.position,
+          email: data.email,
+          imagePath: data.imagePath,
+        };
+      });
+      setBoardMembers(members);
+    } catch (error) {
+      console.error('Error getting members: ', error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getBoardMembers();
+  }, []);
+
   return (
     <div>
       <div className="page-banner">
@@ -39,18 +60,16 @@ export default function Home() {
       <div className="board">
         <h2>2024/2025. õppeaasta juhatus</h2>
         <div className="board-members">
-          <Card title="Alexander Rein Robas" image={sass} description='Juhatuse esimees' board={true} width={400} height={500} email='esimees@ituk.ee'/>
-          <Card title="Alexander Rein Robas" image={sass} description='Juhatuse esimees' board={true} width={400} height={500} email='esimees@ituk.ee'/>
-          <Card title="Alexander Rein Robas" image={sass} description='Juhatuse esimees' board={true} width={400} height={500} email='esimees@ituk.ee'/>
-          <Card title="Alexander Rein Robas" image={sass} description='Juhatuse esimees' board={true} width={400} height={500} email='esimees@ituk.ee'/>
-          <Card title="Alexander Rein Robas" image={sass} description='Juhatuse esimees' board={true} width={400} height={500} email='esimees@ituk.ee'/>
+          {boardMembers.map((member) => (
+            <Card title={member.name} image={member.imagePath} description={member.position} board={true} width={400} height={500} email={member.email}/>
+          ))}
         </div>
       </div>
 
       <div className='history'>
         <h2>ITÜK läbi aegade</h2>
         <div className='timeline'>
-
+          <Timeline type="start" />
         </div>
         <h2>...ja kui tuleb veel huvitavaid asju, siis lisame siia!</h2>
       </div>
