@@ -16,12 +16,18 @@ export default function Home() {
             toovad tudengiellu unustamatuid elamusi.
           </p>
           <div className="buttons">
-            <Link href="/join">
-              <Button type="primary" big={true} text="Liitu meiega" />
-            </Link>
-            <Link href="/aboutus">
-              <Button type="secondary" big={true} text="Loe meist lähemalt" />
-            </Link>
+            <Button
+              type="primary"
+              big={true}
+              text="Liitu meiega"
+              to="https://liitu.ituk.ee/"
+            />
+            <Button
+              type="secondary"
+              big={true}
+              text="Loe meist lähemalt"
+              to="/meist"
+            />
           </div>
         </div>
         <Image src={tux_cover} alt="Tux cover" width={614} height={745} />
