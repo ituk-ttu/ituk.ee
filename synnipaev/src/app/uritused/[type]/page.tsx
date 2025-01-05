@@ -16,7 +16,7 @@ interface Event {
     links: Map<string, string>;
 }
 
-export default function Home() {
+export default function Home({params,}: {params: Promise<{type: string}>}) {
     const [events, setEvents] = useState<Event[]>([]);
     const [curEvent, setCurEvent] = useState<Event>();
     const [overlay, setOverlay] = useState<boolean>(false);
@@ -28,7 +28,7 @@ export default function Home() {
 
     const getEvents = async () => {
         try {
-            const q = query(collection(db, 'events'), where('category', '==', 'haridus'));
+            const q = query(collection(db, 'events'), where('category', '==', (await params).type));
             const querrySnapshot = await getDocs(q);
             const events: Event[] = querrySnapshot.docs.map((doc) => {
                 const data = doc.data() as DocumentData;
