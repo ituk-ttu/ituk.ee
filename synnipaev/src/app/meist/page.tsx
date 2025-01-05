@@ -1,7 +1,7 @@
 "use client";
 
 import { db } from "@/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/card";
@@ -19,8 +19,10 @@ export default function Home() {
 
   const getBoardMembers = async () => {
     try {
-      const querrySnapshet = await getDocs(collection(db, "board"));
-      const members: BoardMember[] = querrySnapshet.docs.map((doc) => {
+      const querySnapshot = await getDocs(
+        query(collection(db, "board"), orderBy("imagePath", "asc"))
+      );
+      const members: BoardMember[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
         return {
           name: data.name,
@@ -58,7 +60,7 @@ export default function Home() {
           tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
           probleemidele lahendusi leida.
         </p>
-        <div className="gap-8 flex-col flex">
+        <div className="gap-16 flex-col flex">
           <h2>Mida itük teeb?</h2>
           <p>
             Meie kõige tuntumad haridusüritused on IT-ametite päev,
