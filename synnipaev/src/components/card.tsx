@@ -14,11 +14,11 @@ interface CardProps {
 export default function Card({ title, image, description, board , email = "", width, height}: CardProps) {
     if (board) {
         return (
-            <div className="card shadow-filled" style={{width: width, height: height}}>
-                <div className="card-image">
-                    <Image style={{objectFit: "cover", translate: " 0 -20%"}} src={image} width={width} height={height} alt="Image" />
+            <div className="flex flex-col items-center overflow-hidden rounded-lg w-72 h-96 p-0 shadow-filled" style={{width: width, height: height}}>
+                <div className="overflow-hidden">
+                    <Image className="object-cover -translate-y-1/4" src={image} width={width} height={height} alt="Image" />
                 </div>
-                <div className="card-content board-member">
+                <div className="flex flex-col items-start p-4 gap-4 w-full board-member">
                     <h5>{title}</h5>
                     <p>{description}</p>
                     <div>
@@ -30,11 +30,11 @@ export default function Card({ title, image, description, board , email = "", wi
         );
     } else {
         return (
-            <div className="card shadow-filled" style={{width: width, height: height}}>
-                <div className="card-image">
-                    <Image style={{objectFit: "cover"}} src={image} alt="Image" />
+            <div className="flex flex-col items-center overflow-hidden rounded-lg w-72 h-96 shadow-filled" style={{width: width, height: height}}>
+                <div className="overflow-hidden">
+                    <Image className="object-cover" src={image} width={width} height={height} alt="Image" />
                 </div>
-                <div className="card-content">
+                <div className="flex flex-col items-start p-4 gap-4 w-full bg-primary">
                     <h5>{title}</h5>
                     <p>{description}</p>
                 </div>

@@ -10,41 +10,41 @@ interface TimelineProps {
     imagePath?: string;
     title?: string;
     description?: string;
-    year?: number;
+    year?: Date;
 }
 
 export default function Timeline({ type, imagePath = "", title = "", description = "", year }: TimelineProps) {
     if (type === "start") {
         return (
-            <div >
+            <div className="flex flex-row justify-center align-center">
                 <Image src={pathShort} alt="Path" />
             </div>
         );
     } else if (type === "left") {
         return (
-            <div>
-                <Card title={title} image={imagePath} description={description} board={false} width={900} height={384} />
+            <div className="flex flex-row justify-center align-center">
+                <Card title={title} image={imagePath} description={description} board={false} width={768} height={384} />
                 <Image src={pathLong} alt="Path" />
-                <div><h5>{year}</h5></div>
+                <div><h5>{year?.toDateString()}</h5></div>
             </div>
         );
     } else if (type === "right") {
         return (
-            <div>
-                <div><h5>{year}</h5></div>
+            <div className="flex flex-row justify-center align-center">
+                <div><h5>{year?.toDateString()}</h5></div>
                 <Image src={pathLong} alt="Path" />
-                <Card title={title} image={imagePath} description={description} board={false} width={900} height={384} />
+                <Card title={title} image={imagePath} description={description} board={false} width={768} height={384} />
             </div>
         );
     } else if (type === "gap") {
         return (
-            <div>
+            <div className="flex flex-row justify-center align-center">
                 <Image src={pathGap} alt="Gap" />
             </div>
         );
     } else if (type === "end") {
         return (
-            <div >
+            <div className="flex flex-row justify-center align-center">
                 <Image src={pathEnd} alt="End" />
             </div>
         );
