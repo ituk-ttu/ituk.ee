@@ -5,7 +5,7 @@ interface CardProps {
   title: string;
   image: string;
   description: string;
-  board: boolean;
+  board?: boolean;
   email?: string;
   width?: number;
   height?: number;
@@ -57,7 +57,7 @@ export default function Card({
         <div className="flex">
           <Image src={image} alt="Image" width={width} height={height}/>
         </div>
-        <div className="card-content">
+        <div className="card-content bg-primary">
           <h5>{title}</h5>
           <p>{description}</p>
         </div>
