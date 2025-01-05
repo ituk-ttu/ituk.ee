@@ -79,91 +79,6 @@ button {
   min-height: calc((100vh - 77px) / 2);
 }
 
-.contacts {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 32px;
-}
-
-.socials {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 32px;
-}
-
-.links {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 24px;
-}
-
-.other {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0px;
-  gap: 32px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 32px;
-}
-
-.hero {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 64px 128px 0px;
-  gap: 64px;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 0px 64px;
-  gap: 64px;
-}
-
-.statistics {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 64px 128px;
-  gap: 64px;
-}
-
-.statistics-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 10px;
-}
-
-.statistics-container h1 {
-  font-size: 128px;
-  font-weight: bold;
-}
-
 .page-banner {
   display: flex;
   flex-direction: row;
@@ -267,7 +182,7 @@ button {
     #870042;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (min-width: 640px) {
   h1 {
     font-size: 2.25rem;
   }
