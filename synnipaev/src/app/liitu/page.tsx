@@ -1,17 +1,9 @@
-"use client";
-
-import Button from "@/components/buttons/button";
-
-const handleButtonClick = () => {
-  console.log("Button clicked!");
-};
-
-export default function Join() {
+export default function Home() {
   return (
-    <div style={{ padding: "20px" }}>
-      <Button type="tertiary">
-        <h1 className="button-text">Lorem Ipsum</h1>
-      </Button>
+    <div className="justify-center items-center bg-about-bg bg-center bg-cover flex-row flex">
+      <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
+        <h1 className="big">Mis on {"\u003E"}itük_?</h1>
+      </div>
     </div>
   );
 }

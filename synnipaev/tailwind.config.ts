@@ -28,6 +28,7 @@ export default {
       backgroundImage: {
         'epic-gradient': 'linear-gradient(90deg, rgba(75, 0, 110, 0.528) 0.07%, rgba(135, 0, 66, 0.528) 99.94%)',
         'about-bg': "url('@/assets/images/about.jpg')",
+        'cooperation-bg': "url('@/assets/images/cooperation.jpg')",
       },
       boxShadow: {
         'filled': '3px 3px 10px 0px black',
