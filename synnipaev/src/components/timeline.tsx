@@ -42,7 +42,7 @@ export default function Timeline({
           <div className="flex-grow bg-light w-1"></div>
         </div>
         <div className="w-full justify-center flex-col hidden sm:flex">
-          <h5>{year?.toDateString()}</h5>
+          <h4>{year?.toDateString()}</h4>
         </div>
       </div>
     );
@@ -62,7 +62,7 @@ export default function Timeline({
           <div className="flex-grow bg-light w-1"></div>
         </div>
         <div className="w-full justify-center items-end flex-col hidden sm:flex">
-          <h5>{year?.toDateString()}</h5>
+          <h4>{year?.toDateString()}</h4>
         </div>
       </div>
     );
