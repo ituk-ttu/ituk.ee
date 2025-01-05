@@ -18,11 +18,11 @@ h4,
 h5,
 button {
   font-weight: bold;
-  text-transform: uppercase;
   font-family: "Raleway", sans-serif;
 }
 
-h1 {
+h1,
+.lead {
   font-size: 2.5rem;
 }
 h2 {
@@ -37,11 +37,11 @@ h4 {
 h5 {
   font-size: 1.5rem;
 }
-.title {
-  font-size: 2.5rem;
+.giant {
+  font-size: 12rem;
 }
 .big {
-  font-size: 7.5rem;
+  font-size: 5rem;
 }
 
 p,
@@ -54,106 +54,123 @@ textarea {
   font-size: 1.125rem;
 }
 
+button {
+  text-transform: uppercase;
+}
+
+.big-button-text {
+  font-size: 1.25rem;
+}
+
 .main-container {
   width: 100%;
   height: 100%;
 }
 
 .main-height {
-  min-height: calc(100vh - 77px);
+  min-height: calc(100vh - 72px);
 }
 
 .main-padding {
-  padding: 6rem 10%;
+  padding: 6rem 6.9%;
 }
 
 .img-button {
   min-height: calc((100vh - 77px) / 2);
 }
 
-.contacts {
+.page-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+
+  height: 320px;
+}
+
+.about-us {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 128px;
+  gap: 64px;
+}
+
+.about-us-purpose {
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
   padding: 0px;
   gap: 32px;
 }
 
-.socials {
+.board {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 32px;
-}
-
-.links {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 24px;
-}
-
-.other {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0px;
-  gap: 32px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 32px;
-}
-
-.hero {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 64px 128px 0px;
-  gap: 64px;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 0px 64px;
-  gap: 64px;
-}
-
-.statistics {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 64px 128px;
   gap: 64px;
 }
 
-.statistics-container {
+.board-members {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 128px;
+  gap: 32px;
+}
+
+.timeline {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 10px;
 }
 
-.statistics-container h1 {
-  font-size: 128px;
-  font-weight: bold;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  overflow: hidden;
+
+  width: 284px;
+  height: 384px;
+
+  border-radius: 8px;
+}
+
+.card-image {
+  overflow: hidden;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 16px;
+
+  width: 100%;
 }
 
 .board-member {
@@ -165,33 +182,30 @@ textarea {
     #870042;
 }
 
-@media screen and (max-width: 640px) {
-  .big {
-    font-size: 5rem;
-  }
-
-  .title {
-    font-size: 2.25rem;
-  }
-
+@media screen and (max-width: 639px) {
   h1 {
     font-size: 2.25rem;
   }
-
   h2 {
     font-size: 2rem;
   }
-
   h3 {
     font-size: 1.75rem;
   }
-
   h4 {
     font-size: 1.5rem;
   }
-
   h5 {
     font-size: 1.25rem;
+  }
+  .giant {
+    font-size: 6rem;
+  }
+  .big {
+    font-size: 3rem;
+  }
+  .lead {
+    font-size: 1.5rem;
   }
 
   p,
@@ -207,7 +221,7 @@ textarea {
   }
 
   .big-button-text {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 }
 
