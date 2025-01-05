@@ -26,7 +26,7 @@ export default {
         '2xl': '1536px',
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(90deg, rgba(75, 0, 110, 0.528) 0.07%, rgba(135, 0, 66, 0.528) 99.94%)',
+        'epic-gradient': 'linear-gradient(90deg, rgba(75, 0, 110, 0.528) 0.07%, rgba(135, 0, 66, 0.528) 99.94%)',
         'about-bg': "url('@/assets/images/about.jpg')",
       },
       boxShadow: {
