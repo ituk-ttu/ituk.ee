@@ -18,11 +18,11 @@ h4,
 h5,
 button {
   font-weight: bold;
-  text-transform: uppercase;
   font-family: "Raleway", sans-serif;
 }
 
-h1 {
+h1,
+.lead {
   font-size: 2.5rem;
 }
 h2 {
@@ -37,11 +37,11 @@ h4 {
 h5 {
   font-size: 1.5rem;
 }
-.title {
-  font-size: 2.5rem;
+.giant {
+  font-size: 12rem;
 }
 .big {
-  font-size: 7.5rem;
+  font-size: 5rem;
 }
 
 p,
@@ -54,6 +54,10 @@ textarea {
   font-size: 1.125rem;
 }
 
+button {
+  text-transform: uppercase;
+}
+
 .big-button-text {
   font-size: 1.25rem;
 }
@@ -64,11 +68,11 @@ textarea {
 }
 
 .main-height {
-  min-height: calc(100vh - 77px);
+  min-height: calc(100vh - 72px);
 }
 
 .main-padding {
-  padding: 6rem 10%;
+  padding: 6rem 6.9%;
 }
 
 .img-button {
@@ -264,32 +268,29 @@ textarea {
 }
 
 @media screen and (max-width: 640px) {
-  .big {
-    font-size: 5rem;
-  }
-
-  .title {
-    font-size: 2.25rem;
-  }
-
   h1 {
     font-size: 2.25rem;
   }
-
   h2 {
     font-size: 2rem;
   }
-
   h3 {
     font-size: 1.75rem;
   }
-
   h4 {
     font-size: 1.5rem;
   }
-
   h5 {
     font-size: 1.25rem;
+  }
+  .giant {
+    font-size: 6rem;
+  }
+  .big {
+    font-size: 3rem;
+  }
+  .lead {
+    font-size: 1.5rem;
   }
 
   p,
@@ -305,7 +306,7 @@ textarea {
   }
 
   .big-button-text {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 }
 

@@ -48,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
     primary: `bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary ${
       big ? "min-w-32 min-h-16 px-8 big-button-text" : "min-w-32 min-h-12 px-8"
     }`,
-    secondary: `bg-transparent shadow-filled rounded box-border border-4 border-primary text-light hover:border-light focus:bg-light focus:border-light focus:text-primary ${
+    secondary: `bg-transparent shadow-filled rounded box-border border-primary border-4 text-light hover:border-light focus:bg-light focus:border-light focus:text-primary ${
       big ? "min-w-32 min-h-16 px-8 big-button-text" : "min-w-32 min-h-12 px-8"
     }`,
     tertiary: `bg-transparent border-b-4 h-12 px-2 ${

@@ -15,7 +15,7 @@ export default function Navbar() {
     document.body.style.overflow = isMenuOpen ? "" : "hidden"; // Lock/unlock scroll
   };
   return (
-    <header className="sticky top-0 z-20 w-screen min-h-[72px] px-[10%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
+    <header className="sticky top-0 z-20 w-screen min-h-[72px] px-[6.9%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
       <a
         className="flex sm:hidden items-center cursor-pointer"
         href="/"
@@ -30,7 +30,7 @@ export default function Navbar() {
       >
         <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
       </a>
-      <div className="justify-start items-center gap-8 hidden xl:flex">
+      <div className="justify-start items-center gap-8 hidden lg:flex">
         <Button type="tertiary" text="Meist" to="/meist" />
         <Button type="tertiary" text="Üritused" to="/uritused" />
         <Button type="tertiary" text="Koostöö" to="/partnerlus" />
@@ -39,18 +39,26 @@ export default function Navbar() {
         <Button type="primary" text="Liitu" to="https://liitu.ituk.ee/" />
       </div>
       <HamburgerMenu
-        className="flex xl:hidden"
+        className="flex lg:hidden"
         isOpen={isMenuOpen}
         onClick={toggleMenu}
       />
       {isMenuOpen && (
-        <div className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4">
+        <div
+          className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4"
+          onClick={toggleMenu}
+        >
           <Button type="tertiary" text="Meist" to="/meist" />
           <Button type="tertiary" text="Üritused" to="/uritused" />
           <Button type="tertiary" text="Koostöö" to="/partnerlus" />
           <Button type="tertiary" text="Kontakt" to="/kontakt" />
           <Button type="tertiary" text="Rent" to="/rent" />
-          <Button type="primary" text="Liitu" to="/liitu" />
+          <Button
+            type="primary"
+            text="Liitu"
+            to="https://liitu.ituk.ee/"
+            onClick={toggleMenu}
+          />
         </div>
       )}
     </header>

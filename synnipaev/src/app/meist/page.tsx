@@ -1,27 +1,25 @@
 "use client";
 
-import {db} from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { DocumentData } from 'firebase/firestore';
-import Card from '@/components/card';
-import Timeline from '@/components/timeline';
+import { db } from "@/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { DocumentData } from "firebase/firestore";
+import Card from "@/components/card";
+import Timeline from "@/components/timeline";
 
 interface BoardMember {
   name: string;
   position: string;
   email: string;
   imagePath: string;
-};
-
-
+}
 
 export default function Home() {
   const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
 
   const getBoardMembers = async () => {
     try {
-      const querrySnapshet = await getDocs(collection(db, 'board'));
+      const querrySnapshet = await getDocs(collection(db, "board"));
       const members: BoardMember[] = querrySnapshet.docs.map((doc) => {
         const data = doc.data() as DocumentData;
         return {
@@ -33,7 +31,7 @@ export default function Home() {
       });
       setBoardMembers(members);
     } catch (error) {
-      console.error('Error getting members: ', error);
+      console.error("Error getting members: ", error);
       throw error;
     }
   };
@@ -45,15 +43,37 @@ export default function Home() {
   return (
     <div>
       <div className="page-banner">
-        <h1 className="big">Mis on {'\u003E'}itük_</h1>
+        <h1 className="big">Mis on {"\u003E"}itük_?</h1>
       </div>
-      
+
       <div className="about-us">
-        <p>ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine. Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.</p>
+        <p>
+          ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on
+          tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite
+          huvide esindamine ning nende hariduse, heaolu ja meelelahutuse
+          edendamine. Meie liikmed, kes õpivad erinevatel infotehnoloogia
+          õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad
+          tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
+          probleemidele lahendusi leida.
+        </p>
         <div className="about-us-purpose">
-          <h2>Mida {'\u003E'}itük_ teeb?</h2>
-          <p>Meie kõige tuntumad haridusüritused on IT-ametite päev, Praktikakohvik ja TalTech GameCamp, kus tudengid saavad praktilise kogemuse ning tutvuda IT-valdkonna ettevõtete ja ekspertidega. Lisaks pakume meelelahutust üritustega nagu Tudengibaar, Don’t Do IT, IT-teaduskonna rebaste ristimine, TalTech e-Sport ja palju muud. Meie eesmärgiks on luua mitmekülgne kogukond, kus tudengid saavad nii õppida, lõbutseda kui ka ennast arendada.</p>
-          <p>Lisaks suurüritustele korraldame ka mitmesuguseid siseüritusi, koolitusi ja osutame õppealast abi, et meie liikmed saaksid tuge ja võimaluse areneda igas valdkonnas. Pakume ka mitmeid spordiüritusi, nagu võrkpallitrennid ja sporditurniirid, et tervis ja meeskonnatunne oleksid igapäevaelu osa.</p>
+          <h2>Mida itük teeb?</h2>
+          <p>
+            Meie kõige tuntumad haridusüritused on IT-ametite päev,
+            Praktikakohvik ja TalTech GameCamp, kus tudengid saavad praktilise
+            kogemuse ning tutvuda IT-valdkonna ettevõtete ja ekspertidega.
+            Lisaks pakume meelelahutust üritustega nagu Tudengibaar, Don’t Do
+            IT, IT-teaduskonna rebaste ristimine, TalTech e-Sport ja palju muud.
+            Meie eesmärgiks on luua mitmekülgne kogukond, kus tudengid saavad
+            nii õppida, lõbutseda kui ka ennast arendada.
+          </p>
+          <p>
+            Lisaks suurüritustele korraldame ka mitmesuguseid siseüritusi,
+            koolitusi ja osutame õppealast abi, et meie liikmed saaksid tuge ja
+            võimaluse areneda igas valdkonnas. Pakume ka mitmeid spordiüritusi,
+            nagu võrkpallitrennid ja sporditurniirid, et tervis ja
+            meeskonnatunne oleksid igapäevaelu osa.
+          </p>
         </div>
       </div>
 
@@ -61,14 +81,22 @@ export default function Home() {
         <h2>2024/2025. õppeaasta juhatus</h2>
         <div className="board-members">
           {boardMembers.map((member) => (
-            <Card title={member.name} image={member.imagePath} description={member.position} board={true} width={400} height={500} email={member.email}/>
+            <Card
+              title={member.name}
+              image={member.imagePath}
+              description={member.position}
+              board={true}
+              width={400}
+              height={500}
+              email={member.email}
+            />
           ))}
         </div>
       </div>
 
-      <div className='history'>
+      <div className="history">
         <h2>ITÜK läbi aegade</h2>
-        <div className='timeline'>
+        <div className="timeline">
           <Timeline type="start" />
         </div>
         <h2>...ja kui tuleb veel huvitavaid asju, siis lisame siia!</h2>
