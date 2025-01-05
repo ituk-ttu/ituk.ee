@@ -42,11 +42,13 @@ export default function Home() {
 
   return (
     <div>
-      <div className="page-banner">
-        <h1 className="big">Mis on {"\u003E"}itük_?</h1>
+      <div className="justify-center items-center bg-about-bg bg-center bg-cover flex-row flex">
+        <div className="main-padding w-full h-full bg-custom-gradient justify-center items-center flex-row flex">
+          <h1 className="big">Mis on {"\u003E"}itük_?</h1>
+        </div>
       </div>
 
-      <div className="about-us">
+      <div className="main-padding gap-16 flex-col flex">
         <p>
           ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on
           tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite
@@ -56,7 +58,7 @@ export default function Home() {
           tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
           probleemidele lahendusi leida.
         </p>
-        <div className="about-us-purpose">
+        <div className="gap-8 flex-col flex">
           <h2>Mida itük teeb?</h2>
           <p>
             Meie kõige tuntumad haridusüritused on IT-ametite päev,
