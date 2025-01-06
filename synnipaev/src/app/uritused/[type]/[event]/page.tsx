@@ -18,8 +18,8 @@ interface Event {
   banner: string;
   name: string;
   description: string;
-  gallery: string[];
-  links: Map<string, string>;
+  gallery?: string[];
+  links?: Map<string, string>;
 }
 
 export default function Home({
@@ -43,8 +43,8 @@ export default function Home({
           banner: data.banner,
           name: data.name,
           description: data.description,
-          gallery: data.gallery,
-          links: new Map(Object.entries(data.links)),
+          gallery: data.gallery ? data.gallery : undefined,
+          links: data.links ? new Map(Object.entries(data.links)) : undefined,
         };
       });
       setCurEvent(events[0]);
@@ -71,23 +71,30 @@ export default function Home({
         <div className="flex flex-col items-start w-full px-32 py-32 gap-16">
           <p>{curEvent.description}</p>
 
-          <div className="flex flex-col items-start w-full gap-8">
-            <h3>Varasemad üritused</h3>
-            <div className="flex flex-row flex-wrap items-start content-start gap-8">
-              {Array.from(curEvent.links.entries()).map(([key, value]) => (
-                <Button type="primary" text={key} to={value} />
-              ))}
+          {curEvent.links ? (
+            <div className="flex flex-col items-start w-full gap-8">
+              <h3>Varasemad üritused</h3>
+              <div className="flex flex-row flex-wrap items-start content-start gap-8">
+                {Array.from(curEvent.links.entries()).map(([key, value]) => (
+                  <Button type="primary" text={key} to={value} />
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className="flex flex-col justify-center items-start w-full gap-8 h-80">
-            <h3>Galerii</h3>
-            <div className="flex flex-row flex-wrap items-center gap-16">
-              {curEvent.gallery.map((image) => (
-                <Image src={image} alt="Image" width={512} height={280} />
-              ))}
+          ) : (
+            <></>
+          )}
+          {curEvent.gallery ? (
+            <div className="flex flex-col justify-center items-start w-full gap-8 h-80">
+              <h3>Galerii</h3>
+              <div className="flex flex-row flex-wrap items-center gap-16">
+                {curEvent.gallery.map((image) => (
+                  <Image src={image} alt="Image" width={512} height={280} />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

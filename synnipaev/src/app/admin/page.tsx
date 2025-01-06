@@ -1,64 +1,65 @@
 "use client";
 
 import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
 } from "firebase/auth";
 import { useState, useEffect, useReducer } from "react";
 import { auth } from "@/firebase";
 import {
-  addDoc,
-  collection,
-  where,
-  query,
-  getDocs,
-  doc,
-  updateDoc,
-  arrayUnion,
-  DocumentData,
-  orderBy,
+    addDoc,
+    collection,
+    where,
+    query,
+    getDocs,
+    doc,
+    updateDoc,
+    arrayUnion,
+    DocumentData,
+    orderBy,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
 import Card from "@/components/card";
+import AdminCard from "@/components/admin_card";
 
 interface BoardMember {
-  key: string;
-  name: string;
-  position: string;
-  email: string;
-  imagePath: string;
+    key: string;
+    name: string;
+    position: string;
+    email: string;
+    imagePath: string;
 }
 
 export default function Home() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
+    const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
 
-  const getBoardMembers = async () => {
-    try {
-      const querySnapshot = await getDocs(
-        query(collection(db, "board"), orderBy("imagePath", "asc"))
-      );
-      const members: BoardMember[] = querySnapshot.docs.map((doc) => {
-        const data = doc.data() as DocumentData;
-        return {
-          key: doc.id,
-          name: data.name,
-          position: data.position,
-          email: data.email,
-          imagePath: data.imagePath,
-        };
-      });
-      setBoardMembers(members);
-    } catch (error) {
-      console.error("Error getting members: ", error);
-      throw error;
-    }
-  };
+    const getBoardMembers = async () => {
+        try {
+            const querySnapshot = await getDocs(
+                query(collection(db, "board"), orderBy("imagePath", "asc"))
+            );
+            const members: BoardMember[] = querySnapshot.docs.map((doc) => {
+                const data = doc.data() as DocumentData;
+                return {
+                    key: doc.id,
+                    name: data.name,
+                    position: data.position,
+                    email: data.email,
+                    imagePath: data.imagePath,
+                };
+            });
+            setBoardMembers(members);
+        } catch (error) {
+            console.error("Error getting members: ", error);
+            throw error;
+        }
+    };
 
   //firebase variables
   const [banner, setBanner] = useState("");
@@ -67,35 +68,35 @@ export default function Home() {
   const [name, setName] = useState("");
   const [handle, setHandle] = useState("");
 
-  interface ButtonEvent
-    extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
-    preventDefault: () => void;
-  }
+    interface ButtonEvent
+        extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
+        preventDefault: () => void;
+    }
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("Signed out successfully");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log("Signed out successfully");
+            })
+            .catch((error) => {
+                // An error happened.
+            });
+    };
 
-  const onLogin = (e: ButtonEvent) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
-  };
+    const onLogin = (e: ButtonEvent) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    };
 
   const createEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,141 +114,162 @@ export default function Home() {
     }
   };
 
-  const addImageToGallery = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const eventRef = query(
-        collection(db, "events"),
-        where("name", "==", name)
-      );
-      const findEvent = await getDocs(eventRef);
-      findEvent.forEach(async (event) => {
-        const getEvent = doc(db, "events", event.id);
-        const docRef = await updateDoc(getEvent, {
-          gallery: arrayUnion(banner),
+    const addImageToGallery = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const eventRef = query(
+                collection(db, "events"),
+                where("name", "==", name)
+            );
+            const findEvent = await getDocs(eventRef);
+            findEvent.forEach(async (event) => {
+                const getEvent = doc(db, "events", event.id);
+                const docRef = await updateDoc(getEvent, {
+                    gallery: arrayUnion(banner),
+                });
+                console.log("Document written with ID: ", docRef);
+            });
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const addLink = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const eventRef = query(
+                collection(db, "events"),
+                where("name", "==", name)
+            );
+            const findEvent = await getDocs(eventRef);
+            findEvent.forEach(async (event) => {
+                const getEvent = doc(db, "events", event.id);
+                const docRef = await updateDoc(getEvent, {
+                    [`links.${description}`]: banner,
+                });
+                console.log("Document written with ID: ", docRef);
+            });
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const updateMember = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const eventRef = query(
+                collection(db, "events"),
+                where("name", "==", name)
+            );
+            const findEvent = await getDocs(eventRef);
+            findEvent.forEach(async (event) => {
+                const getEvent = doc(db, "events", event.id);
+                const docRef = await updateDoc(getEvent, {
+                    [`links.${description}`]: banner,
+                });
+                console.log("Document written with ID: ", docRef);
+            });
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    useEffect(() => {
+        getBoardMembers();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                setLoggedIn(true);
+                console.log("uid", uid);
+            } else {
+                // User is signed out
+                setLoggedIn(false);
+                console.log("user is logged out");
+            }
         });
-        console.log("Document written with ID: ", docRef);
-      });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+    }, []);
 
-  const addLink = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const eventRef = query(
-        collection(db, "events"),
-        where("name", "==", name)
-      );
-      const findEvent = await getDocs(eventRef);
-      findEvent.forEach(async (event) => {
-        const getEvent = doc(db, "events", event.id);
-        const docRef = await updateDoc(getEvent, {
-          [`links.${description}`]: banner,
-        });
-        console.log("Document written with ID: ", docRef);
-      });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+    if (!loggedIn) {
+        return (
+            <form className="flex flex-col items-center justify-center h-screen gap-8">
+                <input
+                    className="bg-light shadow-filled text-black"
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Email address"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
-  useEffect(() => {
-    getBoardMembers();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        setLoggedIn(true);
-        console.log("uid", uid);
-      } else {
-        // User is signed out
-        setLoggedIn(false);
-        console.log("user is logged out");
-      }
-    });
-  }, []);
+                <input
+                    className="bg-light shadow-filled text-black"
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-  if (!loggedIn) {
-    return (
-      <form className="flex flex-col items-center justify-center h-screen gap-8">
-        <input
-          className="bg-light shadow-filled text-black"
-          id="email-address"
-          name="email"
-          type="email"
-          required
-          placeholder="Email address"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+                <button onClick={onLogin}>Login</button>
+            </form>
+        );
+    } else {
+        return (
+            <div className="flex flex-col gap-8 p-16">
+                <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
+                    <h2>Juhatus</h2>
+                    <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
+                        {boardMembers.map((member) => (
+                            <AdminCard
+                                id={member.key}
+                                title={member.name}
+                                image={member.imagePath}
+                                description={member.position}
+                                board={true}
+                                email={member.email}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div className="flex flex-row gap-8 justify-center items-start">
+                    <form
+                        className="flex flex-col gap-8 justify-center items-center"
+                        onSubmit={createEvent}
+                    >
+                        <label>Create event</label>
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="banner"
+                            name="banner"
+                            type="text"
+                            required
+                            placeholder="Banner"
+                            onChange={(e) => setBanner(e.target.value)}
+                        />
 
-        <input
-          className="bg-light shadow-filled text-black"
-          id="password"
-          name="password"
-          type="password"
-          required
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="category"
+                            name="category"
+                            type="text"
+                            required
+                            placeholder="Category"
+                            onChange={(e) => setCategory(e.target.value)}
+                        />
 
-        <button onClick={onLogin}>Login</button>
-      </form>
-    );
-  } else {
-    return (
-      <div className="flex flex-col gap-8 p-16">
-        <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
-          <h2>Juhatus</h2>
-          <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
-            {boardMembers.map((member) => (
-              <Card
-                title={member.name}
-                image={member.imagePath}
-                description={member.position}
-                board={true}
-                email={member.email}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-row gap-8 justify-center items-start">
-          <form
-            className="flex flex-col gap-8 justify-center items-center"
-            onSubmit={createEvent}
-          >
-            <label>Create event</label>
-            <input
-              className="bg-light shadow-filled text-black"
-              id="banner"
-              name="banner"
-              type="text"
-              required
-              placeholder="Banner"
-              onChange={(e) => setBanner(e.target.value)}
-            />
-
-            <input
-              className="bg-light shadow-filled text-black"
-              id="category"
-              name="category"
-              type="text"
-              required
-              placeholder="Category"
-              onChange={(e) => setCategory(e.target.value)}
-            />
-
-            <input
-              className="bg-light shadow-filled text-black"
-              id="description"
-              name="description"
-              type="text"
-              required
-              placeholder="Description"
-              onChange={(e) => setDescription(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="description"
+                            name="description"
+                            type="text"
+                            required
+                            placeholder="Description"
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
 
             <input
               className="bg-light shadow-filled text-black"
@@ -269,71 +291,71 @@ export default function Home() {
               onChange={(e) => setHandle(e.target.value)}
             />
 
-            <button type="submit">Create event</button>
-          </form>
+                        <button type="submit">Create event</button>
+                    </form>
 
-          <form
-            className="flex flex-col gap-8 justify-center items-center"
-            onSubmit={addImageToGallery}
-          >
-            <label>Add image to event gallery</label>
-            <input
-              className="bg-light shadow-filled text-black"
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
+                    <form
+                        className="flex flex-col gap-8 justify-center items-center"
+                        onSubmit={addImageToGallery}
+                    >
+                        <label>Add image to event gallery</label>
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            placeholder="Name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
 
-            <input
-              className="bg-light shadow-filled text-black"
-              id="banner"
-              name="banner"
-              type="text"
-              required
-              placeholder="Image path"
-              onChange={(e) => setBanner(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="banner"
+                            name="banner"
+                            type="text"
+                            required
+                            placeholder="Image path"
+                            onChange={(e) => setBanner(e.target.value)}
+                        />
 
-            <button type="submit">Add image</button>
-          </form>
+                        <button type="submit">Add image</button>
+                    </form>
 
-          <form
-            className="flex flex-col gap-8 justify-center items-center"
-            onSubmit={addLink}
-          >
-            <label>Add link to event</label>
-            <input
-              className="bg-light shadow-filled text-black"
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
+                    <form
+                        className="flex flex-col gap-8 justify-center items-center"
+                        onSubmit={addLink}
+                    >
+                        <label>Add link to event</label>
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            placeholder="Name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
 
-            <input
-              className="bg-light shadow-filled text-black"
-              id="banner"
-              name="banner"
-              type="text"
-              required
-              placeholder="Link"
-              onChange={(e) => setBanner(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="banner"
+                            name="banner"
+                            type="text"
+                            required
+                            placeholder="Link"
+                            onChange={(e) => setBanner(e.target.value)}
+                        />
 
-            <input
-              className="bg-light shadow-filled text-black"
-              id="year"
-              name="year"
-              type="text"
-              required
-              placeholder="Year"
-              onChange={(e) => setDescription(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="year"
+                            name="year"
+                            type="text"
+                            required
+                            placeholder="Year"
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
 
             <button type="submit">Add link</button>
           </form>
