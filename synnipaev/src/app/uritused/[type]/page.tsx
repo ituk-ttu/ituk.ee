@@ -15,9 +15,6 @@ interface Event {
     category: string;
     banner: string;
     name: string;
-    description: string;
-    gallery: string[];
-    links: Map<string, string>;
 }
 
 export default function Home({
@@ -42,9 +39,6 @@ export default function Home({
                     category: data.category,
                     banner: data.banner,
                     name: data.name,
-                    description: data.description,
-                    gallery: data.gallery,
-                    links: new Map(Object.entries(data.links)),
                 };
             });
             setEvents(events);
