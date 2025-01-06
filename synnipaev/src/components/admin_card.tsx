@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Email from "@/assets/icons/email.svg";
 import { useState } from "react";
+import { strict } from "assert";
 
 interface CardProps {
     id?: string;
@@ -12,6 +13,7 @@ interface CardProps {
     board: boolean;
     email?: string;
     onClick?: (id: string, title: string, image: string, description: string, email: string) => void;
+    onDelete?: (id: string) => void;
 }
 
 export default function AdminCard({
@@ -22,6 +24,7 @@ export default function AdminCard({
     board,
     email = "",
     onClick,
+    onDelete,
 }: CardProps) {
     const [ _title, setTitle ] = useState(title);
     const [ _image, setImage ] = useState(image);
@@ -34,6 +37,12 @@ export default function AdminCard({
             onClick(id || "", _title, _image, _description, _email);
         }
     };
+
+    const handleDelete = () => {
+        if (onDelete) {
+            onDelete(id || "");
+        }
+    }
 
     if (board) {
         return (
@@ -53,6 +62,7 @@ export default function AdminCard({
                             <input className="bg-transparent text-light" type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={_email} />
                         </div>
                         <button type="submit">Submit</button>
+                        <button onClick={handleDelete}>Delete</button>
                     </div>
                 </form>
             </div>

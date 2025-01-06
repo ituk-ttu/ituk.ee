@@ -18,7 +18,7 @@ import {
     arrayUnion,
     DocumentData,
     orderBy,
-    documentId,
+    deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
@@ -179,11 +179,24 @@ export default function Home() {
                 name: title,
                 position: description,
             });
+            alert("Document writen with ID: " + docRef.id)
+            window.location.reload();
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
     };
+
+    const deleteMember = async (id: string) => {
+        if (confirm("Are you sure you want to delete this member? This member cannot be restored!!")) {
+            try {
+                await deleteDoc(doc(db, "board", id))
+                window.location.reload();
+            } catch (e) {
+                console.error("Error deleting document: ", e);
+            }
+        }
+    }
 
     useEffect(() => {
         getBoardMembers();
@@ -244,16 +257,17 @@ export default function Home() {
                                 board={true}
                                 email={member.email}
                                 onClick={updateMember}
+                                onDelete={deleteMember}
                             />
                         ))}
                         <AdminCard
-                                title=""
-                                image=""
-                                description=""
-                                board={true}
-                                email=""
-                                onClick={createMember}
-                            />
+                            title=""
+                            image=""
+                            description=""
+                            board={true}
+                            email=""
+                            onClick={createMember}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-row gap-8 justify-center items-start">
