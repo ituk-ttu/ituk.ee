@@ -18,11 +18,13 @@ import {
     arrayUnion,
     DocumentData,
     orderBy,
+    documentId,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
 import Card from "@/components/card";
 import AdminCard from "@/components/admin_card";
+import { posix } from "path";
 
 interface BoardMember {
     key: string;
@@ -61,12 +63,12 @@ export default function Home() {
         }
     };
 
-  //firebase variables
-  const [banner, setBanner] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
-  const [handle, setHandle] = useState("");
+    //firebase variables
+    const [banner, setBanner] = useState("");
+    const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
+    const [handle, setHandle] = useState("");
 
     interface ButtonEvent
         extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
@@ -98,21 +100,21 @@ export default function Home() {
             });
     };
 
-  const createEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const docRef = await addDoc(collection(db, "events"), {
-        banner: banner,
-        category: category,
-        description: description,
-        name: name,
-        handle: handle,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+    const createEvent = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const docRef = await addDoc(collection(db, "events"), {
+                banner: banner,
+                category: category,
+                description: description,
+                name: name,
+                handle: handle,
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
 
     const addImageToGallery = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -154,21 +156,16 @@ export default function Home() {
         }
     };
 
-    const updateMember = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const updateMember = async (id: string, title: string, image: string, description: string, email: string) => {
         try {
-            const eventRef = query(
-                collection(db, "events"),
-                where("name", "==", name)
-            );
-            const findEvent = await getDocs(eventRef);
-            findEvent.forEach(async (event) => {
-                const getEvent = doc(db, "events", event.id);
-                const docRef = await updateDoc(getEvent, {
-                    [`links.${description}`]: banner,
-                });
-                console.log("Document written with ID: ", docRef);
+            const memberDoc = doc(db, "board", id);
+            const docRef = await updateDoc(memberDoc, {
+                email: email,
+                imagePath: image,
+                name: title,
+                position: description,
             });
+            console.log("Document written");
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -225,12 +222,14 @@ export default function Home() {
                     <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                         {boardMembers.map((member) => (
                             <AdminCard
+                                key={member.key}
                                 id={member.key}
                                 title={member.name}
                                 image={member.imagePath}
                                 description={member.position}
                                 board={true}
                                 email={member.email}
+                                onClick={updateMember}
                             />
                         ))}
                     </div>
@@ -271,25 +270,25 @@ export default function Home() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
 
-            <input
-              className="bg-light shadow-filled text-black"
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            placeholder="Name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
 
-            <input
-              className="bg-light shadow-filled text-black"
-              id="handle"
-              name="handle"
-              type="text"
-              required
-              placeholder="Handle"
-              onChange={(e) => setHandle(e.target.value)}
-            />
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="handle"
+                            name="handle"
+                            type="text"
+                            required
+                            placeholder="Handle"
+                            onChange={(e) => setHandle(e.target.value)}
+                        />
 
                         <button type="submit">Create event</button>
                     </form>
@@ -357,11 +356,11 @@ export default function Home() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
 
-            <button type="submit">Add link</button>
-          </form>
-        </div>
-        <Button type="primary" onClick={handleLogout} text="Log out" />
-      </div>
-    );
-  }
+                        <button type="submit">Add link</button>
+                    </form>
+                </div>
+                <Button type="primary" onClick={handleLogout} text="Log out" />
+            </div>
+        );
+    }
 }
