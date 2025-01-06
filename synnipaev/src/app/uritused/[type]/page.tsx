@@ -1,63 +1,60 @@
 "use client";
 
 import { db } from "@/firebase";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
-import { redirect } from 'next/navigation';
-import Button from "@/components/buttons/button";
-import Image from "next/image";
 import Link from "next/link";
 
 interface Event {
-    key: string;
-    handle: string
-    category: string;
-    banner: string;
-    name: string;
+  key: string;
+  handle: string;
+  category: string;
+  banner: string;
+  name: string;
 }
 
 export default function Home({
-    params,
+  params,
 }: {
-    params: Promise<{ type: string }>;
+  params: Promise<{ type: string }>;
 }) {
-    const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
-    const getEvents = async () => {
-        try {
-            const q = query(
-                collection(db, "events"),
-                where("category", "==", (await params).type)
-            );
-            const querySnapshot = await getDocs(q);
-            const events: Event[] = querySnapshot.docs.map((doc) => {
-                const data = doc.data() as DocumentData;
-                return {
-                    key: doc.id,
-                    handle: data.handle,
-                    category: data.category,
-                    banner: data.banner,
-                    name: data.name,
-                };
-            });
-            setEvents(events);
-        } catch (error) {
-            console.error("Error getting members: ", error);
-            throw error;
-        }
-    };
-
-    useEffect(() => {
-        console.log("ABCDEFG");
-        getEvents();
-    }, []);
-
-    if (events.length === 0) {
-        <div className="main-height items-start flex-row flex">
-            <h2>No events found!</h2>
-        </div>;
+  const getEvents = async () => {
+    try {
+      const q = query(
+        collection(db, "events"),
+        where("category", "==", (await params).type)
+      );
+      const querySnapshot = await getDocs(q);
+      const events: Event[] = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as DocumentData;
+        return {
+          key: doc.id,
+          handle: data.handle,
+          category: data.category,
+          banner: data.banner,
+          name: data.name,
+        };
+      });
+      setEvents(events);
+    } catch (error) {
+      console.error("Error getting members: ", error);
+      throw error;
     }
+  };
+
+  useEffect(() => {
+    console.log("ABCDEFG");
+    getEvents();
+  }, []);
+
+  if (events.length === 0) {
+    <div className="main-height items-start flex-row flex">
+      <h2>No events found!</h2>
+    </div>;
+  }
 
     if (events.length <= 3) {
         return (
