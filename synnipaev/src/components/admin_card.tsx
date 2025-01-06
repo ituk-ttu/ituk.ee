@@ -26,10 +26,10 @@ export default function AdminCard({
     onClick,
     onDelete,
 }: CardProps) {
-    const [ _title, setTitle ] = useState(title);
-    const [ _image, setImage ] = useState(image);
-    const [ _description, setDescription ] = useState(description);
-    const [ _email, setEmail ] = useState(email);
+    const [_title, setTitle] = useState(title);
+    const [_image, setImage] = useState(image);
+    const [_description, setDescription] = useState(description);
+    const [_email, setEmail] = useState(email);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -62,7 +62,10 @@ export default function AdminCard({
                             <input className="bg-transparent text-light" type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={_email} />
                         </div>
                         <button type="submit">Submit</button>
-                        <button onClick={handleDelete}>Delete</button>
+                        {onDelete ?
+                            <button onClick={handleDelete}>Delete</button>
+                            : <></>
+                        }
                     </div>
                 </form>
             </div>
