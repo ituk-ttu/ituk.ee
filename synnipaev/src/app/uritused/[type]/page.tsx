@@ -63,6 +63,7 @@ export default function Home({
         return (
             <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]">
                 {events.map((event, index) => (
+                    <Link href={"/uritused/" + event.category + "/" + event.handle}>
                     <div
                         id={index.toString()}
                         className="main-height justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex"
@@ -72,6 +73,7 @@ export default function Home({
                             <h2 className="title text-center">{event.name}</h2>
                         </div>
                     </div>
+                    </Link>
                 ))}
             </div>
         );
