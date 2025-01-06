@@ -6,43 +6,49 @@ import { useState } from "react";
 import { strict } from "assert";
 
 interface CardProps {
-    id?: string;
-    title: string;
-    image: string;
-    description: string;
-    board: boolean;
-    email?: string;
-    onClick?: (id: string, title: string, image: string, description: string, email: string) => void;
-    onDelete?: (id: string) => void;
+  id?: string;
+  title: string;
+  image: string;
+  description: string;
+  board: boolean;
+  email?: string;
+  onClick?: (
+    id: string,
+    title: string,
+    image: string,
+    description: string,
+    email: string
+  ) => void;
+  onDelete?: (id: string) => void;
 }
 
 export default function AdminCard({
-    id,
-    title,
-    image,
-    description,
-    board,
-    email = "",
-    onClick,
-    onDelete,
+  id,
+  title,
+  image,
+  description,
+  board,
+  email = "",
+  onClick,
+  onDelete,
 }: CardProps) {
     const [_title, setTitle] = useState(title);
     const [_image, setImage] = useState(image);
     const [_description, setDescription] = useState(description);
     const [_email, setEmail] = useState(email);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (onClick) {
-            onClick(id || "", _title, _image, _description, _email);
-        }
-    };
-
-    const handleDelete = () => {
-        if (onDelete) {
-            onDelete(id || "");
-        }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick(id || "", _title, _image, _description, _email);
     }
+  };
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(id || "");
+    }
+  };
 
     if (board) {
         return (
