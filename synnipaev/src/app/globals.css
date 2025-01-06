@@ -79,51 +79,6 @@ button {
   text-transform: uppercase;
 }
 
-.edit-primary {
-  background-color: #870042;
-  box-shadow: 3px 3px 10px 0px black;
-  border-radius: 0.25rem;
-  color: #eeeeee;
-  transition: background-color 0.3s, color 0.3s;
-  min-width: 8rem;
-  min-height: 3rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.edit-primary:hover {
-  background-color: #ad0054;
-}
-
-.edit-primary:focus {
-  background-color: #eeeeee;
-  color: #870042;
-}
-
-.edit-secondary {
-  background-color: #00000000;
-  box-shadow: 3px 3px 10px 0px black;
-  box-sizing: border-box;
-  border-radius: 0.25rem;
-  border-color: #870042;
-  border-width: 4px;
-  color: #eeeeee;
-  transition: background-color 0.3s, color 0.3s;
-  min-width: 8rem;
-  min-height: 3rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.edit-secondary:hover {
-  border-color: #eeeeee;
-}
-
-.edit-secondary:focus {
-  background-color: #eeeeee;
-  color: #870042;
-}
-
 .big-button-text {
   font-size: 1.25rem;
 }
@@ -133,16 +88,24 @@ button {
   height: 100%;
 }
 
-.main-height {
+.main-min {
   min-height: calc(100vh - 72px);
+}
+
+.main-max {
+  max-height: calc(100vh - 72px);
 }
 
 .main-padding {
   padding: 6rem 6.9%;
 }
 
-.event-height {
-  min-height: calc((100vh - 77px) / 2);
+.double-max {
+  max-height: calc((100vh - 72px) / 2);
+}
+
+.triple-height {
+  height: calc((100vh - 72px) / 3);
 }
 
 .board-member {

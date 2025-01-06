@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { strict } from "assert";
+import Button from '@/components/buttons/button';
 
 interface CardProps {
     id?: string;
@@ -56,7 +57,7 @@ export default function AdminCard({
         }
     };
 
-    if (board == "juhatus") {
+    if (board === "juhatus") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
@@ -74,16 +75,16 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="imagePath" placeholder="/board/XXXX/X_ametinimetus.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Meiliaadress</label>
                         <input className="w-full" type="text" name="email" placeholder="example@ituk.ee" onChange={(e) => setEmail(e.target.value)} value={_email} />
-                        <button className="edit-primary" type="submit">Salvesta</button>
+                        <Button variant="primary" type="submit" text="" />
                         {onDelete ?
-                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
+                            <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
                         }
                     </div>
                 </form>
             </div>
         );
-    } else if (board == "yritused") {
+    } else if (board === "yritused") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
@@ -103,16 +104,16 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="category" placeholder="meelelahutus/haridus/muu" onChange={(e) => setCategory(e.target.value)} value={_category} />
                         <label>Handle (normaliseeritud)</label>
                         <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
-                        <button className="edit-primary" type="submit">Salvesta</button>
+                        <Button variant="primary" type="submit" text="" />
                         {onDelete ?
-                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
+                            <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
                         }
                     </div>
                 </form>
             </div>
         );
-    } else if (board == "rent") {
+    } else if (board === "rent") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
@@ -123,16 +124,16 @@ export default function AdminCard({
                     />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Seadme nimi</label>
-                        <input className="w-full" type="text" name="title" placeholder="Pikendusjuhe" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <input className="w-full" type="text" name="title" placeholder="Pikendusjuhtmed" onChange={(e) => setTitle(e.target.value)} value={_title} />
                         <label>hind</label>
-                        <input className="w-full" name="description" placeholder="3.5" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <input className="w-full" name="description" placeholder="5" onChange={(e) => setDescription(e.target.value)} value={_description} />
                         <label>Pildi link</label>
                         <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Hinna ühik</label>
-                        <input className="w-full" type="text" name="category" placeholder="€/tk" onChange={(e) => setCategory(e.target.value)} value={_category} />
-                        <button className="edit-primary" type="submit">Salvesta</button>
+                        <input className="w-full" type="text" name="category" placeholder="€/päev" onChange={(e) => setCategory(e.target.value)} value={_category} />
+                        <Button variant="primary" type="submit" text="" />
                         {onDelete ?
-                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
+                            <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
                         }
                     </div>

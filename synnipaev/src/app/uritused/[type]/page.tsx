@@ -51,23 +51,20 @@ export default function Home({
   }, []);
 
   if (events.length === 0) {
-    <div className="main-height items-start flex-row flex">
+    <div className="main-min items-start flex-row flex">
       <h2>No events found!</h2>
     </div>;
   }
 
   if (events.length <= 3) {
     return (
-      <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]">
+      <div className="main-min items-start flex-col sm:flex-row flex">
         {events.map((event, index) => (
-          <Link
-            href={"/uritused/" + event.category + "/" + event.handle}
-            id={index.toString()}
-            className="main-height justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex"
-            style={{ backgroundImage: `url(${event.banner})` }}
+          <Link href={"/uritused/" + event.category + "/" + event.handle} id={index.toString()}
+            className="w-full sm:w-1/3 justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex" style={{ backgroundImage: `url(${event.banner})` }}
           >
-            <div className="main-height w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-              <h2 className="title text-center">{event.name}</h2>
+            <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
+              <h2 className="p-8 title text-center">{event.name}</h2>
             </div>
           </Link>
         ))}
@@ -75,16 +72,16 @@ export default function Home({
     );
   } else {
     return (
-      <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]">
+      <div className="main-min grid grid-cols-[repeat(auto-fit,minmax(100%,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(33.3333%,1fr))]">
         {events.map((event, index) => (
           <Link
             href={"/uritused/" + event.category + "/" + event.handle}
             id={index.toString()}
-            className="event-height justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex"
+            className="w-full justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex"
             style={{ backgroundImage: `url(${event.banner})` }}
           >
-            <div className="event-height w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-              <h2 className="title text-center">{event.name}</h2>
+            <div className="triple-height sm:h-screen double-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
+              <h2 className="p-8 title text-center">{event.name}</h2>
             </div>
           </Link>
         ))}

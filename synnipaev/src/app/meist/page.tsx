@@ -133,13 +133,7 @@ export default function Home() {
         <h2>2024/2025. õppeaasta juhatus</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
           {boardMembers.map((member) => (
-            <Card
-              title={member.name}
-              image={member.imagePath}
-              description={member.position}
-              board={true}
-              email={member.email}
-            />
+            <Card title={member.name} image={member.imagePath} description={member.position} board={true} email={member.email} />
           ))}
         </div>
       </div>
@@ -149,13 +143,7 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />
           {events.map((event, index) => (
-            <Timeline
-              type={index % 2 === 0 ? "left" : "right"}
-              imagePath={event.imagePath}
-              title={event.title}
-              description={event.description}
-              year={event.year}
-            />
+            <Timeline type={index % 2 === 0 ? "left" : "right"} imagePath={event.imagePath} title={event.title} description={event.description} year={event.year} />
           ))}
           <Timeline type="end" />
         </div>
