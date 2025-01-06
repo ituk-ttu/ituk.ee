@@ -60,7 +60,8 @@ export default function Home({
     return (
       <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]">
         {events.map((event, index) => (
-          <div
+          <Link
+            href={"/uritused/" + event.category + "/" + event.handle}
             id={index.toString()}
             className="main-height justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex"
             style={{ backgroundImage: `url(${event.banner})` }}
@@ -68,7 +69,7 @@ export default function Home({
             <div className="main-height w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
               <h2 className="title text-center">{event.name}</h2>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     );

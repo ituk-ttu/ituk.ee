@@ -60,21 +60,23 @@ export default function Home({
 
   if (curEvent) {
     return (
-      <div className="flex flex-col items-center gap-16">
+      <div className="flex flex-col items-center">
         <div
-          className="flex flex-row items-center justify-center h-80 w-full bg-center bg-cover"
+          className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
           style={{ backgroundImage: `url(${curEvent.banner})` }}
         >
-          <h1 className="big text-center">{curEvent.name}</h1>
+          <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
+            <h1 className="big text-center">{curEvent.name}</h1>
+          </div>
         </div>
 
-        <div className="flex flex-col items-start w-full px-32 py-32 gap-16">
+        <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
           <p>{curEvent.description}</p>
 
           {curEvent.links ? (
-            <div className="flex flex-col items-start w-full gap-8">
+            <div className="justify-center items-start flex-col flex gap-8">
               <h3>Varasemad üritused</h3>
-              <div className="flex flex-row flex-wrap items-start content-start gap-8">
+              <div className="justify-start items-center flex-row flex gap-8">
                 {Array.from(curEvent.links.entries()).map(([key, value]) => (
                   <Button type="primary" text={key} to={value} />
                 ))}
@@ -84,9 +86,9 @@ export default function Home({
             <></>
           )}
           {curEvent.gallery ? (
-            <div className="flex flex-col justify-center items-start w-full gap-8 h-80">
+            <div className="justify-center items-start flex-col flex gap-8">
               <h3>Galerii</h3>
-              <div className="flex flex-row flex-wrap items-center gap-16">
+              <div className="">
                 {curEvent.gallery.map((image) => (
                   <Image src={image} alt="Image" width={512} height={280} />
                 ))}
