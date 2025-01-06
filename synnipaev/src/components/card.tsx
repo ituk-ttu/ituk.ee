@@ -1,14 +1,12 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Email from "@/assets/icons/email.svg";
 
 interface CardProps {
   title: string;
   image: string;
   description: string;
-  board?: boolean;
+  board: boolean;
   email?: string;
-  width?: number;
-  height?: number;
 }
 
 export default function Card({
@@ -17,47 +15,36 @@ export default function Card({
   description,
   board,
   email = "",
-  width,
-  height,
 }: CardProps) {
   if (board) {
     return (
-      <div
-        className="card shadow-filled"
-        style={{ width: width, height: height }}
-      >
-        <div className="card-image">
-          <Image
-            className="bg-cover bg-center"
-            src={image}
-            width={width}
-            height={height}
-            alt="Image"
-          />
-        </div>
-        <div className="w-full p-4 justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
+        <img
+          className="min-h-[284px] object-cover rounded-t-lg"
+          src={image}
+          alt={title}
+        />
+        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
           <h5>{title}</h5>
-          <p>{description}</p>
+          <p className="h-[45px]">{description}</p>
           <div className="justify-start items-center gap-2 flex-row flex">
-            <Image 
-              className="flex w-[20px] h-[20px]"
-              src={Email}
-              alt="Email" />
-            <p>{email}</p>
+            <Image className="flex w-[20px] h-[20px]" src={Email} alt="Email" />
+            <a className="underline" href={`mailto:${email}`}>
+              {email}
+            </a>
           </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div
-        className="card shadow-filled"
-        style={{ width: width, height: height }}
-      >
-        <div className="flex">
-          <Image src={image} alt="Image" width={width} height={height}/>
-        </div>
-        <div className="card-content bg-primary">
+      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
+        <img
+          className="h-full object-cover rounded-t-lg"
+          src={image}
+          alt={title}
+        />
+        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-primary">
           <h5>{title}</h5>
           <p>{description}</p>
         </div>

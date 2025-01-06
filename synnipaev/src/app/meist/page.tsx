@@ -1,18 +1,18 @@
 "use client";
 
-import {db} from '@/firebase';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { DocumentData } from 'firebase/firestore';
-import Card from '@/components/card';
-import Timeline from '@/components/timeline';
+import { db } from "@/firebase";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { DocumentData } from "firebase/firestore";
+import Card from "@/components/card";
+import Timeline from "@/components/timeline";
 
 interface BoardMember {
   name: string;
   position: string;
   email: string;
   imagePath: string;
-};
+}
 
 interface Event {
   title: string;
@@ -41,14 +41,14 @@ export default function Home() {
       });
       setBoardMembers(members);
     } catch (error) {
-      console.error('Error getting members: ', error);
+      console.error("Error getting members: ", error);
       throw error;
     }
   };
 
   const getEvents = async () => {
     try {
-      const q = query(collection(db, 'timeline-events'), orderBy('year'));
+      const q = query(collection(db, "timeline-events"), orderBy("year"));
       const querrySnapshot = await getDocs(q);
       const events: Event[] = querrySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
@@ -61,7 +61,7 @@ export default function Home() {
       });
       setEvents(events);
     } catch (error) {
-      console.error('Error getting events: ', error);
+      console.error("Error getting events: ", error);
       throw error;
     }
   };
@@ -73,7 +73,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="justify-center items-center bg-about-bg bg-center bg-cover flex-row flex">
+      <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
           <h1 className="big">Mis on {"\u003E"}itük_?</h1>
         </div>
@@ -110,29 +110,33 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center px-16 py-32 gap-16">
+      <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
         <h2>2024/2025. õppeaasta juhatus</h2>
-        <div className="flex flex-row justify-center align-center gap-8 flex-wrap">
+        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
           {boardMembers.map((member) => (
             <Card
               title={member.name}
               image={member.imagePath}
               description={member.position}
               board={true}
-              width={400}
-              height={500}
               email={member.email}
             />
           ))}
         </div>
       </div>
 
-      <div className='flex flex-col justify-center items-center px-16 py-32 gap-8'>
+      <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
         <h2>ITÜK läbi aegade</h2>
-        <div className='flex flex-col justify-center align-center'>
+        <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />
           {events.map((event, index) => (
-            <Timeline type={index % 2 === 0 ? 'left' : 'right'} imagePath={event.imagePath} title={event.title} description={event.description} year={event.year} />
+            <Timeline
+              type={index % 2 === 0 ? "left" : "right"}
+              imagePath={event.imagePath}
+              title={event.title}
+              description={event.description}
+              year={event.year}
+            />
           ))}
           <Timeline type="end" />
         </div>
