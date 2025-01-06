@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "./assets/images/ituk.logo.long.white.png";
+import logo from "./assets/images/ituk.logo.long.light.png";
 
 import "./Navbar.css";
 

@@ -75,7 +75,7 @@ button {
   padding: 6rem 6.9%;
 }
 
-.img-button {
+.event-height {
   min-height: calc((100vh - 77px) / 2);
 }
 

@@ -37,25 +37,6 @@ export default function Home() {
           alt="ITÜKi maskott pingviin Tux 2.5"
         />
       </div>
-
-      <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">20</p>
-          <p>aastat ajalugu</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">1200+</p>
-          <p>liiget läbi aegade</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">30+</p>
-          <p>üritust aastas</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">1</p>
-          <p>ühine eesmärk</p>
-        </div>
-      </div>
     </div>
   );
 }

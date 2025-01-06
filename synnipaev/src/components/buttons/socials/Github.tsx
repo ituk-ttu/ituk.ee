@@ -13,7 +13,7 @@ const GitHubLink: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 48 48"
         fill="currentColor"
-        className="text-white hover:text-[#2dba4e] transition-colors duration-150"
+        className="text-light hover:text-github transition-colors duration-150"
       >
         <path
           id="github"

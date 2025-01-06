@@ -13,7 +13,7 @@ const InstagramLink: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 48 48"
         fill="currentColor"
-        className="text-white hover:text-[#ff0069] transition-colors duration-150"
+        className="text-light hover:text-instagram transition-colors duration-150"
       >
         <path
           id="instagram"

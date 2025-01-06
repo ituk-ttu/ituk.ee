@@ -59,7 +59,7 @@ const Cards = () => {
 
   const renderCard = (card) => {
     return (
-      <div class="transform transition duration-500 hover:scale-105 h-fit w-80 p-3 colums-3 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div class="transform transition duration-500 hover:scale-105 h-fit w-80 p-3 colums-3 bg-light border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <img
           class="object-scale-down rounded-lg h-auto "
           src={card.image}

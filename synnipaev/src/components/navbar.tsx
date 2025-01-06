@@ -34,7 +34,6 @@ export default function Navbar() {
         <Button type="tertiary" text="Meist" to="/meist" />
         <Button type="tertiary" text="Üritused" to="/uritused" />
         <Button type="tertiary" text="Koostöö" to="/partnerlus" />
-        <Button type="tertiary" text="Kontakt" to="/kontakt" />
         <Button type="tertiary" text="Rent" to="/rent" />
         <Button type="primary" text="Liitu" to="https://liitu.ituk.ee/" />
       </div>
@@ -51,7 +50,6 @@ export default function Navbar() {
           <Button type="tertiary" text="Meist" to="/meist" />
           <Button type="tertiary" text="Üritused" to="/uritused" />
           <Button type="tertiary" text="Koostöö" to="/partnerlus" />
-          <Button type="tertiary" text="Kontakt" to="/kontakt" />
           <Button type="tertiary" text="Rent" to="/rent" />
           <Button
             type="primary"

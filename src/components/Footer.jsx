@@ -21,7 +21,7 @@ const Footer = () => {
               <MdEmail />
               <a
                 href="mailto:kontakt@ituk.ee"
-                class="text-white hover:text-[#870042]"
+                class="text-light hover:text-[#870042]"
               >
                 kontakt@ituk.ee
               </a>
@@ -30,7 +30,7 @@ const Footer = () => {
           <div class="flex col-span-1  justify-center place-items-center gap-6">
             <a
               href="https://hub.ituk.ee"
-              class="text-white hover:text-[#870042]" 
+              class="text-light hover:text-[#870042]" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -50,7 +50,7 @@ const Footer = () => {
             </a>
             <a
               href="https://facebook.com/ituk.taltech"
-              class="text-white hover:text-[#870042]" 
+              class="text-light hover:text-[#870042]" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -70,7 +70,7 @@ const Footer = () => {
             </a>
             <a
               href="https://www.instagram.com/ituk.taltech"
-              class="text-white hover:text-[#870042] dark:hover:text-white" 
+              class="text-light hover:text-[#870042] dark:hover:text-light" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -90,7 +90,7 @@ const Footer = () => {
             </a>
             <a
               href="https://www.github.com/ituk-ttu"
-              class="text-white hover:text-[#870042] dark:hover:text-white" 
+              class="text-light hover:text-[#870042] dark:hover:text-light" 
               target="_blank" 
               rel="noopener noreferrer"
             >

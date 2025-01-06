@@ -21,11 +21,11 @@ const Cards = () => {
       <span className="line"></span>
       <div className="container">
         <div class=" grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 m-3">
-          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-light rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg h-48 w-96" src={Haridus} alt="" />
 
             <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight  text-center text-[#870042] dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight  text-center text-[#870042] dark:text-light">
                 Haridus
               </h5>
               <li>Praktikakohvik</li>
@@ -35,10 +35,10 @@ const Cards = () => {
               <li>Õpiõhtud</li>
             </div>
           </div>
-          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-light rounded-lg border border-gray-200 shadow-lg  dark:bg-gray-800 dark:border-gray-700 ">
             <img class="rounded-t-lg h-48 w-96" src={Meelelahutus} alt="" />
             <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042] dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042] dark:text-light">
                 Meelelahutus
               </h5>
               <li>IT-teaduskonna rebaste ristimine</li>
@@ -48,10 +48,10 @@ const Cards = () => {
               <li>Kevadsport</li>
             </div>
           </div>
-          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+          <div class="transform transition duration-500 hover:scale-105 max-w-sm bg-light rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg   h-48 w-96" src={Siseüritus} alt="" />
             <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042]  dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-[#870042]  dark:text-light">
                 Siseüritused
               </h5>
               <li>Suve- ja talvepäevad</li>
@@ -63,7 +63,7 @@ const Cards = () => {
           </div>
         </div>
         <div class="flex items-center mt-10">
-          <h1 class="mb-2 text-2xl tracking-tight text-center   dark:text-white">
+          <h1 class="mb-2 text-2xl tracking-tight text-center   dark:text-light">
             Rohkem infot ürituste kohta meie {events}
           </h1>
         </div>

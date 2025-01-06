@@ -2,12 +2,12 @@ import React from "react";
 import email from "@/assets/icons/email.svg";
 import phone from "@/assets/icons/phone.svg";
 import location from "@/assets/icons/location.svg";
-import hub from "@/assets/logos/ituk_hub.svg";
 import Image from "next/image";
 import Link from "next/link";
 import FacebookLink from "./buttons/socials/Facebook";
 import InstagramLink from "./buttons/socials/Instagram";
 import GitHubLink from "./buttons/socials/Github";
+import HubLink from "./buttons/socials/Hub";
 
 export default function Footer() {
   return (
@@ -37,9 +37,7 @@ export default function Footer() {
           <GitHubLink />
         </div>
         <div className="justify-between items-center gap-6 flex-row flex">
-          <Link href="https://hub.ituk.ee/">
-            <Image src={hub} alt="Hub" />
-          </Link>
+          <HubLink />
           <Link href="/stiil">
             <p className="font-bold underline">Stiiliraamat</p>
           </Link>

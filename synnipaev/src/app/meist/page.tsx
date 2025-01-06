@@ -110,6 +110,25 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
+        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
+          <p className="big font-bold">20</p>
+          <p>aastat ajalugu</p>
+        </div>
+        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
+          <p className="big font-bold">1200+</p>
+          <p>liiget läbi aegade</p>
+        </div>
+        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
+          <p className="big font-bold">30+</p>
+          <p>üritust aastas</p>
+        </div>
+        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
+          <p className="big font-bold">1</p>
+          <p>ühine eesmärk</p>
+        </div>
+      </div>
+
       <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
         <h2>2024/2025. õppeaasta juhatus</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
