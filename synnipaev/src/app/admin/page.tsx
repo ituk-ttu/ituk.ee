@@ -44,11 +44,23 @@ interface Event {
     links?: Map<string, string>;
 }
 
+interface Rentables {
+    key: string;
+    name: string;
+    price: number;
+    unit: string;
+    imagePath: string;
+}
+
 export default function Home() {
     const [page, setPage] = useState("juhatus");
     const [loggedIn, setLoggedIn] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    //functions to get data from db
+
+    //gets board members
 
     const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
 
@@ -74,6 +86,8 @@ export default function Home() {
         }
     };
 
+    //gets events
+
     const [events, setEvents] = useState<Event[]>([]);
 
     const getEvents = async () => {
@@ -93,6 +107,32 @@ export default function Home() {
                 };
             });
             setEvents(events);
+        } catch (error) {
+            console.error("Error getting members: ", error);
+            throw error;
+        }
+    };
+
+    //gets rentables
+
+    const [rentables, setRentables] = useState<Rentables[]>([]);
+
+    const getRentables = async () => {
+        try {
+            const querySnapshot = await getDocs(
+                query(collection(db, "rent"), orderBy("imagePath", "asc"))
+            );
+            const rentables: Rentables[] = querySnapshot.docs.map((doc) => {
+                const data = doc.data() as DocumentData;
+                return {
+                    key: doc.id,
+                    name: data.name,
+                    price: data.price,
+                    unit: data.unit,
+                    imagePath: data.imagePath,
+                };
+            });
+            setRentables(rentables);
         } catch (error) {
             console.error("Error getting members: ", error);
             throw error;
@@ -134,46 +174,6 @@ export default function Home() {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
-    };
-
-    const addImageToGallery = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const eventRef = query(
-                collection(db, "events"),
-                where("name", "==", name)
-            );
-            const findEvent = await getDocs(eventRef);
-            findEvent.forEach(async (event) => {
-                const getEvent = doc(db, "events", event.id);
-                const docRef = await updateDoc(getEvent, {
-                    gallery: arrayUnion(banner),
-                });
-                console.log("Document written with ID: ", docRef);
-            });
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    };
-
-    const addLink = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const eventRef = query(
-                collection(db, "events"),
-                where("name", "==", name)
-            );
-            const findEvent = await getDocs(eventRef);
-            findEvent.forEach(async (event) => {
-                const getEvent = doc(db, "events", event.id);
-                const docRef = await updateDoc(getEvent, {
-                    [`links.${description}`]: banner,
-                });
-                console.log("Document written with ID: ", docRef);
-            });
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
     };
 
     //member functions
@@ -306,9 +306,114 @@ export default function Home() {
         }
     };
 
+    const addImageToGallery = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const eventRef = query(
+                collection(db, "events"),
+                where("name", "==", name)
+            );
+            const findEvent = await getDocs(eventRef);
+            findEvent.forEach(async (event) => {
+                const getEvent = doc(db, "events", event.id);
+                const docRef = await updateDoc(getEvent, {
+                    gallery: arrayUnion(banner),
+                });
+                console.log("Document written with ID: ", docRef);
+            });
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const addLink = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const eventRef = query(
+                collection(db, "events"),
+                where("name", "==", name)
+            );
+            const findEvent = await getDocs(eventRef);
+            findEvent.forEach(async (event) => {
+                const getEvent = doc(db, "events", event.id);
+                const docRef = await updateDoc(getEvent, {
+                    [`links.${description}`]: banner,
+                });
+                console.log("Document written with ID: ", docRef);
+            });
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    // rent functions
+
+    const updateRent = async (
+        id: string,
+        title: string,
+        image: string,
+        description: string,
+        email: string,
+        category: string,
+    ) => {
+        try {
+            const rentDoc = doc(db, "rent", id);
+            const docRef = await updateDoc(rentDoc, {
+                name: title,
+                imagePath: image,
+                price: +description,
+                unit: category,
+            });
+            console.log("Document written");
+            alert("Event updated");
+            window.location.reload();
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const createRent = async (
+        id: string,
+        title: string,
+        image: string,
+        description: string,
+        email: string,
+        category: string,
+    ) => {
+        try {
+            const docRef = await addDoc(collection(db, "rent"), {
+                name: title,
+                imagePath: image,
+                price: +description,
+                unit: category,
+            });
+            alert("Document writen with ID: " + docRef.id);
+            window.location.reload();
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const deleteRent = async (id: string) => {
+        if (
+            confirm(
+                "Are you sure you want to delete this member? This member cannot be restored!!"
+            )
+        ) {
+            try {
+                await deleteDoc(doc(db, "rent", id));
+                window.location.reload();
+            } catch (e) {
+                console.error("Error deleting document: ", e);
+            }
+        }
+    };
+
     useEffect(() => {
         getBoardMembers();
         getEvents();
+        getRentables();
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
@@ -389,9 +494,9 @@ export default function Home() {
                         <i>??? - 06.01.2025</i>
                     </p>
                     <div className="justify-start items-start sm:items-center flex-col sm:flex-row flex gap-4">
-                        <button className="edit-secondary" onClick={() => setPage("juhatus")}>Juhatus</button>
-                        <button className="edit-secondary" onClick={() => setPage("yritused")}>Üritused</button>
-                        <button className="edit-secondary" onClick={() => setPage("rent")}>Rent</button>
+                        <Button variant="secondary" className="edit-secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
+                        <Button variant="secondary" className="edit-secondary" onClick={() => setPage("yritused")} text="Üritused" />
+                        <Button variant="secondary" className="edit-secondary" onClick={() => setPage("rent")} text="Rent" />
                     </div>
 
                     {(() => {
@@ -423,7 +528,7 @@ export default function Home() {
                                                     title={member.name}
                                                     image={member.imagePath}
                                                     description={member.position}
-                                                    board={true}
+                                                    board="juhatus"
                                                     email={member.email}
                                                     onClick={updateMember}
                                                     onDelete={deleteMember}
@@ -433,7 +538,7 @@ export default function Home() {
                                                 title=""
                                                 image=""
                                                 description=""
-                                                board={true}
+                                                board="juhatus"
                                                 email=""
                                                 onClick={createMember}
                                             />
@@ -544,7 +649,7 @@ export default function Home() {
                                                     title={event.name}
                                                     image={event.banner}
                                                     description={event.description}
-                                                    board={false}
+                                                    board="yritused"
                                                     category={event.category}
                                                     handle={event.handle}
                                                     onClick={updateEvent}
@@ -555,7 +660,7 @@ export default function Home() {
                                                 title=""
                                                 image=""
                                                 description=""
-                                                board={false}
+                                                board="yritused"
                                                 category=""
                                                 handle=""
                                                 email=""
@@ -566,7 +671,47 @@ export default function Home() {
                                 )
                             case 'rent':
                                 return (
-                                    <div></div>
+                                    <div className="justify-center items-center text-align gap-16 flex-col flex">
+                                        <h2>Renditavad seadmed</h2>
+                                        <ul className="w-full flex-col flex gap-4">
+                                            <li>
+                                                Pilt croppida ruudukujuliseks, kasutada .jpg failiformaati, et
+                                                failisuurus väike oleks
+                                            </li>
+                                            <li>
+                                                Kaust, kuhu pildid repos panna on "public/board/(vastav aasta
+                                                number)"
+                                            </li>
+                                            <li>
+                                                Koosseisu järjekord on sorteeritud failinime järgi, seega väikse
+                                                nipina lisa algusesse number (nt "/board/2024/1_esimees.jpg",
+                                                "/board/2024/2_finants.jpg" jne)
+                                            </li>
+                                        </ul>
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
+                                            {rentables.map((rentable) => (
+                                                <AdminCard
+                                                    key={rentable.key}
+                                                    id={rentable.key}
+                                                    title={rentable.name}
+                                                    image={rentable.imagePath}
+                                                    description={rentable.price.toString()}
+                                                    category={rentable.unit}
+                                                    board="rent"
+                                                    onClick={updateRent}
+                                                    onDelete={deleteRent}
+                                                />
+                                            ))}
+                                            <AdminCard
+                                                title=""
+                                                image=""
+                                                description=""
+                                                category=""
+                                                board="rent"
+                                                onClick={createRent}
+                                            />
+                                        </div>
+                                    </div>
                                 )
                             default:
                                 return null

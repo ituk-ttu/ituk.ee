@@ -8,7 +8,7 @@ interface CardProps {
     title: string;
     image: string;
     description: string;
-    board: boolean;
+    board: "juhatus" | "yritused" | "rent";
     email?: string;
     category?: string;
     handle?: string;
@@ -56,7 +56,7 @@ export default function AdminCard({
         }
     };
 
-    if (board) {
+    if (board == "juhatus") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
@@ -83,7 +83,7 @@ export default function AdminCard({
                 </form>
             </div>
         );
-    } else {
+    } else if (board == "yritused") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
@@ -103,6 +103,33 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="category" placeholder="meelelahutus/haridus/muu" onChange={(e) => setCategory(e.target.value)} value={_category} />
                         <label>Handle (normaliseeritud)</label>
                         <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
+                        <button className="edit-primary" type="submit">Salvesta</button>
+                        {onDelete ?
+                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
+                            : <></>
+                        }
+                    </div>
+                </form>
+            </div>
+        );
+    } else if (board == "rent") {
+        return (
+            <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
+                <form className="w-full" onSubmit={handleSubmit}>
+                    <img
+                        className="min-h-[284px] object-cover rounded-t-lg"
+                        src={_image}
+                        alt={title}
+                    />
+                    <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+                        <label>Seadme nimi</label>
+                        <input className="w-full" type="text" name="title" placeholder="Pikendusjuhe" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>hind</label>
+                        <input className="w-full" name="description" placeholder="3.5" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Pildi link</label>
+                        <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
+                        <label>Hinna ühik</label>
+                        <input className="w-full" type="text" name="category" placeholder="€/tk" onChange={(e) => setCategory(e.target.value)} value={_category} />
                         <button className="edit-primary" type="submit">Salvesta</button>
                         {onDelete ?
                             <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
