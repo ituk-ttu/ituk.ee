@@ -31,11 +31,11 @@ export default function Navbar() {
         <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
       </a>
       <div className="justify-start items-center gap-8 hidden lg:flex">
-        <Button type="tertiary" text="Meist" to="/meist" />
-        <Button type="tertiary" text="Üritused" to="/uritused" />
-        <Button type="tertiary" text="Koostöö" to="/partnerlus" />
-        <Button type="tertiary" text="Rent" to="/rent" />
-        <Button type="primary" text="Liitu" to="https://liitu.ituk.ee/" />
+        <Button variant="tertiary" text="Meist" to="/meist" />
+        <Button variant="tertiary" text="Üritused" to="/uritused" />
+        <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
+        <Button variant="tertiary" text="Rent" to="/rent" />
+        <Button variant="primary" text="Liitu" to="https://liitu.ituk.ee/" />
       </div>
       <HamburgerMenu
         className="flex lg:hidden"
@@ -47,12 +47,12 @@ export default function Navbar() {
           className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4"
           onClick={toggleMenu}
         >
-          <Button type="tertiary" text="Meist" to="/meist" />
-          <Button type="tertiary" text="Üritused" to="/uritused" />
-          <Button type="tertiary" text="Koostöö" to="/partnerlus" />
-          <Button type="tertiary" text="Rent" to="/rent" />
+          <Button variant="tertiary" text="Meist" to="/meist" />
+          <Button variant="tertiary" text="Üritused" to="/uritused" />
+          <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
+          <Button variant="tertiary" text="Rent" to="/rent" />
           <Button
-            type="primary"
+            variant="primary"
             text="Liitu"
             to="https://liitu.ituk.ee/"
             onClick={toggleMenu}

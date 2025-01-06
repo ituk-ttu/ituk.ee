@@ -6,7 +6,8 @@ import { useRouter, usePathname } from "next/navigation"; // Use Next.js App Rou
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
-  type: "primary" | "secondary" | "tertiary";
+  type?: string,
+  variant: "primary" | "secondary" | "tertiary";
   big?: boolean;
   active?: boolean;
   to?: string; // Internal navigation path
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   text,
   type,
+  variant,
   big = false,
   active,
   to,
@@ -45,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const baseClasses = `flex justify-center items-center transition-colors duration-150 ${className}`;
 
-  const typeClasses = {
+  const variantClasses = {
     primary: `bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary ${
       big ? "min-w-32 min-h-16 px-8 big-button-text" : "min-w-32 min-h-12 px-8"
     }`,
@@ -61,12 +63,13 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${baseClasses} ${typeClasses[type]}`}
+      className={`${baseClasses} ${variantClasses[variant]}`}
       aria-label={ariaLabel || text}
       onClick={handleClick}
     >
       {children}
       {text}
+      {type}
     </button>
   );
 };

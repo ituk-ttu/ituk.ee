@@ -17,13 +17,13 @@ export default function Home() {
             </p>
             <div className="gap-8 flex-col sm:flex-row flex">
               <Button
-                type="primary"
+                variant="primary"
                 big={true}
                 text="Liitu meiega"
                 to="https://liitu.ituk.ee/"
               />
               <Button
-                type="secondary"
+                variant="secondary"
                 big={true}
                 text="Loe meist lähemalt"
                 to="/meist"

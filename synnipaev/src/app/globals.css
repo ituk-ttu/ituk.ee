@@ -35,8 +35,7 @@ h3 {
 h4 {
   font-size: 1.75rem;
 }
-h5,
-label {
+h5 {
   font-size: 1.5rem;
 }
 .giant {
@@ -56,8 +55,73 @@ textarea {
   font-size: 1.125rem;
 }
 
+ul {
+  list-style-type: circle;
+}
+
+input,
+textarea {
+  background-color: #131313;
+  box-shadow: 3px 3px 10px 0px black;
+  border-radius: 0.25rem;
+  color: #eeeeee;
+  transition: background-color 0.3s, color 0.3s;
+  min-width: 8rem;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+textarea {
+  padding: 1rem 1rem;
+}
+
 button {
   text-transform: uppercase;
+}
+
+.edit-primary {
+  background-color: #870042;
+  box-shadow: 3px 3px 10px 0px black;
+  border-radius: 0.25rem;
+  color: #eeeeee;
+  transition: background-color 0.3s, color 0.3s;
+  min-width: 8rem;
+  min-height: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.edit-primary:hover {
+  background-color: #ad0054;
+}
+
+.edit-primary:focus {
+  background-color: #eeeeee;
+  color: #870042;
+}
+
+.edit-secondary {
+  background-color: #00000000;
+  box-shadow: 3px 3px 10px 0px black;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  border-color: #870042;
+  border-width: 4px;
+  color: #eeeeee;
+  transition: background-color 0.3s, color 0.3s;
+  min-width: 8rem;
+  min-height: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.edit-secondary:hover {
+  border-color: #eeeeee;
+}
+
+.edit-secondary:focus {
+  background-color: #eeeeee;
+  color: #870042;
 }
 
 .big-button-text {
@@ -79,100 +143,6 @@ button {
 
 .event-height {
   min-height: calc((100vh - 77px) / 2);
-}
-
-.page-banner {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  justify-content: center;
-  align-items: center;
-
-  height: 320px;
-}
-
-.about-us {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 64px 128px;
-  gap: 64px;
-}
-
-.about-us-purpose {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 32px;
-}
-
-.board {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 64px 128px;
-  gap: 64px;
-}
-
-.board-members {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.history {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 64px 128px;
-  gap: 32px;
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0px;
-  overflow: hidden;
-
-  width: 284px;
-  height: 384px;
-
-  border-radius: 8px;
-}
-
-.card-image {
-  overflow: hidden;
-
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 16px;
-  gap: 16px;
-
-  width: 100%;
 }
 
 .board-member {
@@ -197,8 +167,7 @@ button {
   h4 {
     font-size: 1.5rem;
   }
-  h5,
-  label {
+  h5 {
     font-size: 1.25rem;
   }
   .giant {
@@ -239,5 +208,21 @@ button {
   html,
   body {
     background-color: #eeeeee;
+  }
+  h1,
+  p >.big,
+  .lead,
+  .giant {
+    color: #eeeeee,
+  }
+  p,
+  h2,
+  h3,
+  h4,
+  h5,
+  ul,
+  li,
+  label {
+    color: #131313;
   }
 }

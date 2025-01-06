@@ -78,7 +78,7 @@ export default function Home({
               <h3>Varasemad üritused</h3>
               <div className="justify-start items-center flex-row flex gap-8">
                 {Array.from(curEvent.links.entries()).map(([key, value]) => (
-                  <Button type="primary" text={key} to={value} />
+                  <Button variant="primary" text={key} to={value} />
                 ))}
               </div>
             </div>

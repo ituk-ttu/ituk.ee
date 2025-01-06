@@ -47,7 +47,7 @@ export default function Home() {
                 mis ei ole otseselt ümberarvestatavad.
                 </p>
 
-                <Button type="primary" text="LAADI ALLA LOGOPAKK"/>
+                <Button variant="primary" text="LAADI ALLA LOGOPAKK"/>
 
                 <div className="flex flex-col items-start gap-8">
                     <h3>

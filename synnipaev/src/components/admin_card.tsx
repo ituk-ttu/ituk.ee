@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import Email from "@/assets/icons/email.svg";
 import { useState } from "react";
 import { strict } from "assert";
 
@@ -19,7 +17,7 @@ interface CardProps {
         title: string,
         image: string,
         description: string,
-        email:string,
+        email: string,
         category: string,
         handle: string,
     ) => void;
@@ -60,24 +58,25 @@ export default function AdminCard({
 
     if (board) {
         return (
-            <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-                <form onSubmit={handleSubmit}>
+            <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
+                <form className="w-full" onSubmit={handleSubmit}>
                     <img
                         className="min-h-[284px] object-cover rounded-t-lg"
                         src={_image}
                         alt={title}
                     />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
-                        <input className="bg-transparent text-light" type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={_title} />
-                        <input className="bg-transparent text-light" type="text" name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={_description} />
-                        <input className="bg-transparent text-light" type="text" name="imagePath" placeholder="Image Path" onChange={(e) => setImage(e.target.value)} value={_image} />
-                        <div className="justify-start items-center gap-2 flex-row flex">
-                            <Image className="flex w-[20px] h-[20px]" src={Email} alt="Email" />
-                            <input className="bg-transparent text-light" type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={_email} />
-                        </div>
-                        <button type="submit">Submit</button>
+                        <label>Ametinimetus</label>
+                        <input className="w-full" type="text" name="description" placeholder="Igavene esimees" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Täisnimi</label>
+                        <input className="w-full" type="text" name="title" placeholder="Härra ITÜK" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Pildi link</label>
+                        <input className="w-full" type="text" name="imagePath" placeholder="/board/XXXX/X_ametinimetus.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
+                        <label>Meiliaadress</label>
+                        <input className="w-full" type="text" name="email" placeholder="example@ituk.ee" onChange={(e) => setEmail(e.target.value)} value={_email} />
+                        <button className="edit-primary" type="submit">Salvesta</button>
                         {onDelete ?
-                            <button onClick={handleDelete}>Delete</button>
+                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
                             : <></>
                         }
                     </div>
@@ -86,22 +85,27 @@ export default function AdminCard({
         );
     } else {
         return (
-            <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-                <form onSubmit={handleSubmit}>
+            <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
+                <form className="w-full" onSubmit={handleSubmit}>
                     <img
                         className="min-h-[284px] object-cover rounded-t-lg"
                         src={_image}
                         alt={title}
                     />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
-                        <input className="bg-transparent text-light" type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={_title} />
-                        <input className="bg-transparent text-light" type="text" name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={_description} />
-                        <input className="bg-transparent text-light" type="text" name="imagePath" placeholder="Image Path" onChange={(e) => setImage(e.target.value)} value={_image} />
-                        <input className="bg-transparent text-light" type="text" name="category" placeholder="Category" onChange={(e) => setCategory(e.target.value)} value={_category} />
-                        <input className="bg-transparent text-light" type="text" name="handle" placeholder="Handle" onChange={(e) => setHandle(e.target.value)} value={_handle} />
-                        <button type="submit">Submit</button>
+                        <label>Ürituse nimi</label>
+                        <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Kirjeldus</label>
+                        <textarea className="w-full" name="description" placeholder="Kirjeldus" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Pildi link</label>
+                        <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
+                        <label>Kategooria</label>
+                        <input className="w-full" type="text" name="category" placeholder="meelelahutus/haridus/muu" onChange={(e) => setCategory(e.target.value)} value={_category} />
+                        <label>Handle (normaliseeritud)</label>
+                        <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
+                        <button className="edit-primary" type="submit">Salvesta</button>
                         {onDelete ?
-                            <button onClick={handleDelete}>Delete</button>
+                            <button className="edit-secondary" onClick={handleDelete}>Kustuta</button>
                             : <></>
                         }
                     </div>
