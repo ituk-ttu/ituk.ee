@@ -9,7 +9,7 @@ export default function Home() {
         <div className="w-screen lg:w-1/2 h-full justify-start items-start pb-24 flex-col flex">
           <div className="items-start gap-16 flex-col flex">
             <div className="bg-primary">
-              <h1 className="font-bold giant lowercase">{"\u003E"}itük_</h1>
+              <h1 className="font-bold giant lowercase">&gt;itük_</h1>
             </div>
             <p className="lead font-bold">
               Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja
