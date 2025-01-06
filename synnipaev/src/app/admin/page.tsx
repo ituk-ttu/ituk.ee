@@ -52,8 +52,14 @@ interface Rentables {
   imagePath: string;
 }
 
+interface Logs {
+  key: string;
+  author: string;
+  entry: string;
+}
+
 export default function Home() {
-  const [page, setPage] = useState("juhatus");
+  const [page, setPage] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -92,7 +98,9 @@ export default function Home() {
 
   const getEvents = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "events"));
+      const querySnapshot = await getDocs(
+        query(collection(db, "events"), orderBy("category", "asc"))
+      );
       const events: Event[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
         return {
@@ -139,12 +147,36 @@ export default function Home() {
     }
   };
 
+  //gets logbooks
+
+  const [logbook, setLogs] = useState<Logs[]>([]);
+
+  const getLogs = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "logs"));
+      const logbook: Logs[] = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as DocumentData;
+        return {
+          key: doc.id,
+          author: data.author,
+          entry: data.entry,
+        };
+      });
+      setLogs(logbook);
+    } catch (error) {
+      console.error("Error getting members: ", error);
+      throw error;
+    }
+  };
+
   //firebase variables
   const [banner, setBanner] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [handle, setHandle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [entry, setEntry] = useState("");
 
   interface ButtonEvent
     extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
@@ -410,10 +442,29 @@ export default function Home() {
     }
   };
 
+  // logbook functions
+
+  const createLog = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("aaaaaaaaaa")
+    try {
+      const docRef = await addDoc(collection(db, "logbook"), {
+        author: author,
+        entry: entry,
+      });
+      alert("Document writen with ID: " + docRef.id);
+      window.location.reload();
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
   useEffect(() => {
     getBoardMembers();
     getEvents();
     getRentables();
+    getLogs();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -453,29 +504,30 @@ export default function Home() {
         <div className="main-padding gap-16 flex-col flex">
           {/* Kui sa seda näed, siis väga vinge! 
         Sõnum siis sulle, tulevane arendaja - palun uuenda iga formi juures regulaarselt, mis on nende andmete nõuded (a la mis failinimi/link peaks olema jne). 
-        Nii saame veenduda, et kesiganes edasi manageerima peab, saab ise hakkama ja ei pea talveunest äratama väiksema probleemi peale ;D */}
-          <p>
-            Tervist!
-            <br /><br />
-            Siin selle lehe versiooni arendaja väikse teadaandega - kui
-            sa veel aru ei saa, siis sul on erakordne õigus olla osa ITÜKi
-            kodulehe administraatoritest!
-            <br /><br />
-            Suuresti midagi erilist ei ole, all on terve hunnik välju, kus sa
-            saad meie andmebaasi muuta. Alates juhatuse koosseisust lõpetades
-            rendinimekirjani, kõiki asju saab siin lihtsasti muuta.
-            <br /><br />
-            Muidugi nende kõigi asjade täpsemaks muutmiseks pead sa Firestore'i
-            avama, nii et ma loodan, et eelmine vend andis sulle selle logini ka.
-            Kui ei, siis küsi. Siinkohal pead siis meilt küsima. Kes me oleme?
-            Noh, edu selle otsimisega ;D
-            <br /><br /><br />
-            <i>??? - 06.01.2025</i>
-          </p>
-          <div className="justify-start items-start sm:items-center flex-col sm:flex-row flex gap-4">
+        Nii saame veenduda, et kesiganes edasi manageerima peab, saab ise hakkama ja ei pea talveunest äratama iga väiksema probleemi peale ;D */}
+          <ol className="italic gap-4 flex-col flex">
+            <li>"Tervist!</li>
+            <li>
+              Siin meie kodulehe hetke versiooni arendajad väikse teadaandega - kui sa veel aru ei ole saanud,
+              siis sul on erakordne võimalus olla osa ITÜKi kodulehe administraatoritest! Ehk sa arvatavasti
+              oled ainuke, sest me oleme oma töö ära teinud.
+            </li>
+            <li>
+              Pole viga, midagi rasket ei ole - all on terve hunnik välja - alates juhatuse koosseisust lõpetades
+              rendinimekirjani, pea kõiki asju saab siin lihtsasti muuta.
+            </li>
+            <li>
+              Muidugi pead sa mingi hetk Firestore'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
+              et eelmine vend andis sulle selle logini ka. Kui ei, siis küsi. Siinkohal pead siis meilt küsima.
+              Kes me oleme? Noh, edu selle otsimisega ;D
+            </li>
+            <li>??? - 06.01.2025"</li>
+          </ol>
+          <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
             <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
             <Button variant="secondary" onClick={() => setPage("yritused")} text="Üritused" />
             <Button variant="secondary" onClick={() => setPage("rent")} text="Rent" />
+            <Button variant="secondary" onClick={() => setPage("logiraamat")} text="Logiraamat" />
             <Button variant="primary" onClick={handleLogout} text="Logi välja" />
           </div>
 
@@ -588,12 +640,31 @@ export default function Home() {
                     </div>
                   </div>
                 )
+              case 'logiraamat':
+                return (
+                  <div className="w-full justify-center items-center text-align gap-16 flex-col flex">
+                    <h2>Logiraamat</h2>
+                    <div className="w-full justify-start items-start flex-col md:flex-row flex gap-16">
+                      <form
+                        className="justify-start items-start flex-col flex gap-4"
+                        onSubmit={createLog}
+                      >
+                        <label>Autori nimi</label>
+                        <input className="w-full" id="author" name="author" type="text" required placeholder="Kes sa oled?" onChange={(e) => setAuthor(e.target.value)} />
+                        <label>Sissekanne</label>
+                        <textarea className="w-full" id="entry" name="entry" required placeholder="Mis sa hingelt puistada tahad?" onChange={(e) => setEntry(e.target.value)} />
+                        <Button variant="primary" type="submit" text="" />
+                      </form>
+                      {logbook.map((log) => (
+                        <p>{`${log.author}\n${log.entry}`}</p>
+                      ))}
+                    </div>
+                  </div>
+                )
               default:
                 return null
             }
           })()}
-
-
         </div>
       </div>
     );
