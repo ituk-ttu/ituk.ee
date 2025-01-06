@@ -171,6 +171,20 @@ export default function Home() {
         }
     };
 
+    const createMember = async (id: string, title: string, image: string, description: string, email: string) => {
+        try {
+            const docRef = await addDoc(collection(db, "board"), {
+                email: email,
+                imagePath: image,
+                name: title,
+                position: description,
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
     useEffect(() => {
         getBoardMembers();
         onAuthStateChanged(auth, (user) => {
@@ -232,6 +246,14 @@ export default function Home() {
                                 onClick={updateMember}
                             />
                         ))}
+                        <AdminCard
+                                title=""
+                                image=""
+                                description=""
+                                board={true}
+                                email=""
+                                onClick={createMember}
+                            />
                     </div>
                 </div>
                 <div className="flex flex-row gap-8 justify-center items-start">

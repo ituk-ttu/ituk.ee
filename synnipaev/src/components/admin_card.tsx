@@ -5,7 +5,7 @@ import Email from "@/assets/icons/email.svg";
 import { useState } from "react";
 
 interface CardProps {
-    id: string;
+    id?: string;
     title: string;
     image: string;
     description: string;
@@ -31,7 +31,7 @@ export default function AdminCard({
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (onClick) {
-            onClick(id, _title, _image, _description, _email);
+            onClick(id || "", _title, _image, _description, _email);
         }
     };
 
