@@ -34,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
   const isActive = to && pathname === to; // Check if the current path matches the `to` prop
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.();
     event.preventDefault();
     if (href) {
       window.location.href = href; // Redirect to external link
