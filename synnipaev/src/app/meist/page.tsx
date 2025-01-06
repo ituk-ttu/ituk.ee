@@ -75,7 +75,7 @@ export default function Home() {
     <div>
       <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
-          <h1 className="big">Mis on {"\u003E"}itük_?</h1>
+          <h1 className="big">Mis on &gt;itük_?</h1>
         </div>
       </div>
 
@@ -89,7 +89,7 @@ export default function Home() {
           tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
           probleemidele lahendusi leida.
         </p>
-        <div className="gap-16 flex-col flex">
+        <div className="gap-8 flex-col flex">
           <h2>Mida itük teeb?</h2>
           <p>
             Meie kõige tuntumad haridusüritused on IT-ametite päev,

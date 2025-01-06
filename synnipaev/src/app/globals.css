@@ -16,6 +16,7 @@ h2,
 h3,
 h4,
 h5,
+label,
 button {
   font-weight: bold;
   font-family: "Raleway", sans-serif;
@@ -34,7 +35,8 @@ h3 {
 h4 {
   font-size: 1.75rem;
 }
-h5 {
+h5,
+label {
   font-size: 1.5rem;
 }
 .giant {
@@ -195,7 +197,8 @@ button {
   h4 {
     font-size: 1.5rem;
   }
-  h5 {
+  h5,
+  label {
     font-size: 1.25rem;
   }
   .giant {
