@@ -50,6 +50,7 @@ export default function Home() {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [name, setName] = useState("");
+    const [handle, setHandle] = useState("");
 
     interface ButtonEvent extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
         preventDefault: () => void;
@@ -86,6 +87,7 @@ export default function Home() {
                 category: category,
                 description: description,
                 name: name,
+                handle: handle,
             });
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -186,8 +188,6 @@ export default function Home() {
                                 image={member.imagePath}
                                 description={member.position}
                                 board={true}
-                                width={400}
-                                height={500}
                                 email={member.email}
                             />
                         ))}
@@ -236,6 +236,16 @@ export default function Home() {
                             required
                             placeholder="Name"
                             onChange={(e) => setName(e.target.value)}
+                        />
+
+                        <input
+                            className="bg-light shadow-filled text-black"
+                            id="handle"
+                            name="handle"
+                            type="text"
+                            required
+                            placeholder="Handle"
+                            onChange={(e) => setHandle(e.target.value)}
                         />
 
                         <button type="submit">Create event</button>
