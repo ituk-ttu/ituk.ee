@@ -6,49 +6,57 @@ import { useState } from "react";
 import { strict } from "assert";
 
 interface CardProps {
-  id?: string;
-  title: string;
-  image: string;
-  description: string;
-  board: boolean;
-  email?: string;
-  onClick?: (
-    id: string,
-    title: string,
-    image: string,
-    description: string,
-    email: string
-  ) => void;
-  onDelete?: (id: string) => void;
+    id?: string;
+    title: string;
+    image: string;
+    description: string;
+    board: boolean;
+    email?: string;
+    category?: string;
+    handle?: string;
+    onClick?: (
+        id: string,
+        title: string,
+        image: string,
+        description: string,
+        email:string,
+        category: string,
+        handle: string,
+    ) => void;
+    onDelete?: (id: string) => void;
 }
 
 export default function AdminCard({
-  id,
-  title,
-  image,
-  description,
-  board,
-  email = "",
-  onClick,
-  onDelete,
+    id,
+    title,
+    image,
+    description,
+    board,
+    email = "",
+    category,
+    handle,
+    onClick,
+    onDelete,
 }: CardProps) {
     const [_title, setTitle] = useState(title);
     const [_image, setImage] = useState(image);
     const [_description, setDescription] = useState(description);
     const [_email, setEmail] = useState(email);
+    const [_category, setCategory] = useState(category);
+    const [_handle, setHandle] = useState(handle);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (onClick) {
-      onClick(id || "", _title, _image, _description, _email);
-    }
-  };
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (onClick) {
+            onClick(id || "", _title || "", _image || "", _description || "", _email || "", _category || "", _handle || "");
+        }
+    };
 
-  const handleDelete = () => {
-    if (onDelete) {
-      onDelete(id || "");
-    }
-  };
+    const handleDelete = () => {
+        if (onDelete) {
+            onDelete(id || "");
+        }
+    };
 
     if (board) {
         return (
@@ -79,15 +87,25 @@ export default function AdminCard({
     } else {
         return (
             <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-                <img
-                    className="h-full object-cover rounded-t-lg"
-                    src={image}
-                    alt={title}
-                />
-                <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-primary">
-                    <h5>{title}</h5>
-                    <p>{description}</p>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <img
+                        className="min-h-[284px] object-cover rounded-t-lg"
+                        src={_image}
+                        alt={title}
+                    />
+                    <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+                        <input className="bg-transparent text-light" type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <input className="bg-transparent text-light" type="text" name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <input className="bg-transparent text-light" type="text" name="imagePath" placeholder="Image Path" onChange={(e) => setImage(e.target.value)} value={_image} />
+                        <input className="bg-transparent text-light" type="text" name="category" placeholder="Category" onChange={(e) => setCategory(e.target.value)} value={_category} />
+                        <input className="bg-transparent text-light" type="text" name="handle" placeholder="Handle" onChange={(e) => setHandle(e.target.value)} value={_handle} />
+                        <button type="submit">Submit</button>
+                        {onDelete ?
+                            <button onClick={handleDelete}>Delete</button>
+                            : <></>
+                        }
+                    </div>
+                </form>
             </div>
         );
     }
