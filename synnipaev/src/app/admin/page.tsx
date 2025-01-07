@@ -655,11 +655,11 @@ export default function Home() {
                                                     oled ainuke, sest me oleme oma töö ära teinud.
                                                 </li>
                                                 <li>
-                                                    Pole viga, midagi rasket ei ole - all on terve hunnik välja - alates juhatuse koosseisust lõpetades
+                                                    Pole viga, midagi rasket ei ole - all on terve hunnik välju - alates juhatuse koosseisust lõpetades
                                                     rendinimekirjani, pea kõiki asju saab siin lihtsasti muuta.
                                                 </li>
                                                 <li>
-                                                    Muidugi pead sa mingi hetk Firestore'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
+                                                    Muidugi pead sa mingi hetk Firebase'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
                                                     et eelmine vend andis sulle selle logini ka. Kui ei, siis küsi. Siinkohal pead siis meilt küsima.
                                                     Kes me oleme? Noh, edu selle otsimisega. Tunne vabalt rantida logiraamatusse, ehk leiad sealt
                                                     lohutust ka. ;D"
