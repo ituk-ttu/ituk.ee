@@ -667,7 +667,7 @@ export default function Home() {
                                                 <li>??? - 07.01.2025</li>
                                             </ol>
                                         </div>
-                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-16">
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-8">
                                             {logbook.map((log, index) => (
                                                 <ol key={log.key} className="h-60 w-60">
                                                     <li
