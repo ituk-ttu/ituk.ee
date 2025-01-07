@@ -158,7 +158,7 @@ export default function Home() {
     const getLogs = async () => {
         try {
             const querySnapshot = await getDocs(
-                query(collection(db, "logbook"), orderBy("date", "desc"))
+                query(collection(db, "logbook"), orderBy("date", "asc"))
             );
             const logbook: Logs[] = querySnapshot.docs.map((doc) => {
                 const data = doc.data() as DocumentData;
@@ -494,9 +494,9 @@ export default function Home() {
             <div className="main-padding main-min justify-center items-center flex-col flex gap-8">
                 <h1>Logi sisse</h1>
                 <form className="items-start justify-center gap-4 flex flex-col">
-                    <label>Meiliaadress</label>
+                    <label><span className="text-secondary">* </span>Meiliaadress</label>
                     <input id="email-address" name="email" type="email" required placeholder="Email address" onChange={(e) => setEmail(e.target.value)} />
-                    <label>Parool</label>
+                    <label><span className="text-secondary">* </span>Parool</label>
                     <input id="password" name="password" type="password" required placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     <button className="edit-primary" onClick={onLogin}>Logi sisse</button>
                 </form>
@@ -511,27 +511,6 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="main-padding gap-16 flex-col flex">
-                    {/* Kui sa seda näed, siis väga vinge! 
-        Sõnum siis sulle, tulevane arendaja - palun uuenda iga formi juures regulaarselt, mis on nende andmete nõuded (a la mis failinimi/link peaks olema jne). 
-        Nii saame veenduda, et kesiganes edasi manageerima peab, saab ise hakkama ja ei pea talveunest äratama iga väiksema probleemi peale ;D */}
-                    <ol className="italic gap-4 flex-col flex">
-                        <li>"Tervist!</li>
-                        <li>
-                            Siin meie kodulehe hetke versiooni arendajad väikse teadaandega - kui sa veel aru ei ole saanud,
-                            siis sul on erakordne võimalus olla osa ITÜKi kodulehe administraatoritest! Ehk sa arvatavasti
-                            oled ainuke, sest me oleme oma töö ära teinud.
-                        </li>
-                        <li>
-                            Pole viga, midagi rasket ei ole - all on terve hunnik välja - alates juhatuse koosseisust lõpetades
-                            rendinimekirjani, pea kõiki asju saab siin lihtsasti muuta.
-                        </li>
-                        <li>
-                            Muidugi pead sa mingi hetk Firestore'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
-                            et eelmine vend andis sulle selle logini ka. Kui ei, siis küsi. Siinkohal pead siis meilt küsima.
-                            Kes me oleme? Noh, edu selle otsimisega ;D
-                        </li>
-                        <li>??? - 06.01.2025"</li>
-                    </ol>
                     <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                         <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
                         <Button variant="secondary" onClick={() => setPage("yritused")} text="Üritused" />
@@ -600,11 +579,11 @@ export default function Home() {
                                                 onSubmit={addLink}
                                             >
                                                 <h5>Lisa ürituse link</h5>
-                                                <label>Ürituse nimi</label>
+                                                <label><span className="text-secondary">* </span>Ürituse nimi</label>
                                                 <input className="w-full" id="name" name="name" type="text" required placeholder="Don't Do IT" onChange={(e) => setName(e.target.value)} />
-                                                <label>Aasta, millal antud üritus toimus</label>
+                                                <label><span className="text-secondary">* </span>Aasta, millal antud üritus toimus</label>
                                                 <input className="w-full" id="year" name="year" type="text" required placeholder="2024" onChange={(e) => setDescription(e.target.value)} />
-                                                <label>FB ürituse/muu koha link</label>
+                                                <label><span className="text-secondary">* </span>FB ürituse/muu koha link</label>
                                                 <input className="w-full" id="banner" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
                                                 <Button variant="primary" type="submit" text="" />
                                             </form>
@@ -613,11 +592,11 @@ export default function Home() {
                                                 onSubmit={addImageToGallery}
                                             >
                                                 <h5>Lisa pilt galeriisse</h5>
-                                                <label>Ürituse nimi</label>
+                                                <label><span className="text-secondary">* </span>Ürituse nimi</label>
                                                 <input
                                                     className="w-full" id="name" name="name" type="text" required placeholder="Don't Do IT" onChange={(e) => setName(e.target.value)}
                                                 />
-                                                <label>Pildi link</label>
+                                                <label><span className="text-secondary">* </span>Pildi link</label>
                                                 <input className="w-full" id="banner" name="banner" type="text" required placeholder="/events/ddit.jpg" onChange={(e) => setBanner(e.target.value)} />
                                                 <Button variant="primary" type="submit" text="" />
                                             </form>
@@ -653,32 +632,71 @@ export default function Home() {
                                 return (
                                     <div className="w-full justify-center items-center text-align gap-16 flex-col flex">
                                         <h2>Logiraamat</h2>
-                                        <div className="w-full justify-start items-start flex-col md:flex-row flex gap-16">
-                                            <form
-                                                className="justify-start items-start flex-col flex gap-4"
-                                            >
-                                                <label>Autori nimi</label>
-                                                <input className="w-full" id="author" name="author" type="text" required placeholder="Kes sa oled?" onChange={(e) => setAuthor(e.target.value)} />
-                                                <label>Sissekanne</label>
-                                                <textarea className="w-full" id="entry" name="entry" required placeholder="Mis sa hingelt puistada tahad?" onChange={(e) => setEntry(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="" onClick={createLog}/>
-                                            </form>
-                                            {logbook.map((log) => (
-                                                <div key={log.key}>
-                                                    <p>{log.author}</p>
-                                                    <p>{log.entry}</p>
-                                                    <p>{log.date.toDateString()}</p>
-                                                </div>
+                                        <div className="flex-row flex gap-16">
+                                            <div className="w-full justify-start items-center flex-col flex gap-16">
+                                                <form
+                                                    className="w-full justify-start items-start flex-col flex gap-4"
+                                                >
+                                                    <label><span className="text-secondary">* </span>Autori nimi</label>
+                                                    <input className="w-full" id="author" name="author" type="text" required placeholder="Kes sa oled?" onChange={(e) => setAuthor(e.target.value)} />
+                                                    <label><span className="text-secondary">* </span>Sissekanne</label>
+                                                    <textarea className="w-full" id="entry" name="entry" required placeholder="Mis sa hingelt puistada tahad?" onChange={(e) => setEntry(e.target.value)} />
+                                                    <Button variant="primary" type="submit" text="" onClick={createLog} />
+                                                </form>
+                                            </div>
+                                            {/* Kui sa seda näed, siis väga vinge! 
+                                            Sõnum siis sulle, tulevane arendaja - palun uuenda iga formi juures regulaarselt, mis on nende andmete nõuded (a la mis failinimi/link peaks olema jne). 
+                                            Nii saame veenduda, et kesiganes edasi manageerima peab, saab ise hakkama ja ei pea talveunest äratama iga väiksema probleemi peale ;D */}
+                                            <ol className="w-full italic gap-4 flex-col flex">
+                                                <li>"Tervist!</li>
+                                                <li>
+                                                    Siin meie kodulehe hetke versiooni arendajad väikse teadaandega - kui sa veel aru ei ole saanud,
+                                                    siis sul on erakordne võimalus olla osa ITÜKi kodulehe administraatoritest! Ehk sa arvatavasti
+                                                    oled ainuke, sest me oleme oma töö ära teinud.
+                                                </li>
+                                                <li>
+                                                    Pole viga, midagi rasket ei ole - all on terve hunnik välja - alates juhatuse koosseisust lõpetades
+                                                    rendinimekirjani, pea kõiki asju saab siin lihtsasti muuta.
+                                                </li>
+                                                <li>
+                                                    Muidugi pead sa mingi hetk Firestore'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
+                                                    et eelmine vend andis sulle selle logini ka. Kui ei, siis küsi. Siinkohal pead siis meilt küsima.
+                                                    Kes me oleme? Noh, edu selle otsimisega. Tunne vabalt rantida logiraamatusse, ehk leiad sealt
+                                                    lohutust ka. ;D"
+                                                </li>
+                                                <li>??? - 07.01.2025</li>
+                                            </ol>
+                                        </div>
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4">
+                                            {logbook.map((log, index) => (
+                                                <ol key={log.key} className="h-60 w-60">
+                                                    <li
+                                                        className={`relative h-60 w-60 p-4 bg-primary text-light shadow-filled transform transition-transform duration-150 ease-linear 
+                                                                ${index % 2 === 1 ? "rotate-[4deg] top-[5px] bg-yellow-300 text-dark" : ""} 
+                                                                ${index % 3 === 0 ? "rotate-[-3deg] top-[-5px] bg-gray text-light" : ""} 
+                                                                ${index % 5 === 0 ? "rotate-[5deg] top-[-10px] bg-[#4dbed2] text-dark" : ""} 
+                                                                hover:scale-110 hover:rotate-[0deg] z-10`}
+                                                    >
+                                                        <h5>{log.author}</h5>
+                                                        <p className="text-xs">{log.date.toDateString()}</p>
+                                                        <br />
+                                                        <p className="text-xs">{log.entry}</p>
+                                                    </li>
+                                                </ol>
                                             ))}
                                         </div>
                                     </div>
                                 )
                             default:
-                                return null
+                                return (
+                                    <div className="justify-center items-center flex-row flex">
+                                        <h2 className="italic box-border border-b-2 text-green-700">Tervist, &lt;user_id&gt;!</h2>
+                                    </div>
+                                )
                         }
                     })()}
                 </div>
-            </div>
+            </div >
         );
     }
 }
