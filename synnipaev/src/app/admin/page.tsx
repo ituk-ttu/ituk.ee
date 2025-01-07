@@ -504,7 +504,7 @@ export default function Home() {
         );
     } else {
         return (
-            <div>
+            <div className="main-min">
                 <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
                     <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-col flex gap-8">
                         <h1 className="big">Dashboard</h1>
@@ -669,16 +669,38 @@ export default function Home() {
                                         </div>
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-8">
                                             {logbook.map((log, index) => (
-                                                <ol key={log.key} className="h-60 w-60">
+                                                <ol key={log.key} className="h-full w-60">
                                                     <li
-                                                        className={`relative h-60 w-60 p-4 bg-primary text-light shadow-filled transform transition-transform duration-150 ease-linear 
-                                                                ${index % 2 === 1 ? "rotate-[4deg] top-[5px] bg-yellow-300 text-dark" : ""} 
-                                                                ${index % 3 === 0 ? "rotate-[-3deg] top-[-5px] bg-gray text-light" : ""} 
-                                                                ${index % 5 === 0 ? "rotate-[5deg] top-[-10px] bg-[#4dbed2] text-dark" : ""} 
-                                                                hover:scale-110 hover:rotate-[0deg] z-10`}
+                                                        className={`relative min-h-60 w-60 p-4 shadow-filled break-words transform transition-transform duration-150 ease-linear ${(() => {
+                                                            if ((index + 1) % 3 === 0) {
+                                                                return "rotate-[6deg] top-[-3px] bg-gray text-light";
+                                                            } else if ((index + 1) % 4 === 0) {
+                                                                return "rotate-[-3deg] top-[8px] bg-light text-dark";
+                                                            } else if ((index + 1) % 5 === 0) {
+                                                                return "rotate-[2deg] top-[2px] bg-[#4dbed2] text-dark";
+                                                            } else if ((index + 1) % 2 === 0) {
+                                                                return "rotate-[-2deg] top-[4px] bg-yellow-300 text-dark";
+                                                            } else if ((index + 1) % 7 === 0) {
+                                                                return "rotate-[-5deg] top-[7px] bg-[#342b60] text-light";
+                                                            } else if ((index + 1) % 6 === 0) {
+                                                                return "rotate-[-1deg] top-[5px] bg-green-500 text-dark";
+                                                            } else {
+                                                                return "bg-primary text-light"; // Default case for other list items
+                                                            }
+                                                        })()} hover:scale-110 hover:rotate-[0deg] z-10`}
                                                     >
                                                         <h5>{log.author}</h5>
-                                                        <p className="text-xs">{log.date.toDateString()}</p>
+                                                        <p className="text-xs">
+                                                            {new Date(log.date).toLocaleString('et-EE', {
+                                                                year: 'numeric',
+                                                                month: '2-digit',
+                                                                day: '2-digit',
+                                                                hour: '2-digit',
+                                                                minute: '2-digit',
+                                                                second: '2-digit',
+                                                                hour12: false,
+                                                            })}
+                                                        </p>
                                                         <br />
                                                         <p className="text-xs">{log.entry}</p>
                                                     </li>

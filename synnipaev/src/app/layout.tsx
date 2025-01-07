@@ -28,10 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="et"
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
-      <body className="main-min">
+      <body>
         <Navbar />
         {children}
         <Footer />
