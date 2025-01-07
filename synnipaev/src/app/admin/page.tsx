@@ -158,7 +158,7 @@ export default function Home() {
     const getLogs = async () => {
         try {
             const querySnapshot = await getDocs(
-                query(collection(db, "logbook"), orderBy("date", "asc"))
+                query(collection(db, "logbook"), orderBy("date", "desc"))
             );
             const logbook: Logs[] = querySnapshot.docs.map((doc) => {
                 const data = doc.data() as DocumentData;
