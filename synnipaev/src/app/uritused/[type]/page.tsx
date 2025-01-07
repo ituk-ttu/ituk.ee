@@ -52,13 +52,14 @@ export default function Home({
 
   if (events.length === 0) {
     <div className="main-min items-start flex-row flex">
-      <h2>No events found!</h2>
+      <h2>Üritusi ei leitud!</h2>
     </div>;
   }
 
   if (events.length <= 3) {
     return (
       <div className="main-min items-start flex-col sm:flex-row flex">
+        {/**TODO: Lisada siia <h1 className="hidden">Vastava kategooria nimi</h1> */}
         {events.map((event, index) => (
           <Link href={"/uritused/" + event.category + "/" + event.handle} id={index.toString()}
             className="w-full sm:w-1/3 justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/sisekad.jpg')] flex-col flex" style={{ backgroundImage: `url(${event.banner})` }}
@@ -73,6 +74,7 @@ export default function Home({
   } else {
     return (
       <div className="main-min grid grid-cols-[repeat(auto-fit,minmax(100%,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(33.3333%,1fr))]">
+        {/**TODO: Lisada siia <h1 className="hidden">Vastava kategooria nimi</h1> */}
         {events.map((event, index) => (
           <Link
             href={"/uritused/" + event.category + "/" + event.handle}

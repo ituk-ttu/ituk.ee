@@ -6,6 +6,7 @@ import logo_large from "@/assets/logos/ituk_navbar_logo.svg";
 import logo_small from "@/assets/logos/ituk_navbar_symbol.svg";
 import Button from "@/components/buttons/button";
 import HamburgerMenu from "./buttons/HamburgerMenu";
+import LanguageButton from "./buttons/language_button";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,12 +37,9 @@ export default function Navbar() {
         <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
         <Button variant="tertiary" text="Rent" to="/rent" />
         <Button variant="primary" text="Liitu" to="https://liitu.ituk.ee/" />
+        <LanguageButton />
       </div>
-      <HamburgerMenu
-        className="flex lg:hidden"
-        isOpen={isMenuOpen}
-        onClick={toggleMenu}
-      />
+      <HamburgerMenu className="flex lg:hidden" isOpen={isMenuOpen} onClick={toggleMenu} />
       {isMenuOpen && (
         <div
           className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4"
@@ -51,12 +49,10 @@ export default function Navbar() {
           <Button variant="tertiary" text="Üritused" to="/uritused" />
           <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
           <Button variant="tertiary" text="Rent" to="/rent" />
-          <Button
-            variant="primary"
-            text="Liitu"
-            to="https://liitu.ituk.ee/"
-            onClick={toggleMenu}
-          />
+          <div className="justify-center items-center flex-col flex gap-8">
+            <Button variant="primary" text="Liitu" />
+            <LanguageButton />
+          </div>
         </div>
       )}
     </header>

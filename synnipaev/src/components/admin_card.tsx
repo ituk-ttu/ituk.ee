@@ -56,7 +56,7 @@ export default function AdminCard({
             onDelete(id || "");
         }
     };
-
+    /**TODO: panna /add_new.jpg image default pildina, kui on kaart, kust saab uut lisada */
     if (board === "juhatus") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
