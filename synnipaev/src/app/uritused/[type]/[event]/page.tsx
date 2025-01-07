@@ -8,17 +8,16 @@ import {
   where,
   getDocs,
   DocumentData,
-  documentId,
 } from "firebase/firestore";
 import Button from "@/components/buttons/button";
-import Image from "next/image";
+import Gallery from "@/components/gallery/gallery"; // Import the Gallery component
 
 interface Event {
   category: string;
   banner: string;
   name: string;
   description: string;
-  gallery?: string[];
+  gallery?: { src: string; name: string }[]; // Update to match Gallery props
   links?: Map<string, string>;
 }
 
@@ -38,18 +37,27 @@ export default function Home({
       const querySnapshot = await getDocs(q);
       const events: Event[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
+
+        // Map gallery array into { src, name } format for Gallery component
+        const gallery = data.gallery
+          ? data.gallery.map((src: string, index: number) => ({
+            src,
+            name: `Image ${index + 1}`,
+          }))
+          : undefined;
+
         return {
           category: data.category,
           banner: data.banner,
           name: data.name,
           description: data.description,
-          gallery: data.gallery ? data.gallery : undefined,
+          gallery,
           links: data.links ? new Map(Object.entries(data.links)) : undefined,
         };
       });
       setCurEvent(events[0]);
     } catch (error) {
-      console.error("Error getting members: ", error);
+      console.error("Error getting event: ", error);
       throw error;
     }
   };
@@ -78,27 +86,23 @@ export default function Home({
               <h3>Varasemad üritused</h3>
               <div className="justify-start items-center flex-row flex gap-8">
                 {Array.from(curEvent.links.entries()).map(([key, value]) => (
-                  <Button variant="primary" text={key} to={value} />
+                  <Button key={key} variant="primary" text={key} to={value} />
                 ))}
               </div>
             </div>
-          ) : (
-            <></>
-          )}
+          ) : null}
+
           {curEvent.gallery ? (
             <div className="justify-center items-start flex-col flex gap-8">
               <h3>Galerii</h3>
-              <div className="">
-                {curEvent.gallery.map((image) => (
-                  <Image src={image} alt="Image" width={512} height={280} />
-                ))}
-              </div>
+              {/* Render the Gallery component */}
+              <Gallery photos={curEvent.gallery} />
             </div>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </div>
       </div>
     );
   }
+
+  return null; // Handle loading or fallback state
 }

@@ -3,7 +3,7 @@ import pathStart from "@/assets/icons/timeline-path-start.svg";
 import pathGap from "@/assets/icons/timeline-path-gap.svg";
 import pathEnd from "@/assets/icons/timeline-path-end.svg";
 import pathCircle from "@/assets/icons/timeline-path-circle.svg";
-import Card from "@/components/card";
+import Card from "@/components/cards/card";
 
 interface TimelineProps {
   type: "start" | "left" | "right" | "gap" | "end";

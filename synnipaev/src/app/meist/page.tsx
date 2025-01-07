@@ -4,7 +4,7 @@ import { db } from "@/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
-import Card from "@/components/card";
+import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
 
 interface BoardMember {

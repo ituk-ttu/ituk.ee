@@ -23,7 +23,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
-import AdminCard from "@/components/admin_card";
+import AdminCard from "@/components/cards/admin_card";
 import { posix } from "path";
 
 interface BoardMember {
