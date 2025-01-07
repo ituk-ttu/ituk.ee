@@ -632,7 +632,7 @@ export default function Home() {
                                 return (
                                     <div className="w-full justify-center items-center text-align gap-16 flex-col flex">
                                         <h2>Logiraamat</h2>
-                                        <div className="flex-row flex gap-16">
+                                        <div className="flex-col md:flex-row flex gap-16">
                                             <div className="w-full justify-start items-center flex-col flex gap-16">
                                                 <form
                                                     className="w-full justify-start items-start flex-col flex gap-4"
@@ -667,7 +667,7 @@ export default function Home() {
                                                 <li>??? - 07.01.2025</li>
                                             </ol>
                                         </div>
-                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4">
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-16">
                                             {logbook.map((log, index) => (
                                                 <ol key={log.key} className="h-60 w-60">
                                                     <li
