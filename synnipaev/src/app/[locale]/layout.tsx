@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { getDictionary } from "@/dictionaries/dictionaries";
-import Metadata from "@/components/metadata";
 
 const raleway = Raleway({
   subsets: ["latin"],
