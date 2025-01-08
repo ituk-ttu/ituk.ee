@@ -5,7 +5,7 @@ import {
     onAuthStateChanged,
     signOut,
 } from "firebase/auth";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase";
 import {
     addDoc,
@@ -23,8 +23,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
-import AdminCard from "@/components/admin_card";
-import { posix } from "path";
+import AdminCard from "@/components/cards/admin_card";
 
 interface BoardMember {
     key: string;
@@ -498,13 +497,13 @@ export default function Home() {
                     <input id="email-address" name="email" type="email" required placeholder="Email address" onChange={(e) => setEmail(e.target.value)} />
                     <label><span className="text-secondary">* </span>Parool</label>
                     <input id="password" name="password" type="password" required placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    <button className="edit-primary" onClick={onLogin}>Logi sisse</button>
+                    <Button variant="primary" onClick={onLogin} text="Logi sisse" />
                 </form>
             </div>
         );
     } else {
         return (
-            <div>
+            <div className="main-min">
                 <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
                     <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-col flex gap-8">
                         <h1 className="big">Dashboard</h1>
@@ -584,8 +583,8 @@ export default function Home() {
                                                 <label><span className="text-secondary">* </span>Aasta, millal antud üritus toimus</label>
                                                 <input className="w-full" id="year" name="year" type="text" required placeholder="2024" onChange={(e) => setDescription(e.target.value)} />
                                                 <label><span className="text-secondary">* </span>FB ürituse/muu koha link</label>
-                                                <input className="w-full" id="banner" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="" />
+                                                <input className="w-full" id="eventLink" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
+                                                <Button variant="primary" type="submit" text="Salvesta" />
                                             </form>
                                             <form
                                                 className="w-full flex flex-col gap-4 justify-center items-start"
@@ -598,7 +597,7 @@ export default function Home() {
                                                 />
                                                 <label><span className="text-secondary">* </span>Pildi link</label>
                                                 <input className="w-full" id="banner" name="banner" type="text" required placeholder="/events/ddit.jpg" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="" />
+                                                <Button variant="primary" type="submit" text="Salvesta" />
                                             </form>
                                         </div>
 
@@ -641,7 +640,7 @@ export default function Home() {
                                                     <input className="w-full" id="author" name="author" type="text" required placeholder="Kes sa oled?" onChange={(e) => setAuthor(e.target.value)} />
                                                     <label><span className="text-secondary">* </span>Sissekanne</label>
                                                     <textarea className="w-full" id="entry" name="entry" required placeholder="Mis sa hingelt puistada tahad?" onChange={(e) => setEntry(e.target.value)} />
-                                                    <Button variant="primary" type="submit" text="" onClick={createLog} />
+                                                    <Button variant="primary" type="submit" text="Salvesta" onClick={createLog} />
                                                 </form>
                                             </div>
                                             {/* Kui sa seda näed, siis väga vinge! 
@@ -655,11 +654,11 @@ export default function Home() {
                                                     oled ainuke, sest me oleme oma töö ära teinud.
                                                 </li>
                                                 <li>
-                                                    Pole viga, midagi rasket ei ole - all on terve hunnik välja - alates juhatuse koosseisust lõpetades
+                                                    Pole viga, midagi rasket ei ole - all on terve hunnik välju - alates juhatuse koosseisust lõpetades
                                                     rendinimekirjani, pea kõiki asju saab siin lihtsasti muuta.
                                                 </li>
                                                 <li>
-                                                    Muidugi pead sa mingi hetk Firestore'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
+                                                    Muidugi pead sa mingi hetk Firebase'i ka avama, sest 100% kõike siit ei tee, nii et, ma loodan,
                                                     et eelmine vend andis sulle selle logini ka. Kui ei, siis küsi. Siinkohal pead siis meilt küsima.
                                                     Kes me oleme? Noh, edu selle otsimisega. Tunne vabalt rantida logiraamatusse, ehk leiad sealt
                                                     lohutust ka. ;D"
@@ -667,18 +666,40 @@ export default function Home() {
                                                 <li>??? - 07.01.2025</li>
                                             </ol>
                                         </div>
-                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-16">
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-8">
                                             {logbook.map((log, index) => (
-                                                <ol key={log.key} className="h-60 w-60">
+                                                <ol key={log.key} className="h-full w-60">
                                                     <li
-                                                        className={`relative h-60 w-60 p-4 bg-primary text-light shadow-filled transform transition-transform duration-150 ease-linear 
-                                                                ${index % 2 === 1 ? "rotate-[4deg] top-[5px] bg-yellow-300 text-dark" : ""} 
-                                                                ${index % 3 === 0 ? "rotate-[-3deg] top-[-5px] bg-gray text-light" : ""} 
-                                                                ${index % 5 === 0 ? "rotate-[5deg] top-[-10px] bg-[#4dbed2] text-dark" : ""} 
-                                                                hover:scale-110 hover:rotate-[0deg] z-10`}
+                                                        className={`relative min-h-60 w-60 p-4 shadow-filled break-words transform transition-transform duration-150 ease-linear ${(() => {
+                                                            if ((index + 1) % 3 === 0) {
+                                                                return "rotate-[6deg] top-[-3px] bg-gray text-light";
+                                                            } else if ((index + 1) % 4 === 0) {
+                                                                return "rotate-[-3deg] top-[8px] bg-light text-dark";
+                                                            } else if ((index + 1) % 5 === 0) {
+                                                                return "rotate-[2deg] top-[2px] bg-[#4dbed2] text-dark";
+                                                            } else if ((index + 1) % 2 === 0) {
+                                                                return "rotate-[-2deg] top-[4px] bg-yellow-300 text-dark";
+                                                            } else if ((index + 1) % 7 === 0) {
+                                                                return "rotate-[-5deg] top-[7px] bg-[#342b60] text-light";
+                                                            } else if ((index + 1) % 6 === 0) {
+                                                                return "rotate-[-1deg] top-[5px] bg-green-500 text-dark";
+                                                            } else {
+                                                                return "bg-primary text-light"; // Default case for other list items
+                                                            }
+                                                        })()} hover:scale-110 hover:rotate-[0deg] z-10`}
                                                     >
                                                         <h5>{log.author}</h5>
-                                                        <p className="text-xs">{log.date.toDateString()}</p>
+                                                        <p className="text-xs">
+                                                            {new Date(log.date).toLocaleString('et-EE', {
+                                                                year: 'numeric',
+                                                                month: '2-digit',
+                                                                day: '2-digit',
+                                                                hour: '2-digit',
+                                                                minute: '2-digit',
+                                                                second: '2-digit',
+                                                                hour12: false,
+                                                            })}
+                                                        </p>
                                                         <br />
                                                         <p className="text-xs">{log.entry}</p>
                                                     </li>

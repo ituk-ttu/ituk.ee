@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 import { Raleway, Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { getDictionary } from "@/dictionaries/dictionaries";
+import Metadata from "@/components/metadata";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -17,11 +17,6 @@ const noto_sans_georgian = Noto_Sans_Georgian({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "ITÜK | IT-teaduskonna üliõpilaskogu",
-  description: "ITÜK",
-};
-
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: Promise<{ locale: "est" | "en" }>;
@@ -31,7 +26,7 @@ export default async function RootLayout(props: {
   const dictionary = await getDictionary(locale);
   return (
     <html
-      lang="en"
+      lang="et"
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
       <body className="main-min">

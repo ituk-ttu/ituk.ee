@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { strict } from "assert";
 import Button from '@/components/buttons/button';
 
 interface CardProps {
@@ -75,7 +74,7 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="imagePath" placeholder="/board/XXXX/X_ametinimetus.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Meiliaadress</label>
                         <input className="w-full" type="text" name="email" placeholder="example@ituk.ee" onChange={(e) => setEmail(e.target.value)} value={_email} />
-                        <Button variant="primary" type="submit" text="" />
+                        <Button variant="primary" type="submit" text="Salvesta" />
                         {onDelete ?
                             <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
@@ -104,7 +103,7 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="category" placeholder="meelelahutus/haridus/muu" onChange={(e) => setCategory(e.target.value)} value={_category} />
                         <label>Handle (normaliseeritud)</label>
                         <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
-                        <Button variant="primary" type="submit" text="" />
+                        <Button variant="primary" type="submit" text="Salvesta" />
                         {onDelete ?
                             <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
@@ -131,7 +130,7 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Hinna ühik</label>
                         <input className="w-full" type="text" name="category" placeholder="€/päev" onChange={(e) => setCategory(e.target.value)} value={_category} />
-                        <Button variant="primary" type="submit" text="" />
+                        <Button variant="primary" type="submit" text="Salvesta" />
                         {onDelete ?
                             <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
