@@ -2,6 +2,7 @@ import { Raleway, Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { getDictionary } from "@/dictionaries/dictionaries";
 import Metadata from "@/components/metadata";
 
 const raleway = Raleway({
@@ -16,20 +17,21 @@ const noto_sans_georgian = Noto_Sans_Georgian({
   display: "swap",
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default async function RootLayout(props: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: "est" | "en" }>;
+}) {
+  const { locale } = await props.params;
+
+  const dictionary = await getDictionary(locale);
   return (
     <html
       lang="et"
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
-      <Metadata />
-      <body>
-        <Navbar />
-        {children}
+      <body className="main-min">
+        <Navbar dictionary={dictionary.navbar} />
+        {props.children}
         <Footer />
       </body>
     </html>

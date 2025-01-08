@@ -7,8 +7,13 @@ import logo_small from "@/assets/logos/ituk_navbar_symbol.svg";
 import Button from "@/components/buttons/button";
 import HamburgerMenu from "./buttons/HamburgerMenu";
 import LanguageButton from "./buttons/language_button";
+import { getDictionary } from "@/dictionaries/dictionaries";
 
-export default function Navbar() {
+export default function Navbar({
+  dictionary,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["navbar"];
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -32,11 +37,11 @@ export default function Navbar() {
         <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
       </a>
       <div className="justify-start items-center gap-8 hidden lg:flex">
-        <Button variant="tertiary" text="Meist" to="/meist" />
-        <Button variant="tertiary" text="Üritused" to="/uritused" />
-        <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
-        <Button variant="tertiary" text="Rent" to="/rent" />
-        <Button variant="primary" text="Liitu" to="https://liitu.ituk.ee/" />
+        <Button variant="tertiary" text={dictionary.aboutus} to="/meist" />
+        <Button variant="tertiary" text={dictionary.events} to="/uritused" />
+        <Button variant="tertiary" text={dictionary.partners} to="/partnerlus" />
+        <Button variant="tertiary" text={dictionary.rent} to="/rent" />
+        <Button variant="primary" text={dictionary.join} to="https://liitu.ituk.ee/" />
         <LanguageButton />
       </div>
       <HamburgerMenu className="flex lg:hidden" isOpen={isMenuOpen} onClick={toggleMenu} />
