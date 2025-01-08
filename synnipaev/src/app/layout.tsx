@@ -26,9 +26,7 @@ export default function RootLayout({
       lang="et"
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
-      <head>
-        <Metadata />
-      </head>
+      <Metadata />
       <body>
         <Navbar />
         {children}
