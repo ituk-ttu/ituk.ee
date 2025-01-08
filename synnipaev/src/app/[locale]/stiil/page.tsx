@@ -2,17 +2,10 @@ import Button from "@/components/buttons/button"
 import Image from "next/image"
 import logoLong from "@/assets/logos/ituk_long_logo.svg"
 import long from "@/assets/logos/ituk_long.svg"
-import Metadata from "@/components/metadata"
 
 export default function Home() {
     return (
         <div className="flex flex-col items-start px-16 py-32 gap-16">
-            <Metadata
-                title="Üritused | TalTechi IT-teaduskonna üliõpilaskogu"
-                description="ITÜKi stiiliraamat"
-                image="/banners/stiil_banner.jpg"
-                url="https://ituk.ee/stiil"
-            />
             <div className="flex flex-col items-start gap-8">
                 <h1>
                     TalTechi IT-teaduskonna üliõpilaskogu stiiliraamat

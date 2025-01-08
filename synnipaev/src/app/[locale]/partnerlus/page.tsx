@@ -1,17 +1,10 @@
 import Image from "next/image"
 import netgroup from "@/assets/images/partners/netgroup.png"
 import nortal from "@/assets/images/partners/nortal.png"
-import Metadata from "@/components/metadata"
 
 export default function Home() {
   return (
     <div>
-      <Metadata
-        title="Koostöö | TalTechi IT-teaduskonna üliõpilaskogu"
-        description="ITÜKi koostöö"
-        image="/banners/partnerlus_banner.jpg"
-        url="https://ituk.ee/partnerlus"
-      />
       <div className="justify-center items-center bg-cooperation-bg bg-center bg-cover flex-row flex">
         <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
           <h1 className="big">Koostöö</h1>

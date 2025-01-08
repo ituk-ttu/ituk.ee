@@ -5,7 +5,6 @@ import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
 import Button from "@/components/buttons/button";
 import Gallery from "@/components/gallery/gallery";
-import Metadata from "@/components/metadata"; // Import your Metadata component
 import Loading from "@/components/loading";
 
 interface Event {
@@ -74,12 +73,6 @@ export default function EventPage({
   if (curEvent) {
     return (
       <div>
-        <Metadata
-          title={`${curEvent.name} | TalTechi IT-teaduskonna üliõpilaskogu`}
-          description={curEvent.description}
-          image={curEvent.banner}
-          url={`https://ituk.ee/uritused/${curEvent.category}/${eventHandle}`}
-        />
         <div className="flex flex-col items-center">
           <div
             className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
