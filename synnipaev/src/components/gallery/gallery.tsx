@@ -38,24 +38,11 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
         <div>
             <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] items-start gap-12">
                 {photos.map((photo, index) => (
-                    <GalleryCard
-                        key={index}
-                        index={index}
-                        imageSrc={photo.src}
-                        cardName={photo.name}
-                        onOpenOverlay={openOverlay}
-                    />
+                    <GalleryCard key={index} index={index} imageSrc={photo.src} cardName={photo.name} onOpenOverlay={openOverlay} />
                 ))}
             </div>
 
-            {/* Gallery Overlay */}
-            <GalleryOverlay
-                photos={photos}
-                currentIndex={currentIndex}
-                isOpen={isOpen}
-                onCloseOverlay={closeOverlay}
-                onUpdateIndex={updateIndex}
-            />
+            <GalleryOverlay photos={photos} currentIndex={currentIndex} isOpen={isOpen} onCloseOverlay={closeOverlay} onUpdateIndex={updateIndex} />
         </div>
     );
 };
