@@ -26,21 +26,27 @@ h1,
 .lead {
   font-size: 2.5rem;
 }
+
 h2 {
   font-size: 2rem;
 }
+
 h3 {
   font-size: 1.875rem;
 }
+
 h4 {
   font-size: 1.75rem;
 }
+
 h5 {
   font-size: 1.5rem;
 }
+
 .giant {
   font-size: 12rem;
 }
+
 .big {
   font-size: 5rem;
 }
@@ -109,11 +115,9 @@ button {
 }
 
 .board-member {
-  background: linear-gradient(
-      90deg,
+  background: linear-gradient(90deg,
       rgba(75, 0, 110, 0.528) 0.07%,
-      rgba(135, 0, 66, 0.528) 99.94%
-    ),
+      rgba(135, 0, 66, 0.528) 99.94%),
     #870042;
 }
 
@@ -121,24 +125,31 @@ button {
   h1 {
     font-size: 2.25rem;
   }
+
   h2 {
     font-size: 2rem;
   }
+
   h3 {
     font-size: 1.75rem;
   }
+
   h4 {
     font-size: 1.5rem;
   }
+
   h5 {
     font-size: 1.25rem;
   }
+
   .giant {
     font-size: 6rem;
   }
+
   .big {
     font-size: 3rem;
   }
+
   .lead {
     font-size: 1.5rem;
   }
@@ -161,6 +172,7 @@ button {
 }
 
 @media (prefers-color-scheme: dark) {
+
   html,
   body {
     background-color: #131313;
@@ -168,16 +180,19 @@ button {
 }
 
 @media (prefers-color-scheme: light) {
+
   html,
   body {
     background-color: #eeeeee;
   }
+
   h1,
-  p >.big,
+  p>.big,
   .lead,
   .giant {
     color: #eeeeee,
   }
+
   p,
   h2,
   h3,

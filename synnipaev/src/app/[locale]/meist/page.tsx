@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
+import Carousel from "@/components/carousel";
 
 interface BoardMember {
   name: string;
@@ -79,39 +80,20 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
-        <p>
-          ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on
-          tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite
-          huvide esindamine ning nende hariduse, heaolu ja meelelahutuse
-          edendamine. Meie liikmed, kes õpivad erinevatel infotehnoloogia
-          õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad
-          tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
-          probleemidele lahendusi leida.
-        </p>
-        <p>
-          Meie kõige tuntumad haridusüritused on IT-ametite päev,
-          Praktikakohvik ja TalTech GameCamp, kus tudengid saavad praktilise
-          kogemuse ning tutvuda IT-valdkonna ettevõtete ja ekspertidega.
-          Lisaks pakume meelelahutust üritustega nagu Tudengibaar, Don’t Do
-          IT, IT-teaduskonna rebaste ristimine, TalTech e-Sport ja palju muud.
-          Meie eesmärgiks on luua mitmekülgne kogukond, kus tudengid saavad
-          nii õppida, lõbutseda kui ka ennast arendada.
-        </p>
-        <p>
-          Lisaks suurüritustele korraldame ka mitmesuguseid siseüritusi,
-          koolitusi ja osutame õppealast abi, et meie liikmed saaksid tuge ja
-          võimaluse areneda igas valdkonnas. Pakume ka mitmeid spordiüritusi,
-          nagu võrkpallitrennid ja sporditurniirid, et tervis ja
-          meeskonnatunne oleksid igapäevaelu osa.
+      <div className="main-padding justify-center items-center text-align gap-16 flex-col md:flex-row flex">
+        <p className="">
+          ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on tudengiorganisatsioon,
+          mis esindab IT-teaduskonna tudengite huve ning toetab nende haridust,
+          heaolu ja meelelahutust. Meie eesmärgiks on luua mitmekülgne kogukond,
+          kus tudengid saavad õppida, lõbutseda ja ennast arendada, pakkudes nii
+          haridus- kui ka meelelahutusüritusi, õppealast tuge ja sportimisvõimalusi.
         </p>
 
-        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
-          <Card image="" title="Lorem ipsum" description="Lorem ipsum" board={false} />
-          <Card image="" title="Lorem ipsum" description="Lorem ipsum" board={false} />
-          <Card image="" title="Lorem ipsum" description="Lorem ipsum" board={false} />
-          <Card image="" title="Lorem ipsum" description="Lorem ipsum" board={false} />
-        </div>
+        <Carousel>
+          <Card image="/banners/ituk_banner.jpg" title="Card 1" description="This is the description for Card 1" board={false} />
+          <Card image="/banners/ituk_banner.jpg" title="Card 2" description="This is the description for Card 2" board={false} />
+          <Card image="/banners/ituk_banner.jpg" title="Card 3" description="This is the description for Card 3" board={false} />
+        </Carousel>
       </div>
 
       <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
