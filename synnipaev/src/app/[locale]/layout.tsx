@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { getDictionary } from "@/dictionaries/dictionaries";
-import Metadata from "@/components/metadata";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -19,7 +18,7 @@ const noto_sans_georgian = Noto_Sans_Georgian({
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locale: "est" | "en" }>;
+  params: Promise<{ locale: "et" | "en" }>;
 }) {
   const { locale } = await props.params;
 

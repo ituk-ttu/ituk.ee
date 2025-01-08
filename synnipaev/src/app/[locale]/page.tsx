@@ -18,26 +18,12 @@ export default function Home() {
               toovad tudengiellu unustamatuid elamusi.
             </p>
             <div className="gap-8 flex-col sm:flex-row flex">
-              <Button
-                variant="primary"
-                big={true}
-                text="Liitu meiega"
-                to="https://liitu.ituk.ee/"
-              />
-              <Button
-                variant="secondary"
-                big={true}
-                text="Loe meist lähemalt"
-                to="/meist"
-              />
+              <Button variant="primary" big={true} text="Liitu meiega" to="https://liitu.ituk.ee/" />
+              <Button variant="secondary" big={true} text="Loe meist lähemalt" to="/meist" />
             </div>
           </div>
         </div>
-        <Image
-          className="hidden lg:flex"
-          src={tux_cover}
-          alt="ITÜKi maskott pingviin Tux 2.5"
-        />
+        <Image className="hidden lg:flex" src={tux_cover} alt="ITÜKi maskott pingviin Tux 2.5" />
       </div>
     </div>
   );

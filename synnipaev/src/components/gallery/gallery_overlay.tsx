@@ -20,16 +20,15 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
     onCloseOverlay,
     onUpdateIndex,
 }) => {
-    // Show the next image, cycling back to the start if at the end
     const showNextImage = useCallback(() => {
-        const nextIndex = (currentIndex + 1) % photos.length; // Use modulo to cycle through images
+        const nextIndex = (currentIndex + 1) % photos.length;
         onUpdateIndex(nextIndex);
-    }, [currentIndex, photos.length, onUpdateIndex]); // Dependencies of showNextImage
+    }, [currentIndex, photos.length, onUpdateIndex]);
 
     const showPreviousImage = useCallback(() => {
-        const prevIndex = (currentIndex - 1 + photos.length) % photos.length; // Handle negative indices and cycle
+        const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
         onUpdateIndex(prevIndex);
-    }, [currentIndex, photos.length, onUpdateIndex]); // Dependencies of showPreviousImage
+    }, [currentIndex, photos.length, onUpdateIndex]);
 
     const handleKeyDown = useCallback(
         (event: KeyboardEvent) => {
@@ -47,7 +46,7 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
                     break;
             }
         },
-        [onCloseOverlay, showNextImage, showPreviousImage] // Dependencies of handleKeyDown
+        [onCloseOverlay, showNextImage, showPreviousImage]
     );
 
     useEffect(() => {

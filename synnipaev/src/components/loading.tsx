@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import loading from '@/assets/logos/ituk_symbol_white.svg';
 
-// Loading Component
 const Loading = () => {
     return (
         <div className="flex justify-center items-center">

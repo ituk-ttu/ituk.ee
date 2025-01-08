@@ -22,18 +22,10 @@ export default function Navbar({
   };
   return (
     <header className="sticky top-0 z-20 w-full min-h-[72px] px-[6.9%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
-      <a
-        className="flex sm:hidden items-center cursor-pointer"
-        href="/"
-        aria-label="Avaleht"
-      >
+      <a className="flex sm:hidden items-center cursor-pointer" href="/" aria-label="Avaleht">
         <Image src={logo_small} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
       </a>
-      <a
-        className="hidden sm:flex items-center cursor-pointer"
-        href="/"
-        aria-label="Avaleht"
-      >
+      <a className="hidden sm:flex items-center cursor-pointer" href="/" aria-label="Avaleht">
         <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
       </a>
       <div className="justify-start items-center gap-8 hidden lg:flex">

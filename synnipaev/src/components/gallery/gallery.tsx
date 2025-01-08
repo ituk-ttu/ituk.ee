@@ -15,9 +15,10 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    // Ensure photos is not undefined
     if (!photos) {
-        return <div>Laeb...</div>; // Display loading if photos are undefined
+        return <div>
+            <h5>Laeb...</h5>
+        </div>;
     }
 
     const openOverlay = (index: number) => {
@@ -42,7 +43,7 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
                         index={index}
                         imageSrc={photo.src}
                         cardName={photo.name}
-                        onOpenOverlay={openOverlay} // Pass the openOverlay function
+                        onOpenOverlay={openOverlay}
                     />
                 ))}
             </div>
@@ -52,8 +53,8 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
                 photos={photos}
                 currentIndex={currentIndex}
                 isOpen={isOpen}
-                onCloseOverlay={closeOverlay} // Pass the closeOverlay function
-                onUpdateIndex={updateIndex} // Pass the updateIndex function
+                onCloseOverlay={closeOverlay}
+                onUpdateIndex={updateIndex}
             />
         </div>
     );
