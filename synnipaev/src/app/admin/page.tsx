@@ -5,7 +5,7 @@ import {
     onAuthStateChanged,
     signOut,
 } from "firebase/auth";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase";
 import {
     addDoc,
@@ -24,7 +24,6 @@ import {
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
 import AdminCard from "@/components/cards/admin_card";
-import { posix } from "path";
 
 interface BoardMember {
     key: string;
@@ -498,7 +497,7 @@ export default function Home() {
                     <input id="email-address" name="email" type="email" required placeholder="Email address" onChange={(e) => setEmail(e.target.value)} />
                     <label><span className="text-secondary">* </span>Parool</label>
                     <input id="password" name="password" type="password" required placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    <button className="edit-primary" onClick={onLogin}>Logi sisse</button>
+                    <Button variant="primary" onClick={onLogin} text="Logi sisse" />
                 </form>
             </div>
         );
@@ -584,8 +583,8 @@ export default function Home() {
                                                 <label><span className="text-secondary">* </span>Aasta, millal antud üritus toimus</label>
                                                 <input className="w-full" id="year" name="year" type="text" required placeholder="2024" onChange={(e) => setDescription(e.target.value)} />
                                                 <label><span className="text-secondary">* </span>FB ürituse/muu koha link</label>
-                                                <input className="w-full" id="banner" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="" />
+                                                <input className="w-full" id="eventLink" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
+                                                <Button variant="primary" type="submit" text="Salvesta" />
                                             </form>
                                             <form
                                                 className="w-full flex flex-col gap-4 justify-center items-start"
@@ -598,7 +597,7 @@ export default function Home() {
                                                 />
                                                 <label><span className="text-secondary">* </span>Pildi link</label>
                                                 <input className="w-full" id="banner" name="banner" type="text" required placeholder="/events/ddit.jpg" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="" />
+                                                <Button variant="primary" type="submit" text="Salvesta" />
                                             </form>
                                         </div>
 
@@ -641,7 +640,7 @@ export default function Home() {
                                                     <input className="w-full" id="author" name="author" type="text" required placeholder="Kes sa oled?" onChange={(e) => setAuthor(e.target.value)} />
                                                     <label><span className="text-secondary">* </span>Sissekanne</label>
                                                     <textarea className="w-full" id="entry" name="entry" required placeholder="Mis sa hingelt puistada tahad?" onChange={(e) => setEntry(e.target.value)} />
-                                                    <Button variant="primary" type="submit" text="" onClick={createLog} />
+                                                    <Button variant="primary" type="submit" text="Salvesta" onClick={createLog} />
                                                 </form>
                                             </div>
                                             {/* Kui sa seda näed, siis väga vinge! 

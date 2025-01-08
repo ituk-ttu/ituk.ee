@@ -17,7 +17,7 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
 
     // Ensure photos is not undefined
     if (!photos) {
-        return <div>Loading...</div>; // Display loading if photos are undefined
+        return <div>Laeb...</div>; // Display loading if photos are undefined
     }
 
     const openOverlay = (index: number) => {

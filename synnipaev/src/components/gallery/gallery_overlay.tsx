@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 interface Photo {
     src: string;
@@ -21,32 +21,34 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
     onUpdateIndex,
 }) => {
     // Show the next image, cycling back to the start if at the end
-    const showNextImage = () => {
+    const showNextImage = useCallback(() => {
         const nextIndex = (currentIndex + 1) % photos.length; // Use modulo to cycle through images
         onUpdateIndex(nextIndex);
-    };
+    }, [currentIndex, photos.length, onUpdateIndex]); // Dependencies of showNextImage
 
-    // Show the previous image, cycling back to the end if at the beginning
-    const showPreviousImage = () => {
+    const showPreviousImage = useCallback(() => {
         const prevIndex = (currentIndex - 1 + photos.length) % photos.length; // Handle negative indices and cycle
         onUpdateIndex(prevIndex);
-    };
+    }, [currentIndex, photos.length, onUpdateIndex]); // Dependencies of showPreviousImage
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        switch (event.key) {
-            case "Escape":
-                onCloseOverlay();
-                break;
-            case "ArrowRight":
-                showNextImage();
-                break;
-            case "ArrowLeft":
-                showPreviousImage();
-                break;
-            default:
-                break;
-        }
-    };
+    const handleKeyDown = useCallback(
+        (event: KeyboardEvent) => {
+            switch (event.key) {
+                case "Escape":
+                    onCloseOverlay();
+                    break;
+                case "ArrowRight":
+                    showNextImage();
+                    break;
+                case "ArrowLeft":
+                    showPreviousImage();
+                    break;
+                default:
+                    break;
+            }
+        },
+        [onCloseOverlay, showNextImage, showPreviousImage] // Dependencies of handleKeyDown
+    );
 
     useEffect(() => {
         if (isOpen) {
@@ -55,7 +57,7 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [isOpen, currentIndex]);
+    }, [isOpen, handleKeyDown]);
 
     if (!isOpen) return null;
 

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Raleway, Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import Metadata from "@/components/metadata";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -16,11 +16,6 @@ const noto_sans_georgian = Noto_Sans_Georgian({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "ITÜK | IT-teaduskonna üliõpilaskogu",
-  description: "ITÜK",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,6 +26,9 @@ export default function RootLayout({
       lang="et"
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
+      <head>
+        <Metadata />
+      </head>
       <body>
         <Navbar />
         {children}
