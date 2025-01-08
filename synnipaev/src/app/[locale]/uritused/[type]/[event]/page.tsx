@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { db } from "@/firebase";
@@ -18,17 +18,28 @@ interface Event {
 }
 
 export default function EventPage({
-  params,
+  params: paramsPromise,
 }: {
-  params: { event: string };
+  params: Promise<{ event: string }>;
 }) {
   const [curEvent, setCurEvent] = useState<Event | null>(null);
+  const [eventHandle, setEventHandle] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function unwrapParams() {
+      const params = await paramsPromise;
+      setEventHandle(params.event);
+    }
+    unwrapParams();
+  }, [paramsPromise]);
 
   const getEvent = useCallback(async () => {
+    if (!eventHandle) return;
+
     try {
       const q = query(
         collection(db, "events"),
-        where("handle", "==", params.event)
+        where("handle", "==", eventHandle)
       );
       const querySnapshot = await getDocs(q);
       const events: Event[] = querySnapshot.docs.map((doc) => {
@@ -54,7 +65,7 @@ export default function EventPage({
     } catch (error) {
       console.error("Error getting event: ", error);
     }
-  }, [params.event]);
+  }, [eventHandle]);
 
   useEffect(() => {
     getEvent();
@@ -67,10 +78,9 @@ export default function EventPage({
           title={`${curEvent.name} | TalTechi IT-teaduskonna üliõpilaskogu`}
           description={curEvent.description}
           image={curEvent.banner}
-          url={`https://ituk.ee/uritused/${curEvent.category}/${params.event}`}
+          url={`https://ituk.ee/uritused/${curEvent.category}/${eventHandle}`}
         />
         <div className="flex flex-col items-center">
-
           <div
             className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
             style={{ backgroundImage: `url(${curEvent.banner})` }}
@@ -83,21 +93,31 @@ export default function EventPage({
           <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
             <p>{curEvent.description}</p>
 
-            {curEvent.links && (
+            {curEvent.links && curEvent.links.size > 0 ? (
               <div className="justify-center items-start flex-col flex gap-8">
-                <h3>Varasemad üritused</h3>
+                <h2>Varasemad üritused</h2>
                 <div className="justify-start items-center flex-row flex gap-8">
                   {Array.from(curEvent.links.entries()).map(([key, value]) => (
                     <Button key={key} variant="primary" text={key} to={value} />
                   ))}
                 </div>
               </div>
+            ) : (
+              <div className="justify-center items-start flex-col flex gap-8">
+                <h2>Varasemad üritused</h2>
+                <p>Ei ole üritusi, mida näidata.</p>
+              </div>
             )}
 
-            {curEvent.gallery && (
+            {curEvent.gallery && curEvent.gallery.length > 0 ? (
               <div className="justify-center items-start flex-col flex gap-8">
-                <h3>Galerii</h3>
+                <h2>Galerii</h2>
                 <Gallery photos={curEvent.gallery} />
+              </div>
+            ) : (
+              <div className="justify-center items-start flex-col flex gap-8">
+                <h2>Galerii</h2>
+                <p>Ei ole pilte, mida näidata.</p>
               </div>
             )}
           </div>
@@ -106,8 +126,10 @@ export default function EventPage({
     );
   }
 
-  return <div className="main-min justify-center items-center flex-col flex gap-8">
-    <h2>Laeb...</h2>
-    <Loading />
-  </div>;
+  return (
+    <div className="main-min justify-center items-center flex-col flex gap-8">
+      <h2>Laeb...</h2>
+      <Loading />
+    </div>
+  );
 }

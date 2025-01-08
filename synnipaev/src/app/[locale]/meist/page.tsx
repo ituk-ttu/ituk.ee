@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
+import Metadata from "@/components/metadata";
 
 interface BoardMember {
   name: string;
@@ -73,6 +74,12 @@ export default function Home() {
 
   return (
     <div>
+      <Metadata
+        title="Meist | TalTechi IT-teaduskonna üliõpilaskogu"
+        description="Mis on ITÜK?"
+        image="/banners/meist_banner.jpg"
+        url="https://ituk.ee/meist"
+      />
       <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
           <h1 className="big">Mis on &gt;itük_?</h1>

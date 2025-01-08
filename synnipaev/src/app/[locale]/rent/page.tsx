@@ -1,10 +1,11 @@
 "use client";
 
 import { db } from '@/firebase';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import Card from "@/components/cards/card";
+import Metadata from '@/components/metadata';
 
 interface Rent {
   name: string;
@@ -43,6 +44,12 @@ export default function Home() {
 
   return (
     <div>
+      <Metadata
+        title="Tehnika rent | TalTechi IT-teaduskonna üliõpilaskogu"
+        description="ITÜKi tehnika rent"
+        image="/banners/rent_banner.jpg"
+        url="https://ituk.ee/rent"
+      />
       <div className="justify-center items-center bg-rent-bg bg-center bg-cover flex-row flex">
         <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
           <h1 className="big">Tehnika rent</h1>

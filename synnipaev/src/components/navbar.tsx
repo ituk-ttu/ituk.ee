@@ -50,12 +50,12 @@ export default function Navbar({
           className="fixed inset-0 top-[72px] bg-dark/90 z-30 flex flex-col items-center justify-center gap-4"
           onClick={toggleMenu}
         >
-          <Button variant="tertiary" text="Meist" to="/meist" />
-          <Button variant="tertiary" text="Üritused" to="/uritused" />
-          <Button variant="tertiary" text="Koostöö" to="/partnerlus" />
-          <Button variant="tertiary" text="Rent" to="/rent" />
+          <Button variant="tertiary" text={dictionary.aboutus} to="/meist" />
+          <Button variant="tertiary" text={dictionary.events} to="/uritused" />
+          <Button variant="tertiary" text={dictionary.partners} to="/partnerlus" />
+          <Button variant="tertiary" text={dictionary.rent} to="/rent" />
           <div className="justify-center items-center flex-col flex gap-8">
-            <Button variant="primary" text="Liitu" />
+            <Button variant="primary" text={dictionary.join} to="https://liitu.ituk.ee/" />
             <LanguageButton />
           </div>
         </div>

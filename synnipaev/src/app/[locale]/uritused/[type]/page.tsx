@@ -67,7 +67,7 @@ export default function Home({
     <div>
       <Metadata
         title={categoryTitles[category] + " | TalTechi IT-teaduskonna üliõpilaskogu"}
-        description="Discover the events organized by ITÜK!"
+        description="ITÜKi üritused"
         image={`/banners/${category}_banner.jpg`}
         url={`https://ituk.ee/uritused/${category}`}
       />

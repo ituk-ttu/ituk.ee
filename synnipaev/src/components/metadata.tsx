@@ -8,7 +8,7 @@ interface MetadataProps {
 const Metadata: React.FC<MetadataProps> = ({
     title = "ITÜK | TalTechi IT-teaduskonna üliõpilaskogu",
     description = "ITÜK",
-    image = "/ituk_banner.png",
+    image = "/banners/ituk_banner.jpg",
     url = "https://ituk.ee/",
 }) => {
     return (

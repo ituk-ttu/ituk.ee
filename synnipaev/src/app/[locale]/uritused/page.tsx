@@ -6,8 +6,8 @@ export default function Home() {
     <div className="main-min items-start flex-col sm:flex-row flex">
       <Metadata
         title="Üritused | TalTechi IT-teaduskonna üliõpilaskogu"
-        description="Discover the events organized by ITÜK!"
-        image="/uritused_banner.jpg"
+        description="ITÜKi üritused"
+        image="/banners/uritused_banner.jpg"
         url="https://ituk.ee/uritused"
       />
       <h1 className="hidden">Üritused</h1>

@@ -1,9 +1,9 @@
 {
     "navbar": {
-        "aboutus": "About us",
+        "aboutus": "About",
         "events": "Events",
         "partners": "Partners",
         "rent": "Rent",
-        "join": "Join"
+        "join": "Join us"
     }
 }
