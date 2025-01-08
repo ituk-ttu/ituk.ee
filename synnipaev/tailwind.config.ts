@@ -36,6 +36,19 @@ export default {
         'filled': '3px 3px 10px 0px black',
         'nofill': 'inset 3px 3px 10px 0px black, 3px 3px 10px 0px black',
       },
+      animation: {
+        rotate: '2s cubic-bezier(.68,-0.55,.27,1.55) infinite rotate',
+      },
+      keyframes: {
+        rotate: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
+      },
     },
   },
   plugins: [],

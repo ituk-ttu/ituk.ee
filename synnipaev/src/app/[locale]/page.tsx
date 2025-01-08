@@ -1,10 +1,12 @@
 import Image from "next/image";
 import tux_cover from "@/assets/images/tux_cover.png";
 import Button from "@/components/buttons/button";
+import Metadata from "@/components/metadata";
 
 export default function Home() {
   return (
     <div>
+      <Metadata />
       <div className="justify-between items-end pt-24 px-[6.9%] flex-row flex">
         <div className="w-screen lg:w-1/2 h-full justify-start items-start pb-24 flex-col flex">
           <div className="items-start gap-16 flex-col flex">

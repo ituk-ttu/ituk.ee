@@ -29,7 +29,7 @@ export default async function RootLayout(props: {
       className={`${raleway.variable} ${noto_sans_georgian.variable}`}
     >
       <body className="main-min">
-        <Navbar dictionary={dictionary.navbar}/>
+        <Navbar dictionary={dictionary.navbar} />
         {props.children}
         <Footer />
       </body>
