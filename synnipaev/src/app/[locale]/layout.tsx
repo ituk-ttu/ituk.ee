@@ -64,7 +64,7 @@ export default async function RootLayout(props: {
       <body className="main-min">
         <Navbar dictionary={dictionary.navbar} />
         {props.children}
-        <Footer />
+        <Footer dictionary={dictionary.footer} />
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
 import Button from "@/components/buttons/button";
 import Gallery from "@/components/gallery/gallery";
-import Loading from "@/components/loading";
+import Loading from "@/components/animations/loading";
 
 interface Event {
   category: string;

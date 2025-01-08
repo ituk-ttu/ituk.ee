@@ -18,15 +18,15 @@ export default function Navbar({
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflow = isMenuOpen ? "" : "hidden"; // Lock/unlock scroll
+    document.body.style.overflow = isMenuOpen ? "" : "hidden";
   };
   return (
     <header className="sticky top-0 z-20 w-full min-h-[72px] px-[6.9%] py-1 bg-dark shadow-filled justify-between items-center inline-flex">
       <a className="flex sm:hidden items-center cursor-pointer" href="/" aria-label="Avaleht">
-        <Image src={logo_small} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
+        <Image src={logo_small} alt="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu" />
       </a>
       <a className="hidden sm:flex items-center cursor-pointer" href="/" aria-label="Avaleht">
-        <Image src={logo_large} alt="ITÜK | IT-teaduskonna üliõpilaskogu" />
+        <Image src={logo_large} alt="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu" />
       </a>
       <div className="justify-start items-center gap-8 hidden lg:flex">
         <Button variant="tertiary" text={dictionary.aboutus} to="/meist" />

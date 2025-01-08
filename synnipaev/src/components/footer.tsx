@@ -8,8 +8,14 @@ import FacebookLink from "./buttons/socials/Facebook";
 import InstagramLink from "./buttons/socials/Instagram";
 import GitHubLink from "./buttons/socials/Github";
 import HubLink from "./buttons/socials/Hub";
+import { getDictionary } from "@/dictionaries/dictionaries";
 
-export default function Footer() {
+export default function Footer({
+  dictionary,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["footer"];
+}) {
+
   return (
     <footer className="main-container main-padding dark shadow-filled justify-between items-center flex-col gap-auto md:flex-row gap-32 md:gap-auto flex">
       <div className="justify-between items-start gap-8 flex-col flex">
@@ -39,7 +45,7 @@ export default function Footer() {
         <div className="justify-between items-center gap-6 flex-row flex">
           <HubLink />
           <Link href="/stiil">
-            <p className="font-bold underline">Stiiliraamat</p>
+            <p className="font-bold underline">{dictionary.style}</p>
           </Link>
         </div>
         <p className="font-bold">© ITÜK 2016-2024</p>

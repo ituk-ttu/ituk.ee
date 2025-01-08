@@ -5,5 +5,13 @@
         "partners": "Koostöö",
         "rent": "Rent",
         "join": "Liitu"
+    },
+    "footer": {
+        "style": "Stiiliraamat"
+    },
+    "home": {
+        "hero": "Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.",
+        "joinus": "Liitu meiega",
+        "readaboutus": "Loe meist lähemalt"
     }
 }

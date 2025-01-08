@@ -5,7 +5,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState, useCallback } from "react";
 import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
-import Loading from "@/components/loading";
+import Loading from "@/components/animations/loading";
 
 interface Event {
   key: string;

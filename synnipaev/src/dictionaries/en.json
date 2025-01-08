@@ -5,5 +5,13 @@
         "partners": "Partners",
         "rent": "Rent",
         "join": "Join us"
+    },
+    "footer": {
+        "style": "Style book"
+    },
+    "home": {
+        "hero": "We are students who carry the voice of others, promote education and bring unforgettable experiences to student life.",
+        "joinus": "Join us",
+        "readaboutus": "Read more about us"
     }
 }
