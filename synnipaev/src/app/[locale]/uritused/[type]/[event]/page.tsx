@@ -3,9 +3,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
-import Button from "@/components/buttons/button";
 import Gallery from "@/components/gallery/gallery";
 import Loading from "@/components/animations/loading";
+import down_arrow from "@/assets/icons/down_arrow.svg";
 
 interface Event {
   category: string;
@@ -13,7 +13,7 @@ interface Event {
   name: string;
   description: string;
   gallery?: { src: string; name: string }[];
-  links?: Map<string, string>;
+  links?: Map<string, Map<string, string>>;
 }
 
 export default function EventPage({
@@ -23,6 +23,8 @@ export default function EventPage({
 }) {
   const [curEvent, setCurEvent] = useState<Event | null>(null);
   const [eventHandle, setEventHandle] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   useEffect(() => {
     async function unwrapParams() {
@@ -41,15 +43,28 @@ export default function EventPage({
         where("handle", "==", eventHandle)
       );
       const querySnapshot = await getDocs(q);
+
       const events: Event[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
 
         const gallery = data.gallery
-          ? data.gallery.map((src: string, index: number) => ({
+          ? (data.gallery as string[]).map((src: string, index: number) => ({
             src,
             name: `Image ${index + 1}`,
           }))
           : undefined;
+
+        const links =
+          data.links && typeof data.links === "object"
+            ? new Map(
+              Object.entries(data.links).map(([year, events]) => [
+                year,
+                new Map(
+                  Object.entries(events as Record<string, string>)
+                ),
+              ])
+            )
+            : undefined;
 
         return {
           category: data.category,
@@ -57,9 +72,10 @@ export default function EventPage({
           name: data.name,
           description: data.description,
           gallery,
-          links: data.links ? new Map(Object.entries(data.links)) : undefined,
+          links,
         };
       });
+
       setCurEvent(events[0]);
     } catch (error) {
       console.error("Error getting event: ", error);
@@ -69,6 +85,31 @@ export default function EventPage({
   useEffect(() => {
     getEvent();
   }, [getEvent]);
+
+  const renderEventLinks = () => {
+    if (!selectedYear || !curEvent?.links) return null;
+
+    const events = curEvent.links.get(selectedYear);
+
+    if (!events) return <p>Ei ole üritusi, mida näidata.</p>;
+
+    return (
+      <ul className="space-y-2">
+        {Array.from(events.entries()).map(([name, link]) => (
+          <li key={name}>
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              {name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   if (curEvent) {
     return (
@@ -84,23 +125,55 @@ export default function EventPage({
           </div>
 
           <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
-            <p>{curEvent.description}</p>
+            <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
+              <div className="w-full justify-center items-start flex-col flex gap-16">
+                <h2>Kirjeldus</h2>
+                <p>{curEvent.description}</p>
+              </div>
 
-            {curEvent.links && curEvent.links.size > 0 ? (
-              <div className="justify-center items-start flex-col flex gap-8">
-                <h2>Varasemad üritused</h2>
-                <div className="justify-start items-center flex-row flex gap-8">
-                  {Array.from(curEvent.links.entries()).map(([key, value]) => (
-                    <Button key={key} variant="primary" text={key} to={value} />
-                  ))}
+
+              {curEvent.links && curEvent.links.size > 0 ? (
+                <div className="w-full justify-center items-start flex-col flex gap-8">
+                  <h2>Varasemad üritused</h2>
+                  <div className="relative inline-block w-full">
+                    <button
+                      className="z-20 min-h-12 px-8 button-text bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary justify-between items-center flex-row flex gap-4"
+                      onClick={() => setIsDropdownOpen((prev) => !prev)}
+                    >
+                      {selectedYear || "Vali aasta"}
+                      <p className={`w-4 h-4 transform transition-transform duration-300 justify-center items-center flex ${isDropdownOpen ? "rotate-180" : ""}`}>
+                        v
+                      </p>
+                    </button>
+                    {isDropdownOpen && (
+                      <div className="self-stretch absolute z-10 bg-dark border-t-2 border-black rounded shadow-filled overflow-y-auto">
+                        {Array.from(curEvent.links.keys())
+                          .sort((a, b) => Number(b) - Number(a)) // Sort years in descending order
+                          .map((year) => (
+                            <div
+                              key={year}
+                              className="min-w-32 min-h-12 px-8 button-text bg-dark border-t-2 border-black hover:bg-gray cursor-pointer justify-start items-center flex-row flex"
+                              onClick={() => {
+                                setSelectedYear(year);
+                                setIsDropdownOpen(false);
+                              }}
+                            >
+                              {year}
+                            </div>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                  <div>{renderEventLinks()}</div>
                 </div>
-              </div>
-            ) : (
-              <div className="justify-center items-start flex-col flex gap-8">
-                <h2>Varasemad üritused</h2>
-                <p>Ei ole üritusi, mida näidata.</p>
-              </div>
-            )}
+
+              ) : (
+                <div className="justify-center items-start flex-col flex gap-8">
+                  <h2>Varasemad üritused</h2>
+                  <p>Ei ole üritusi, mida näidata.</p>
+                </div>
+              )}
+            </div>
 
             {curEvent.gallery && curEvent.gallery.length > 0 ? (
               <div className="justify-center items-start flex-col flex gap-8">
