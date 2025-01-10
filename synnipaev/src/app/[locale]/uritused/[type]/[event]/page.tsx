@@ -131,19 +131,28 @@ export default function EventPage({
                 <p>{curEvent.description}</p>
               </div>
 
-
               {curEvent.links && curEvent.links.size > 0 ? (
                 <div className="w-full justify-center items-start flex-col flex gap-8">
                   <h2>Varasemad üritused</h2>
+                  <p className="italic">Mõned aastad võivad olla vahelt puudu, kuna nendel aastatel puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
                   <div className="relative inline-block w-full">
                     <button
                       className="z-20 min-h-12 px-8 button-text bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary justify-between items-center flex-row flex gap-4"
                       onClick={() => setIsDropdownOpen((prev) => !prev)}
                     >
                       {selectedYear || "Vali aasta"}
-                      <p className={`w-4 h-4 transform transition-transform duration-300 justify-center items-center flex ${isDropdownOpen ? "rotate-180" : ""}`}>
-                        v
-                      </p>
+                      <div className={`focus:text-primary w-4 h-4 transform transition-transform duration-300 justify-center items-center flex ${isDropdownOpen ? "rotate-180" : ""}`} >
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <g clipPath="url(#clip0_1038_2084)">
+                            <path d="M7.77742 6.76758L1.41409 0.404243L-3.39965e-07 1.81833L7.77749 9.59582L15.555 1.81818L14.1409 0.404091L7.77742 6.76758Z" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1038_2084">
+                              <rect width="9.19173" height="15.555" fill="white" transform="translate(0 9.59583) rotate(-90)" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
                     </button>
                     {isDropdownOpen && (
                       <div className="self-stretch absolute z-10 bg-dark border-t-2 border-black rounded shadow-filled overflow-y-auto">
@@ -170,7 +179,7 @@ export default function EventPage({
               ) : (
                 <div className="justify-center items-start flex-col flex gap-8">
                   <h2>Varasemad üritused</h2>
-                  <p>Ei ole üritusi, mida näidata.</p>
+                  <p className="italic">Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
                 </div>
               )}
             </div>
@@ -183,7 +192,7 @@ export default function EventPage({
             ) : (
               <div className="justify-center items-start flex-col flex gap-8">
                 <h2>Galerii</h2>
-                <p>Ei ole pilte, mida näidata.</p>
+                <p className="italic">Ei ole pilte, mida näidata.</p>
               </div>
             )}
           </div>
