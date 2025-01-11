@@ -5,7 +5,6 @@ import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
 import Gallery from "@/components/gallery/gallery";
 import Loading from "@/components/animations/loading";
-import down_arrow from "@/assets/icons/down_arrow.svg";
 
 interface Event {
   category: string;
