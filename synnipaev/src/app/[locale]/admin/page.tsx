@@ -505,8 +505,10 @@ export default function Home() {
         return (
             <div className="main-min">
                 <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
-                    <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-col flex gap-8">
-                        <h1 className="big">Dashboard</h1>
+                    <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+                        <div className="main-padding w-full h-full bg-epic-gradient">
+                            <h1 className="text-center big">Dashboard</h1>
+                        </div>
                     </div>
                 </div>
                 <div className="main-padding gap-16 flex-col flex">

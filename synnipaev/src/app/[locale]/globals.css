@@ -53,13 +53,14 @@ h5 {
 }
 
 p,
+a,
 li,
 img,
 input,
 button,
 select,
 textarea {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 ul {
@@ -84,10 +85,6 @@ textarea {
 
 button {
   text-transform: uppercase;
-}
-
-.big-button-text {
-  font-size: 1.25rem;
 }
 
 .main-container {
@@ -156,6 +153,7 @@ button {
   }
 
   p,
+  a,
   li,
   img,
   html,
@@ -165,10 +163,6 @@ button {
   .input-text,
   .button-text {
     font-size: 1rem;
-  }
-
-  .big-button-text {
-    font-size: 1.125rem;
   }
 }
 

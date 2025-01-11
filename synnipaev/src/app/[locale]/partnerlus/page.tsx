@@ -6,8 +6,10 @@ export default function Home() {
   return (
     <div>
       <div className="justify-center items-center bg-cooperation-bg bg-center bg-cover flex-row flex">
-        <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
-          <h1 className="big">Koostöö</h1>
+        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+          <div className="main-padding w-full h-full bg-epic-gradient">
+            <h1 className="text-center big">Koostöö</h1>
+          </div>
         </div>
       </div>
 

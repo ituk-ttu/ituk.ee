@@ -134,7 +134,7 @@ export default function EventPage({
                 <div className="w-full justify-center items-start flex-col flex gap-8">
                   <h2>Varasemad üritused</h2>
                   <p className="italic">Mõned aastad võivad olla vahelt puudu, kuna nendel aastatel puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
-                  <div className="relative inline-block w-full">
+                  <div className="relative inline-block">
                     <button
                       className="z-20 min-h-12 px-8 button-text bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary justify-between items-center flex-row flex gap-4"
                       onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -154,7 +154,7 @@ export default function EventPage({
                       </div>
                     </button>
                     {isDropdownOpen && (
-                      <div className="self-stretch absolute z-10 bg-dark border-t-2 border-black rounded shadow-filled overflow-y-auto">
+                      <div className="self-stretch w-full absolute z-10 bg-dark border-t-2 border-black rounded shadow-filled overflow-y-auto">
                         {Array.from(curEvent.links.keys())
                           .sort((a, b) => Number(b) - Number(a)) // Sort years in descending order
                           .map((year) => (

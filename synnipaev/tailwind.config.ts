@@ -17,6 +17,7 @@ export default {
         'facebook': '#1868fc',
         'instagram': '#ff0069',
         'github': '#2dba4e',
+        'extra': '#87004280',
       },
       screens: {
         sm: '640px',

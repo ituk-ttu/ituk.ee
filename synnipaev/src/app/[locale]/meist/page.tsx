@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
-import Carousel from "@/components/carousel";
+import uritused from "@/assets/images/uritused.jpg";
+import sobrad from "@/assets/images/sobrad.jpg";
+import Loading from "@/components/animations/loading";
 
 interface BoardMember {
   name: string;
@@ -75,25 +77,26 @@ export default function Home() {
   return (
     <div>
       <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
-        <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
-          <h1 className="big">Mis on &gt;itük_?</h1>
+        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+          <div className="main-padding w-full h-full bg-epic-gradient">
+            <h1 className="text-center big">Mis on ITÜK?</h1>
+          </div>
         </div>
       </div>
 
-      <div className="main-padding justify-center items-center text-align gap-16 flex-col md:flex-row flex">
-        <p className="">
-          ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on tudengiorganisatsioon,
-          mis esindab IT-teaduskonna tudengite huve ning toetab nende haridust,
-          heaolu ja meelelahutust. Meie eesmärgiks on luua mitmekülgne kogukond,
-          kus tudengid saavad õppida, lõbutseda ja ennast arendada, pakkudes nii
-          haridus- kui ka meelelahutusüritusi, õppealast tuge ja sportimisvõimalusi.
-        </p>
-
-        <Carousel>
-          <Card image="/banners/ituk_banner.jpg" title="Card 1" description="This is the description for Card 1" board={false} />
-          <Card image="/banners/ituk_banner.jpg" title="Card 2" description="This is the description for Card 2" board={false} />
-          <Card image="/banners/ituk_banner.jpg" title="Card 3" description="This is the description for Card 3" board={false} />
-        </Carousel>
+      <div className="main-padding justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
+        <div className="flex-col flex gap-8">
+          <h2>ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on...</h2>
+          <p>
+            ...tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.
+            <br /><br />
+            Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.
+          </p>
+        </div>
+        <div className="flex-col sm:flex-row flex gap-16">
+          <Card image={uritused.src} title="Ürituste korraldamine" description="Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!" board={false} />
+          <Card image={sobrad.src} title="Sõbrad kogu eluks" description="ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!" board={false} />
+        </div>
       </div>
 
       <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
