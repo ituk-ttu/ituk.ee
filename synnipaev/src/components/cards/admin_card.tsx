@@ -8,7 +8,7 @@ interface CardProps {
     title: string;
     image: string;
     description: string;
-    board: "juhatus" | "yritused" | "rent";
+    board: "juhatus" | "uritused" | "rent";
     email?: string;
     category?: string;
     handle?: string;
@@ -60,11 +60,7 @@ export default function AdminCard({
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img
-                        className="min-h-[284px] object-cover rounded-t-lg"
-                        src={_image}
-                        alt={title}
-                    />
+                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ametinimetus</label>
                         <input className="w-full" type="text" name="description" placeholder="Igavene esimees" onChange={(e) => setDescription(e.target.value)} value={_description} />
@@ -83,15 +79,11 @@ export default function AdminCard({
                 </form>
             </div>
         );
-    } else if (board === "yritused") {
+    } else if (board === "uritused") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img
-                        className="min-h-[284px] object-cover rounded-t-lg"
-                        src={_image}
-                        alt={title}
-                    />
+                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ürituse nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setTitle(e.target.value)} value={_title} />
@@ -116,11 +108,7 @@ export default function AdminCard({
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img
-                        className="min-h-[284px] object-cover rounded-t-lg"
-                        src={_image}
-                        alt={title}
-                    />
+                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Seadme nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Pikendusjuhtmed" onChange={(e) => setTitle(e.target.value)} value={_title} />

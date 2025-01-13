@@ -5,8 +5,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState, useCallback } from "react";
 import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
-import Metadata from "@/components/metadata";
-import Loading from "@/components/loading";
+import Loading from "@/components/animations/loading";
 
 interface Event {
   key: string;
@@ -65,12 +64,6 @@ export default function Home({
 
   return (
     <div>
-      <Metadata
-        title={categoryTitles[category] + " | TalTechi IT-teaduskonna üliõpilaskogu"}
-        description="Discover the events organized by ITÜK!"
-        image={`/banners/${category}_banner.jpg`}
-        url={`https://ituk.ee/uritused/${category}`}
-      />
       <h1 className="hidden">{categoryTitles[category]}</h1>
 
       {events.length === 0 ? (

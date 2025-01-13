@@ -17,6 +17,7 @@ export default {
         'facebook': '#1868fc',
         'instagram': '#ff0069',
         'github': '#2dba4e',
+        'extra': '#87004280',
       },
       screens: {
         sm: '640px',
@@ -38,6 +39,7 @@ export default {
       },
       animation: {
         rotate: '2s cubic-bezier(.68,-0.55,.27,1.55) infinite rotate',
+        bright: 'bright 1s infinite',
       },
       keyframes: {
         rotate: {
@@ -47,6 +49,10 @@ export default {
           '100%': {
             transform: 'rotate(360deg)',
           },
+        },
+        bright: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
         },
       },
     },

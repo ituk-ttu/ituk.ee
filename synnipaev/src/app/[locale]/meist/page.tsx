@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
+import uritused from "@/assets/images/uritused.jpg";
+import sobrad from "@/assets/images/sobrad.jpg";
+import Loading from "@/components/animations/loading";
 
 interface BoardMember {
   name: string;
@@ -74,68 +77,33 @@ export default function Home() {
   return (
     <div>
       <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
-        <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
-          <h1 className="big">Mis on &gt;itük_?</h1>
+        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+          <div className="main-padding w-full h-full bg-epic-gradient">
+            <h1 className="text-center big">Mis on ITÜK?</h1>
+          </div>
         </div>
       </div>
 
-      <div className="main-padding gap-16 flex-col flex">
-        <p>
-          ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on
-          tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite
-          huvide esindamine ning nende hariduse, heaolu ja meelelahutuse
-          edendamine. Meie liikmed, kes õpivad erinevatel infotehnoloogia
-          õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad
-          tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud
-          probleemidele lahendusi leida.
-        </p>
-        <div className="gap-8 flex-col flex">
-          <h2>Mida itük teeb?</h2>
+      <div className="main-padding justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
+        <div className="flex-col flex gap-8">
+          <h2>ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on...</h2>
           <p>
-            Meie kõige tuntumad haridusüritused on IT-ametite päev,
-            Praktikakohvik ja TalTech GameCamp, kus tudengid saavad praktilise
-            kogemuse ning tutvuda IT-valdkonna ettevõtete ja ekspertidega.
-            Lisaks pakume meelelahutust üritustega nagu Tudengibaar, Don’t Do
-            IT, IT-teaduskonna rebaste ristimine, TalTech e-Sport ja palju muud.
-            Meie eesmärgiks on luua mitmekülgne kogukond, kus tudengid saavad
-            nii õppida, lõbutseda kui ka ennast arendada.
+            ...tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.
+            <br /><br />
+            Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.
           </p>
-          <p>
-            Lisaks suurüritustele korraldame ka mitmesuguseid siseüritusi,
-            koolitusi ja osutame õppealast abi, et meie liikmed saaksid tuge ja
-            võimaluse areneda igas valdkonnas. Pakume ka mitmeid spordiüritusi,
-            nagu võrkpallitrennid ja sporditurniirid, et tervis ja
-            meeskonnatunne oleksid igapäevaelu osa.
-          </p>
+        </div>
+        <div className="flex-col sm:flex-row flex gap-16">
+          <Card image={uritused.src} title="Ürituste korraldamine" description="Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!" board={false} />
+          <Card image={sobrad.src} title="Sõbrad kogu eluks" description="ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!" board={false} />
         </div>
       </div>
 
       <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">20</p>
-          <p>aastat&nbsp;ajalugu</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">1200+</p>
-          <p>liiget läbi aegade</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">30+</p>
-          <p>üritust aastas</p>
-        </div>
-        <div className="justify-center items-center gap-2 sm:gap-4 flex-col flex">
-          <p className="big font-bold">1</p>
-          <p>eesmärk</p>
-        </div>
-      </div>
-
-      <div className="main-padding justify-center items-center text-align gap-32 flex-col flex">
-        <h2>2024/2025. õppeaasta juhatus</h2>
-        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
-          {boardMembers.map((member) => (
-            <Card title={member.name} image={member.imagePath} description={member.position} board={true} email={member.email} />
-          ))}
-        </div>
+        <p className="items-center flex-col flex gap-4"><span className="big font-bold">20</span> aastat&nbsp;ajalugu</p>
+        <p className="items-center flex-col flex gap-4"><span className="big font-bold">1200+</span> liiget läbi aegade</p>
+        <p className="items-center flex-col flex gap-4"><span className="big font-bold">30+</span> üritust aastas</p>
+        <p className="items-center flex-col flex gap-4"><span className="big font-bold">1</span> eesmärk</p>
       </div>
 
       <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
@@ -147,7 +115,12 @@ export default function Home() {
           ))}
           <Timeline type="end" />
         </div>
-        <h2>...ja kui tuleb veel huvitavaid asju, siis lisame siia!</h2>
+        <h2>2024/2025. õppeaasta juhatus</h2>
+        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
+          {boardMembers.map((member) => (
+            <Card title={member.name} image={member.imagePath} description={member.position} board={true} email={member.email} />
+          ))}
+        </div>
       </div>
     </div>
   );

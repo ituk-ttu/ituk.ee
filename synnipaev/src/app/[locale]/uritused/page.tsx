@@ -1,15 +1,8 @@
-import Metadata from "@/components/metadata";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="main-min items-start flex-col sm:flex-row flex">
-      <Metadata
-        title="Üritused | TalTechi IT-teaduskonna üliõpilaskogu"
-        description="Discover the events organized by ITÜK!"
-        image="/uritused_banner.jpg"
-        url="https://ituk.ee/uritused"
-      />
       <h1 className="hidden">Üritused</h1>
       <Link
         className="w-full sm:w-1/3 justify-center items-center bg-center bg-cover bg-[url('@/assets/images/events/haridus.jpg')] flex-col flex"

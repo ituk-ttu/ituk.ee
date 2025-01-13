@@ -1,7 +1,9 @@
+import 'server-only'
+
 const dictionaries = {
-  est: () => import('@/dictionaries/est.json').then((module) => module.default),
+  et: () => import('@/dictionaries/et.json').then((module) => module.default),
   en: () => import('@/dictionaries/en.json').then((module) => module.default),
 }
- 
-export const getDictionary = async (locale: 'est' | 'en') =>
-  dictionaries[locale]?.() ?? dictionaries.est();
+
+export const getDictionary = async (locale: 'et' | 'en') =>
+  dictionaries[locale]?.() ?? dictionaries.en();

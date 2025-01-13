@@ -15,9 +15,10 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    // Ensure photos is not undefined
     if (!photos) {
-        return <div>Laeb...</div>; // Display loading if photos are undefined
+        return <div>
+            <h5>Laeb...</h5>
+        </div>;
     }
 
     const openOverlay = (index: number) => {
@@ -37,24 +38,11 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
         <div>
             <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] items-start gap-12">
                 {photos.map((photo, index) => (
-                    <GalleryCard
-                        key={index}
-                        index={index}
-                        imageSrc={photo.src}
-                        cardName={photo.name}
-                        onOpenOverlay={openOverlay} // Pass the openOverlay function
-                    />
+                    <GalleryCard key={index} index={index} imageSrc={photo.src} cardName={photo.name} onOpenOverlay={openOverlay} />
                 ))}
             </div>
 
-            {/* Gallery Overlay */}
-            <GalleryOverlay
-                photos={photos}
-                currentIndex={currentIndex}
-                isOpen={isOpen}
-                onCloseOverlay={closeOverlay} // Pass the closeOverlay function
-                onUpdateIndex={updateIndex} // Pass the updateIndex function
-            />
+            <GalleryOverlay photos={photos} currentIndex={currentIndex} isOpen={isOpen} onCloseOverlay={closeOverlay} onUpdateIndex={updateIndex} />
         </div>
     );
 };

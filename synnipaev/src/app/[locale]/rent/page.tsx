@@ -1,7 +1,7 @@
 "use client";
 
 import { db } from '@/firebase';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import Card from "@/components/cards/card";
@@ -44,8 +44,10 @@ export default function Home() {
   return (
     <div>
       <div className="justify-center items-center bg-rent-bg bg-center bg-cover flex-row flex">
-        <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-row flex">
-          <h1 className="big">Tehnika rent</h1>
+        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+          <div className="main-padding w-full h-full bg-epic-gradient">
+            <h1 className="text-center big">Tehnika rent</h1>
+          </div>
         </div>
       </div>
 

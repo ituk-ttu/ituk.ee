@@ -4,7 +4,7 @@ interface GalleryCardProps {
     index: number;
     imageSrc: string;
     cardName: string;
-    onOpenOverlay: (index: number) => void; // Explicitly defining the type
+    onOpenOverlay: (index: number) => void;
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = ({ index, imageSrc, cardName, onOpenOverlay }) => {

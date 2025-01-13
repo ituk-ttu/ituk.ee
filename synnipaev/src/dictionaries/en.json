@@ -1,12 +1,17 @@
 {
     "navbar": {
-        "aboutus": "About us",
+        "aboutus": "About",
         "events": "Events",
         "partners": "Partners",
         "rent": "Rent",
-        "join": "Join"
+        "join": "Join us"
     },
-    "aboutus": {
-        "title": ""
+    "footer": {
+        "style": "Style book"
+    },
+    "home": {
+        "hero": "We are students who carry the voice of others, promote education and bring unforgettable experiences to student life.",
+        "joinus": "Join us",
+        "readaboutus": "Read more about us"
     }
 }

@@ -505,14 +505,16 @@ export default function Home() {
         return (
             <div className="main-min">
                 <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
-                    <div className="main-padding w-full h-full bg-epic-gradient justify-center items-center flex-col flex gap-8">
-                        <h1 className="big">Dashboard</h1>
+                    <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
+                        <div className="main-padding w-full h-full bg-epic-gradient">
+                            <h1 className="text-center big">Dashboard</h1>
+                        </div>
                     </div>
                 </div>
                 <div className="main-padding gap-16 flex-col flex">
                     <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                         <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
-                        <Button variant="secondary" onClick={() => setPage("yritused")} text="Üritused" />
+                        <Button variant="secondary" onClick={() => setPage("uritused")} text="Üritused" />
                         <Button variant="secondary" onClick={() => setPage("rent")} text="Rent" />
                         <Button variant="secondary" onClick={() => setPage("logiraamat")} text="Logiraamat" />
                         <Button variant="primary" onClick={handleLogout} text="Logi välja" />
@@ -548,7 +550,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                 )
-                            case 'yritused':
+                            case 'uritused':
                                 return (
                                     <div className="justify-center items-center text-align gap-16 flex-col flex">
                                         <h2>Üritused</h2>
@@ -604,9 +606,9 @@ export default function Home() {
                                         <h3>Kõik üritused</h3>
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {events.map((event) => (
-                                                <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="yritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} />
+                                                <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} />
                                             ))}
-                                            <AdminCard title="" image="" description="" board="yritused" category="" handle="" email="" onClick={createEvent} />
+                                            <AdminCard title="" image="" description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
                                         </div>
                                     </div>
                                 )
