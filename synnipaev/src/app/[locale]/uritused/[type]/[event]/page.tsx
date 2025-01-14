@@ -124,7 +124,7 @@ export default function EventPage({
           </div>
 
           <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
-            <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
+            <div className="w-full justify-start items-start flex-col md:flex-row flex gap-16">
               <div className="w-full justify-center items-start flex-col flex gap-16">
                 <h2>Kirjeldus</h2>
                 <p>{curEvent.description}</p>
@@ -176,7 +176,7 @@ export default function EventPage({
                 </div>
 
               ) : (
-                <div className="justify-center items-start flex-col flex gap-8">
+                <div className="w-full justify-center items-start flex-col flex gap-8">
                   <h2>Varasemad üritused</h2>
                   <p className="italic">Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
                 </div>

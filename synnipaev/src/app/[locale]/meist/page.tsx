@@ -8,7 +8,6 @@ import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
 import uritused from "@/assets/images/uritused.jpg";
 import sobrad from "@/assets/images/sobrad.jpg";
-import Loading from "@/components/animations/loading";
 
 interface BoardMember {
   name: string;
@@ -93,7 +92,7 @@ export default function Home() {
             Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.
           </p>
         </div>
-        <div className="flex-col sm:flex-row flex gap-16">
+        <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
           <Card image={uritused.src} title="Ürituste korraldamine" description="Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!" board={false} />
           <Card image={sobrad.src} title="Sõbrad kogu eluks" description="ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!" board={false} />
         </div>

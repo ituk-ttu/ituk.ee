@@ -1,6 +1,3 @@
-import Image from "next/image";
-import pathStart from "@/assets/icons/timeline-path-start.svg";
-import pathCircle from "@/assets/icons/timeline-path-circle.svg";
 import Card from "@/components/cards/card";
 
 interface TimelineProps {
@@ -28,7 +25,7 @@ export default function Timeline({
     );
   } else if (type === "left") {
     return (
-      <div className="justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
+      <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
         <Card title={title} image={imagePath} description={description} board={false} />
         <div className="h-16 bg-light w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
@@ -49,7 +46,7 @@ export default function Timeline({
     );
   } else if (type === "right") {
     return (
-      <div className="justify-center items-center sm:items-stretch flex-col sm:flex-row-reverse flex">
+      <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row-reverse flex">
         <Card title={title} image={imagePath} description={description} board={false} />
         <div className="h-16 bg-light w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">

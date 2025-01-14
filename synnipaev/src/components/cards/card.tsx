@@ -35,7 +35,7 @@ export default function Card({
   } else {
     return (
       <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-        <img className="h-full object-cover rounded-t-lg" src={image} alt={title} />
+        <img className="object-cover rounded-t-lg" src={image} alt={title} />
         <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-primary">
           <h5>{title}</h5>
           <p>{description}</p>
