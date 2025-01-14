@@ -1,8 +1,15 @@
 import Image from "next/image";
 import tux_cover from "@/assets/images/tux_cover.png";
 import Button from "@/components/buttons/button";
+import { Locale } from "../../../i18nConfig";
+import { getDictionary } from "@/dictionaries/dictionaries";
 
-export default function Home() {
+export default async function Home(props: {
+  params: Promise<{ locale: Locale}>
+}) {
+  const { locale } = await props.params;
+  
+  const dictionary = (await getDictionary(locale)).home;
   return (
     <div>
       <div className="justify-between items-end pt-24 px-[6.9%] flex-row flex">
@@ -11,13 +18,10 @@ export default function Home() {
             <div className="bg-primary">
               <h1 className="font-bold giant lowercase">&gt;itük_</h1>
             </div>
-            <p className="lead font-bold">
-              Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja
-              toovad tudengiellu unustamatuid elamusi.
-            </p>
+            <p className="lead font-bold">{dictionary.hero}</p>
             <div className="gap-8 flex-col sm:flex-row flex">
-              <Button variant="primary" big={true} text="Liitu meiega" to="https://liitu.ituk.ee/" />
-              <Button variant="secondary" big={true} text="Loe meist lähemalt" to="/meist" />
+              <Button variant="primary" big={true} text={dictionary.joinus} to="https://liitu.ituk.ee/" />
+              <Button variant="secondary" big={true} text={dictionary.readaboutus} to="/meist" />
             </div>
           </div>
         </div>

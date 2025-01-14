@@ -1,4 +1,4 @@
-const i18nConfig = {
+export const i18nConfig = {
   // These are all the locales you want to support in
   // your application
   locales: ['et', 'en'],
@@ -9,6 +9,6 @@ const i18nConfig = {
   // should handle (these are only required when setting up domain routing)
   // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
   localeDetection: false
-}
+} as const;
 
-export default i18nConfig;
+export type Locale = (typeof i18nConfig)["locales"][number];

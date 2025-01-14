@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { getDictionary } from "@/dictionaries/dictionaries";
+import { Locale } from "../../../i18nConfig";
+import DictionaryProvider from "@/components/dictionary-provider";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -18,7 +20,7 @@ const noto_sans_georgian = Noto_Sans_Georgian({
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locale: "et" | "en" }>;
+  params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await props.params;
 
@@ -63,7 +65,9 @@ export default async function RootLayout(props: {
       </head>
       <body className="main-min">
         <Navbar dictionary={dictionary.navbar} />
-        {props.children}
+          <DictionaryProvider dictionary={dictionary}>
+            {props.children}
+          </DictionaryProvider>
         <Footer dictionary={dictionary.footer} />
       </body>
     </html>

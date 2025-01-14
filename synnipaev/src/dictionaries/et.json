@@ -13,5 +13,39 @@
         "hero": "Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.",
         "joinus": "Liitu meiega",
         "readaboutus": "Loe meist lähemalt"
+    },
+    "aboutus": {
+        "whatis": "Mis on ITÜK?",
+        "answer": "ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on...",
+        "answer2": "...tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.",
+        "answer3": "Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.",
+        "card1": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card2": {
+            "title": "Sõbrad kogu eluks",
+            "description": "ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!"
+        },
+        "statistics": {
+            "stat1": {
+                "title": "20",
+                "description": "aastat ajalugu"
+            },
+            "stat2": {
+                "title": "1200+",
+                "description": "liiget läbi aegade"
+            },
+            "stat3": {
+                "title": "30+",
+                "description": "üritust aastas"
+            },
+            "stat4": {
+                "title": "1", 
+                "description": "eesmärk"
+            }
+        },
+        "historytitle": "ITÜK läbi aegade",
+        "boardtitle": "2024/2025. õppeaasta juhatus"
     }
 }
