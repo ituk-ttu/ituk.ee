@@ -98,7 +98,7 @@ export default function Home() {
             {dictionary.answer3}
           </p>
         </div>
-        <div className="flex-col sm:flex-row flex gap-16">
+        <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
           <Card image={uritused.src} title={dictionary.card1.title} description={dictionary.card1.description} board={false} />
           <Card image={sobrad.src} title={dictionary.card2.title} description={dictionary.card2.description} board={false} />
         </div>
