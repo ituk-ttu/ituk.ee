@@ -179,12 +179,13 @@ export default function Home() {
 
     //firebase variables
     const [banner, setBanner] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("kõik");
     const [description, setDescription] = useState("");
     const [name, setName] = useState("");
     const [handle, setHandle] = useState("");
     const [author, setAuthor] = useState("");
     const [entry, setEntry] = useState("");
+    const [event, setEvent] = useState("3CqbdfQup1Efv1io1xPl");
 
     //firebase authentication functions
 
@@ -625,13 +626,50 @@ export default function Home() {
                                             </form>
                                         </div>
 
-                                        <h3>Kõik üritused</h3>
+                                        <h3>Üritused</h3>
+                                        <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
+                                            <Button variant="secondary" onClick={() => setCategory("kõik")} text="Kõik" />
+                                            <Button variant="secondary" onClick={() => setCategory("haridus")} text="Haridus" />
+                                            <Button variant="secondary" onClick={() => setCategory("meelelahutus")} text="Meelelahutus" />
+                                            <Button variant="secondary" onClick={() => setCategory("muu")} text="Muu" />
+                                        </div>
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {events.map((event) => (
-                                                <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} />
+                                                (category === "kõik" || category === event.category) && (
+                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => setEvent(id)}/>
+                                                )
                                             ))}
                                             <AdminCard title="" image="" description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
                                         </div>
+                                        <h3>Üritused igal aastal</h3>
+                                        {}
+                                    {events.map((eventItem) => (
+                                        eventItem.key === event && (
+                                            <div key={eventItem.key} className="event-details">
+                                                <h3>{eventItem.name}</h3>
+                                                <p>{eventItem.description}</p>
+                                                <img src={eventItem.banner} alt={eventItem.name} />
+                                                {eventItem.gallery && eventItem.gallery.length > 0 && (
+                                                    <div className="gallery">
+                                                        <h4>Gallery</h4>
+                                                        {eventItem.gallery.map((image, index) => (
+                                                            <img key={index} src={image} alt={`Gallery image ${index + 1}`} />
+                                                        ))}
+                                                    </div>
+                                                )}
+                                                {eventItem.links && eventItem.links.size > 0 && (
+                                                    <div className="links">
+                                                        <h4>Links</h4>
+                                                        {Array.from(eventItem.links.entries()).map(([year, link], index) => (
+                                                            <a key={index} href={link} target="_blank" rel="noopener noreferrer">
+                                                                {year}
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    ))}
                                     </div>
                                 )
                             case 'rent':

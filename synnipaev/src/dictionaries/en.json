@@ -64,6 +64,7 @@
     },
     "join": {
         "header": "Liitu meiega",
+        "text1": "Miks liituda just meie tudengiorganisatsiooniga?",
         "card1": {
             "title": "Ürituste korraldamine",
             "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
@@ -79,6 +80,7 @@
         "card4": {
             "title": "Ürituste korraldamine",
             "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
-        }
+        }, 
+        "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!"
     }
 }

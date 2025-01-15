@@ -22,6 +22,7 @@ interface CardProps {
         handle: string,
     ) => void;
     onDelete?: (id: string) => void;
+    onSelect? : (id: string) => void;
 }
 
 export default function AdminCard({
@@ -35,6 +36,7 @@ export default function AdminCard({
     handle,
     onClick,
     onDelete,
+    onSelect,
 }: CardProps) {
     const [_title, setTitle] = useState(title);
     const [_image, setImage] = useState(image);
@@ -55,12 +57,19 @@ export default function AdminCard({
             onDelete(id || "");
         }
     };
+
+    const handleSelect = () => {
+        if (onSelect) {
+            onSelect(id || "")
+        }
+    }
+
     /**TODO: panna /add_new.jpg image default pildina, kui on kaart, kust saab uut lisada */
     if (board === "juhatus") {
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <img onClick={handleSelect} className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ametinimetus</label>
                         <input className="w-full" type="text" name="description" placeholder="Igavene esimees" onChange={(e) => setDescription(e.target.value)} value={_description} />
@@ -83,7 +92,7 @@ export default function AdminCard({
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <img onClick={handleSelect} className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ürituse nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setTitle(e.target.value)} value={_title} />
@@ -108,7 +117,7 @@ export default function AdminCard({
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <img onClick={handleSelect} className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Seadme nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Pikendusjuhtmed" onChange={(e) => setTitle(e.target.value)} value={_title} />
