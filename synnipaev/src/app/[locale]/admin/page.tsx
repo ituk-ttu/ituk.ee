@@ -4,6 +4,7 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
+    validatePassword,
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { auth } from "@/firebase";
@@ -185,6 +186,8 @@ export default function Home() {
     const [author, setAuthor] = useState("");
     const [entry, setEntry] = useState("");
 
+    //firebase authentication functions
+
     interface ButtonEvent
         extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
         preventDefault: () => void;
@@ -201,7 +204,7 @@ export default function Home() {
             });
     };
 
-    const onLogin = (e: ButtonEvent) => {
+    const onLogin = async (e: ButtonEvent) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -213,6 +216,25 @@ export default function Home() {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
+
+        const status = await validatePassword(auth, password);
+        if(!status.isValid) {
+            if (!status.containsLowercaseLetter) {
+                alert("Password must contain lowercase letter!!!")
+            }
+            if (!status.containsUppercaseLetter) {
+                alert("Password must contain uppercase letter!!!")
+            }
+            if (!status.containsNonAlphanumericCharacter) {
+                alert("Password must contain special character!!!")
+            }
+            if (!status.containsNumericCharacter) {
+                alert("Password must contain number!!!")
+            }
+            if (!status.meetsMinPasswordLength) {
+                alert("Password is not long enough!!!")
+            }
+        }
     };
 
     //member functions
