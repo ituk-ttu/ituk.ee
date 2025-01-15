@@ -61,5 +61,24 @@
         "header": "Tehnika rent",
         "request": "Saada päring meile siit: ",
         "NB": "NB! Hind kehtib ürituse/päeva kohta!"
+    },
+    "join": {
+        "header": "Liitu meiega",
+        "card1": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card2": {
+            "title": ">itük_ meened",
+            "description": "Liikmetel on võimalus soetada stiilseid meeneid kruusidest pusadeni."
+        },
+        "card3": {
+            "title": "Sõbrad kogu eluks yippiee",
+            "description": "ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!"
+        },
+        "card4": {
+            "title": "Ja palju muud!",
+            "description": "Meiega ei hakka sul kunagi igav ;)"
+        }
     }
 }

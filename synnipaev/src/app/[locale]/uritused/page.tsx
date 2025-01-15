@@ -1,3 +1,5 @@
+"use client"
+
 import { useDictionary } from "@/components/dictionary-provider";
 import Link from "next/link";
 

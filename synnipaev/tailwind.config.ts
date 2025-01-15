@@ -32,6 +32,7 @@ export default {
         'cooperation-bg': "url('@/assets/images/cooperation.jpg')",
         'rent-bg': "url('@/assets/images/rent.jpg')",
         'derp-bg': "url('@/assets/images/derp.jpg')",
+        'join-bg': "url('@/assets/images/liitu.jpg')",
       },
       boxShadow: {
         'filled': '3px 3px 10px 0px black',

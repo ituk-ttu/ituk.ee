@@ -61,5 +61,24 @@
         "header": "Tehnika rent",
         "request": "Saada päring meile siit: ",
         "NB": "NB! Hind kehtib ürituse/päeva kohta!"
+    },
+    "join": {
+        "header": "Liitu meiega",
+        "card1": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card2": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card3": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card4": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        }
     }
 }
