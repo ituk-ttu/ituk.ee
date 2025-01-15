@@ -1,6 +1,9 @@
+import { useDictionary } from "@/components/dictionary-provider";
 import Link from "next/link";
 
 export default function Home() {
+  const dictionary = useDictionary().events;
+
   return (
     <div className="main-min items-start flex-col sm:flex-row flex">
       <h1 className="hidden">Üritused</h1>
@@ -9,7 +12,7 @@ export default function Home() {
         href="/uritused/haridus"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">Haridus</h2>
+          <h2 className="p-8 title text-center">{dictionary.education}</h2>
         </div>
       </Link>
       <Link
@@ -17,7 +20,7 @@ export default function Home() {
         href="/uritused/meelelahutus"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">Meelelahutus</h2>
+          <h2 className="p-8 title text-center">{dictionary.entertainment}</h2>
         </div>
       </Link>
       <Link
@@ -25,7 +28,7 @@ export default function Home() {
         href="/uritused/muu"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">Sise- ja muud üritused</h2>
+          <h2 className="p-8 title text-center">{dictionary.other}</h2>
         </div>
       </Link>
     </div>

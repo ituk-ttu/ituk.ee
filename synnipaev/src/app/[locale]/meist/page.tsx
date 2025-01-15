@@ -9,8 +9,6 @@ import Timeline from "@/components/timeline";
 import uritused from "@/assets/images/uritused.jpg";
 import sobrad from "@/assets/images/sobrad.jpg";
 import { useDictionary } from "@/components/dictionary-provider";
-import { describe } from "node:test";
-import { Decipher } from "crypto";
 
 interface BoardMember {
   name: string;

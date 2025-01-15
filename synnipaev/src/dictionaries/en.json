@@ -47,5 +47,19 @@
         },
         "historytitle": "ITÜK läbi aegade",
         "boardtitle": "2024/2025. õppeaasta juhatus"
+    },
+    "events": {
+        "education": "Haridus",
+        "entertainment": "Meelelahutus",
+        "other": "Sise- ja muud üritused"
+    },
+    "partners": {
+        "header": "Koostöö",
+        "partners": "Meie koostööpartnerid"
+    },
+    "rent": {
+        "header": "Tehnika rent",
+        "request": "Saada päring meile siit: ",
+        "NB": "NB! Hind kehtib ürituse/päeva kohta!"
     }
 }
