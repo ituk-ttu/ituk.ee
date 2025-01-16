@@ -15,7 +15,7 @@ interface Event {
   name: string;
 }
 
-export default function Home({
+export default function EventType({
   params,
 }: {
   params: { type: string }; // `params` is directly passed as an object, not a Promise

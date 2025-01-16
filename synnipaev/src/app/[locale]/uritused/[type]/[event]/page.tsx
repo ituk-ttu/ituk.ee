@@ -2,9 +2,12 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { db } from "@/firebase";
-import { query, collection, where, getDocs, DocumentData } from "firebase/firestore";
+import { query, collection, where, getDocs, DocumentData, doc, orderBy } from "firebase/firestore";
 import Gallery from "@/components/gallery/gallery";
 import Loading from "@/components/animations/loading";
+import Card from "@/components/cards/card";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Event {
   category: string;
@@ -15,6 +18,16 @@ interface Event {
   links?: Map<string, Map<string, string>>;
 }
 
+interface EventYear {
+  key: string;
+  banner: string;
+  date: string;
+  description: string;
+  handle: string;
+  gallery?: string[];
+  title: string;
+}
+
 export default function EventPage({
   params: paramsPromise,
 }: {
@@ -22,8 +35,8 @@ export default function EventPage({
 }) {
   const [curEvent, setCurEvent] = useState<Event | null>(null);
   const [eventHandle, setEventHandle] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [eventYears, setEventYears] = useState<EventYear[]>([]);
+  const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     async function unwrapParams() {
@@ -75,40 +88,48 @@ export default function EventPage({
         };
       });
 
+      try {
+        const eventRef = doc(db, "events", querySnapshot.docs[0].id);
+        const yearQuerySnapshot = await getDocs(
+          query(collection(eventRef, "years"), orderBy("date", "desc"))
+        );
+        const eventYears: EventYear[] = yearQuerySnapshot.docs.map((doc) => {
+          const data = doc.data() as DocumentData;
+          return {
+            key: doc.id,
+            banner: data.banner,
+            date: data.date,
+            description: data.description,
+            gallery: data.gallery ? data.gallery : undefined,
+            handle: data.handle,
+            title: data.title
+          };
+        });
+        setEventYears(eventYears);
+      } catch (error) {
+        console.error("Error getting members: ", error);
+        throw error;
+      }
+
       setCurEvent(events[0]);
     } catch (error) {
       console.error("Error getting event: ", error);
     }
   }, [eventHandle]);
 
+  const getImages = () => eventYears.map((year) => (
+    year.gallery?.map((image) => (
+      setImages(oldArray => [...oldArray, image])
+    ))
+  ))
+
   useEffect(() => {
     getEvent();
   }, [getEvent]);
 
-  const renderEventLinks = () => {
-    if (!selectedYear || !curEvent?.links) return null;
-
-    const events = curEvent.links.get(selectedYear);
-
-    if (!events) return <p>Ei ole üritusi, mida näidata.</p>;
-
-    return (
-      <ul className="space-y-2">
-        {Array.from(events.entries()).map(([name, link]) => (
-          <li key={name}>
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              {name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    );
-  };
+  useEffect(() => {
+    getImages();
+  }, [curEvent])
 
   if (curEvent) {
     return (
@@ -129,58 +150,32 @@ export default function EventPage({
                 <h2>Kirjeldus</h2>
                 <p>{curEvent.description}</p>
               </div>
+            </div>
 
-              {curEvent.links && curEvent.links.size > 0 ? (
-                <div className="w-full justify-center items-start flex-col flex gap-8">
-                  <h2>Varasemad üritused</h2>
-                  <p className="italic">Mõned aastad võivad olla vahelt puudu, kuna nendel aastatel puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
-                  <div className="relative inline-block">
-                    <button
-                      className="z-20 min-h-12 px-8 button-text bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary justify-between items-center flex-row flex gap-4"
-                      onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    >
-                      {selectedYear || "Vali aasta"}
-                      <div className={`focus:text-primary w-4 h-4 transform transition-transform duration-300 justify-center items-center flex ${isDropdownOpen ? "rotate-180" : ""}`} >
-                        <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <g clipPath="url(#clip0_1038_2084)">
-                            <path d="M7.77742 6.76758L1.41409 0.404243L-3.39965e-07 1.81833L7.77749 9.59582L15.555 1.81818L14.1409 0.404091L7.77742 6.76758Z" />
-                          </g>
-                          <defs>
-                            <clipPath id="clip0_1038_2084">
-                              <rect width="9.19173" height="15.555" fill="white" transform="translate(0 9.59583) rotate(-90)" />
-                            </clipPath>
-                          </defs>
-                        </svg>
-                      </div>
-                    </button>
-                    {isDropdownOpen && (
-                      <div className="self-stretch w-full absolute z-10 bg-dark border-t-2 border-black rounded shadow-filled overflow-y-auto">
-                        {Array.from(curEvent.links.keys())
-                          .sort((a, b) => Number(b) - Number(a)) // Sort years in descending order
-                          .map((year) => (
-                            <div
-                              key={year}
-                              className="min-w-32 min-h-12 px-8 button-text bg-dark border-t-2 border-black hover:bg-gray cursor-pointer justify-start items-center flex-row flex"
-                              onClick={() => {
-                                setSelectedYear(year);
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              {year}
-                            </div>
-                          ))}
-                      </div>
-                    )}
+            {eventYears ? (
+              <div className="w-full justify-center items-start flex-col flex gap-8">
+                <h2>Varasemad üritused</h2>
+                <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
+                  {eventYears.map((year) => (
+                    <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
+                      <Card title={year.title} image={year.banner} description={year.description} board={false} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="w-full justify-center items-start flex-col flex gap-8">
+                <h2>Varasemad üritused</h2>
+                <p className="italic">Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
+              </div>
+            )}
+
+            <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
+              {images && images.map((image, index) => (
+                  <div key={index}>
+                    <img src={image} alt={`Gallery image ${index + 1}`} />
                   </div>
-                  <div>{renderEventLinks()}</div>
-                </div>
-
-              ) : (
-                <div className="w-full justify-center items-start flex-col flex gap-8">
-                  <h2>Varasemad üritused</h2>
-                  <p className="italic">Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
-                </div>
-              )}
+              ))}
             </div>
 
             {curEvent.gallery && curEvent.gallery.length > 0 ? (

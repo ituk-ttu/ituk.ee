@@ -3,7 +3,7 @@
 import { useDictionary } from "@/components/dictionary-provider";
 import Link from "next/link";
 
-export default function Home() {
+export default function Events() {
   const dictionary = useDictionary().events;
 
   return (

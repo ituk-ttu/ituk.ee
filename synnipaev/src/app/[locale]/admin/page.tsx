@@ -25,6 +25,7 @@ import {
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
 import AdminCard from "@/components/cards/admin_card";
+import Card from "@/components/cards/card";
 
 interface BoardMember {
     key: string;
@@ -45,6 +46,17 @@ interface Event {
     links?: Map<string, string>;
 }
 
+interface EventYear {
+    key: string;
+    banner: string;
+    date: string;
+    description: string;
+    extraInfo?: string;
+    handle: string;
+    gallery?: string[];
+    title: string;
+}
+
 interface Rentables {
     key: string;
     name: string;
@@ -59,6 +71,18 @@ interface Logs {
     author: string;
     entry: string;
     date: Date;
+}
+
+export interface AdminCardResponse {
+    id: string;
+    title: string;
+    image: string;
+    description: string;
+    email: string;
+    category: string;
+    handle: string;
+    date: string;
+    extraInformation: string;
 }
 
 export default function Home() {
@@ -125,6 +149,34 @@ export default function Home() {
         }
     };
 
+    const [eventYears, setEventYears] = useState<EventYear[]>([]);
+
+    const getEventYears = async (id: string) => {
+        try {
+            const eventRef = doc(db, "events", id)
+            const querySnapshot = await getDocs(
+                query(collection(eventRef, "years"), orderBy("date", "asc"))
+            );
+            const eventYears: EventYear[] = querySnapshot.docs.map((doc) => {
+                const data = doc.data() as DocumentData;
+                return {
+                    key: doc.id,
+                    banner: data.banner,
+                    date: data.date,
+                    description: data.description,
+                    extraInfo: data.extraInfo ? data.extraInfo : undefined,
+                    gallery: data.gallery ? data.gallery : undefined,
+                    handle: data.handle,
+                    title: data.title
+                };
+            });
+            setEventYears(eventYears);
+        } catch (error) {
+            console.error("Error getting members: ", error);
+            throw error;
+        }
+    };
+
     //gets rentables
 
     const [rentables, setRentables] = useState<Rentables[]>([]);
@@ -185,7 +237,7 @@ export default function Home() {
     const [handle, setHandle] = useState("");
     const [author, setAuthor] = useState("");
     const [entry, setEntry] = useState("");
-    const [event, setEvent] = useState("3CqbdfQup1Efv1io1xPl");
+    const [event, setEvent] = useState("");
 
     //firebase authentication functions
 
@@ -241,19 +293,15 @@ export default function Home() {
     //member functions
 
     const updateMember = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string
+        response: AdminCardResponse
     ) => {
         try {
-            const memberDoc = doc(db, "board", id);
+            const memberDoc = doc(db, "board", response.id);
             const docRef = await updateDoc(memberDoc, {
-                email: email,
-                imagePath: image,
-                name: title,
-                position: description,
+                email: response.email,
+                imagePath: response.image,
+                name: response.title,
+                position: response.description,
             });
             console.log("Document written");
             alert("Member changed!");
@@ -263,19 +311,13 @@ export default function Home() {
         }
     };
 
-    const createMember = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string
-    ) => {
+    const createMember = async ( response: AdminCardResponse ) => {
         try {
             const docRef = await addDoc(collection(db, "board"), {
-                email: email,
-                imagePath: image,
-                name: title,
-                position: description,
+                email: response.email,
+                imagePath: response.image,
+                name: response.title,
+                position: response.description,
             });
             alert("Document writen with ID: " + docRef.id);
             window.location.reload();
@@ -302,23 +344,15 @@ export default function Home() {
 
     // event functions
 
-    const updateEvent = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string,
-        category: string,
-        handle: string
-    ) => {
+    const updateEvent = async ( response: AdminCardResponse ) => {
         try {
-            const memberDoc = doc(db, "events", id);
-            const docRef = await updateDoc(memberDoc, {
-                banner: image,
-                category: category,
-                description: description,
-                handle: handle,
-                name: title,
+            const eventDoc = doc(db, "events", response.id);
+            const docRef = await updateDoc(eventDoc, {
+                banner: response.image,
+                category: response.category,
+                description: response.description,
+                handle: response.handle,
+                name: response.title,
             });
             console.log("Document written");
             alert("Event updated");
@@ -328,22 +362,14 @@ export default function Home() {
         }
     };
 
-    const createEvent = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string,
-        category: string,
-        handle: string
-    ) => {
+    const createEvent = async ( response: AdminCardResponse ) => {
         try {
             const docRef = await addDoc(collection(db, "events"), {
-                banner: image,
-                category: category,
-                description: description,
-                handle: handle,
-                name: title,
+                banner: response.image,
+                category: response.category,
+                description: response.description,
+                handle: response.handle,
+                name: response.title,
             });
             alert("Document writen with ID: " + docRef.id);
             window.location.reload();
@@ -356,11 +382,65 @@ export default function Home() {
     const deleteEvent = async (id: string) => {
         if (
             confirm(
-                "Are you sure you want to delete this member? This member cannot be restored!!"
+                "Are you sure you want to delete this event? This event cannot be restored!!"
             )
         ) {
             try {
                 await deleteDoc(doc(db, "events", id));
+                window.location.reload();
+            } catch (e) {
+                console.error("Error deleting document: ", e);
+            }
+        }
+    };
+
+    const updateYear = async (response: AdminCardResponse) => {
+        try {
+            const eventRef = doc(db, "events", event)
+            const docRef = await updateDoc(doc(eventRef, "years", response.id), {
+                banner: response.image,
+                date: response.date,
+                description: response.description,
+                handle: response.handle,
+                title: response.title,
+                extraInformation: response.extraInformation
+            });
+            console.log("Document written");
+            alert("Event updated");
+            window.location.reload();
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+
+    const createYear = async ( response: AdminCardResponse) => {
+        try {
+            const eventRef = doc(db, "events", event)
+            const docRef = await addDoc(collection(eventRef, "years"), {
+                banner: response.image,
+                date: response.date,
+                description: response.description,
+                handle: response.handle,
+                title: response.title,
+                extraInformation: response.extraInformation
+            });
+            alert("Document writen with ID: " + docRef.id);
+            window.location.reload();
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const deleteYear = async (id: string) => {
+        if (
+            confirm(
+                "Are you sure you want to delete this year event? This year event cannot be restored!!"
+            )
+        ) {
+            try {
+                const eventRef = doc(db, "events", event)
+                await deleteDoc(doc(eventRef, "years", id));
                 window.location.reload();
             } catch (e) {
                 console.error("Error deleting document: ", e);
@@ -411,20 +491,15 @@ export default function Home() {
     // rent functions
 
     const updateRent = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string,
-        category: string,
+        response: AdminCardResponse
     ) => {
         try {
-            const rentDoc = doc(db, "rent", id);
+            const rentDoc = doc(db, "rent", response.id);
             const docRef = await updateDoc(rentDoc, {
-                name: title,
-                imagePath: image,
-                price: +description,
-                unit: category,
+                name: response.title,
+                imagePath: response.image,
+                price: +response.description,
+                unit: response.category,
             });
             console.log("Document written");
             alert("Event updated");
@@ -435,19 +510,14 @@ export default function Home() {
     };
 
     const createRent = async (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string,
-        category: string,
+        response: AdminCardResponse
     ) => {
         try {
             const docRef = await addDoc(collection(db, "rent"), {
-                name: title,
-                imagePath: image,
-                price: +description,
-                unit: category,
+                name: response.title,
+                imagePath: response.image,
+                price: +response.description,
+                unit: response.category,
             });
             alert("Document writen with ID: " + docRef.id);
             window.location.reload();
@@ -489,6 +559,11 @@ export default function Home() {
             console.error("Error adding document: ", e);
         }
     };
+
+    const handleEventSelect = (id: string) => {
+        setEvent(id);
+        getEventYears(id);
+    }
 
     useEffect(() => {
         getBoardMembers();
@@ -636,41 +711,29 @@ export default function Home() {
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {events.map((event) => (
                                                 (category === "kõik" || category === event.category) && (
-                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => setEvent(id)}/>
+                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => handleEventSelect(id)}/>
                                                 )
                                             ))}
                                             <AdminCard title="" image="" description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
                                         </div>
-                                        <h3>Üritused igal aastal</h3>
-                                        {}
-                                    {events.map((eventItem) => (
-                                        eventItem.key === event && (
-                                            <div key={eventItem.key} className="event-details">
-                                                <h3>{eventItem.name}</h3>
-                                                <p>{eventItem.description}</p>
-                                                <img src={eventItem.banner} alt={eventItem.name} />
-                                                {eventItem.gallery && eventItem.gallery.length > 0 && (
-                                                    <div className="gallery">
-                                                        <h4>Gallery</h4>
-                                                        {eventItem.gallery.map((image, index) => (
-                                                            <img key={index} src={image} alt={`Gallery image ${index + 1}`} />
-                                                        ))}
-                                                    </div>
-                                                )}
-                                                {eventItem.links && eventItem.links.size > 0 && (
-                                                    <div className="links">
-                                                        <h4>Links</h4>
-                                                        {Array.from(eventItem.links.entries()).map(([year, link], index) => (
-                                                            <a key={index} href={link} target="_blank" rel="noopener noreferrer">
-                                                                {year}
-                                                            </a>
-                                                        ))}
-                                                    </div>
-                                                )}
+                                            <h3>Üritused igal aastal</h3>
+
+                                            <h2>Hetkel valitud üritus</h2>
+                                            {events.map((_event) => (
+                                                (_event.key === event) && (
+                                                    <Card title={_event.name} image={_event.banner} description={_event.description} board={false}/>
+                                                )
+                                            ))}
+                                        
+                                            <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
+                                            {eventYears.map((eventYear) => (
+                                                <AdminCard key={eventYear.key} id={eventYear.key} title={eventYear.title} image={eventYear.banner} description={eventYear.description} board="aasta" handle={eventYear.handle} date={eventYear.date} extraInformation={eventYear.extraInfo} onClick={updateYear} onDelete={deleteYear}/>
+                                            ))}
+                                            {event && (
+                                                <AdminCard title="" image="" description="" board="aasta" handle="" date="" onClick={createYear} />
+                                            )}
                                             </div>
-                                        )
-                                    ))}
-                                    </div>
+                                        </div>
                                 )
                             case 'rent':
                                 return (

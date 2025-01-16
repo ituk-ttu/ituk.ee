@@ -3,24 +3,20 @@
 import { useState } from "react";
 import Button from '@/components/buttons/button';
 
+import { AdminCardResponse } from "@/app/[locale]/admin/page";
+
 interface CardProps {
     id?: string;
     title: string;
     image: string;
     description: string;
-    board: "juhatus" | "uritused" | "rent";
+    board: "juhatus" | "uritused" | "rent" | "aasta";
     email?: string;
     category?: string;
     handle?: string;
-    onClick?: (
-        id: string,
-        title: string,
-        image: string,
-        description: string,
-        email: string,
-        category: string,
-        handle: string,
-    ) => void;
+    date?: string;
+    extraInformation?: string;
+    onClick?: ( response: AdminCardResponse) => void;
     onDelete?: (id: string) => void;
     onSelect? : (id: string) => void;
 }
@@ -34,6 +30,8 @@ export default function AdminCard({
     email = "",
     category,
     handle,
+    date,
+    extraInformation,
     onClick,
     onDelete,
     onSelect,
@@ -44,11 +42,23 @@ export default function AdminCard({
     const [_email, setEmail] = useState(email);
     const [_category, setCategory] = useState(category);
     const [_handle, setHandle] = useState(handle);
+    const [_date, setDate] = useState(date);
+    const [_extraInformation, setExtraInformation] = useState(extraInformation);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         if (onClick) {
-            onClick(id || "", _title || "", _image || "", _description || "", _email || "", _category || "", _handle || "");
+            const response: AdminCardResponse = {
+                id: id || "",
+                title: _title || "",
+                image: _image || "",
+                description: _description || "",
+                email: _email || "",
+                category: _category || "",
+                handle: _handle || "",
+                date: _date || "",
+                extraInformation: _extraInformation ||""
+            }
+            onClick(response);
         }
     };
 
@@ -92,7 +102,7 @@ export default function AdminCard({
         return (
             <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
                 <form className="w-full" onSubmit={handleSubmit}>
-                    <img onClick={handleSelect} className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <img onClick={handleSelect} className="min-h-[284px] object-cover rounded-t-lg cursor-pointer" src={_image} alt={title} />
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ürituse nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setTitle(e.target.value)} value={_title} />
@@ -104,7 +114,34 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="category" placeholder="meelelahutus/haridus/muu" onChange={(e) => setCategory(e.target.value)} value={_category} />
                         <label>Handle (normaliseeritud)</label>
                         <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
-                        <Button variant="primary" type="submit" text="Salvesta" />
+                        <Button variant="primary" type="submit" text="Salvesta" onClick={handleSubmit}/>
+                        {onDelete ?
+                            <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
+                            : <></>
+                        }
+                    </div>
+                </form>
+            </div>
+        );
+    } else if (board === "aasta") {
+        return (
+            <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
+                <form className="w-full" onSubmit={handleSubmit}>
+                    <img onClick={handleSelect}  className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+                        <label>Ürituse nimi koos aastaga</label>
+                        <input className="w-full" type="text" name="title" placeholder="Don't Do IT 2024" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Kirjeldus</label>
+                        <textarea className="w-full" name="description" placeholder="Kirjeldus" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Lisainfo</label>
+                        <textarea className="w-full" name="extraInformation" placeholder="Lisainfo" onChange={(e) => setExtraInformation(e.target.value)} value={_extraInformation} />
+                        <label>Pildi link</label>
+                        <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
+                        <label>Kuupäev</label>
+                        <input className="w-full" type="text" name="date" placeholder="2024" onChange={(e) => setDate(e.target.value)} value={_date} />
+                        <label>Handle (normaliseeritud)</label>
+                        <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
+                        <Button variant="primary" type="submit" text="Salvesta" onClick={handleSubmit}/>
                         {onDelete ?
                             <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
                             : <></>
