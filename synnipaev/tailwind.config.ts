@@ -40,6 +40,7 @@ export default {
       },
       animation: {
         rotate: '2s cubic-bezier(.68,-0.55,.27,1.55) infinite rotate',
+        etator: '2s cubic-bezier(.68,-0.55,.27,1.55) infinite etator',
         bright: 'bright 1s infinite',
       },
       keyframes: {
@@ -49,6 +50,14 @@ export default {
           },
           '100%': {
             transform: 'rotate(360deg)',
+          },
+        },
+        etator: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(-360deg)',
           },
         },
         bright: {

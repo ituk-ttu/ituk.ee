@@ -16,8 +16,8 @@ const LanguageButton: React.FC<LanguageButtonProps> = ({
     onClick,
     className = "",
 }) => {
-
     const pathname = usePathname();
+
     const redirectedPathname = (locale: string) => {
         if (!pathname) return "/";
         const segments = pathname.split("/");
@@ -28,14 +28,22 @@ const LanguageButton: React.FC<LanguageButtonProps> = ({
         return segments.join("/");
     };
 
+    const currentLocale = pathname?.split("/")[1] || "et";
+
     return (
-        <div aria-label="Language Button" className="justify-start items-center flex-row flex gap-8">
-            <Link href={redirectedPathname("et")} aria-label="Estonian" onClick={onClick}>
-                <Image src={Estonian} alt="Estonian" />
-            </Link>
-            <Link href={redirectedPathname("en")} aria-label="English" onClick={onClick}>
-                <Image src={English} alt="English" />
-            </Link>
+        <div
+            aria-label="Language Button"
+            className="justify-start items-center flex-row flex gap-8"
+        >
+            {currentLocale === "et" ? (
+                <Link href={redirectedPathname("en")} aria-label="English" onClick={onClick}>
+                    <Image src={English} alt="Switch to English" />
+                </Link>
+            ) : (
+                <Link href={redirectedPathname("et")} aria-label="Estonian" onClick={onClick}>
+                    <Image src={Estonian} alt="Switch to Estonian" />
+                </Link>
+            )}
         </div>
     );
 };

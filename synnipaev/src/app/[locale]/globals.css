@@ -93,11 +93,11 @@ button {
 }
 
 .main-min {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 88px);
 }
 
 .main-max {
-  max-height: calc(100vh - 72px);
+  max-height: calc(100vh - 88px);
 }
 
 .main-padding {
@@ -105,11 +105,11 @@ button {
 }
 
 .double-max {
-  max-height: calc((100vh - 72px) / 2);
+  max-height: calc((100vh - 88px) / 2);
 }
 
 .triple-height {
-  height: calc((100vh - 72px) / 3);
+  height: calc((100vh - 88px) / 3);
 }
 
 .board-member {

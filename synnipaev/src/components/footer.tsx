@@ -18,7 +18,7 @@ export default function Footer({
 
   return (
     <footer className="main-container main-padding dark shadow-filled justify-between items-center flex-col gap-auto md:flex-row gap-32 md:gap-auto flex">
-      <div className="justify-between items-start gap-8 flex-col flex">
+      <div className="justify-between items-start gap-4 flex-col flex">
         <div className="justify-start items-center gap-4 flex-row flex">
           <Image src={email} alt="E-mail" />
           <p className="font-bold underline">kontakt@ituk.ee</p>
@@ -34,7 +34,7 @@ export default function Footer({
           </p>
         </div>
       </div>
-      <div className="justify-between items-center md:items-end gap-8 flex-col flex">
+      <div className="justify-between items-center md:items-end gap-4 flex-col flex">
         <div className="justify-between items-center gap-6 flex-row flex">
           <FacebookLink />
           <div className="w-[2px] h-[24px] bg-light" />
@@ -48,7 +48,7 @@ export default function Footer({
             <p className="font-bold underline">{dictionary.style}</p>
           </Link>
         </div>
-        <p className="font-bold">© ITÜK 2016-2024</p>
+        <p className="font-bold">© ITÜK 2017-2025</p>
       </div>
     </footer>
   );
