@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData, doc, orderBy } from "firebase/firestore";
 import Gallery from "@/components/gallery/gallery";
@@ -23,8 +23,9 @@ interface EventYear {
   banner: string;
   date: string;
   description: string;
+  extraInformation?: string;
   handle: string;
-  gallery?: string[];
+  gallery?: Map<string, string>;
   title: string;
 }
 
@@ -36,7 +37,7 @@ export default function EventPage({
   const [curEvent, setCurEvent] = useState<Event | null>(null);
   const [eventHandle, setEventHandle] = useState<string | null>(null);
   const [eventYears, setEventYears] = useState<EventYear[]>([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<Map<string, string>>();
 
   useEffect(() => {
     async function unwrapParams() {
@@ -46,7 +47,7 @@ export default function EventPage({
     unwrapParams();
   }, [paramsPromise]);
 
-  const getEvent = useCallback(async () => {
+  const getEvent = async () => {
     if (!eventHandle) return;
 
     try {
@@ -93,7 +94,7 @@ export default function EventPage({
         const yearQuerySnapshot = await getDocs(
           query(collection(eventRef, "years"), orderBy("date", "desc"))
         );
-        const eventYears: EventYear[] = yearQuerySnapshot.docs.map((doc) => {
+        const _eventYears: EventYear[] = yearQuerySnapshot.docs.map((doc) => {
           const data = doc.data() as DocumentData;
           return {
             key: doc.id,
@@ -105,31 +106,32 @@ export default function EventPage({
             title: data.title
           };
         });
-        setEventYears(eventYears);
+        setEventYears(_eventYears);
       } catch (error) {
         console.error("Error getting members: ", error);
         throw error;
       }
 
       setCurEvent(events[0]);
+      getImages();
     } catch (error) {
       console.error("Error getting event: ", error);
     }
-  }, [eventHandle]);
+  };
 
-  const getImages = () => eventYears.map((year) => (
-    year.gallery?.map((image) => (
-      setImages(oldArray => [...oldArray, image])
+  const getImages = () => (
+    eventYears.map((year) => (
+    year.gallery?.forEach((title, image) => {
+      const newMap = new Map(images);
+      newMap.set(title, image)
+      setImages(newMap)
+      console.log(images)}
     ))
   ))
 
   useEffect(() => {
     getEvent();
   }, [getEvent]);
-
-  useEffect(() => {
-    getImages();
-  }, [curEvent])
 
   if (curEvent) {
     return (
@@ -171,9 +173,9 @@ export default function EventPage({
             )}
 
             <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
-              {images && images.map((image, index) => (
+              {images && Array.from(images.entries()).map(([title, image], index) => (
                   <div key={index}>
-                    <img src={image} alt={`Gallery image ${index + 1}`} />
+                    <img src={image} alt={title} />
                   </div>
               ))}
             </div>

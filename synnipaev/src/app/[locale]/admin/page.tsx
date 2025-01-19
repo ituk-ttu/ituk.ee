@@ -20,7 +20,9 @@ import {
     DocumentData,
     orderBy,
     deleteDoc,
-    Timestamp
+    Timestamp,
+    getDoc,
+    deleteField
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
@@ -51,9 +53,9 @@ interface EventYear {
     banner: string;
     date: string;
     description: string;
-    extraInfo?: string;
+    extraInformation?: string;
     handle: string;
-    gallery?: string[];
+    gallery?: Map<string, string>;
     title: string;
 }
 
@@ -91,6 +93,16 @@ export default function Home() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [uid, setUid] = useState("");
+
+    //firebase variables
+    const [banner, setBanner] = useState("");
+    const [category, setCategory] = useState("kõik");
+    const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
+    const [author, setAuthor] = useState("");
+    const [entry, setEntry] = useState("");
+    const [curEvent, setCurEvent] = useState("");
+    const [curYear, setCurYear] = useState("");
 
     //functions to get data from db
 
@@ -164,8 +176,8 @@ export default function Home() {
                     banner: data.banner,
                     date: data.date,
                     description: data.description,
-                    extraInfo: data.extraInfo ? data.extraInfo : undefined,
-                    gallery: data.gallery ? data.gallery : undefined,
+                    extraInformation: data.extraInformation ? data.extraInformation : undefined,
+                    gallery: data.gallery ? new Map(Object.entries(data.gallery)) : undefined,
                     handle: data.handle,
                     title: data.title
                 };
@@ -229,16 +241,6 @@ export default function Home() {
         }
     };
 
-    //firebase variables
-    const [banner, setBanner] = useState("");
-    const [category, setCategory] = useState("kõik");
-    const [description, setDescription] = useState("");
-    const [name, setName] = useState("");
-    const [handle, setHandle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [entry, setEntry] = useState("");
-    const [event, setEvent] = useState("");
-
     //firebase authentication functions
 
     interface ButtonEvent
@@ -271,7 +273,7 @@ export default function Home() {
             });
 
         const status = await validatePassword(auth, password);
-        if(!status.isValid) {
+        if (!status.isValid) {
             if (!status.containsLowercaseLetter) {
                 alert("Password must contain lowercase letter!!!")
             }
@@ -311,7 +313,7 @@ export default function Home() {
         }
     };
 
-    const createMember = async ( response: AdminCardResponse ) => {
+    const createMember = async (response: AdminCardResponse) => {
         try {
             const docRef = await addDoc(collection(db, "board"), {
                 email: response.email,
@@ -344,7 +346,7 @@ export default function Home() {
 
     // event functions
 
-    const updateEvent = async ( response: AdminCardResponse ) => {
+    const updateEvent = async (response: AdminCardResponse) => {
         try {
             const eventDoc = doc(db, "events", response.id);
             const docRef = await updateDoc(eventDoc, {
@@ -356,13 +358,13 @@ export default function Home() {
             });
             console.log("Document written");
             alert("Event updated");
-            window.location.reload();
+            getEvents();
         } catch (e) {
             console.error("Error adding document: ", e);
         }
     };
 
-    const createEvent = async ( response: AdminCardResponse ) => {
+    const createEvent = async (response: AdminCardResponse) => {
         try {
             const docRef = await addDoc(collection(db, "events"), {
                 banner: response.image,
@@ -372,7 +374,7 @@ export default function Home() {
                 name: response.title,
             });
             alert("Document writen with ID: " + docRef.id);
-            window.location.reload();
+            getEvents();
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -387,16 +389,18 @@ export default function Home() {
         ) {
             try {
                 await deleteDoc(doc(db, "events", id));
-                window.location.reload();
+                getEvents();
             } catch (e) {
                 console.error("Error deleting document: ", e);
             }
         }
     };
 
+    // event year functions
+
     const updateYear = async (response: AdminCardResponse) => {
         try {
-            const eventRef = doc(db, "events", event)
+            const eventRef = doc(db, "events", curEvent)
             const docRef = await updateDoc(doc(eventRef, "years", response.id), {
                 banner: response.image,
                 date: response.date,
@@ -407,15 +411,15 @@ export default function Home() {
             });
             console.log("Document written");
             alert("Event updated");
-            window.location.reload();
+            getEventYears(curEvent);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
     }
 
-    const createYear = async ( response: AdminCardResponse) => {
+    const createYear = async (response: AdminCardResponse) => {
         try {
-            const eventRef = doc(db, "events", event)
+            const eventRef = doc(db, "events", curEvent)
             const docRef = await addDoc(collection(eventRef, "years"), {
                 banner: response.image,
                 date: response.date,
@@ -425,7 +429,7 @@ export default function Home() {
                 extraInformation: response.extraInformation
             });
             alert("Document writen with ID: " + docRef.id);
-            window.location.reload();
+            getEventYears(curEvent);
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -439,12 +443,42 @@ export default function Home() {
             )
         ) {
             try {
-                const eventRef = doc(db, "events", event)
+                const eventRef = doc(db, "events", curEvent)
                 await deleteDoc(doc(eventRef, "years", id));
-                window.location.reload();
+                getEventYears(curEvent);
             } catch (e) {
                 console.error("Error deleting document: ", e);
             }
+        }
+    };
+
+    const addImage = async (response: AdminCardResponse) => {
+        try {
+            const eventRef = doc(db, "events", curEvent);
+            const yearRef = doc(eventRef, "years", curYear)
+            const docRef = await updateDoc(yearRef, {
+                [`gallery.${response.title}`]: response.image,
+            });
+            console.log("Document written with ID: ", docRef);
+            alert("Image added");
+            getEventYears(curEvent);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
+    const deleteImage = async (id: string) => {
+        try {
+            const eventRef = doc(db, "events", curEvent);
+            const yearRef = doc(eventRef, "years", curYear)
+            const docRef = await updateDoc(yearRef, {
+                [`gallery.${id}`]: deleteField(),
+            });
+            console.log("Document written with ID: ", docRef);
+            alert("Image deleted");
+            getEventYears(curEvent);
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
     };
 
@@ -561,7 +595,7 @@ export default function Home() {
     };
 
     const handleEventSelect = (id: string) => {
-        setEvent(id);
+        setCurEvent(id);
         getEventYears(id);
     }
 
@@ -711,29 +745,45 @@ export default function Home() {
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {events.map((event) => (
                                                 (category === "kõik" || category === event.category) && (
-                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => handleEventSelect(id)}/>
+                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => handleEventSelect(id)} />
                                                 )
                                             ))}
                                             <AdminCard title="" image="" description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
                                         </div>
-                                            <h3>Üritused igal aastal</h3>
 
-                                            <h2>Hetkel valitud üritus</h2>
-                                            {events.map((_event) => (
-                                                (_event.key === event) && (
-                                                    <Card title={_event.name} image={_event.banner} description={_event.description} board={false}/>
-                                                )
-                                            ))}
-                                        
-                                            <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
+                                        <h2>Hetkel valitud üritus</h2>
+                                        {events.map((_event) => (
+                                            (_event.key === curEvent) && (
+                                                <Card title={_event.name} image={_event.banner} description={_event.description} board={false} />
+                                            )
+                                        ))}
+
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {eventYears.map((eventYear) => (
-                                                <AdminCard key={eventYear.key} id={eventYear.key} title={eventYear.title} image={eventYear.banner} description={eventYear.description} board="aasta" handle={eventYear.handle} date={eventYear.date} extraInformation={eventYear.extraInfo} onClick={updateYear} onDelete={deleteYear}/>
+                                                <AdminCard key={eventYear.key} id={eventYear.key} title={eventYear.title} image={eventYear.banner} description={eventYear.description} board="aasta" handle={eventYear.handle} date={eventYear.date} extraInformation={eventYear.extraInformation} onClick={updateYear} onDelete={deleteYear} onSelect={(id) => setCurYear(id)} />
                                             ))}
-                                            {event && (
+                                            {curEvent && (
                                                 <AdminCard title="" image="" description="" board="aasta" handle="" date="" onClick={createYear} />
                                             )}
-                                            </div>
                                         </div>
+
+                                        <div>
+                                            <h3>Ürituse gallerii</h3>
+                                            {curYear && eventYears
+                                                .filter(year => year.key === curYear)
+                                                .map(year => (
+                                                    year.gallery ? (
+                                                        Array.from(year.gallery.entries()).map(([title, image]) => (
+                                                            <AdminCard key={title} id={title} title={title} image={image} onDelete={deleteImage} board="pilt"/>
+                                                        ))
+                                                    ) : (
+                                                        <p key="no-images">Galleriis puuduvad pildid</p>
+                                                    )
+                                                ))
+                                            }
+                                            <AdminCard key="" title="" image="" board="pilt" onClick={addImage}/>
+                                        </div>
+                                    </div>
                                 )
                             case 'rent':
                                 return (

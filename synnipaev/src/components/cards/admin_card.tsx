@@ -9,8 +9,8 @@ interface CardProps {
     id?: string;
     title: string;
     image: string;
-    description: string;
-    board: "juhatus" | "uritused" | "rent" | "aasta";
+    description?: string;
+    board: "juhatus" | "uritused" | "rent" | "aasta" | "pilt";
     email?: string;
     category?: string;
     handle?: string;
@@ -141,6 +141,25 @@ export default function AdminCard({
                         <input className="w-full" type="text" name="date" placeholder="2024" onChange={(e) => setDate(e.target.value)} value={_date} />
                         <label>Handle (normaliseeritud)</label>
                         <input className="w-full" type="text" name="handle" placeholder="dont-do-it" onChange={(e) => setHandle(e.target.value)} value={_handle} />
+                        <Button variant="primary" type="submit" text="Salvesta" onClick={handleSubmit}/>
+                        {onDelete ?
+                            <Button variant="secondary" onClick={handleDelete} text="Kustuta" />
+                            : <></>
+                        }
+                    </div>
+                </form>
+            </div>
+        );
+    } else if (board === "pilt") {
+        return (
+            <div className="w-full rounded-lg shadow-filled justify-end items-start flex-col flex">
+                <form className="w-full" onSubmit={handleSubmit}>
+                    <img onClick={handleSelect}  className="min-h-[284px] object-cover rounded-t-lg" src={_image} alt={title} />
+                    <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+                        <label>Pildi nimi</label>
+                        <input className="w-full" type="text" name="title" placeholder="Don't Do IT 2024" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Pildi link</label>
+                        <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <Button variant="primary" type="submit" text="Salvesta" onClick={handleSubmit}/>
                         {onDelete ?
                             <Button variant="secondary" onClick={handleDelete} text="Kustuta" />

@@ -10,7 +10,7 @@ interface EventYear {
     banner: string;
     date: string;
     description: string;
-    extraInfo?: string;
+    extraInformation?: string;
     handle: string;
     gallery?: string[];
     title: string;
@@ -54,7 +54,7 @@ export default function Year({
                 banner: data.banner,
                 date: data.date,
                 description: data.description,
-                extraInfo: data.extraInfo ? data.extraInfo : undefined,
+                extraInformation: data.extraInformation ? data.extraInformation : undefined,
                 gallery: data.gallery ? data.gallery : undefined,
                 handle: data.handle,
                 title: data.title
@@ -89,10 +89,10 @@ export default function Year({
                         <p>{eventYear.description}</p>
                     </div>
 
-                    {eventYear.extraInfo && eventYear.extraInfo.length > 0 && (
+                    {eventYear.extraInformation && eventYear.extraInformation.length > 0 && (
                         <div className="flex flex-col items-start gap-8">
                             <h3>Lisainfo</h3>
-                            <p>{eventYear.extraInfo}</p>
+                            <p>{eventYear.extraInformation}</p>
                         </div>
                     )}
                 </div>
