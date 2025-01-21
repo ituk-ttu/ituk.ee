@@ -33,6 +33,7 @@ interface BoardMember {
     key: string;
     name: string;
     position: string;
+    en_position: string;
     email: string;
     imagePath: string;
 }
@@ -78,8 +79,10 @@ interface Logs {
 export interface AdminCardResponse {
     id: string;
     title: string;
+    en_title: string;
     image: string;
     description: string;
+    en_description: string;
     email: string;
     category: string;
     handle: string;
@@ -121,6 +124,7 @@ export default function Home() {
                     key: doc.id,
                     name: data.name,
                     position: data.position,
+                    en_position: data.position_en,
                     email: data.email,
                     imagePath: data.imagePath,
                 };
@@ -297,6 +301,7 @@ export default function Home() {
     const updateMember = async (
         response: AdminCardResponse
     ) => {
+        console.log("Button called")
         try {
             const memberDoc = doc(db, "board", response.id);
             const docRef = await updateDoc(memberDoc, {
@@ -304,6 +309,7 @@ export default function Home() {
                 imagePath: response.image,
                 name: response.title,
                 position: response.description,
+                position_en: response.en_description,
             });
             console.log("Document written");
             alert("Member changed!");
@@ -320,6 +326,7 @@ export default function Home() {
                 imagePath: response.image,
                 name: response.title,
                 position: response.description,
+                position_en: response.en_description,
             });
             alert("Document writen with ID: " + docRef.id);
             window.location.reload();
@@ -675,7 +682,7 @@ export default function Home() {
                                         </ul>
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {boardMembers.map((member) => (
-                                                <AdminCard key={member.key} id={member.key} title={member.name} image={member.imagePath} description={member.position} board="juhatus" email={member.email} onClick={updateMember} onDelete={deleteMember}
+                                                <AdminCard key={member.key} id={member.key} title={member.name} image={member.imagePath} description={member.position} en_description={member.en_position} board="juhatus" email={member.email} onClick={updateMember} onDelete={deleteMember}
                                                 />
                                             ))}
                                             <AdminCard title="" image="" description="" board="juhatus" email="" onClick={createMember} />
@@ -706,35 +713,7 @@ export default function Home() {
                                                 Lisaks on ka olemas galerii, kuhu saab pilte juurde lisada.
                                             </li>
                                         </ul>
-                                        <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
-                                            <form
-                                                className="w-full flex flex-col gap-4 justify-center items-start"
-                                                onSubmit={addLink}
-                                            >
-                                                <h5>Lisa ürituse link</h5>
-                                                <label><span className="text-secondary">* </span>Ürituse nimi</label>
-                                                <input className="w-full" id="name" name="name" type="text" required placeholder="Don't Do IT" onChange={(e) => setName(e.target.value)} />
-                                                <label><span className="text-secondary">* </span>Aasta, millal antud üritus toimus</label>
-                                                <input className="w-full" id="year" name="year" type="text" required placeholder="2024" onChange={(e) => setDescription(e.target.value)} />
-                                                <label><span className="text-secondary">* </span>FB ürituse/muu koha link</label>
-                                                <input className="w-full" id="eventLink" name="banner" type="text" required placeholder="https://facebook.com/" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="Salvesta" />
-                                            </form>
-                                            <form
-                                                className="w-full flex flex-col gap-4 justify-center items-start"
-                                                onSubmit={addImageToGallery}
-                                            >
-                                                <h5>Lisa pilt galeriisse</h5>
-                                                <label><span className="text-secondary">* </span>Ürituse nimi</label>
-                                                <input
-                                                    className="w-full" id="name" name="name" type="text" required placeholder="Don't Do IT" onChange={(e) => setName(e.target.value)}
-                                                />
-                                                <label><span className="text-secondary">* </span>Pildi link</label>
-                                                <input className="w-full" id="banner" name="banner" type="text" required placeholder="/events/ddit.jpg" onChange={(e) => setBanner(e.target.value)} />
-                                                <Button variant="primary" type="submit" text="Salvesta" />
-                                            </form>
-                                        </div>
-
+                                        
                                         <h3>Üritused</h3>
                                         <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                                             <Button variant="secondary" onClick={() => setCategory("kõik")} text="Kõik" />
@@ -768,7 +747,7 @@ export default function Home() {
                                         </div>
 
                                         <div>
-                                            <h3>Ürituse gallerii</h3>
+                                            {curYear && <h3>Ürituse gallerii</h3>}
                                             {curYear && eventYears
                                                 .filter(year => year.key === curYear)
                                                 .map(year => (
@@ -781,7 +760,7 @@ export default function Home() {
                                                     )
                                                 ))
                                             }
-                                            <AdminCard key="" title="" image="" board="pilt" onClick={addImage}/>
+                                            {curYear && <AdminCard key="" title="" image="" board="pilt" onClick={addImage}/>}
                                         </div>
                                     </div>
                                 )

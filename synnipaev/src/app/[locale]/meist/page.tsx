@@ -9,10 +9,12 @@ import Timeline from "@/components/timeline";
 import uritused from "@/assets/images/uritused.jpg";
 import sobrad from "@/assets/images/sobrad.jpg";
 import { useDictionary } from "@/components/dictionary-provider";
+import { usePathname } from "next/navigation";
 
 interface BoardMember {
   name: string;
   position: string;
+  en_position: string;
   email: string;
   imagePath: string;
 }
@@ -26,6 +28,9 @@ interface Event {
 
 export default function Home() {
   //get dictionary
+  const pathname = usePathname();
+  const currentLocale = pathname?.split("/")[1];
+
   const dictionary = useDictionary().aboutus;
 
   const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
@@ -41,6 +46,7 @@ export default function Home() {
         return {
           name: data.name,
           position: data.position,
+          en_position: data.position_en,
           email: data.email,
           imagePath: data.imagePath,
         };
@@ -121,7 +127,7 @@ export default function Home() {
         <h2>{dictionary.boardtitle}</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
           {boardMembers.map((member) => (
-            <Card title={member.name} image={member.imagePath} description={member.position} board={true} email={member.email} />
+            <Card title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} board={true} email={member.email} />
           ))}
         </div>
       </div>

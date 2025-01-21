@@ -179,18 +179,6 @@ export default function EventPage({
                   </div>
               ))}
             </div>
-
-            {curEvent.gallery && curEvent.gallery.length > 0 ? (
-              <div className="justify-center items-start flex-col flex gap-8">
-                <h2>Galerii</h2>
-                <Gallery photos={curEvent.gallery} />
-              </div>
-            ) : (
-              <div className="justify-center items-start flex-col flex gap-8">
-                <h2>Galerii</h2>
-                <p className="italic">Ei ole pilte, mida näidata.</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
