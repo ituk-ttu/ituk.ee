@@ -28,20 +28,20 @@ const LanguageButton: React.FC<LanguageButtonProps> = ({
         return segments.join("/");
     };
 
-    const currentLocale = pathname?.split("/")[1] || "et";
+    const currentLocale = pathname?.split("/")[1];
 
     return (
         <div
             aria-label="Language Button"
             className="justify-start items-center flex-row flex gap-8"
         >
-            {currentLocale === "et" ? (
-                <Link href={redirectedPathname("en")} aria-label="English" onClick={onClick}>
-                    <Image src={English} alt="Switch to English" />
-                </Link>
-            ) : (
+            {currentLocale === "en" ? (
                 <Link href={redirectedPathname("et")} aria-label="Estonian" onClick={onClick}>
                     <Image src={Estonian} alt="Switch to Estonian" />
+                </Link>
+            ) : (
+                <Link href={redirectedPathname("en")} aria-label="English" onClick={onClick}>
+                    <Image src={English} alt="Switch to English" />
                 </Link>
             )}
         </div>
