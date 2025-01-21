@@ -3,17 +3,19 @@
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 import { query, collection, where, getDocs, DocumentData, doc, orderBy } from "firebase/firestore";
-import Gallery from "@/components/gallery/gallery";
 import Loading from "@/components/animations/loading";
 import Card from "@/components/cards/card";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDictionary } from "@/components/dictionary-provider";
 
 interface Event {
   category: string;
   banner: string;
   name: string;
+  en_name: string;
   description: string;
+  en_description: string;
   gallery?: { src: string; name: string }[];
   links?: Map<string, Map<string, string>>;
 }
@@ -34,6 +36,11 @@ export default function EventPage({
 }: {
   params: Promise<{ event: string }>;
 }) {
+  const pathname = usePathname();
+  const currentLocale = pathname?.split("/")[1];
+
+  const dictionary = useDictionary().event;
+
   const [curEvent, setCurEvent] = useState<Event | null>(null);
   const [eventHandle, setEventHandle] = useState<string | null>(null);
   const [eventYears, setEventYears] = useState<EventYear[]>([]);
@@ -83,7 +90,9 @@ export default function EventPage({
           category: data.category,
           banner: data.banner,
           name: data.name,
+          en_name: data.name_en,
           description: data.description,
+          en_description: data.description_en,
           gallery,
           links,
         };
@@ -142,21 +151,21 @@ export default function EventPage({
             style={{ backgroundImage: `url(${curEvent.banner})` }}
           >
             <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
-              <h1 className="big text-center">{curEvent.name}</h1>
+              <h1 className="big text-center">{currentLocale === "en" ? curEvent.en_name : curEvent.name}</h1>
             </div>
           </div>
 
           <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
             <div className="w-full justify-start items-start flex-col md:flex-row flex gap-16">
               <div className="w-full justify-center items-start flex-col flex gap-16">
-                <h2>Kirjeldus</h2>
-                <p>{curEvent.description}</p>
+                <h2>{dictionary.description}</h2>
+                <p>{currentLocale === "en" ? curEvent.en_description : curEvent.description}</p>
               </div>
             </div>
 
             {eventYears ? (
               <div className="w-full justify-center items-start flex-col flex gap-8">
-                <h2>Varasemad üritused</h2>
+                <h2>{dictionary.years}</h2>
                 <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
                   {eventYears.map((year) => (
                     <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
@@ -167,8 +176,8 @@ export default function EventPage({
               </div>
             ) : (
               <div className="w-full justify-center items-start flex-col flex gap-8">
-                <h2>Varasemad üritused</h2>
-                <p className="italic">Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud.</p>
+                <h2>{dictionary.years}</h2>
+                <p className="italic">{dictionary.noyears}</p>
               </div>
             )}
 

@@ -82,5 +82,15 @@
             "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
         }, 
         "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!"
+    },
+    "event": {
+        "description": "Kirjeldus",
+        "years": "Varasemad üritused",
+        "noyears": "Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud."
+    },
+    "year": {
+        "description": "Kirjeldus",
+        "extrainformation": "Lisainfo",
+        "gallery": "Galerii"
     }
 }

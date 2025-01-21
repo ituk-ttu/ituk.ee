@@ -43,7 +43,9 @@ interface Event {
     category: string;
     banner: string;
     name: string;
+    en_name: string;
     description: string;
+    en_description: string;
     handle: string;
     gallery?: string[];
     links?: Map<string, string>;
@@ -54,15 +56,19 @@ interface EventYear {
     banner: string;
     date: string;
     description: string;
+    en_description: string;
     extraInformation?: string;
+    en_extraInformation?: string;
     handle: string;
     gallery?: Map<string, string>;
     title: string;
+    en_title: string;
 }
 
 interface Rentables {
     key: string;
     name: string;
+    en_name: string;
     price: number;
     unit: string;
     imagePath: string;
@@ -88,6 +94,7 @@ export interface AdminCardResponse {
     handle: string;
     date: string;
     extraInformation: string;
+    en_extraInformation: string;
 }
 
 export default function Home() {
@@ -153,7 +160,9 @@ export default function Home() {
                     category: data.category,
                     banner: data.banner,
                     name: data.name,
+                    en_name: data.name_en,
                     description: data.description,
+                    en_description: data.description_en,
                     gallery: data.gallery ? data.gallery : undefined,
                     links: data.links ? new Map(Object.entries(data.links)) : undefined,
                 };
@@ -180,10 +189,13 @@ export default function Home() {
                     banner: data.banner,
                     date: data.date,
                     description: data.description,
+                    en_description: data.description_en,
                     extraInformation: data.extraInformation ? data.extraInformation : undefined,
+                    en_extraInformation: data.extraInformation_en ? data.extraInformation_en : undefined,
                     gallery: data.gallery ? new Map(Object.entries(data.gallery)) : undefined,
                     handle: data.handle,
-                    title: data.title
+                    title: data.title,
+                    en_title: data.title_en
                 };
             });
             setEventYears(eventYears);
@@ -207,6 +219,7 @@ export default function Home() {
                 return {
                     key: doc.id,
                     name: data.name,
+                    en_name: data.name_en,
                     price: data.price,
                     unit: data.unit,
                     imagePath: data.imagePath,
@@ -360,8 +373,10 @@ export default function Home() {
                 banner: response.image,
                 category: response.category,
                 description: response.description,
+                description_en: response.en_description,
                 handle: response.handle,
                 name: response.title,
+                name_en: response.en_title,
             });
             console.log("Document written");
             alert("Event updated");
@@ -377,8 +392,10 @@ export default function Home() {
                 banner: response.image,
                 category: response.category,
                 description: response.description,
+                description_en: response.en_description,
                 handle: response.handle,
                 name: response.title,
+                name_en: response.en_title,
             });
             alert("Document writen with ID: " + docRef.id);
             getEvents();
@@ -412,9 +429,12 @@ export default function Home() {
                 banner: response.image,
                 date: response.date,
                 description: response.description,
+                description_en: response.en_description,
                 handle: response.handle,
                 title: response.title,
-                extraInformation: response.extraInformation
+                title_en: response.en_title,
+                extraInformation: response.extraInformation,
+                extraInformation_en: response.en_extraInformation
             });
             console.log("Document written");
             alert("Event updated");
@@ -431,9 +451,12 @@ export default function Home() {
                 banner: response.image,
                 date: response.date,
                 description: response.description,
+                description_en: response.en_description,
                 handle: response.handle,
                 title: response.title,
-                extraInformation: response.extraInformation
+                title_en: response.en_title,
+                extraInformation: response.extraInformation,
+                extraInformation_en: response.en_extraInformation
             });
             alert("Document writen with ID: " + docRef.id);
             getEventYears(curEvent);
@@ -538,6 +561,7 @@ export default function Home() {
             const rentDoc = doc(db, "rent", response.id);
             const docRef = await updateDoc(rentDoc, {
                 name: response.title,
+                name_en: response.en_title,
                 imagePath: response.image,
                 price: +response.description,
                 unit: response.category,
@@ -556,6 +580,7 @@ export default function Home() {
         try {
             const docRef = await addDoc(collection(db, "rent"), {
                 name: response.title,
+                name_en: response.en_title,
                 imagePath: response.image,
                 price: +response.description,
                 unit: response.category,
@@ -724,10 +749,10 @@ export default function Home() {
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {events.map((event) => (
                                                 (category === "kõik" || category === event.category) && (
-                                                    <AdminCard key={event.key} id={event.key} title={event.name} image={event.banner} description={event.description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => handleEventSelect(id)} />
+                                                    <AdminCard key={event.key} id={event.key} title={event.name} en_title={event.en_name} image={event.banner} description={event.description} en_description={event.en_description} board="uritused" category={event.category} handle={event.handle} onClick={updateEvent} onDelete={deleteEvent} onSelect={(id) => handleEventSelect(id)} />
                                                 )
                                             ))}
-                                            <AdminCard title="" image="" description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
+                                            <AdminCard title="" en_title="" image="" description="" en_description="" board="uritused" category="" handle="" email="" onClick={createEvent} />
                                         </div>
 
                                         <h2>Hetkel valitud üritus</h2>
@@ -739,7 +764,7 @@ export default function Home() {
 
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {eventYears.map((eventYear) => (
-                                                <AdminCard key={eventYear.key} id={eventYear.key} title={eventYear.title} image={eventYear.banner} description={eventYear.description} board="aasta" handle={eventYear.handle} date={eventYear.date} extraInformation={eventYear.extraInformation} onClick={updateYear} onDelete={deleteYear} onSelect={(id) => setCurYear(id)} />
+                                                <AdminCard key={eventYear.key} id={eventYear.key} title={eventYear.title} en_title={eventYear.en_title} image={eventYear.banner} description={eventYear.description} en_description={eventYear.en_description} board="aasta" handle={eventYear.handle} date={eventYear.date} extraInformation={eventYear.extraInformation} en_extraInformation={eventYear.en_extraInformation} onClick={updateYear} onDelete={deleteYear} onSelect={(id) => setCurYear(id)} />
                                             ))}
                                             {curEvent && (
                                                 <AdminCard title="" image="" description="" board="aasta" handle="" date="" onClick={createYear} />
@@ -775,7 +800,7 @@ export default function Home() {
                                         </ul>
                                         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
                                             {rentables.map((rentable) => (
-                                                <AdminCard key={rentable.key} id={rentable.key} title={rentable.name} image={rentable.imagePath} description={rentable.price.toString()} category={rentable.unit} board="rent" onClick={updateRent} onDelete={deleteRent} />
+                                                <AdminCard key={rentable.key} id={rentable.key} title={rentable.name} en_title={rentable.en_name} image={rentable.imagePath} description={rentable.price.toString()} category={rentable.unit} board="rent" onClick={updateRent} onDelete={deleteRent} />
                                             ))}
                                             <AdminCard title="" image="" description="" category="" board="rent" onClick={createRent} />
                                         </div>

@@ -126,8 +126,8 @@ export default function Home() {
         </div>
         <h2>{dictionary.boardtitle}</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
-          {boardMembers.map((member) => (
-            <Card title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} board={true} email={member.email} />
+          {boardMembers.map((member, index) => (
+            <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} board={true} email={member.email} />
           ))}
         </div>
       </div>

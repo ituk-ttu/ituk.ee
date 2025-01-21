@@ -6,15 +6,20 @@ import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import Card from "@/components/cards/card";
 import { useDictionary } from '@/components/dictionary-provider';
+import { usePathname } from 'next/navigation';
 
 interface Rent {
   name: string;
+  en_name: string;
   price: number;
   unit: string;
   imagePath: string;
 }
 
 export default function Home() {
+  const pathname = usePathname();
+  const currentLocale = pathname?.split("/")[1];
+
   //get dictionary
   const dictionary = useDictionary().rent;
 
@@ -29,6 +34,7 @@ export default function Home() {
         const data = doc.data() as DocumentData;
         return {
           name: data.name,
+          en_name: data.name_en,
           price: data.price,
           unit: data.unit,
           imagePath: data.imagePath,
@@ -63,7 +69,7 @@ export default function Home() {
 
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
           {rentables.map((rent) => (
-            <Card title={rent.name} image={rent.imagePath} description={rent.price.toString() + " " + rent.unit} board={false} />
+            <Card title={currentLocale === "en" ? rent.en_name: rent.name} image={rent.imagePath} description={rent.price.toString() + " " + rent.unit} board={false} />
           ))}
         </div>
       </div>

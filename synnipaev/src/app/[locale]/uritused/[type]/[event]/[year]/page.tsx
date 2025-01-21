@@ -1,8 +1,10 @@
 "use client"
 
 import Loading from "@/components/animations/loading";
+import { useDictionary } from "@/components/dictionary-provider";
 import { db } from "@/firebase";
 import { collection, doc, DocumentData, getDocs, query, where } from "firebase/firestore";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface EventYear {
@@ -10,10 +12,13 @@ interface EventYear {
     banner: string;
     date: string;
     description: string;
+    en_description: string;
     extraInformation?: string;
+    en_extraInformation?: string;
     handle: string;
     gallery?: Map<string, string>;
     title: string;
+    en_title: string;
 }
 
 export default function Year({
@@ -21,6 +26,11 @@ export default function Year({
 }: {
     params: Promise<{ event: string, year: string }>;
 }) {
+    const pathname = usePathname();
+    const currentLocale = pathname?.split("/")[1];
+
+    const dictionary = useDictionary().year;
+
     const [eventHandle, setEventHandle] = useState<string>("");
     const [year, setYear] = useState<string>("");
     const [eventYear, setEventYear] = useState<EventYear>();
@@ -54,10 +64,13 @@ export default function Year({
                 banner: data.banner,
                 date: data.date,
                 description: data.description,
+                en_description: data.description_en,
                 extraInformation: data.extraInformation ? data.extraInformation : undefined,
+                en_extraInformation: data.extraInformation_ ? data.extraInformation_ : undefined,
                 gallery: data.gallery ? new Map(Object.entries(data.gallery)) : undefined,
                 handle: data.handle,
-                title: data.title
+                title: data.title,
+                en_title: data.title_en
             };
             console.log(eventYear);
             setEventYear(eventYear);
@@ -79,27 +92,27 @@ export default function Year({
                     style={{ backgroundImage: `url(${eventYear.banner})` }}
                 >
                     <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
-                        <h1 className="big text-center">{eventYear.title}</h1>
+                        <h1 className="big text-center">{currentLocale === "en" ? eventYear.en_title : eventYear.title}</h1>
                     </div>
                 </div>
 
                 <div className="flex flex-row items-start py-32 gap-16">
                     <div className="flex flex-col items-start gap-8">
-                        <h3>Kirjeldus</h3>
-                        <p>{eventYear.description}</p>
+                        <h3>{dictionary.description}</h3>
+                        <p>{currentLocale === "en" ? eventYear.en_description : eventYear.description}</p>
                     </div>
 
                     {eventYear.extraInformation && eventYear.extraInformation.length > 0 && (
                         <div className="flex flex-col items-start gap-8">
-                            <h3>Lisainfo</h3>
-                            <p>{eventYear.extraInformation}</p>
+                            <h3>{dictionary.extrainformation}</h3>
+                            <p>{currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation}</p>
                         </div>
                     )}
                 </div>
                 
                 {eventYear.gallery && eventYear.gallery.size > 0 && (
                     <div className="flex flex-col justify-center items-start py-32 gap-8">
-                        <h3>Galerii</h3>
+                        <h3>{dictionary.gallery}</h3>
                         {Array.from(eventYear.gallery.values()).map((image, index) => (
                             <div key={index}>
                             <img src={image} alt={`Gallery image ${index + 1}`} />

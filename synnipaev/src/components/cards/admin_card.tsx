@@ -18,6 +18,7 @@ interface CardProps {
     handle?: string;
     date?: string;
     extraInformation?: string;
+    en_extraInformation?: string;
     onClick?: ( response: AdminCardResponse) => void;
     onDelete?: (id: string) => void;
     onSelect? : (id: string) => void;
@@ -36,6 +37,7 @@ export default function AdminCard({
     handle,
     date,
     extraInformation,
+    en_extraInformation,
     onClick,
     onDelete,
     onSelect,
@@ -50,6 +52,7 @@ export default function AdminCard({
     const [_handle, setHandle] = useState(handle);
     const [_date, setDate] = useState(date);
     const [_extraInformation, setExtraInformation] = useState(extraInformation);
+    const [_en_extraInformation, setEnExtraInformation] = useState(en_extraInformation);
 
     const handleSubmit = () => {
         if (onClick) {
@@ -64,7 +67,8 @@ export default function AdminCard({
                 category: _category || "",
                 handle: _handle || "",
                 date: _date || "",
-                extraInformation: _extraInformation ||""
+                extraInformation: _extraInformation ||"",
+                en_extraInformation: _en_extraInformation ||""
             }
             onClick(response);
         }
@@ -116,8 +120,12 @@ export default function AdminCard({
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ürituse nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Ürituse nimi en</label>
+                        <input className="w-full" type="text" name="title" placeholder="Don't Do IT" onChange={(e) => setEnTitle(e.target.value)} value={_en_title} />
                         <label>Kirjeldus</label>
                         <textarea className="w-full" name="description" placeholder="Kirjeldus" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Kirjeldus en</label>
+                        <textarea className="w-full" name="description" placeholder="Description" onChange={(e) => setEnDescription(e.target.value)} value={_en_description} />
                         <label>Pildi link</label>
                         <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Kategooria</label>
@@ -141,10 +149,16 @@ export default function AdminCard({
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Ürituse nimi koos aastaga</label>
                         <input className="w-full" type="text" name="title" placeholder="Don't Do IT 2024" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Ürituse nimi koos aastaga en</label>
+                        <input className="w-full" type="text" name="title" placeholder="Don't Do IT 2024" onChange={(e) => setEnTitle(e.target.value)} value={_en_title} />
                         <label>Kirjeldus</label>
                         <textarea className="w-full" name="description" placeholder="Kirjeldus" onChange={(e) => setDescription(e.target.value)} value={_description} />
+                        <label>Kirjeldus en</label>
+                        <textarea className="w-full" name="description" placeholder="Description" onChange={(e) => setEnDescription(e.target.value)} value={_en_description} />
                         <label>Lisainfo</label>
                         <textarea className="w-full" name="extraInformation" placeholder="Lisainfo" onChange={(e) => setExtraInformation(e.target.value)} value={_extraInformation} />
+                        <label>Lisainfo en</label>
+                        <textarea className="w-full" name="extraInformation" placeholder="Extra information" onChange={(e) => setEnExtraInformation(e.target.value)} value={_en_extraInformation} />
                         <label>Pildi link</label>
                         <input className="w-full" type="text" name="imagePath" placeholder="/events/ddit.jpg" onChange={(e) => setImage(e.target.value)} value={_image} />
                         <label>Kuupäev</label>
@@ -187,6 +201,8 @@ export default function AdminCard({
                     <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
                         <label>Seadme nimi</label>
                         <input className="w-full" type="text" name="title" placeholder="Pikendusjuhtmed" onChange={(e) => setTitle(e.target.value)} value={_title} />
+                        <label>Seadme nimi en</label>
+                        <input className="w-full" type="text" name="title" placeholder="Extension cords" onChange={(e) => setEnTitle(e.target.value)} value={_en_title} />
                         <label>hind</label>
                         <input className="w-full" name="description" placeholder="5" onChange={(e) => setDescription(e.target.value)} value={_description} />
                         <label>Pildi link</label>
