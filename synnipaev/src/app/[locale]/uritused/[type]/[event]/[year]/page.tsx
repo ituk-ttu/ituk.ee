@@ -12,7 +12,7 @@ interface EventYear {
     description: string;
     extraInformation?: string;
     handle: string;
-    gallery?: string[];
+    gallery?: Map<string, string>;
     title: string;
 }
 
@@ -55,7 +55,7 @@ export default function Year({
                 date: data.date,
                 description: data.description,
                 extraInformation: data.extraInformation ? data.extraInformation : undefined,
-                gallery: data.gallery ? data.gallery : undefined,
+                gallery: data.gallery ? new Map(Object.entries(data.gallery)) : undefined,
                 handle: data.handle,
                 title: data.title
             };
@@ -97,10 +97,10 @@ export default function Year({
                     )}
                 </div>
                 
-                {eventYear.gallery && eventYear.gallery.length > 0 && (
+                {eventYear.gallery && eventYear.gallery.size > 0 && (
                     <div className="flex flex-col justify-center items-start py-32 gap-8">
                         <h3>Galerii</h3>
-                        {eventYear.gallery.map((image, index) => (
+                        {Array.from(eventYear.gallery.values()).map((image, index) => (
                             <div key={index}>
                             <img src={image} alt={`Gallery image ${index + 1}`} />
                           </div>
