@@ -18,27 +18,25 @@ interface Event {
 export default function EventType({
   params,
 }: {
-  params: { type: string }; // `params` is directly passed as an object, not a Promise
+  params: Promise<{ type: string }>;
 }) {
   const [events, setEvents] = useState<Event[]>([]);
   const [category, setCategory] = useState<string>("");
 
-  // Mapping for categories to titles
   const categoryTitles: Record<string, string> = {
     haridus: "Hariduslikud üritused",
     meelelahutus: "Meelelahutuslikud üritused",
     muu: "Sise- ja muud üritused",
   };
 
-  // Memoize getEvents to prevent unnecessary re-renders
   const getEvents = useCallback(async () => {
     try {
-      const { type } = params;
-      setCategory(type); // Set the category based on params
+      const resolvedParams = await params;
+      setCategory(resolvedParams.type);
 
       const q = query(
         collection(db, "events"),
-        where("category", "==", type)
+        where("category", "==", resolvedParams.type)
       );
       const querySnapshot = await getDocs(q);
       const fetchedEvents: Event[] = querySnapshot.docs.map((doc) => {
@@ -55,9 +53,8 @@ export default function EventType({
     } catch (error) {
       console.error("Error getting events: ", error);
     }
-  }, [params]); // useCallback ensures the function is memoized and only changes when `params` change
+  }, [params]);
 
-  // Trigger the effect when params change
   useEffect(() => {
     getEvents();
   }, [getEvents]);
@@ -65,23 +62,23 @@ export default function EventType({
   return (
     <div>
       <h1 className="hidden">{categoryTitles[category]}</h1>
-
       {events.length === 0 ? (
         <div className="main-min justify-center items-center flex-col flex gap-8">
           <h2>Laeb...</h2>
           <Loading />
         </div>
       ) : (
-        <div className={`main-min ${events.length <= 3 ? 'items-start flex-col sm:flex-row flex' : 'grid grid-cols-[repeat(auto-fit,minmax(100%,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(33.3333%,1fr))]'}`}>
-          {events.map((event, index) => {
-            const eventClass =
-              events.length <= 3
-                ? "triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex"
-                : "triple-height sm:h-screen double-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex";
+        <div
+          className={`main-min ${events.length <= 3
+            ? "items-start flex-col sm:flex-row flex"
+            : "grid grid-cols-[repeat(auto-fit,minmax(100%,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(33.3333%,1fr))]"
+            }`}
+        >
+          {events.map((event) => {
             const linkClass =
               events.length <= 3
                 ? "w-full sm:w-1/3 justify-center items-center bg-center bg-cover flex-col flex"
-                : "w-full justify-center items-center bg-center bg-cover bg-flex-col flex";
+                : "w-full justify-center items-center bg-center bg-cover flex-col flex";
 
             return (
               <Link
@@ -90,7 +87,7 @@ export default function EventType({
                 className={linkClass}
                 style={{ backgroundImage: `url(${event.banner})` }}
               >
-                <div className={eventClass}>
+                <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
                   <h2 className="p-8 title text-center">{event.name}</h2>
                 </div>
               </Link>

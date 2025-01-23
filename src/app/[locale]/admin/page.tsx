@@ -668,7 +668,7 @@ export default function Home() {
     } else {
         return (
             <div className="main-min">
-                <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
+                <div className="bg-[url('/headers/derp.jpg')] bg-top bg-cover text-align justify-center items-center flex-row flex">
                     <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
                         <div className="main-padding w-full h-full bg-epic-gradient">
                             <h1 className="text-center big">Dashboard</h1>
