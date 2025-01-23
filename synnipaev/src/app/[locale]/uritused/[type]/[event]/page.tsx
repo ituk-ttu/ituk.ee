@@ -130,13 +130,14 @@ export default function EventPage({
 
   const getImages = () => (
     eventYears.map((year) => (
-    year.gallery?.forEach((title, image) => {
-      const newMap = new Map(images);
-      newMap.set(title, image)
-      setImages(newMap)
-      console.log(images)}
+      year.gallery?.forEach((title, image) => {
+        const newMap = new Map(images);
+        newMap.set(title, image)
+        setImages(newMap)
+        console.log(images)
+      }
+      ))
     ))
-  ))
 
   useEffect(() => {
     getEvent();
@@ -169,7 +170,7 @@ export default function EventPage({
                 <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
                   {eventYears.map((year) => (
                     <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
-                      <Card title={year.title} image={year.banner} description={year.description} board={false} />
+                      <Card title={year.title} image={year.banner} description={year.description} type="default" />
                     </Link>
                   ))}
                 </div>
@@ -183,9 +184,9 @@ export default function EventPage({
 
             <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
               {images && Array.from(images.entries()).map(([title, image], index) => (
-                  <div key={index}>
-                    <img src={image} alt={title} />
-                  </div>
+                <div key={index}>
+                  <img src={image} alt={title} />
+                </div>
               ))}
             </div>
           </div>

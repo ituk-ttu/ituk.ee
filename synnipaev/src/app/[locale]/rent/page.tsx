@@ -69,7 +69,7 @@ export default function Home() {
 
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
           {rentables.map((rent) => (
-            <Card title={currentLocale === "en" ? rent.en_name: rent.name} image={rent.imagePath} description={rent.price.toString() + " " + rent.unit} board={false} />
+            <Card title={currentLocale === "en" ? rent.en_name : rent.name} image={rent.imagePath} description={rent.price.toString() + " " + rent.unit} type="default" />
           ))}
         </div>
       </div>

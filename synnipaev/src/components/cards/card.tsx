@@ -4,19 +4,21 @@ import Email from "@/assets/icons/email.svg";
 interface CardProps {
   title: string;
   image: string;
-  description: string;
-  board: boolean;
+  description?: string;
+  type: "default" | "board" | "list";
   email?: string;
+  listItems?: string[];
 }
 
 export default function Card({
   title,
   image,
   description,
-  board,
+  type,
   email = "",
+  listItems = [],
 }: CardProps) {
-  if (board) {
+  if (type === "board") {
     return (
       <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
         <img className="min-h-[284px] object-cover rounded-t-lg" src={image} alt={title} />
@@ -32,11 +34,25 @@ export default function Card({
         </div>
       </div>
     );
+  } else if (type === "list") {
+    return (
+      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
+        <img className="object-cover rounded-t-lg" src={image} alt={title} />
+        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
+          <h5 className="uppercase">{title}</h5>
+          <ul>
+            {listItems.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
         <img className="object-cover rounded-t-lg" src={image} alt={title} />
-        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-primary">
+        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
           <h5>{title}</h5>
           <p>{description}</p>
         </div>

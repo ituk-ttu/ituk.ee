@@ -10,6 +10,8 @@ import uritused from "@/assets/images/uritused.jpg";
 import sobrad from "@/assets/images/sobrad.jpg";
 import { useDictionary } from "@/components/dictionary-provider";
 import { usePathname } from "next/navigation";
+import ituk_struktuur from "@/assets/images/itük_struktuur.png";
+import Image from "next/image";
 
 interface BoardMember {
   name: string;
@@ -103,16 +105,51 @@ export default function Home() {
           </p>
         </div>
         <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
-          <Card image={uritused.src} title={dictionary.card1.title} description={dictionary.card1.description} board={false} />
-          <Card image={sobrad.src} title={dictionary.card2.title} description={dictionary.card2.description} board={false} />
+          <Card image={uritused.src} title={dictionary.card1.title} description={dictionary.card1.description} type="default" />
+          <Card image={sobrad.src} title={dictionary.card2.title} description={dictionary.card2.description} type="default" />
         </div>
       </div>
 
-      <div className="main-padding bg-primary justify-center items-center gap-16 flex-col md:flex-row flex">
-        <p className="items-center flex-col flex gap-4"><span className="big font-bold">{dictionary.statistics.stat1.title}</span>{dictionary.statistics.stat1.description}</p>
-        <p className="items-center flex-col flex gap-4"><span className="big font-bold">{dictionary.statistics.stat2.title}</span>{dictionary.statistics.stat2.description}</p>
-        <p className="items-center flex-col flex gap-4"><span className="big font-bold">{dictionary.statistics.stat3.title}</span>{dictionary.statistics.stat3.description}</p>
-        <p className="items-center flex-col flex gap-4"><span className="big font-bold">{dictionary.statistics.stat4.title}</span>{dictionary.statistics.stat4.description}</p>
+      <div className="main-padding bg-primary justify-center items-center gap-16 md:gap-32 flex-col md:flex-row flex">
+        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <span className="big font-bold">{dictionary.statistics.stat1.title}</span>
+          {dictionary.statistics.stat1.description}
+        </p>
+        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <span className="big font-bold">{dictionary.statistics.stat2.title}</span>
+          {dictionary.statistics.stat2.description}
+        </p>
+        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <span className="big font-bold">{dictionary.statistics.stat3.title}</span>
+          {dictionary.statistics.stat3.description}
+        </p>
+        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <span className="big font-bold">{dictionary.statistics.stat4.title}</span>
+          {dictionary.statistics.stat4.description}
+        </p>
+      </div>
+
+      <div className="main-padding justify-center items-center gap-16 flex-col md:flex-row flex">
+        <div className="w-full md:w-1/2 flex-col flex gap-8">
+          <h2>
+            {dictionary.structure}
+          </h2>
+          <p>
+            {dictionary.howmany}
+          </p>
+          <ul>
+            <li>{dictionary.statuses.status1}</li>
+            <li>{dictionary.statuses.status2}</li>
+            <li>{dictionary.statuses.status3}</li>
+            <li>{dictionary.statuses.status4}</li>
+          </ul>
+          <p>
+            {dictionary.structure2}
+            <br /><br />
+            {dictionary.structure3}
+          </p>
+        </div>
+        <Image className="w-full md:w-1/2" src={ituk_struktuur} alt="ITÜKi struktuur 2025" />
       </div>
 
       <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
@@ -127,10 +164,10 @@ export default function Home() {
         <h2>{dictionary.boardtitle}</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
           {boardMembers.map((member, index) => (
-            <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} board={true} email={member.email} />
+            <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} type="board" email={member.email} />
           ))}
         </div>
       </div>
-    </div>
+    </div >
   );
 }

@@ -18,6 +18,8 @@ export default {
         'instagram': '#ff0069',
         'github': '#2dba4e',
         'extra': '#87004280',
+        'nortal': '#009639',
+        'netgroup': '#fc3056',
       },
       screens: {
         sm: '640px',

@@ -26,7 +26,7 @@ export default function Timeline({
   } else if (type === "left") {
     return (
       <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
-        <Card title={title} image={imagePath} description={description} board={false} />
+        <Card title={title} image={imagePath} description={description} type="default" />
         <div className="h-16 bg-light w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
           <div className="flex-grow bg-light w-1"></div>
@@ -47,7 +47,7 @@ export default function Timeline({
   } else if (type === "right") {
     return (
       <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row-reverse flex">
-        <Card title={title} image={imagePath} description={description} board={false} />
+        <Card title={title} image={imagePath} description={description} type="default" />
         <div className="h-16 bg-light w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
           <div className="flex-grow bg-light w-1"></div>

@@ -738,7 +738,7 @@ export default function Home() {
                                                 Lisaks on ka olemas galerii, kuhu saab pilte juurde lisada.
                                             </li>
                                         </ul>
-                                        
+
                                         <h3>Üritused</h3>
                                         <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                                             <Button variant="secondary" onClick={() => setCategory("kõik")} text="Kõik" />
@@ -758,7 +758,7 @@ export default function Home() {
                                         <h2>Hetkel valitud üritus</h2>
                                         {events.map((_event) => (
                                             (_event.key === curEvent) && (
-                                                <Card title={_event.name} image={_event.banner} description={_event.description} board={false} />
+                                                <Card title={_event.name} image={_event.banner} description={_event.description} type="default" />
                                             )
                                         ))}
 
@@ -778,14 +778,14 @@ export default function Home() {
                                                 .map(year => (
                                                     year.gallery ? (
                                                         Array.from(year.gallery.entries()).map(([title, image]) => (
-                                                            <AdminCard key={title} id={title} title={title} image={image} onDelete={deleteImage} board="pilt"/>
+                                                            <AdminCard key={title} id={title} title={title} image={image} onDelete={deleteImage} board="pilt" />
                                                         ))
                                                     ) : (
                                                         <p key="no-images">Galleriis puuduvad pildid</p>
                                                     )
                                                 ))
                                             }
-                                            {curYear && <AdminCard key="" title="" image="" board="pilt" onClick={addImage}/>}
+                                            {curYear && <AdminCard key="" title="" image="" board="pilt" onClick={addImage} />}
                                         </div>
                                     </div>
                                 )
