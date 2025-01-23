@@ -6,6 +6,7 @@ import { db } from "@/firebase";
 import { collection, doc, DocumentData, getDocs, query, where } from "firebase/firestore";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import Gallery from "@/components/gallery/gallery";
 
 interface EventYear {
     key: string;
@@ -51,7 +52,7 @@ export default function Year({
             const eventQuerry = query(
                 collection(db, "events"),
                 where("handle", "==", eventHandle)
-              );
+            );
             const eventQuerySnapshot = await getDocs(eventQuerry);
             const eventRef = doc(db, "events", eventQuerySnapshot.docs[0].id);
             const yearRef = collection(eventRef, "years");
@@ -86,40 +87,45 @@ export default function Year({
 
     if (eventYear) {
         return (
-            <div className="flex flex-col items-center">
-                <div
-                    className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
-                    style={{ backgroundImage: `url(${eventYear.banner})` }}
-                >
-                    <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
-                        <h1 className="big text-center">{currentLocale === "en" ? eventYear.en_title : eventYear.title}</h1>
-                    </div>
-                </div>
-
-                <div className="flex flex-row items-start py-32 gap-16">
-                    <div className="flex flex-col items-start gap-8">
-                        <h3>{dictionary.description}</h3>
-                        <p>{currentLocale === "en" ? eventYear.en_description : eventYear.description}</p>
-                    </div>
-
-                    {eventYear.extraInformation && eventYear.extraInformation.length > 0 && (
-                        <div className="flex flex-col items-start gap-8">
-                            <h3>{dictionary.extrainformation}</h3>
-                            <p>{currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation}</p>
+            <div className="main-min">
+                <div className="flex flex-col items-center">
+                    <div
+                        className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
+                        style={{ backgroundImage: `url(${eventYear.banner})` }}
+                    >
+                        <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
+                            <h1 className="big text-center">{currentLocale === "en" ? eventYear.en_title : eventYear.title}</h1>
                         </div>
-                    )}
-                </div>
-                
-                {eventYear.gallery && eventYear.gallery.size > 0 && (
-                    <div className="flex flex-col justify-center items-start py-32 gap-8">
-                        <h3>{dictionary.gallery}</h3>
-                        {Array.from(eventYear.gallery.values()).map((image, index) => (
-                            <div key={index}>
-                            <img src={image} alt={`Gallery image ${index + 1}`} />
-                          </div>
-                        ))}
                     </div>
-                )}
+
+                    <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
+                        <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
+                            <div className="w-full justify-center items-start flex-col flex gap-16">
+                                <h2>{dictionary.description}</h2>
+                                <p>{currentLocale === "en" ? eventYear.en_description : eventYear.description}</p>
+                            </div>
+
+                            {eventYear.extraInformation && eventYear.extraInformation.length > 0 && (
+                                <div className="w-full justify-center items-start flex-col flex gap-8">
+                                    <h3>{dictionary.extrainformation}</h3>
+                                    <p>{currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {eventYear.gallery && eventYear.gallery.size > 0 && (
+                            <div className="w-full justify-center items-start flex-col flex gap-8">
+                                <h3>{dictionary.gallery}</h3>
+                                <Gallery
+                                    photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({
+                                        src,
+                                        name,
+                                    }))}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         )
     } else {
