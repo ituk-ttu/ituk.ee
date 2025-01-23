@@ -109,6 +109,6 @@ export default function Home() {
         <p className="text-center">{dictionary.goal}</p>
         <h3 className="text-center">{dictionary.contact} <a className="contact text-secondary underline" href="mailto:kontakt@ituk.ee">kontakt@ituk.ee</a> {dictionary.contact2}</h3>
       </div>
-    </div >
+    </div>
   )
 }
