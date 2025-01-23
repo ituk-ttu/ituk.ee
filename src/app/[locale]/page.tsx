@@ -1,0 +1,61 @@
+import Image from "next/image";
+import tux_cover from "@/assets/images/tux_cover.png";
+import Button from "@/components/buttons/button";
+import { Locale } from "../../../i18nConfig";
+import { getDictionary } from "@/dictionaries/dictionaries";
+
+export default async function Home(props: {
+  params: Promise<{ locale: Locale }>
+}) {
+  const { locale } = await props.params;
+
+  const dictionary = (await getDictionary(locale)).home;
+  return (
+    <div>
+      <div className="relative w-full h-full">
+        {/* Video Background */}
+        <video className="absolute top-0 left-0 w-full h-full object-cover" src="/itünk.mp4" autoPlay loop muted playsInline />
+        <div className="absolute z-10 top-0 left-0 w-full h-full object-cover bg-[#000000bf]" />
+        <div className="relative z-20 justify-between items-end px-[6.9%] flex-row flex">
+          <div className="h-full w-screen lg:w-1/2 justify-center py-24 items-start flex-col flex">
+            <div className="items-start gap-16 flex-col flex">
+              <div className="bg-primary">
+                <h1 className="font-bold giant lowercase">&gt;itük_</h1>
+              </div>
+              <p className="lead font-bold">{dictionary.hero}</p>
+              <div className="gap-8 flex-col sm:flex-row flex">
+                <Button variant="primary" big={true} text={dictionary.joinus} to="https://liitu.ituk.ee/" />
+                <Button variant="secondary" big={true} text={dictionary.readaboutus} to="/meist" />
+              </div>
+            </div>
+          </div>
+          <div className="hidden lg:w-1/2 justify-end items-end flex-col lg:flex">
+            <Image src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+          </div>
+        </div>
+      </div>
+
+      <div className="main-padding justify-start items-start flex-col lg:flex-row flex gap-32">
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+        <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
+          <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
+            <h2 className="lead">{dictionary.events}</h2>
+          </div>
+          <p>{dictionary.eventsdesc}</p>
+          <Button variant="primary" big={true} text={dictionary.eventsbutton} to="/uritused" />
+        </div>
+      </div>
+
+      <div className="main-padding justify-start items-start flex-col lg:flex-row flex gap-32">
+        <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
+          <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
+            <h2 className="lead">{dictionary.coop}</h2>
+          </div>
+          <p>{dictionary.coopdesc}</p>
+          <Button variant="primary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
+        </div>
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+      </div>
+    </div >
+  );
+}
