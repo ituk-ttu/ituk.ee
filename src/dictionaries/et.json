@@ -1,0 +1,136 @@
+{
+    "navbar": {
+        "aboutus": "Meist",
+        "events": "Üritused",
+        "partners": "Koostöö",
+        "rent": "Rent",
+        "join": "Liitu"
+    },
+    "footer": {
+        "style": "Stiiliraamat"
+    },
+    "home": {
+        "hero": "Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.",
+        "joinus": "Liitu meiega",
+        "readaboutus": "Loe meist lähemalt",
+        "events": "Hinge(matvad) üritused",
+        "eventsdesc": "Meie ürituste ampluaas on kõike, alates harivatest õpiõhtutest kuni suurejoonelise Tudengibaarini välja.",
+        "eventsbutton": "Vaata üritusi",
+        "coop": "Koostöö ITÜKiga",
+        "coopdesc": "Meil on pikaajaline kogemus erinevate ettevõtete, organisatsioonide ja ülikoolidega koostöö tegemisel.",
+        "coopbutton": "Vaata koostöövõimalusi"
+    },
+    "aboutus": {
+        "whatis": "Mis on ITÜK?",
+        "answer": "ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on...",
+        "answer2": "...tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.",
+        "answer3": "Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.",
+        "card1": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card2": {
+            "title": "Sõbrad kogu eluks",
+            "description": "ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!"
+        },
+        "statistics": {
+            "stat1": {
+                "title": "20",
+                "description": "aastat ajalugu"
+            },
+            "stat2": {
+                "title": "1200+",
+                "description": "liiget läbi aegade"
+            },
+            "stat3": {
+                "title": "62",
+                "description": "aktiivset liiget"
+            },
+            "stat4": {
+                "title": "1",
+                "description": "eesmärk"
+            }
+        },
+        "structure": "ITÜKi struktuur",
+        "howmany": "ITÜKis on neli liikmestaatust:",
+        "statuses": {
+            "status1": "Noorliige (organisatsiooniga liitudes);",
+            "status2": "Täisliige (aktiivsuskriteeriumite täitmisel);",
+            "status3": "Vilistlased (peale kooli lõpetamist);",
+            "status4": "Juhatuse liige (organisatsiooni esindav liige)."
+        },
+        "structure2": "Igal kevadel valivad täisliikmed uue esimehe ja aseesimehed, kes moodustavad juhatuse üheks aastaks. Aseesimehed vastutavad erinevate valdkondade eest.",
+        "structure3": "Juhatusse kandideerida saavad kõik liikmed olenemata staatusest. Täisliikmeks saavad aga need, kes on osalenud aktiivselt ürituste või muude projektide korraldamisel ja elluviimisel.",
+        "historytitle": "ITÜK läbi aegade",
+        "boardtitle": "2024/2025. õppeaasta juhatus"
+    },
+    "events": {
+        "education": "Haridus",
+        "entertainment": "Meelelahutus",
+        "other": "Sise- ja muud üritused"
+    },
+    "rent": {
+        "header": "Tehnika rent",
+        "request": "Saada päring meile siit: ",
+        "NB": "NB! Hind kehtib ürituse/päeva kohta!"
+    },
+    "join": {
+        "header": "Liitu meiega",
+        "text1": "Miks liituda just meie tudengiorganisatsiooniga?",
+        "card1": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card2": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card3": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "card4": {
+            "title": "Ürituste korraldamine",
+            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+        },
+        "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!"
+    },
+    "event": {
+        "description": "Kirjeldus",
+        "years": "Varasemad üritused",
+        "noyears": "Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud."
+    },
+    "year": {
+        "description": "Kirjeldus",
+        "extrainformation": "Lisainfo",
+        "gallery": "Galerii"
+    },
+    "partners": {
+        "header": "Koostöö",
+        "partners": "Meie suurtoetajad",
+        "studentorgs": "Koostöö tudengiorganisatsioonidega",
+        "offer": "Mida ITÜK partnerile pakkuda saab?",
+        "statistics": {
+            "stat1": {
+                "title": "1070",
+                "description": "jälgijat Instagramis"
+            },
+            "stat2": {
+                "title": "1900",
+                "description": "jälgijat Facebookis"
+            },
+            "stat3": {
+                "title": "320",
+                "description": "liiget Discordis"
+            },
+            "stat4": {
+                "title": "30+",
+                "description": "üritust aastas"
+            }
+        },
+        "wish": "Soovid kaasa aidata IT tulevikutegijate arengule?",
+        "goal": "Meie eesmärk on edendada tudengite haridust, heaolu ja kogukonna sidusust, korraldades unustamatuid üritusi ja pakkudes väärtuslikke kogemusi. Teie toetusega saame ellu viia veelgi suuremaid ja silmapaistvamaid projekte.",
+        "contact": "Võta meiega ühendust",
+        "contact2": "ja koos muudame suured ideed tegelikkuseks!"
+    }
+}
