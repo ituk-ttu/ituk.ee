@@ -18,7 +18,7 @@ export default function Home() {
                         TalTechi IT-teaduskonna üliõpilaskogu stiiliraamat en
                     </h1>
                     <h1 className="small">
-                        viimati uuendatud xx. jaanuar 2025
+                        viimati uuendatud 23. jaanuar 2025
                     </h1>
                     <p>ITÜK on Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu.
                         Seetõttu järgime väga suures osas TalTechi stiiliraamatut.</p>

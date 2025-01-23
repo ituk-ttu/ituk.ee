@@ -1,130 +1,136 @@
 {
     "navbar": {
-        "aboutus": "About",
+        "aboutus": "About us",
         "events": "Events",
         "partners": "Partners",
-        "rent": "Rent",
+        "rent": "Rental",
         "join": "Join us"
     },
     "footer": {
-        "style": "Style book"
+        "style": "Style guide"
     },
     "home": {
         "hero": "We are students who carry the voice of others, promote education and bring unforgettable experiences to student life.",
         "joinus": "Join us",
-        "readaboutus": "Read more about us"
+        "readaboutus": "Read more about us",
+        "events": "Breath(taking) events",
+        "eventsdesc": "Our events include everything from educational study nights to a spectacular student bar.",
+        "eventsbutton": "See events",
+        "coop": "Cooperation with ITÜK",
+        "coopdesc": "We have a long track record of working with a wide range of companies, organisations and universities.",
+        "coopbutton": "See opportunities"
     },
     "aboutus": {
-        "whatis": "Mis on ITÜK?",
-        "answer": "ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu...",
-        "answer2": "...on tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.",
-        "answer3": "Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.",
+        "whatis": "What is ITÜK?",
+        "answer": "ITÜK or TalTech Student Council of the School of Information Technologies is...",
+        "answer2": "...a student organization, whose goal is to represent the interests of the IT-faculty students, and further their education, well-being and offer them entertainment. ITÜK is an abbreviation in Estonian that stands for 'IT-teaduskonna üliõpilaskogu'.",
+        "answer3": "We have members from all the IT-faculty study programmes, who are active, helpful and give a voice to the other students and who can help with studies or everyday problems.",
         "card1": {
-            "title": "Ürituste korraldamine",
-            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+            "title": "Organising events",
+            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
         "card2": {
-            "title": "Sõbrad kogu eluks",
-            "description": "ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!"
+            "title": "Friends for life",
+            "description": "From ITÜK, you can find friends and like-minded students, with whom you can take on future challenges and do great deeds with!"
         },
         "statistics": {
             "stat1": {
                 "title": "20",
-                "description": "aastat ajalugu"
+                "description": "years of history"
             },
             "stat2": {
                 "title": "1200+",
-                "description": "liiget läbi aegade"
+                "description": "members through the years"
             },
             "stat3": {
                 "title": "62",
-                "description": "aktiivset liiget"
+                "description": "active members"
             },
             "stat4": {
                 "title": "1",
-                "description": "eesmärk"
+                "description": "goal"
             }
         },
-        "structure": "ITÜKi struktuur",
-        "howmany": "ITÜKis on neli liikmestaatust:",
+        "structure": "Structure of ITÜK",
+        "howmany": "ITÜK has four member statuses:",
         "statuses": {
-            "status1": "Noorliige (organisatsiooniga liitudes);",
-            "status2": "Täisliige (aktiivsuskriteeriumite täitmisel);",
-            "status3": "Vilistlased (peale kooli lõpetamist);",
-            "status4": "Juhatuse liige (organisatsiooni esindav liige)."
+            "status1": "Member (Joining the organisation);",
+            "status2": "Full member (Fulfilling the activity criteria);",
+            "status3": "Alumni (Leaving the organisation or graduating after being a full member for a year);",
+            "status4": "Board member (A member who represents the organisation)."
         },
-        "structure2": "Igal kevadel valivad täisliikmed uue esimehe ja aseesimehed, kes moodustavad juhatuse üheks aastaks. Aseesimehed vastutavad erinevate valdkondade eest.",
-        "structure3": "Juhatusse kandideerida saavad kõik liikmed olenemata staatusest. Täisliikmeks saavad aga need, kes on osalenud aktiivselt ürituste või muude projektide korraldamisel ja elluviimisel.",
-        "historytitle": "ITÜK läbi aegade",
-        "boardtitle": "2024/2025. õppeaasta juhatus"
+        "structure2": "Every spring the full members elect board members and a chairman who make up the organisation board for a year. Board members are responsible for their respective areas.",
+        "structure3": "All members of ITÜK can run for the board, no matter their member status. But to become a full member one must actively help with organising and creating events or other projects.",
+        "historytitle": "ITÜK through the years",
+        "boardtitle": "Board of the 2024/2025 academic year"
     },
     "events": {
-        "education": "Haridus",
-        "entertainment": "Meelelahutus",
-        "other": "Sise- ja muud üritused"
+        "education": "Education",
+        "entertainment": "Entertainment",
+        "other": "Internal and other events"
     },
     "rent": {
-        "header": "Tehnika rent",
-        "request": "Saada päring meile siit: ",
-        "NB": "NB! Hind kehtib ürituse/päeva kohta!"
+        "header": "Electronics rental",
+        "request": "Make a request here: ",
+        "NB": "NB! Price is per event/day!"
     },
     "join": {
-        "header": "Liitu meiega",
-        "text1": "Miks liituda just meie tudengiorganisatsiooniga?",
+        "header": "Join us",
+        "text1": "Why join our student organisation?",
         "card1": {
-            "title": "Ürituste korraldamine",
-            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+            "title": "Organising events",
+            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
         "card2": {
-            "title": "Ürituste korraldamine",
-            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+            "title": "Organising events",
+            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
         "card3": {
-            "title": "Ürituste korraldamine",
-            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+            "title": "Organising events",
+            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
         "card4": {
-            "title": "Ürituste korraldamine",
-            "description": "Jäta oma märk maha korraldades üritusi ja luues unustamatuid hetki nii endale kui kaastudengitele!"
+            "title": "Organising events",
+            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
-        "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!"
+        "text2": "So if You're ready for a thrilling journey, don't wait and join us today!"
     },
     "event": {
-        "description": "Kirjeldus",
-        "years": "Varasemad üritused",
-        "noyears": "Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud."
+        "description": "Description",
+        "years": "Past events",
+        "noyears": "There are no events to display. Events probably lacked public advertisements(i.e. internal events) or there were no events organised."
     },
     "year": {
-        "description": "Kirjeldus",
-        "extrainformation": "Lisainfo",
-        "gallery": "Galerii"
+        "description": "Description",
+        "extrainformation": "Additional information",
+        "gallery": "Gallery"
     },
     "partners": {
-        "header": "Koostöö",
-        "partners": "Meie suurtoetajad",
-        "studentorgs": "Koostöö tudengiorganisatsioonidega",
-        "offer": "Mida ITÜK partnerile pakkuda saab?",
+        "header": "Collaboration",
+        "partners": "Our main collaborators",
+        "studentorgs": "Collaboration with other student organisations",
+        "offer": "What can ITÜK offer their partners?",
         "statistics": {
             "stat1": {
                 "title": "1070",
-                "description": "jälgijat Instagramis"
+                "description": "followers on Instagram"
             },
             "stat2": {
                 "title": "1900",
-                "description": "jälgijat Facebookis"
+                "description": "followers on Facebook"
             },
             "stat3": {
                 "title": "320",
-                "description": "liiget Discordis"
+                "description": "members on Discord"
             },
             "stat4": {
                 "title": "30+",
-                "description": "üritust aastas"
+                "description": "events every year"
             }
         },
-        "wish": "Soovid kaasa aidata IT tulevikutegijate arengule?",
-        "goal": "Meie eesmärk on edendada tudengite haridust, heaolu ja kogukonna sidusust, korraldades unustamatuid üritusi ja pakkudes väärtuslikke kogemusi. Teie toetusega saame ellu viia veelgi suuremaid ja silmapaistvamaid projekte.",
-        "contact": "Võta meiega ühendust",
-        "contact2": "ja koos muudame suured ideed tegelikkuseks!"
+        "wish": "Want to support the development of the future of IT?",
+        "goal": "Our goal is to further the education, well-being and sense of community of studens by organising unforgettable events and offering valuable experiences. With your support we can create even bigger and more memorable events!",
+        "contact": "Contact us",
+        "contact2": "and together we can make great ideas a reality!"
     }
 }

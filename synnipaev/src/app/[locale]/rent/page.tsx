@@ -52,7 +52,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="main-min">
       <div className="justify-center items-center bg-rent-bg bg-center bg-cover flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
           <div className="main-padding w-full h-full bg-epic-gradient">

@@ -38,8 +38,6 @@ export default function Timeline({
         <div className="w-full justify-center flex-col hidden sm:flex">
           <h4>{year?.toLocaleString('et-EE', {
             year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
           })}</h4>
         </div>
       </div>
@@ -59,8 +57,6 @@ export default function Timeline({
         <div className="w-full justify-center items-end flex-col hidden sm:flex">
           <h4>{year?.toLocaleString('et-EE', {
             year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
           })}</h4>
         </div>
       </div>

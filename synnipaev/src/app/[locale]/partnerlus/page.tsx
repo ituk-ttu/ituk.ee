@@ -15,6 +15,7 @@ interface StudentOrg {
   name: string;
   en_name: string;
   imagePath: string;
+  link: string;
   projects?: string[];
 }
 
@@ -37,6 +38,7 @@ export default function Home() {
           name: data.name,
           en_name: data.name_en,
           imagePath: data.imagePath,
+          link: data.link,
           projects: data.projects,
         };
       });
@@ -51,7 +53,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="main-min">
       <div className="justify-center items-center bg-cooperation-bg bg-center bg-cover flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
           <div className="main-padding w-full h-full bg-epic-gradient">
@@ -76,7 +78,7 @@ export default function Home() {
         <h2 className="text-center break-all">{dictionary.studentorgs}</h2>
         <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
           {studentOrgs.map((partner, index) => (
-            <Card key={index} title={currentLocale === "en" ? partner.en_name : partner.name} image={partner.name} listItems={partner.projects} type="list" />
+            <Card key={index} link={partner.link} title={currentLocale === "en" ? partner.en_name : partner.name} image={partner.imagePath} listItems={partner.projects} type="list" />
           ))}
         </div>
       </div>

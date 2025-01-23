@@ -17,7 +17,7 @@ export default function Footer({
 }) {
 
   return (
-    <footer className="main-container main-padding dark shadow-filled justify-between items-center flex-col gap-auto md:flex-row gap-32 md:gap-auto flex">
+    <footer className="z-50 main-container main-padding dark shadow-filled justify-between items-center flex-col gap-auto md:flex-row gap-32 md:gap-auto flex">
       <div className="justify-between items-start gap-4 flex-col flex">
         <div className="justify-start items-center gap-4 flex-row flex">
           <Image src={email} alt="E-mail" />

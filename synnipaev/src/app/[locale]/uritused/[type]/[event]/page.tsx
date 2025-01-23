@@ -167,10 +167,10 @@ export default function EventPage({
             {eventYears ? (
               <div className="w-full justify-center items-start flex-col flex gap-8">
                 <h2>{dictionary.years}</h2>
-                <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
+                <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
                   {eventYears.map((year) => (
                     <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
-                      <Card title={year.title} image={year.banner} description={year.description} type="default" />
+                      <Card title={year.title} image={year.banner} type="default" />
                     </Link>
                   ))}
                 </div>

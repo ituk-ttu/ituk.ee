@@ -12,12 +12,18 @@
     "home": {
         "hero": "Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.",
         "joinus": "Liitu meiega",
-        "readaboutus": "Loe meist lähemalt"
+        "readaboutus": "Loe meist lähemalt",
+        "events": "Hinge(matvad) üritused",
+        "eventsdesc": "Meie ürituste ampluaas on kõike, alates harivatest õpiõhtutest kuni suurejoonelise Tudengibaarini välja.",
+        "eventsbutton": "Vaata üritusi",
+        "coop": "Koostöö ITÜKiga",
+        "coopdesc": "Meil on pikaajaline kogemus erinevate ettevõtete, organisatsioonide ja ülikoolidega koostöö tegemisel.",
+        "coopbutton": "Vaata koostöövõimalusi"
     },
     "aboutus": {
         "whatis": "Mis on ITÜK?",
-        "answer": "ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu...",
-        "answer2": "...on tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.",
+        "answer": "ITÜK ehk TalTechi IT-teaduskonna üliõpilaskogu on...",
+        "answer2": "...tudengiorganisatsioon, mille eesmärgiks on IT-teaduskonna tudengite huvide esindamine ning nende hariduse, heaolu ja meelelahutuse edendamine, korraldades õppeaasta vältel mitmeid ägedaid üritusi.",
         "answer3": "Meie liikmed, kes õpivad erinevatel infotehnoloogia õppekavadel, on aktiivsed ja abivalmid tudengid, kes annavad tudengitele hääle ja aitavad igapäevaelu ja õpingutega seotud probleemidele lahendusi leida.",
         "card1": {
             "title": "Ürituste korraldamine",

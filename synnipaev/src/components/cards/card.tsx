@@ -8,6 +8,7 @@ interface CardProps {
   type: "default" | "board" | "list";
   email?: string;
   listItems?: string[];
+  link?: string;
 }
 
 export default function Card({
@@ -17,11 +18,12 @@ export default function Card({
   type,
   email = "",
   listItems = [],
+  link,
 }: CardProps) {
-  if (type === "board") {
-    return (
-      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-        <img className="min-h-[284px] object-cover rounded-t-lg" src={image} alt={title} />
+  const cardContent = (
+    <div className="h-full w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
+      <img className="object-fill object-center rounded-t-lg" src={image} alt={title} />
+      {type === "board" && (
         <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
           <h5>{title}</h5>
           <p className="h-[50px]">{description}</p>
@@ -32,12 +34,8 @@ export default function Card({
             </a>
           </div>
         </div>
-      </div>
-    );
-  } else if (type === "list") {
-    return (
-      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-        <img className="object-cover rounded-t-lg" src={image} alt={title} />
+      )}
+      {type === "list" && (
         <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
           <h5 className="uppercase">{title}</h5>
           <ul>
@@ -46,17 +44,21 @@ export default function Card({
             ))}
           </ul>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-        <img className="object-cover rounded-t-lg" src={image} alt={title} />
+      )}
+      {type === "default" && (
         <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
           <h5>{title}</h5>
           <p>{description}</p>
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
+
+  return link ? (
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      {cardContent}
+    </a>
+  ) : (
+    cardContent
+  );
 }
