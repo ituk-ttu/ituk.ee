@@ -18,7 +18,6 @@ interface StudentOrg {
   projects?: string[];
 }
 
-
 export default function Home() {
   const pathname = usePathname();
   const currentLocale = pathname?.split("/")[1];
