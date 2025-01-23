@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function NotFound() {
   return (
-    <div className="bg-derp-bg bg-top bg-cover text-align justify-center items-center flex-row flex">
+    <div className="bg-[url('/headers/derp.jpg')] bg-top bg-cover text-align justify-center items-center flex-row flex">
       <div className="bg-extra justify-center items-center flex-row flex">
         <div className="w-screen main-padding bg-epic-gradient justify-center items-center flex-col md:flex-row flex gap-16">
           <div className="w-full md:w-1/3 flex-row justify-center items-end flex">

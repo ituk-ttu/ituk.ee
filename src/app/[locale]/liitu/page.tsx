@@ -12,7 +12,7 @@ export default function Home() {
     const dictionary = useDictionary().join;
     return (
         <div>
-            <div className="justify-center items-center bg-join-bg bg-center bg-cover flex-row flex">
+            <div className="justify-center items-center bg-[url('/headers/liitu.jpg')] bg-center bg-cover flex-row flex">
                 <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
                     <div className="main-padding w-full h-full bg-epic-gradient">
                         <h1 className="text-center big">{dictionary.header}</h1>

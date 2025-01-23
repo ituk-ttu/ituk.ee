@@ -87,7 +87,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="bg-about-bg bg-center bg-cover text-align justify-center items-center flex-row flex">
+      <div className="bg-[url('/headers/about.jpg')] bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
           <div className="main-padding w-full h-full bg-epic-gradient">
             <h1 className="text-center big">{dictionary.whatis}</h1>
