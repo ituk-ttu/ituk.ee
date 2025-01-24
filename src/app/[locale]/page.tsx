@@ -15,7 +15,6 @@ export default async function Home(props: {
   return (
     <div>
       <div className="relative w-full h-full">
-        {/* Video Background */}
         <video className="absolute top-0 left-0 w-full h-full object-cover" src="/itünk.mp4" autoPlay loop muted playsInline />
         <div className="absolute z-10 top-0 left-0 w-full h-full object-cover bg-[#000000bf]" />
         <div className="relative z-20 justify-between items-end px-[6.9%] flex-row flex">
