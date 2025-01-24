@@ -3,6 +3,8 @@ import tux_cover from "@/assets/images/tux_cover.png";
 import Button from "@/components/buttons/button";
 import { Locale } from "../../../i18nConfig";
 import { getDictionary } from "@/dictionaries/dictionaries";
+import hingematvad from "@/assets/images/hingematvad.jpg";
+import koostoo from "@/assets/images/koostoo.jpg";
 
 export default async function Home(props: {
   params: Promise<{ locale: Locale }>
@@ -35,8 +37,8 @@ export default async function Home(props: {
         </div>
       </div>
 
-      <div className="main-padding justify-start items-start flex-col lg:flex-row flex gap-32">
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-32">
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
           <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
             <h2 className="lead">{dictionary.events}</h2>
@@ -46,7 +48,7 @@ export default async function Home(props: {
         </div>
       </div>
 
-      <div className="main-padding justify-start items-start flex-col lg:flex-row flex gap-32">
+      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-32">
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
           <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
             <h2 className="lead">{dictionary.coop}</h2>
@@ -54,7 +56,7 @@ export default async function Home(props: {
           <p>{dictionary.coopdesc}</p>
           <Button variant="primary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
         </div>
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={koostoo} alt="ITÜKi liikmed tegemas omavahelist koostööd" />
       </div>
     </div >
   );
