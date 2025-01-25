@@ -27,8 +27,10 @@ jobs:
     - name: Adding Known Hosts
       run: ssh-keyscan -H ituk.ee >> ~/.ssh/known_hosts
     - name: Build
-      run: npm run build -prod
+      run: docker build -t nextjs-ituk-ee .
+    - name: Push
+      run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
     - name: Deploy
-      run: rsync -chavzP --rsh="ssh -l deploy" build/* deploy@ituk.ee:/var/ituk.ee/build
+      run: ssh deploy@ituk.ee "docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) && docker run -d -p 6969:6969 nextjs-ituk-ee"
     - name: Cleanup SSH keys
       run: rm ~/.ssh/id_rsa

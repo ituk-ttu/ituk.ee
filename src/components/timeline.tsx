@@ -6,6 +6,7 @@ interface TimelineProps {
   title?: string;
   description?: string;
   year?: Date;
+  key?: number;
 }
 
 export default function Timeline({
@@ -14,6 +15,7 @@ export default function Timeline({
   title = "",
   description = "",
   year,
+  key,
 }: TimelineProps) {
   if (type === "start") {
     return (
@@ -25,7 +27,7 @@ export default function Timeline({
     );
   } else if (type === "left") {
     return (
-      <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
+      <div key={key} className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
         <Card title={title} image={imagePath} description={description} type="default" />
         <div className="h-16 bg-light w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">

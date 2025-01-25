@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID
-  }
+  },
+  output: 'standalone'
 };
 
 export default nextConfig;

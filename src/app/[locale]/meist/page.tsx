@@ -157,7 +157,7 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />
           {events.map((event, index) => (
-            <Timeline type={index % 2 === 0 ? "left" : "right"} imagePath={event.imagePath} title={event.title} description={event.description} year={event.year} />
+            <Timeline key={index} type={index % 2 === 0 ? "left" : "right"} imagePath={event.imagePath} title={event.title} description={event.description} year={event.year} />
           ))}
           <Timeline type="end" />
         </div>

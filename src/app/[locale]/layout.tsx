@@ -35,7 +35,7 @@ export default async function RootLayout(props: {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>ITÜK | TalTechi IT-teaduskonna üliõpilaskogu</title>
-        <meta name="description" content="ITÜK" />
+        <meta name="description" content="Tere tulemast ITÜKi kodulehele! Siit leiad kogu vajaliku info IT-teaduskonna üliõpilaskogu tegemistest, sündmustest ja õppimist toetavatest võimalustest. Oleme siin, et kuulata, esindada ja muuta tudengite elu stressivabamaks ning põnevamaks!" />
         <meta name="keywords" content="ITÜK, IT, TalTech, tudeng, üliõpilaskogu" />
         <meta name="author" content="ITÜK" />
         <meta name="robots" content="index, follow" />
@@ -43,14 +43,14 @@ export default async function RootLayout(props: {
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu" />
-        <meta name="twitter:description" content="ITÜK" />
+        <meta name="twitter:description" content="Tere tulemast ITÜKi kodulehele! Siit leiad kogu vajaliku info IT-teaduskonna üliõpilaskogu tegemistest, sündmustest ja õppimist toetavatest võimalustest. Oleme siin, et kuulata, esindada ja muuta tudengite elu stressivabamaks ning põnevamaks!" />
         <meta name="twitter:image" content="/banners/ituk_banner.jpg" />
         <meta name="twitter:image:width" content="1200" />
         <meta name="twitter:image:height" content="630" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu" />
-        <meta property="og:description" content="ITÜK" />
+        <meta property="og:description" content="Tere tulemast ITÜKi kodulehele! Siit leiad kogu vajaliku info IT-teaduskonna üliõpilaskogu tegemistest, sündmustest ja õppimist toetavatest võimalustest. Oleme siin, et kuulata, esindada ja muuta tudengite elu stressivabamaks ning põnevamaks!" />
         <meta property="og:image" content="/banners/ituk_banner.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -65,9 +65,9 @@ export default async function RootLayout(props: {
       </head>
       <body className="main-min">
         <Navbar dictionary={dictionary.navbar} />
-          <DictionaryProvider dictionary={dictionary}>
-            {props.children}
-          </DictionaryProvider>
+        <DictionaryProvider dictionary={dictionary}>
+          {props.children}
+        </DictionaryProvider>
         <Footer dictionary={dictionary.footer} />
       </body>
     </html>

@@ -1,51 +1,37 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation"; // Use Next.js App Router
 
-interface ButtonProps {
+interface NavigationLinkProps {
   children?: React.ReactNode;
   text?: string;
-  type?: "button" | "submit" | "reset"; // Specify valid button types
   variant: "primary" | "secondary" | "tertiary";
   big?: boolean;
+  type?: string;
   active?: boolean;
-  to?: string; // Internal navigation path
-  href?: string; // External link
+  href: string;
   ariaLabel?: string;
   className?: string; // Allow custom class names to be passed
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // MouseEvent type
 }
 
-const Button: React.FC<ButtonProps> = ({
+const NavigationLink: React.FC<NavigationLinkProps> = ({
   children,
   text,
-  type = "button", // Default to "button"
   variant,
   big = false,
   active,
-  to,
   href,
   ariaLabel,
   className = "",
-  onClick,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isActive = pathname.includes(to || ""); // Check if the current path matches the `to` prop
+  const isActive = pathname.includes(href || ""); // Check if the current path matches the `to` prop
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event); // Pass the event to the `onClick` prop
-    event.preventDefault();
-    if (href) {
-      window.location.href = href; // Redirect to external link
-    } else if (to) {
-      router.push(to); // Internal navigation using Next.js's router
-    }
-  };
-
-  const baseClasses = `flex justify-center items-center button-text transition-colors duration-150 ${className}`;
+  const baseClasses = `flex justify-center items-center button-text transition-colors duration-150 uppercase ${className}`;
 
   const variantClasses = {
     primary: `bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary ${big ? "min-w-32 min-h-16 px-8" : "min-w-32 min-h-12 px-8"
@@ -59,15 +45,14 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button
+    <Link
       className={`${baseClasses} ${variantClasses[variant]}`}
       aria-label={ariaLabel || text}
-      onClick={handleClick}
-      type={type} // Pass the `type` here to the button attribute
+      href={href}
     >
       {children || text} {/* Render `children` or `text` */}
-    </button>
+    </Link>
   );
 };
 
-export default Button;
+export default NavigationLink;

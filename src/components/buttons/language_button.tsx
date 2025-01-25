@@ -4,29 +4,36 @@ import React from "react";
 import Estonian from "@/assets/icons/et.svg";
 import English from "@/assets/icons/en.svg";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface LanguageButtonProps {
     onClick?: () => void;
     className?: string;
 }
 
+
 const LanguageButton: React.FC<LanguageButtonProps> = ({
     onClick,
     className = "",
 }) => {
+    const router = useRouter()
     const pathname = usePathname();
 
-    const redirectedPathname = (locale: string) => {
-        if (!pathname) return "/";
-        const segments = pathname.split("/");
-        if (segments[1] !== "en") {
-            return `/${locale}${pathname}`;
+    const changeLanguage = (locale: string) => {
+
+        const pathParts = pathname.split("/").filter(Boolean) || [];
+
+        if (pathParts[0] === "en" || pathParts[0] === "et") {
+            pathParts[0] = locale; // Replace the current locale
+        } else {
+            pathParts.unshift(locale); // Prepend the new locale
         }
-        segments[1] = locale;
-        return segments.join("/");
+
+        console.log(`/${pathParts.join("/")}`);
+        router.push(`/${pathParts.join("/")}`);
     };
+
 
     const currentLocale = pathname?.split("/")[1];
 
@@ -36,13 +43,13 @@ const LanguageButton: React.FC<LanguageButtonProps> = ({
             className="justify-start items-center flex-row flex gap-8"
         >
             {currentLocale === "en" ? (
-                <Link href={redirectedPathname("et")} aria-label="Estonian" onClick={onClick}>
+                <button aria-label="Estonian" onClick={() => changeLanguage("et")}>
                     <Image src={Estonian} alt="Switch to Estonian" />
-                </Link>
+                </button>
             ) : (
-                <Link href={redirectedPathname("en")} aria-label="English" onClick={onClick}>
+                <button aria-label="English" onClick={() => changeLanguage("en")}>
                     <Image src={English} alt="Switch to English" />
-                </Link>
+                </button>
             )}
         </div>
     );
