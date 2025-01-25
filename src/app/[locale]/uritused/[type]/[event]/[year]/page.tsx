@@ -102,29 +102,48 @@ export default function Year({
                         <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
                             <div className="w-full justify-center items-start flex-col flex gap-16">
                                 <h2>{dictionary.description}</h2>
-                                <p>{currentLocale === "en" ? eventYear.en_description : eventYear.description}</p>
+                                <div>
+                                    {(currentLocale === "en" ? eventYear.en_description : eventYear.description)
+                                        ?.split("\n")
+                                        .map((line, index) => (
+                                            <span key={index}>
+                                                {line}
+                                                <br />
+                                            </span>
+                                        ))}
+                                </div>
                             </div>
 
                             {eventYear.extraInformation && eventYear.extraInformation.length > 0 && (
                                 <div className="w-full justify-center items-start flex-col flex gap-8">
                                     <h3>{dictionary.extrainformation}</h3>
-                                    <p>{currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation}</p>
+                                    <div>
+                                        {(currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation)
+                                            ?.split("\n")
+                                            .map((line, index) => (
+                                                <span key={index}>
+                                                    {line}
+                                                    <br />
+                                                </span>
+                                            ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
-
-                        {eventYear.gallery && eventYear.gallery.size > 0 && (
-                            <div className="w-full justify-center items-start flex-col flex gap-8">
-                                <h3>{dictionary.gallery}</h3>
-                                <Gallery
-                                    photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({
-                                        src,
-                                        name,
-                                    }))}
-                                />
-                            </div>
-                        )}
                     </div>
+
+
+                    {eventYear.gallery && eventYear.gallery.size > 0 && (
+                        <div className="w-full justify-center items-start flex-col flex gap-8">
+                            <h3>{dictionary.gallery}</h3>
+                            <Gallery
+                                photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({
+                                    src,
+                                    name,
+                                }))}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         )
