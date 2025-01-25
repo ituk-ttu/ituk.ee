@@ -106,10 +106,10 @@ export default function Year({
                                     {(currentLocale === "en" ? eventYear.en_description : eventYear.description)
                                         ?.split("\n")
                                         .map((line, index) => (
-                                            <span key={index}>
+                                            <p key={index}>
                                                 {line}
                                                 <br />
-                                            </span>
+                                            </p>
                                         ))}
                                 </div>
                             </div>
@@ -121,10 +121,10 @@ export default function Year({
                                         {(currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation)
                                             ?.split("\n")
                                             .map((line, index) => (
-                                                <span key={index}>
+                                                <p key={index}>
                                                     {line}
                                                     <br />
-                                                </span>
+                                                </p>
                                             ))}
                                     </div>
                                 </div>

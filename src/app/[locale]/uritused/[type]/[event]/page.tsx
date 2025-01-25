@@ -164,10 +164,10 @@ export default function EventPage({
                   {(currentLocale === "en" ? curEvent.en_description : curEvent.description)
                     ?.split("\n")
                     .map((line, index) => (
-                      <span key={index}>
+                      <p key={index}>
                         {line}
                         <br />
-                      </span>
+                      </p>
                     ))}
                 </div>
 
