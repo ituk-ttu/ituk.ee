@@ -15,9 +15,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '22.13.1' # Adjust to the appropriate Node.js version
-    - name: Install dependencies
-      run: npm install --force
-
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
       with:
@@ -30,7 +27,9 @@ jobs:
       run: docker build -t nextjs-ituk-ee .
     - name: Push
       run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
-    - name: Deploy
-      run: ssh deploy@ituk.ee "docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) && docker run -d -p 6969:3000 nextjs-ituk-ee"
+    - name: Stop old container
+      run: ssh deploy@ituk.ee 'docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) || echo Failed to stop old container!'
+    - name: Start new container
+      run: ssh deploy@ituk.ee "docker run -d -p 6969:3000 nextjs-ituk-ee || echo Failed to start new container!"
     - name: Cleanup SSH keys
       run: rm ~/.ssh/id_rsa
