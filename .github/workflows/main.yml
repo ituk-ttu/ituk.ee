@@ -25,10 +25,10 @@ jobs:
       run: ssh-keyscan -H ituk.ee >> ~/.ssh/known_hosts
     - name: Build
       run: docker build -t nextjs-ituk-ee .
-    - name: Push
-      run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
     - name: Stop old container
       run: ssh deploy@ituk.ee 'docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) || echo Failed to stop old container!'
+    - name: Push container to server
+      run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
     - name: Start new container
       run: ssh deploy@ituk.ee "docker run -d -p 6969:3000 nextjs-ituk-ee || echo Failed to start new container!"
     - name: Cleanup SSH keys
