@@ -31,6 +31,6 @@ jobs:
     - name: Push
       run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
     - name: Deploy
-      run: ssh deploy@ituk.ee "docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) && docker run -d -p 6969:6969 nextjs-ituk-ee"
+      run: ssh deploy@ituk.ee "docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) && docker run -d -p 6969:3000 nextjs-ituk-ee"
     - name: Cleanup SSH keys
       run: rm ~/.ssh/id_rsa
