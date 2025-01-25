@@ -16,8 +16,15 @@ export function middleware(request: NextRequest): NextResponse {
         }
     }
 
+    const defaultLocale = i18nConfig.defaultLocale || "et";
+    const localeFromCookie = request.cookies.get("NEXT_LOCALE")?.value;
+
+    if (!localeFromCookie) {
+        request.cookies.set("NEXT_LOCALE", defaultLocale);
+    }
+
     return i18nRouter(request, i18nConfig);
-};
+}
 
 export const config = {
     matcher: '/((?!api|static|.*\\..*|_next).*)'
