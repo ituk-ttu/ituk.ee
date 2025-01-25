@@ -39,7 +39,7 @@ export default async function Home(props: {
         </div>
       </div>
 
-      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-32">
+      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
         <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
           <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
