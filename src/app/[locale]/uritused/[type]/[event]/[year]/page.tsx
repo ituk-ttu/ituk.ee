@@ -109,6 +109,7 @@ export default function Year({
                                             <p key={index}>
                                                 {line}
                                                 <br />
+                                                <br />
                                             </p>
                                         ))}
                                 </div>
@@ -123,6 +124,7 @@ export default function Year({
                                             .map((line, index) => (
                                                 <p key={index}>
                                                     {line}
+                                                    <br />
                                                     <br />
                                                 </p>
                                             ))}

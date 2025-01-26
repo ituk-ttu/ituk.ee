@@ -167,6 +167,7 @@ export default function EventPage({
                       <p key={index}>
                         {line}
                         <br />
+                        <br />
                       </p>
                     ))}
                 </div>
