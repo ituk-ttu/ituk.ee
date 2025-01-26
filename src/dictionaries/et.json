@@ -97,13 +97,16 @@
     },
     "event": {
         "description": "Kirjeldus",
+        "nodescription": "Kirjeldus puudub.",
         "years": "Varasemad üritused",
         "noyears": "Ei ole üritusi, mida näidata. Tõenäoliselt puudus avalik reklaam üritustele (nt siseüritused), või üritusi ei toimunud."
     },
     "year": {
         "description": "Kirjeldus",
+        "nodescription": "Kirjeldus puudub.",
         "extrainformation": "Lisainfo",
-        "gallery": "Galerii"
+        "gallery": "Galerii",
+        "noimages": "No images provided."
     },
     "partners": {
         "header": "Koostöö",

@@ -97,13 +97,16 @@
     },
     "event": {
         "description": "Description",
+        "nodescription": "No description provided.",
         "years": "Past events",
-        "noyears": "There are no events to display. Events probably lacked public advertisements(i.e. internal events) or there were no events organised."
+        "noyears": "There are no events to display. Events probably lacked public advertisements (i.e. internal events) or there were no events organised."
     },
     "year": {
         "description": "Description",
+        "nodescription": "No description provided.",
         "extrainformation": "Additional information",
-        "gallery": "Gallery"
+        "gallery": "Gallery",
+        "noimages": "No images provided."
     },
     "partners": {
         "header": "Collaboration",

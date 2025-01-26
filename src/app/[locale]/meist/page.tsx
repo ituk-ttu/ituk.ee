@@ -63,8 +63,8 @@ export default function Home() {
   const getEvents = async () => {
     try {
       const q = query(collection(db, "timeline-events"), orderBy("year"));
-      const querrySnapshot = await getDocs(q);
-      const events: Event[] = querrySnapshot.docs.map((doc) => {
+      const querySnapshot = await getDocs(q);
+      const events: Event[] = querySnapshot.docs.map((doc) => {
         const data = doc.data() as DocumentData;
         return {
           title: data.title,
