@@ -40,7 +40,7 @@ export default async function Home(props: {
       </div>
 
       <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex shadow-filled" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
           <div className="p-4 md:p-8 bg-primary flex-col justify-center items-start gap-6 flex">
             <h2 className="lead">{dictionary.events}</h2>
@@ -58,7 +58,7 @@ export default async function Home(props: {
           <p>{dictionary.coopdesc}</p>
           <Button variant="secondary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
         </div>
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={koostoo} alt="ITÜKi liikmed tegemas omavahelist koostööd" />
+        <Image className="h-full w-full lg:w-1/2 hidden lg:flex shadow-filled" src={koostoo} alt="ITÜKi liikmed tegemas omavahelist koostööd" />
       </div>
     </div >
   );

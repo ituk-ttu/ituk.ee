@@ -77,7 +77,7 @@ export default function EventType({
           {events.map((event) => {
             const linkClass =
               events.length <= 3
-                ? "w-full sm:h-screen sm:w-1/3 justify-center items-center bg-center bg-cover flex-col flex"
+                ? "w-full sm:h-[calc(100vh-88px)] sm:w-1/3 justify-center items-center bg-center bg-cover flex-col flex"
                 : "w-full sm:h-[calc(50vh-44px)] justify-center items-center bg-center bg-cover flex-col flex";
 
             return (
