@@ -135,5 +135,84 @@
         "goal": "Meie eesmärk on edendada tudengite haridust, heaolu ja kogukonna sidusust, korraldades unustamatuid üritusi ja pakkudes väärtuslikke kogemusi. Teie toetusega saame ellu viia veelgi suuremaid ja silmapaistvamaid projekte.",
         "contact": "Võta meiega ühendust",
         "contact2": "ja koos muudame suured ideed tegelikkuseks!"
+    },
+    "style": {
+        "title": "TalTechi IT-teaduskonna üliõpilaskogu stiiliraamat",
+        "last_updated": "viimati uuendatud 27. jaanuar 2025",
+        "name_abbreviation": {
+            "heading": "Nimi ja lühendamine",
+            "context": "Kui ITÜKi nime kasutatakse kontekstis, kus arvestatav osa lugejatest ei tea, mida ITÜK tähendab, siis palume kirjutada nimi välja (nt. TalTechi IT-teaduskonna üliõpilaskogu).",
+            "valid_names_text": "Nime võib kirjutada järgmiselt:",
+            "valid_names_1": "Tallinna Tehnikaülikooli IT-teaduskonna üliõpilaskogu",
+            "valid_names_2": "TalTechi IT-teaduskonna üliõpilaskogu",
+            "valid_names_3": "IT-teaduskonna üliõpilaskogu",
+            "valid_names_4": "ITÜK",
+            "alternative_names_text": "Lubatud, kuid mitte eelistatud viisid:",
+            "alternative_names_1": "Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu",
+            "alternative_names_2": "TalTechi infotehnoloogia teaduskonna üliõpilaskogu",
+            "important": "Oluline! Jälgi suure- ja väikese algustähe reegleid. ITÜKi nime valesti kirjutamine ei ole lubatud!",
+            "abbreviation_case": "ITÜK lühendi käänamisel sidekriipsu ei lisata (nt ITÜKi, ITÜKile)."
+        },
+        "logo": {
+            "heading": "Logo",
+            "description": "Siit saad alla laadida kõik logo versioonid. Palun väldi rastergraafika kasutamist. Veebis kasutamiseks on SVG-failid ja trükiks PDF-failid. Palun väldi SVG kasutamist trükis ja PDF kasutamist veebis, sest need on vastavalt RGB ja CMYK värvimudelites, mis ei ole otseselt ümberarvestatavad.",
+            "download_button": "Laadi alla logopakk",
+            "internal_use_heading": "Logo kasutamine koos TalTechi logoga või ilma TalTechi logota",
+            "internal_use_context": "TalTechi-siseselt kasutatakse ITÜKi logo ilma TalTechi logota, et vältida sama logo kordumist ürituste, postrite, reklaamide jms puhul. Väljaspool TalTechi kasutatakse logoversiooni, kus on lisatud ka TalTechi logo.",
+            "logo_variants_heading": "Logo variandid",
+            "logo_variants_context": "Logo ikoone võib kasutada:",
+            "logo_variants_use_1": "Kujunduselementidena.",
+            "logo_variants_use_2": "Kui pikk logo ei oleks loetav.",
+            "logo_variants_use_3": "Juhul, kui on lihtne ITÜK ühendada ikooniga.",
+            "icon_usage": "Ikooni võib kasutada nii kastiga kui ilma.",
+            "long_variant_with_taltech": "Pikk variant TalTechi logoga",
+            "long_variant_without_taltech": "Pikk variant ilma TalTechi logota",
+            "logotype": "Logotype",
+            "icon": "Ikoon",
+            "icon_without_box": "Ilma kastita ikoon"
+        },
+        "logo_colors": {
+            "heading": "Logo värvid",
+            "instructions": "Logo värvivalikul tuleb järgida:",
+            "color_usage_1": "Värviline logo — kasutada valgel või väga heledal taustal (tumedaim lubatud taust on #ebebeb).",
+            "color_usage_2": "Must logo — kasutada valgel või heledal taustal (tumedaim lubatud taust on #a1a1a1).",
+            "color_usage_3": "Valge logo — kasutada värvilisel või tumedal taustal.",
+            "contrast_check": "Logol olev tekst PEAB vastama WCAG AAA standardile. Kontrolli seda",
+            "here": "siin",
+            "protected_area": {
+                "heading": "Kaitstud ala",
+                "description": "Logol peab igast küljest olema kaitstud ala, mille laius võrdub logo '>'-märgi '_'-laiusega. Nt:",
+                "instructions": "Kaitstud alasse ei tohi paigutada muid elemente."
+            }
+        },
+        "colors": {
+            "heading": "Värvid",
+            "primary_colors_heading": "Põhivärvid",
+            "primary_color_1_hex": "HEX: #870042",
+            "primary_color_1_rgb": "RGB: 135, 0, 66",
+            "primary_color_1_cmyk": "CMYK: 9%, 100%, 24%, 38%",
+            "primary_color_2_hex": "HEX: #ad0054",
+            "primary_color_2_rgb": "RGB: 173, 0, 84",
+            "primary_color_2_cmyk": "CMYK: 0%, 100%, 51%, 32%",
+            "primary_color_3_hex": "HEX: #4c4c4e",
+            "primary_color_3_rgb": "RGB: 76, 76, 78",
+            "primary_color_3_cmyk": "CMYK: 0%, 0%, 0%, 70%",
+            "primary_color_4_hex": "HEX: #131313",
+            "primary_color_4_rgb": "RGB: 19, 19, 19",
+            "primary_color_4_cmyk": "CMYK: 0%, 0%, 0%, 93%",
+            "primary_color_5_hex": "HEX: #eeeeee",
+            "primary_color_5_rgb": "RGB: 238, 238, 238",
+            "primary_color_5_cmyk": "CMYK: 0%, 0%, 0%, 7%"
+        },
+        "typography": {
+            "heading": "Tüpograafia",
+            "description": "ITÜK kasutab logodes fonti Raleway. Sisutekstis kasutatakse fonti Noto Sans Georgian."
+        },
+        "contact": {
+            "heading": "Kontakt",
+            "description": "Kõik küsimused ITÜKi brändi identiteedi kohta saab saata e-posti aadressile:",
+            "email": "kontakt@ituk.ee",
+            "note": "Palume mitte olla loomingulised, vaid kõik küsimused kooskõlastada ITÜKiga."
+        }
     }
 }
