@@ -6,13 +6,13 @@ const HubLink: React.FC = () => {
       href="https://hub.ituk.ee/"
       target="_self"
       aria-label="ITÜK Hub"
-      className="w-[76px] h-6 justify-center items-center flex"
+      className="w-[76px] h-6 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
     >
       <svg
         aria-label="ITÜK Hub logo"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 76 24"
-        fill="none"
+        fill="#EEEEEE"
       >
         <path
           d="M11.6913 14.2985L0 21.349V17.1187L6.28891 13.2832L0 9.2785V5.27379L11.6913 12.4653V14.2985Z"

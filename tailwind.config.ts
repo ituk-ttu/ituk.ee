@@ -22,6 +22,7 @@ export default {
         'netgroup': '#fc3056',
       },
       screens: {
+        'xs': '480px',
         sm: '640px',
         md: '768px',
         lg: '1146px',

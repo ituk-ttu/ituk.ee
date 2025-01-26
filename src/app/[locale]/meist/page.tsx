@@ -104,26 +104,26 @@ export default function Home() {
             {dictionary.answer3}
           </p>
         </div>
-        <div className="justify-center items-center flex-col sm:flex-row flex gap-16">
+        <div className="h-full justify-center items-stretch flex-col sm:flex-row flex gap-16">
           <Card image={uritused.src} title={dictionary.card1.title} description={dictionary.card1.description} type="default" />
           <Card image={sobrad.src} title={dictionary.card2.title} description={dictionary.card2.description} type="default" />
         </div>
       </div>
 
-      <div className="main-padding bg-primary justify-center items-center gap-16 md:gap-32 flex-col md:flex-row flex">
-        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+      <div className="main-padding bg-primary justify-center items-center lg:items-start gap-16 lg:gap-32 flex-col xs:flex-row flex-wrap flex">
+        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
           <span className="big font-bold">{dictionary.statistics.stat1.title}</span>
           {dictionary.statistics.stat1.description}
         </p>
-        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
           <span className="big font-bold">{dictionary.statistics.stat2.title}</span>
           {dictionary.statistics.stat2.description}
         </p>
-        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
           <span className="big font-bold">{dictionary.statistics.stat3.title}</span>
           {dictionary.statistics.stat3.description}
         </p>
-        <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
           <span className="big font-bold">{dictionary.statistics.stat4.title}</span>
           {dictionary.statistics.stat4.description}
         </p>
@@ -162,7 +162,7 @@ export default function Home() {
           <Timeline type="end" />
         </div>
         <h2>{dictionary.boardtitle}</h2>
-        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
+        <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
           {boardMembers.map((member, index) => (
             <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} type="board" email={member.email} />
           ))}

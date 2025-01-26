@@ -22,9 +22,9 @@ export default function Card({
 }: CardProps) {
   const cardContent = (
     <div className="h-full w-full rounded-lg shadow-filled justify-start items-start flex-col flex">
-      <img className="object-fill object-center rounded-t-lg" src={image} alt={title} />
+      <img className="w-full object-cover aspect-auto object-center rounded-t-lg" src={image} alt={title} />
       {type === "board" && (
-        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
+        <div className="w-full h-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex bg-epic-gradient">
           <h5>{title}</h5>
           <p className="h-[50px]">{description}</p>
           <div className="justify-start items-center gap-2 flex-row flex">
@@ -36,7 +36,7 @@ export default function Card({
         </div>
       )}
       {type === "list" && (
-        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
+        <div className="w-full h-full p-4 rounded-b-lg justify-start items-start gap-4 flex-col flex">
           <h5 className="uppercase">{title}</h5>
           <ul>
             {listItems.map((item, index) => (
@@ -46,7 +46,7 @@ export default function Card({
         </div>
       )}
       {type === "default" && (
-        <div className="w-full p-4 rounded-b-lg justify-between items-start gap-4 flex-col flex">
+        <div className="w-full h-full p-4 rounded-b-lg justify-start items-start gap-4 flex-col flex">
           <h5>{title}</h5>
           <p>{description}</p>
         </div>

@@ -3,17 +3,16 @@ import React from "react";
 const InstagramLink: React.FC = () => {
   return (
     <a
-      href="https:/a"
+      href="https://www.instagram.com/ituk.taltech/"
       target="_self"
       aria-label="ITÜK Instagram"
-      className="w-12 h-12 justify-center items-center flex"
+      className="w-12 h-12 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
     >
       <svg
         aria-label="Instagram logo"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 48 48"
-        fill="currentColor"
-        className="text-light hover:text-instagram transition-colors duration-150"
+        fill="#EEEEEE"
       >
         <path
           id="instagram"

@@ -145,7 +145,7 @@ export default function EventPage({
 
   if (curEvent) {
     return (
-      <div>
+      <div className="main-min">
         <div className="flex flex-col items-center">
           <div
             className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
@@ -177,7 +177,7 @@ export default function EventPage({
             {eventYears ? (
               <div className="w-full justify-center items-start flex-col flex gap-8">
                 <h2>{dictionary.years}</h2>
-                <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
+                <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
                   {eventYears.map((year) => (
                     <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
                       <Card title={year.title} image={year.banner} type="default" />
