@@ -103,7 +103,7 @@ export default function Year({
                             <div className="w-full justify-center items-start flex-col flex gap-16">
                                 <h2>{dictionary.description}</h2>
                                 <div>
-                                    {(currentLocale === "en" ? eventYear.en_description : eventYear.description) || dictionary.nodescription
+                                    {(currentLocale === "en" ? eventYear.en_description : eventYear.description)
                                         ?.split("\n")
                                         .map((line, index) => (
                                             <p key={index}>
@@ -119,7 +119,7 @@ export default function Year({
                                 <div className="w-full justify-center items-start flex-col flex gap-16">
                                     <h3>{dictionary.extrainformation}</h3>
                                     <div>
-                                        {(currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation) || dictionary.nodescription
+                                        {(currentLocale === "en" ? eventYear.en_extraInformation : eventYear.extraInformation)
                                             ?.split("\n")
                                             .map((line, index) => (
                                                 <p key={index}>
