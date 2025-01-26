@@ -1,192 +1,144 @@
-"use client"
-
 import Button from "@/components/buttons/button"
 import Image from "next/image"
-import logoLong from "@/assets/logos/ituk_long_logo.svg"
-import long from "@/assets/logos/ituk_long.svg"
-import { usePathname } from "next/navigation";
+import ituk_long_nottu_red from "@/assets/logos/style_examples/ituk_long_nottu_red.svg"
+import ituk_long_ttu_red from "@/assets/logos/style_examples/ituk_long_ttu_red.svg"
+import ituk_symbol_negative_red from "@/assets/logos/style_examples/ituk_symbol_negative_red.svg"
+import ituk_symbol_red from "@/assets/logos/style_examples/ituk_symbol_red.svg"
+import logotype_red_white from "@/assets/logos/style_examples/logotype_red_white.svg"
+import protected_example from "@/assets/logos/style_examples/protected.svg"
+import { Locale } from "../../../../i18nConfig";
+import { getDictionary } from "@/dictionaries/dictionaries";
 
-export default function Home() {
-    const pathname = usePathname();
-    const currentLocale = pathname?.split("/")[1];
+export default async function Home(props: {
+    params: Promise<{ locale: Locale }>
+}) {
+    const { locale } = await props.params;
 
-    if (currentLocale === "en") {
-        return (
-            <div className="flex flex-col items-start px-16 py-32 gap-16">
-                <div className="flex flex-col items-start gap-8">
-                    <h1>
-                        TalTechi IT-teaduskonna üliõpilaskogu stiiliraamat en
-                    </h1>
-                    <h1 className="small">
-                        viimati uuendatud 23. jaanuar 2025
-                    </h1>
-                    <p>ITÜK on Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu.
-                        Seetõttu järgime väga suures osas TalTechi stiiliraamatut.</p>
-                </div>
-
-                <div className="flex flex-col items-start gap-8">
-                    <h2>
-                        Nimi ja lühendamine
-                    </h2>
+    const dictionary = (await getDictionary(locale)).style;
+    return (
+        <div className="main-padding flex-col justify-start items-start gap-16 flex">
+            <div className="w-full flex-col justify-start items-start gap-8 flex">
+                <h1>{dictionary.title}</h1>
+                <p>{dictionary.last_updated}</p>
+            </div>
+            <div className="w-full flex-col justify-start items-start gap-8 flex">
+                <h2>{dictionary.name_abbreviation.heading}</h2>
+                <p>{dictionary.name_abbreviation.context}</p>
+                <p>
+                    {dictionary.name_abbreviation.valid_names_text}
+                    <ul>
+                        <li>{dictionary.name_abbreviation.valid_names_1}</li>
+                        <li>{dictionary.name_abbreviation.valid_names_2}</li>
+                        <li>{dictionary.name_abbreviation.valid_names_3}</li>
+                        <li>{dictionary.name_abbreviation.valid_names_4}</li>
+                    </ul>
+                </p>
+                <p>
+                    {dictionary.name_abbreviation.alternative_names_text}
+                    <ul>
+                        <li>{dictionary.name_abbreviation.alternative_names_1}</li>
+                        <li>{dictionary.name_abbreviation.alternative_names_2}</li>
+                    </ul>
+                </p>
+                <p>{dictionary.name_abbreviation.important}</p>
+                <p>{dictionary.name_abbreviation.abbreviation_case}</p>
+            </div>
+            <div className="w-full flex-col justify-start items-start gap-8 flex">
+                <h2>{dictionary.logo.heading}</h2>
+                <p>{dictionary.logo.description}</p>
+                <Button variant="primary" big={true} text={dictionary.logo.download_button} href="/ITUK_stiiliraamat_27012025.zip" />
+                <h3>{dictionary.logo.internal_use_heading}</h3>
+                <p>{dictionary.logo.internal_use_context}</p>
+                <div className="flex-col justify-start items-start gap-8 flex">
+                    <h3>{dictionary.logo.logo_variants_heading}</h3>
                     <p>
-                        Kui ITÜKi nime kasutatakse kontekstis, kus arvestatav osa lugejatest ei tea, mida ITÜK tähendab, siis palume kirjutada nimi välja (nt. TalTechi IT-teaduskonna üliõpilaskogu).<br /><br />
-
-                        Nime võib kirjutada järgmiselt:<br />
-                        Tallinna Tehnikaülikooli IT-teaduskonna üliõpilaskogu<br />
-                        TalTechi IT-teaduskonna üliõpilaskogu<br />
-                        IT-teaduskonna üliõpilaskogu<br />
-                        ITÜK<br /><br />
-
-                        Lubatud, kuid mitte eelistatud viisid:<br />
-                        Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu<br />
-                        TalTechi infotehnoloogia teaduskonna üliõpilaskogu<br /><br />
-
-                        <b>Oluline!</b> Jälgi suure- ja väikese algustähe reegleid. ITÜKi nime valesti kirjutamine ei ole lubatud! ITÜK lühendi käänamisel sidekriipsu ei lisata (nt ITÜKi, ITÜKile).<br />
+                        {dictionary.logo.logo_variants_context}
+                        <ul>
+                            <li>{dictionary.logo.logo_variants_use_1}</li>
+                            <li>{dictionary.logo.logo_variants_use_2}</li>
+                            <li>{dictionary.logo.logo_variants_use_3}</li>
+                        </ul>
                     </p>
+                    <p>{dictionary.logo.icon_usage}</p>
                 </div>
-
-                <div className="flex flex-col items-start gap-8">
-                    <h2>Logo</h2>
-                    <p>
-                        Siit saad alla laadida kõik logo versioonid. Palun väldi rastergraafika kasutamist.
-                        Veebis kasutamiseks on SVG-failid ja trükiks PDF-failid. Palun väldi SVG kasutamist
-                        trükis ja PDF kasutamist veebis, sest need on vastavalt RGB ja CMYK värvimudelites,
-                        mis ei ole otseselt ümberarvestatavad.
-                    </p>
-
-                    <Button variant="primary" text="LAADI ALLA LOGOPAKK" />
-
-                    <div className="flex flex-col items-start gap-8">
-                        <h3>
-                            Logo kasutamine koos TalTechi logoga või ilma TalTechi logota
-                        </h3>
-                        <p>
-                            TalTechi siseselt kasutatakse ITÜKi logot ilma TalTechi logota,
-                            et vältida sama logo kordumist ürituste, postrite, reklaamide jms puhul.
-                            Väljaspool TalTechi kasutatakse logoversiooni, kus on lisatud ka TalTechi logo.
-                        </p>
+                <div className="w-full justify-start items-start gap-16 flex-wrap flex">
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                        <h4>{dictionary.logo.long_variant_with_taltech}</h4>
+                        <Image src={ituk_long_ttu_red} alt={dictionary.logo.long_variant_with_taltech} />
                     </div>
-
-                    <div className="flex flex-col items-start gap-8">
-                        <h3>
-                            Logo variandid
-                        </h3>
-                        <p>
-                            Logo ikoone võib kasutada:<br />
-                            Kujunduselementidena.<br />
-                            Kui pikk logo ei oleks loetav.<br />
-                            Juhul, kui on lihtne ITÜK ühendada ikooniga.<br /><br />
-
-                            Ikooni võib kasutada nii kastiga kui ilma.
-                        </p>
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                        <h4>{dictionary.logo.long_variant_without_taltech}</h4>
+                        <Image src={ituk_long_nottu_red} alt={dictionary.logo.long_variant_without_taltech} />
                     </div>
-
-                    <div className="flex flex-row items-start gap-8">
-                        <div className="flex flex-col items-start gap-8">
-                            <h4>
-                                Pikk variant TalTechi logoga
-                            </h4>
-                            <Image src={logoLong} alt="Logo" width={640} height={100} />
-                        </div>
-
-                        <div className="flex flex-col items-start gap-8">
-                            <h4>
-                                Pikk variant ilma TalTechi logota
-                            </h4>
-                            <Image src={long} alt="Logo" width={400} height={100} />
-                        </div>
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                        <h4>{dictionary.logo.logotype}</h4>
+                        <Image src={logotype_red_white} alt={dictionary.logo.logotype} />
+                    </div>
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                        <h4>{dictionary.logo.icon}</h4>
+                        <Image src={ituk_symbol_red} alt={dictionary.logo.icon} />
+                    </div>
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                        <h4>{dictionary.logo.icon_without_box}</h4>
+                        <Image src={ituk_symbol_negative_red} alt={dictionary.logo.icon_without_box} />
                     </div>
                 </div>
             </div>
-        )
-    } else {
-        return (
-            <div className="flex flex-col items-start px-16 py-32 gap-16">
-                <div className="flex flex-col items-start gap-8">
-                    <h1>
-                        TalTechi IT-teaduskonna üliõpilaskogu stiiliraamat
-                    </h1>
-                    <h1 className="small">
-                        viimati uuendatud xx. jaanuar 2025
-                    </h1>
-                    <p>ITÜK on Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu.
-                        Seetõttu järgime väga suures osas TalTechi stiiliraamatut.</p>
-                </div>
-
-                <div className="flex flex-col items-start gap-8">
-                    <h2>
-                        Nimi ja lühendamine
-                    </h2>
-                    <p>
-                        Kui ITÜKi nime kasutatakse kontekstis, kus arvestatav osa lugejatest ei tea, mida ITÜK tähendab, siis palume kirjutada nimi välja (nt. TalTechi IT-teaduskonna üliõpilaskogu).<br /><br />
-
-                        Nime võib kirjutada järgmiselt:<br />
-                        Tallinna Tehnikaülikooli IT-teaduskonna üliõpilaskogu<br />
-                        TalTechi IT-teaduskonna üliõpilaskogu<br />
-                        IT-teaduskonna üliõpilaskogu<br />
-                        ITÜK<br /><br />
-
-                        Lubatud, kuid mitte eelistatud viisid:<br />
-                        Tallinna Tehnikaülikooli infotehnoloogia teaduskonna üliõpilaskogu<br />
-                        TalTechi infotehnoloogia teaduskonna üliõpilaskogu<br /><br />
-
-                        <b>Oluline!</b> Jälgi suure- ja väikese algustähe reegleid. ITÜKi nime valesti kirjutamine ei ole lubatud! ITÜK lühendi käänamisel sidekriipsu ei lisata (nt ITÜKi, ITÜKile).<br />
-                    </p>
-                </div>
-
-                <div className="flex flex-col items-start gap-8">
-                    <h2>Logo</h2>
-                    <p>
-                        Siit saad alla laadida kõik logo versioonid. Palun väldi rastergraafika kasutamist.
-                        Veebis kasutamiseks on SVG-failid ja trükiks PDF-failid. Palun väldi SVG kasutamist
-                        trükis ja PDF kasutamist veebis, sest need on vastavalt RGB ja CMYK värvimudelites,
-                        mis ei ole otseselt ümberarvestatavad.
-                    </p>
-
-                    <Button variant="primary" text="LAADI ALLA LOGOPAKK" />
-
-                    <div className="flex flex-col items-start gap-8">
-                        <h3>
-                            Logo kasutamine koos TalTechi logoga või ilma TalTechi logota
-                        </h3>
-                        <p>
-                            TalTechi siseselt kasutatakse ITÜKi logot ilma TalTechi logota,
-                            et vältida sama logo kordumist ürituste, postrite, reklaamide jms puhul.
-                            Väljaspool TalTechi kasutatakse logoversiooni, kus on lisatud ka TalTechi logo.
-                        </p>
+            <div className="w-full flex-col justify-start items-start gap-8 flex">
+                <h3>{dictionary.logo_colors.heading}</h3>
+                <p>{dictionary.logo_colors.instructions}
+                    <ul>
+                        <li>{dictionary.logo_colors.color_usage_1}</li>
+                        <li>{dictionary.logo_colors.color_usage_2}</li>
+                        <li>{dictionary.logo_colors.color_usage_3}</li>
+                    </ul>
+                </p>
+                <p>{dictionary.logo_colors.contrast_check} <a className="bold underline" href="https://webaim.org/resources/contrastchecker/">{dictionary.logo_colors.here}</a>.</p>
+                <h3>{dictionary.logo_colors.protected_area.heading}</h3>
+                <p>{dictionary.logo_colors.protected_area.description}</p>
+                <Image src={protected_example} alt={dictionary.logo_colors.protected_area.description} />
+                <p>{dictionary.logo_colors.protected_area.instructions}</p>
+            </div>
+            <div className="w-full flex-col justify-start items-start gap-8 flex">
+                <h2>{dictionary.colors.heading}</h2>
+                <h3>{dictionary.colors.primary_colors_heading}</h3>
+                <div className="w-full h-full justify-start items-start flex-wrap flex">
+                    <div className="bg-primary w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p>{dictionary.colors.primary_color_1_hex}</p>
+                        <p>{dictionary.colors.primary_color_1_rgb}</p>
+                        <p>{dictionary.colors.primary_color_1_cmyk}</p>
                     </div>
-
-                    <div className="flex flex-col items-start gap-8">
-                        <h3>
-                            Logo variandid
-                        </h3>
-                        <p>
-                            Logo ikoone võib kasutada:<br />
-                            Kujunduselementidena.<br />
-                            Kui pikk logo ei oleks loetav.<br />
-                            Juhul, kui on lihtne ITÜK ühendada ikooniga.<br /><br />
-
-                            Ikooni võib kasutada nii kastiga kui ilma.
-                        </p>
+                    <div className="bg-secondary w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p>{dictionary.colors.primary_color_2_hex}</p>
+                        <p>{dictionary.colors.primary_color_2_rgb}</p>
+                        <p>{dictionary.colors.primary_color_2_cmyk}</p>
                     </div>
-
-                    <div className="flex flex-row items-start gap-8">
-                        <div className="flex flex-col items-start gap-8">
-                            <h4>
-                                Pikk variant TalTechi logoga
-                            </h4>
-                            <Image src={logoLong} alt="Logo" width={640} height={100} />
-                        </div>
-
-                        <div className="flex flex-col items-start gap-8">
-                            <h4>
-                                Pikk variant ilma TalTechi logota
-                            </h4>
-                            <Image src={long} alt="Logo" width={400} height={100} />
-                        </div>
+                    <div className="bg-gray w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p>{dictionary.colors.primary_color_3_hex}</p>
+                        <p>{dictionary.colors.primary_color_3_rgb}</p>
+                        <p>{dictionary.colors.primary_color_3_cmyk}</p>
+                    </div>
+                    <div className="bg-dark w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p>{dictionary.colors.primary_color_4_hex}</p>
+                        <p>{dictionary.colors.primary_color_4_rgb}</p>
+                        <p>{dictionary.colors.primary_color_4_cmyk}</p>
+                    </div>
+                    <div className="bg-light w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p className="text-dark">{dictionary.colors.primary_color_5_hex}</p>
+                        <p className="text-dark">{dictionary.colors.primary_color_5_rgb}</p>
+                        <p className="text-dark">{dictionary.colors.primary_color_5_cmyk}</p>
                     </div>
                 </div>
             </div>
-        )
-    }
+            <div className="flex-col justify-start items-start gap-8 flex">
+                <h2>{dictionary.typography.heading}</h2>
+                <p>{dictionary.typography.description}</p>
+            </div>
+            <div className="flex-col justify-start items-start gap-8 flex">
+                <h2>{dictionary.contact.heading}</h2>
+                <p>{dictionary.contact.description} <a className="bold underline" href={`mailto:${dictionary.contact.email}`}>{dictionary.contact.email}</a>.</p>
+                <p>{dictionary.contact.note}</p>
+            </div>
+        </div >
+    )
 }
