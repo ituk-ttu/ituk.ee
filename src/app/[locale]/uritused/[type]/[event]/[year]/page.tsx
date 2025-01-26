@@ -132,9 +132,8 @@ export default function Year({
                         </div>
                     </div>
 
-
                     {eventYear.gallery && eventYear.gallery.size > 0 && (
-                        <div className="w-full justify-center items-start flex-col flex gap-8">
+                        <div className="main-padding w-full justify-center items-start flex-col flex gap-8">
                             <h3>{dictionary.gallery}</h3>
                             <Gallery
                                 photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({
