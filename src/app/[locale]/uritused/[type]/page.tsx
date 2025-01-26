@@ -77,8 +77,8 @@ export default function EventType({
           {events.map((event) => {
             const linkClass =
               events.length <= 3
-                ? "w-full sm:w-1/3 justify-center items-center bg-center bg-cover flex-col flex"
-                : "w-full justify-center items-center bg-center bg-cover flex-col flex";
+                ? "w-full sm:h-screen sm:w-1/3 justify-center items-center bg-center bg-cover flex-col flex"
+                : "w-full sm:h-[calc(50vh-44px)] justify-center items-center bg-center bg-cover flex-col flex";
 
             return (
               <Link
@@ -87,7 +87,7 @@ export default function EventType({
                 className={linkClass}
                 style={{ backgroundImage: `url(${event.banner})` }}
               >
-                <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
+                <div className="triple-height sm:h-screen w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
                   <h2 className="p-8 title text-center">{event.name}</h2>
                 </div>
               </Link>
