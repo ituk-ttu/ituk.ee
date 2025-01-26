@@ -4,10 +4,10 @@ import phone from "@/assets/icons/phone.svg";
 import location from "@/assets/icons/location.svg";
 import Image from "next/image";
 import Link from "next/link";
-import FacebookLink from "./buttons/socials/Facebook";
-import InstagramLink from "./buttons/socials/Instagram";
-import GitHubLink from "./buttons/socials/Github";
-import HubLink from "./buttons/socials/Hub";
+import facebook from "@/assets/icons/facebook.svg";
+import instagram from "@/assets/icons/instagram.svg";
+import github from "@/assets/icons/github.svg";
+import hub from "@/assets/icons/hub.svg";
 import { getDictionary } from "@/dictionaries/dictionaries";
 
 export default function Footer({
@@ -36,14 +36,33 @@ export default function Footer({
       </div>
       <div className="justify-between items-center md:items-end gap-4 flex-col flex">
         <div className="justify-between items-center gap-6 flex-row flex">
-          <FacebookLink />
+          <a href="https://www.facebook.com/ituk.taltech/" target="_self" aria-label="ITÜK Facebook"
+            className="w-12 h-12 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
+          >
+            <Image src={facebook} alt="ITÜK Facebook" />
+          </a>
           <div className="w-[2px] h-[24px] bg-light" />
-          <InstagramLink />
+          <a href="https://www.github.com/ituk-ttu/" target="_self" aria-label="ITÜK Github"
+            className="w-12 h-12 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
+          >
+            <Image src={github} alt="ITÜK Github" />
+          </a>
           <div className="w-[2px] h-[24px] bg-light" />
-          <GitHubLink />
+          <a href="https://www.instagram.com/ituk.taltech/" target="_self" aria-label="ITÜK Instagram"
+            className="w-12 h-12 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
+          >
+            <Image src={instagram} alt="ITÜK Instagram" />
+          </a>
         </div>
         <div className="justify-between items-center gap-6 flex-row flex">
-          <HubLink />
+          <a
+            href="https://hub.ituk.ee/"
+            target="_self"
+            aria-label="ITÜK Hub"
+            className="w-[76px] h-6 justify-center items-center flex transform transition-transform duration-150 hover:scale-125"
+          >
+            <Image src={hub} alt="ITÜK Hub" />
+          </a>
           <Link href="/stiil" className="font-bold underline hover:decoration-primary">
             {dictionary.style}
           </Link>
