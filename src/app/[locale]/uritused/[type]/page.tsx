@@ -6,6 +6,7 @@ import { useEffect, useState, useCallback } from "react";
 import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
 import Loading from "@/components/animations/loading";
+import { usePathname } from "next/navigation";
 
 interface Event {
   key: string;
@@ -13,6 +14,7 @@ interface Event {
   category: string;
   banner: string;
   name: string;
+  en_name: string;
 }
 
 export default function EventType({
@@ -22,6 +24,9 @@ export default function EventType({
 }) {
   const [events, setEvents] = useState<Event[]>([]);
   const [category, setCategory] = useState<string>("");
+
+  const pathname = usePathname();
+  const currentLocale = pathname?.split("/")[1];
 
   const categoryTitles: Record<string, string> = {
     haridus: "Hariduslikud üritused",
@@ -47,6 +52,7 @@ export default function EventType({
           category: data.category,
           banner: data.banner,
           name: data.name,
+          en_name: data.name_en,
         };
       });
       setEvents(fetchedEvents);
@@ -88,7 +94,9 @@ export default function EventType({
                 style={{ backgroundImage: `url(${event.banner})` }}
               >
                 <div className="triple-height sm:h-screen w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-                  <h2 className="p-8 title text-center">{event.name}</h2>
+                  <h2 className="p-8 title text-center">
+                    {currentLocale === "en" ? event.en_name : event.name}
+                  </h2>
                 </div>
               </Link>
             );

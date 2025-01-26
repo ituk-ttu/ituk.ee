@@ -161,7 +161,7 @@ export default function EventPage({
               <div className="w-full justify-center items-start flex-col flex gap-16">
                 <h2>{dictionary.description}</h2>
                 <div>
-                  {(currentLocale === "en" ? curEvent.en_description : curEvent.description)
+                  {(currentLocale === "en" ? curEvent?.en_description : curEvent?.description) || dictionary.nodescription
                     ?.split("\n")
                     .map((line, index) => (
                       <p key={index}>
