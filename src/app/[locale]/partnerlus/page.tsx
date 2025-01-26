@@ -10,6 +10,7 @@ import nortal from "@/assets/images/partners/nortal.png"
 import { useDictionary } from "@/components/dictionary-provider";
 import Card from "@/components/cards/card";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface StudentOrg {
   name: string;
@@ -64,19 +65,19 @@ export default function Home() {
 
       <div className="main-padding items-center flex-col flex gap-16">
         <h2 className="text-center">{dictionary.partners}</h2>
-        <div className="h-auto w-full justify-center items-center flex-col md:flex-row flex gap-16">
-          <div className="self-stretch main-padding h-full md:w-1/2 bg-nortal rounded-2xl flex-col justify-center items-center flex">
+        <div className="w-full justify-center items-center flex-col md:flex-row flex gap-16">
+          <Link href="https://nortal.com/" className="self-stretch main-padding h-full md:w-1/2 bg-nortal rounded-2xl flex-col justify-center items-center flex">
             <Image src={nortal} alt="Nortal" />
-          </div>
-          <div className="self-stretch main-padding h-full md:w-1/2 bg-netgroup rounded-2xl flex-col justify-center items-center flex">
+          </Link>
+          <Link href="https://netgroup.com/" className="self-stretch main-padding h-full md:w-1/2 bg-netgroup rounded-2xl flex-col justify-center items-center flex">
             <Image src={netgroup} alt="Netgroup" />
-          </div>
+          </Link>
         </div>
       </div>
 
       <div className="main-padding items-center flex-col flex gap-16">
         <h2 className="text-center break-all">{dictionary.studentorgs}</h2>
-        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
+        <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
           {studentOrgs.map((partner, index) => (
             <Card key={index} link={partner.link} title={currentLocale === "en" ? partner.en_name : partner.name} image={partner.imagePath} listItems={partner.projects} type="list" />
           ))}
@@ -86,19 +87,19 @@ export default function Home() {
       <div className="main-padding bg-primary justify-center items-center gap-16 flex-col xl:flex-row flex">
         <h2 className="text-center w-full">{dictionary.offer}</h2>
         <div className=" justify-between items-center flex-col md:flex-row flex gap-16">
-          <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
             <span className="big font-bold">{dictionary.statistics.stat1.title}</span>
             {dictionary.statistics.stat1.description}
           </p>
-          <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
             <span className="big font-bold">{dictionary.statistics.stat2.title}</span>
             {dictionary.statistics.stat2.description}
           </p>
-          <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
             <span className="big font-bold">{dictionary.statistics.stat3.title}</span>
             {dictionary.statistics.stat3.description}
           </p>
-          <p className="items-center flex-col flex gap-4 transform transition-transform duration-300 hover:scale-125 hover:select-none">
+          <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
             <span className="big font-bold">{dictionary.statistics.stat4.title}</span>
             {dictionary.statistics.stat4.description}
           </p>
@@ -108,7 +109,7 @@ export default function Home() {
       <div className="main-padding justify-center items-center gap-16 flex-col flex">
         <h2 className="text-center">{dictionary.wish}</h2>
         <p className="text-center">{dictionary.goal}</p>
-        <h3 className="text-center">{dictionary.contact} <a className="contact text-secondary underline" href="mailto:kontakt@ituk.ee">kontakt@ituk.ee</a> {dictionary.contact2}</h3>
+        <h3 className="text-center">{dictionary.contact} <a className="contact underline hover:decoration-primary" href="mailto:kontakt@ituk.ee">kontakt@ituk.ee</a> {dictionary.contact2}</h3>
       </div>
     </div>
   )

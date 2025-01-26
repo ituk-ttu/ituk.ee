@@ -14,8 +14,8 @@ export default async function Home(props: {
   const dictionary = (await getDictionary(locale)).home;
   return (
     <div>
-      <div className="relative w-full h-full">
-        <video className="absolute top-0 left-0 w-full h-full object-cover" autoPlay loop muted playsInline>
+      <div className="relative w-full h-full" aria-label="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu">
+        <video className="absolute top-0 left-0 w-full h-full object-cover" autoPlay loop muted playsInline aria-label="ITÜK läbi aegade">
           <source src="/itünk.webm" type="video/webm" />
           <source src="/itünk.mp4" type="video/mp4" />
         </video>
@@ -42,21 +42,21 @@ export default async function Home(props: {
       <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
         <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
-          <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
+          <div className="p-4 md:p-8 bg-primary flex-col justify-center items-start gap-6 flex">
             <h2 className="lead">{dictionary.events}</h2>
           </div>
           <p>{dictionary.eventsdesc}</p>
-          <Button variant="primary" big={true} text={dictionary.eventsbutton} to="/uritused" />
+          <Button variant="secondary" big={true} text={dictionary.eventsbutton} to="/uritused" />
         </div>
       </div>
 
-      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-32">
+      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
         <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
-          <div className="p-8 bg-primary flex-col justify-center items-start gap-6 flex">
+          <div className="p-4 md:p-8 bg-primary flex-col justify-center items-start gap-6 flex">
             <h2 className="lead">{dictionary.coop}</h2>
           </div>
           <p>{dictionary.coopdesc}</p>
-          <Button variant="primary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
+          <Button variant="secondary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
         </div>
         <Image className="h-full w-full lg:w-1/2 hidden lg:flex" src={koostoo} alt="ITÜKi liikmed tegemas omavahelist koostööd" />
       </div>
