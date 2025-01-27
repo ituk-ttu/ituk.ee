@@ -118,7 +118,6 @@ export default function EventPage({
         setEventYears(_eventYears);
       } catch (error) {
         console.error("Error getting members: ", error);
-        throw error;
       }
 
       setCurEvent(events[0]);
@@ -180,7 +179,7 @@ export default function EventPage({
                 <h2>{dictionary.years}</h2>
                 <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
                   {eventYears.map((year) => (
-                    <Link key={year.key} href={`${usePathname()}/${year.handle}`}>
+                    <Link key={year.key} href={`${pathname}/${year.handle}`}>
                       <Card title={year.title} image={year.banner} type="default" />
                     </Link>
                   ))}
