@@ -94,7 +94,7 @@ export default function EventType({
                 style={{ backgroundImage: `url(${event.banner})` }}
               >
                 <div className="triple-height sm:h-screen w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-                  <h2 className="p-8 lead text-center break-words">
+                  <h2 className="p-8 lead text-center break-words text-wrap">
                     {currentLocale === "en" ? event.en_name : event.name}
                   </h2>
                 </div>

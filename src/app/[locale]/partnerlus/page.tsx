@@ -76,7 +76,7 @@ export default function Home() {
       </div>
 
       <div className="main-padding items-center flex-col flex gap-16">
-        <h2 className="text-center">{dictionary.studentorgs}</h2>
+        <h2 className="text-center break-all">{dictionary.studentorgs}</h2>
         <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
           {studentOrgs.map((partner, index) => (
             <Card key={index} link={partner.link} title={currentLocale === "en" ? partner.en_name : partner.name} image={partner.imagePath} listItems={partner.projects} type="list" />
