@@ -180,29 +180,3 @@ button {
     background-color: #131313;
   }
 }
-
-@media (prefers-color-scheme: light) {
-
-  html,
-  body {
-    background-color: #eeeeee;
-  }
-
-  h1,
-  p>.big,
-  .lead,
-  .giant {
-    color: #eeeeee,
-  }
-
-  p,
-  h2,
-  h3,
-  h4,
-  h5,
-  ul,
-  li,
-  label {
-    color: #131313;
-  }
-}

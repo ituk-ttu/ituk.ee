@@ -14,7 +14,7 @@ export default function Events() {
         href="/uritused/haridus"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">{dictionary.education}</h2>
+          <h2 className="p-8 lead text-center">{dictionary.education}</h2>
         </div>
       </Link>
       <Link
@@ -22,7 +22,7 @@ export default function Events() {
         href="/uritused/meelelahutus"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">{dictionary.entertainment}</h2>
+          <h2 className="p-8 lead text-center">{dictionary.entertainment}</h2>
         </div>
       </Link>
       <Link
@@ -30,7 +30,7 @@ export default function Events() {
         href="/uritused/muu"
       >
         <div className="triple-height sm:h-screen main-max w-full bg-black/50 hover:bg-primary/50 transition-colors duration-150 ease-in-out justify-center items-center flex-row flex">
-          <h2 className="p-8 title text-center">{dictionary.other}</h2>
+          <h2 className="p-8 lead text-center">{dictionary.other}</h2>
         </div>
       </Link>
     </div>
