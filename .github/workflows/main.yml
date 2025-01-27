@@ -29,6 +29,8 @@ jobs:
       run: docker build -t nextjs-ituk-ee .
     - name: Stop old container
       run: ssh deploy@ituk.ee 'docker rm $(docker stop $(docker ps -a -q --filter ancestor=nextjs-ituk-ee --format="{{.ID}}")) || echo Failed to stop old container!'
+    - name: Remove unused Docker images
+      run: ssh deploy@ituk.ee "docker images --quiet --filter=dangling=true | xargs --no-run-if-empty docker rmi"
     - name: Push container to server
       run: docker save nextjs-ituk-ee | ssh -C deploy@ituk.ee docker load
     - name: Start new container
