@@ -8,6 +8,7 @@ body {
   font-size: 16px;
   font-family: "Noto Sans Georgian", sans-serif;
   color: #eeeeee;
+  background-color: #131313;
   line-height: 1.25;
 }
 
@@ -72,7 +73,7 @@ ul {
 input,
 textarea {
   background-color: #131313;
-  box-shadow: 3px 3px 10px 0px black;
+  box-shadow: 3px 3px 10px 0 black;
   border-radius: 0.25rem;
   color: #eeeeee;
   transition: background-color 0.3s, color 0.3s;
@@ -170,13 +171,5 @@ button {
 
   .main-padding {
     padding: 3rem 6.9%;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-
-  html,
-  body {
-    background-color: #131313;
   }
 }
