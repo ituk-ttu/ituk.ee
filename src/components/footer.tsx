@@ -25,7 +25,7 @@ export default function Footer({
         </div>
         <div className="justify-start items-center gap-4 flex-row flex">
           <Image src={phone} alt="Phone number" />
-          <a href="tel:+37256931193" className="font-bold underline hover:decoration-primary">+372 5693 1193</a>
+          <a href="tel:+37258517633" className="font-bold underline hover:decoration-primary">+372 5851 7633</a>
         </div>
         <div className="justify-start items-center gap-5 flex-row flex">
           <Image src={location} alt="Our office" />
