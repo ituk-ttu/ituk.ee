@@ -20,6 +20,8 @@ export default {
         'extra': '#87004280',
         'nortal': '#009639',
         'netgroup': '#fc3056',
+        'alecoq': '#eee',
+        'paulig': '#eee',
       },
       screens: {
         'xs': '480px',
