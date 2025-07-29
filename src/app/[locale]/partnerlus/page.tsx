@@ -77,7 +77,7 @@ export default function Home() {
           <Link target="_blank" href="https://www.alecoq.ee/" className="self-stretch main-padding h-full bg-alecoq rounded-2xl flex-col justify-center items-center flex">
             <Image src={alecoq} alt="A.LeCoq" />
           </Link>
-          <Link target="_blank" href="https://paulig.com/ee/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://www.pauliggroup.com/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
             <Image src={paulig} alt="Paulig" />
           </Link>
         </div>
