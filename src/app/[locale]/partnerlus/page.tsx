@@ -7,6 +7,8 @@ import { DocumentData } from "firebase/firestore";
 import Image from "next/image"
 import netgroup from "@/assets/images/partners/netgroup.png"
 import nortal from "@/assets/images/partners/nortal.png"
+import alecoq from "@/assets/images/partners/alecoq.png"
+import paulig from "@/assets/images/partners/paulig.png"
 import { useDictionary } from "@/components/dictionary-provider";
 import Card from "@/components/cards/card";
 import { usePathname } from "next/navigation";
@@ -65,12 +67,18 @@ export default function Home() {
 
       <div className="main-padding items-center flex-col flex gap-16">
         <h2 className="text-center">{dictionary.partners}</h2>
-        <div className="w-full justify-center items-center flex-col md:flex-row flex gap-16">
-          <Link href="https://nortal.com/" className="self-stretch main-padding h-full md:w-1/2 bg-nortal rounded-2xl flex-col justify-center items-center flex">
+        <div className="w-full justify-center items-center grid-col md:grid-cols-2 grid gap-16">
+          <Link target="_blank" href="https://nortal.com/" className="self-stretch main-padding h-full bg-nortal rounded-2xl flex-col justify-center items-center flex">
             <Image src={nortal} alt="Nortal" />
           </Link>
-          <Link href="https://netgroup.com/" className="self-stretch main-padding h-full md:w-1/2 bg-netgroup rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://netgroup.com/" className="self-stretch main-padding h-full bg-netgroup rounded-2xl flex-col justify-center items-center flex">
             <Image src={netgroup} alt="Netgroup" />
+          </Link>
+          <Link target="_blank" href="https://www.alecoq.ee/" className="self-stretch main-padding h-full bg-alecoq rounded-2xl flex-col justify-center items-center flex">
+            <Image src={alecoq} alt="A.LeCoq" />
+          </Link>
+          <Link target="_blank" href="https://paulig.com/ee/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
+            <Image src={paulig} alt="Paulig" />
           </Link>
         </div>
       </div>
