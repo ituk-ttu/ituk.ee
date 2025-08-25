@@ -37,10 +37,11 @@ const Button: React.FC<ButtonProps> = ({
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onClick?.(event); // Pass the event to the `onClick` prop
-    event.preventDefault();
     if (href) {
+      event.preventDefault();
       window.location.href = href; // Redirect to external link
     } else if (to) {
+      event.preventDefault();
       router.push(to); // Internal navigation using Next.js's router
     }
   };
