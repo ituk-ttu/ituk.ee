@@ -93,7 +93,17 @@
             "title": "Ja palju muud!",
             "description": "Meiega ei hakka sul kunagi igav ;)"
         },
-        "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!"
+        "text2": "Seega, kui sa oled valmis üheks lahedaks teekonnaks, siis esita avaldus juba täna!",
+        "form": {
+            "firstname": "Eesnimi",
+            "lastname": "Perekonnanimi",
+            "studentId": "Üliõpilaskood",
+            "personalId": "Isikukood",
+            "email": "E-mail",
+            "notice": "Sinu isikuandmeid ei edastata kolmandatele osapooltele. Sinu andmeid kasutatakse ainult selleks, et registreerida sind TalTechi IT-teaduskonna üliõpilaskogu liikmeks.",
+            "submit": "Esita avaldus",
+            "submitted": "Esitatud"
+        }
     },
     "event": {
         "description": "Kirjeldus",

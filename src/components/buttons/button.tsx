@@ -15,6 +15,7 @@ interface ButtonProps {
   ariaLabel?: string;
   className?: string; // Allow custom class names to be passed
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // MouseEvent type
+  disabled?: boolean; // Add disabled prop
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
   ariaLabel,
   className = "",
   onClick,
+  disabled = false, // Destructure disabled prop with default value
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -65,6 +67,7 @@ const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel || text}
       onClick={handleClick}
       type={type} // Pass the `type` here to the button attribute
+      disabled={disabled} // Disable button if needed
     >
       {children || text} {/* Render `children` or `text` */}
     </button>

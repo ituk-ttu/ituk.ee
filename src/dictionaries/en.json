@@ -82,18 +82,28 @@
             "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
         },
         "card2": {
-            "title": "Organising events",
-            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
+            "title": ">itük_ merch",
+            "description": "Members get the chance to grab stylish merch, from mugs to hoodies."
         },
         "card3": {
-            "title": "Organising events",
-            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
+            "title": "Friends for life yippiee",
+            "description": "At ITÜK you'll find friends and like-minded people to take on the future with and do great things together!"
         },
         "card4": {
-            "title": "Organising events",
-            "description": "Leave your mark by organising events and creating unforgettable memories for yourself and fellow students!"
+            "title": "And so much more!",
+            "description": "With us, you'll never be bored ;"
         },
-        "text2": "So if You're ready for a thrilling journey, don't wait and join us today!"
+        "text2": "So if You're ready for a thrilling journey, don't wait and join us today!",
+        "form": {
+            "firstname": "First name",
+            "lastname": "Last name",
+            "studentId": "Student code",
+            "personalId": "ID code",
+            "email": "Email address",
+            "notice": "Your personal data will not be shared with third parties. Your data will only be used to register you as a member of the TalTech Student Council of the School of Information Technologies.",
+            "submit": "Submit application",
+            "submitted": "Submitted"
+        }
     },
     "event": {
         "description": "Description",
