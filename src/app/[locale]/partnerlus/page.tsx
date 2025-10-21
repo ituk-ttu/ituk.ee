@@ -9,8 +9,9 @@ import netgroup from "@/assets/images/partners/netgroup.png"
 import nortal from "@/assets/images/partners/nortal.png"
 import alecoq from "@/assets/images/partners/alecoq.png"
 import paulig from "@/assets/images/partners/paulig.png"
+import dominos from "@/assets/images/partners/dominos.png"
 import { useDictionary } from "@/components/dictionary-provider";
-import Card from "@/components/cards/card";
+import Card from "@/components/cards/card"; 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -79,6 +80,9 @@ export default function Home() {
           </Link>
           <Link target="_blank" href="https://www.pauliggroup.com/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
             <Image src={paulig} alt="Paulig" />
+          </Link>
+          <Link target="_blank" href="https://dominospizza.ee/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
+            <Image src={dominos} alt="Domino's" />
           </Link>
         </div>
       </div>
