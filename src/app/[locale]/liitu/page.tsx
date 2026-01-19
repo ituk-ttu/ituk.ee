@@ -20,7 +20,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex flex-col justify-center items-center px-16 py-32 gap-16">
+            <div className="section-padding container-content flex flex-col justify-center items-center gap-16">
                 <h1>{dictionary.text1}</h1>
                 <div className="flex flex-row items-center gap-16">
                     <Card title={dictionary.card1.title} image={uritused.src} description={dictionary.card1.description} type="default" />

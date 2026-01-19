@@ -16,7 +16,7 @@ export default async function Home(props: {
 
     const dictionary = (await getDictionary(locale)).style;
     return (
-        <div className="section-padding flex-col justify-start items-start gap-16 flex">
+        <div className="section-padding container-content flex-col justify-start items-start gap-16 flex">
             <div className="w-full flex-col justify-start items-start gap-8 flex">
                 <h1>{dictionary.title}</h1>
                 <p>{dictionary.last_updated}</p>

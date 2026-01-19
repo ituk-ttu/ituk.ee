@@ -57,16 +57,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="main-min">
+    <div>
       <div className="justify-center items-center bg-[url('/headers/cooperation.jpg')] bg-center bg-cover flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
           <div className="section-padding w-full h-full bg-epic-gradient">
-            <h1 className="text-center big">{dictionary.header}</h1>
+            <h1 className="text-center text-big">{dictionary.header}</h1>
           </div>
         </div>
       </div>
 
-      <div className="section-padding items-center flex-col flex gap-16">
+      <div className="section-padding container-content items-center flex-col flex gap-16">
         <h2 className="text-center">{dictionary.partners}</h2>
         <div className="w-full justify-center items-center grid-col md:grid-cols-2 grid gap-16">
           <Link target="_blank" href="https://nortal.com/" className="self-stretch section-padding h-full bg-nortal rounded-2xl flex-col justify-center items-center flex">
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section-padding items-center flex-col flex gap-16">
+      <div className="section-padding container-content items-center flex-col flex gap-16">
         <h2 className="text-center break-all">{dictionary.studentorgs}</h2>
         <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
           {studentOrgs.map((partner, index) => (
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section-padding bg-primary justify-center items-center gap-16 flex-col xl:flex-row flex">
+      <div className="section-padding container-content bg-primary justify-center items-center gap-16 flex-col xl:flex-row flex">
         <h2 className="text-center w-full">{dictionary.offer}</h2>
         <div className=" justify-between items-center flex-col md:flex-row flex gap-16">
           <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
@@ -118,7 +118,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section-padding justify-center items-center gap-16 flex-col flex">
+      <div className="section-padding container-content justify-center items-center gap-16 flex-col flex">
         <h2 className="text-center">{dictionary.wish}</h2>
         <p className="text-center">{dictionary.goal}</p>
         <h3 className="text-center">{dictionary.contact} <a className="contact underline hover:decoration-primary" href="mailto:kontakt@ituk.ee">kontakt@ituk.ee</a> {dictionary.contact2}</h3>

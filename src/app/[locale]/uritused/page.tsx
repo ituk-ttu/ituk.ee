@@ -7,7 +7,7 @@ export default function Events() {
   const dictionary = useDictionary().events;
 
   return (
-    <div className="main-min items-start flex-col sm:flex-row flex">
+    <div className=" items-start flex-col sm:flex-row flex">
       <h1 className="hidden">Üritused</h1>
       <Link
         className="w-full sm:w-1/3 justify-center items-center bg-center bg-cover bg-[url('/events/haridus.jpg')] flex-col flex"

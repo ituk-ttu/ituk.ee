@@ -651,7 +651,7 @@ export default function Home() {
 
     if (!loggedIn) {
         return (
-            <div className="section-padding main-min justify-center items-center flex-col flex gap-8">
+            <div className="section-padding container-content justify-center items-center flex-col flex gap-8">
                 <h1>Logi sisse</h1>
                 <form className="items-start justify-center gap-4 flex flex-col">
                     <label><span className="text-secondary">* </span>Meiliaadress</label>
@@ -664,7 +664,7 @@ export default function Home() {
         );
     } else {
         return (
-            <div className="main-min">
+            <div>
                 <div className="bg-[url('/headers/derp.jpg')] bg-top bg-cover text-align justify-center items-center flex-row flex">
                     <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
                         <div className="section-padding w-full h-full bg-epic-gradient">
@@ -672,7 +672,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="section-padding gap-16 flex-col flex">
+                <div className="section-padding container-content gap-16 flex-col flex">
                     <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                         <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
                         <Button variant="secondary" onClick={() => setPage("uritused")} text="Üritused" />

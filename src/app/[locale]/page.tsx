@@ -26,7 +26,7 @@ export default async function Home(props: {
         />
         <div className="absolute z-10 top-0 left-0 w-full h-full bg-gradient-to-t from-background via-background/80 to-primary/40" />
         <div className="relative z-20 container-content justify-between items-end flex-row flex">
-          <div className="h-full w-screen lg:w-1/2 justify-center py-24 items-start flex-col flex">
+          <div className="h-full w-full lg:w-1/2 justify-center py-24 items-start flex-col flex">
             <div className="items-start gap-16 flex-col flex">
               <div className="bg-primary p-4">
                 <h1 className="font-bold text-big lowercase">&gt;itük_</h1>

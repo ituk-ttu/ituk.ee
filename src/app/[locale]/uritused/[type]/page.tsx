@@ -69,13 +69,13 @@ export default function EventType({
     <div>
       <h1 className="hidden">{categoryTitles[category]}</h1>
       {events.length === 0 ? (
-        <div className="main-min justify-center items-center flex-col flex gap-8">
+        <div className="justify-center items-center flex-col flex gap-8">
           <h2>Laeb...</h2>
           <Loading />
         </div>
       ) : (
         <div
-          className={`main-min ${events.length <= 3
+          className={`${events.length <= 3
             ? "items-start flex-col sm:flex-row flex"
             : "grid grid-cols-[repeat(auto-fit,minmax(100%,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(33.3333%,1fr))]"
             }`}

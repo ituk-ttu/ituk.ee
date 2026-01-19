@@ -90,12 +90,12 @@ export default function Home() {
       <div className="bg-[url('/headers/about.jpg')] bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
           <div className="section-padding w-full h-full bg-epic-gradient">
-            <h1 className="text-center big">{dictionary.whatis}</h1>
+            <h1 className="text-center text-big">{dictionary.whatis}</h1>
           </div>
         </div>
       </div>
 
-      <div className="section-padding justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
+      <div className="section-padding container-content justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
         <div className="flex-col flex gap-8">
           <h2>{dictionary.answer}</h2>
           <p>
@@ -129,7 +129,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="section-padding justify-center items-center gap-16 flex-col md:flex-row flex">
+      <div className="section-padding container-content justify-center items-center gap-16 flex-col md:flex-row flex">
         <div className="w-full md:w-1/2 flex-col flex gap-8">
           <h2>
             {dictionary.structure}
@@ -152,7 +152,7 @@ export default function Home() {
         <Image className="w-full md:w-1/2" src={ituk_struktuur} alt="ITÜKi struktuur 2025" />
       </div>
 
-      <div className="section-padding justify-center items-center text-align gap-16 flex-col flex">
+      <div className="section-padding container-content justify-center items-center text-align gap-16 flex-col flex">
         <h2>{dictionary.historytitle}</h2>
         <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />

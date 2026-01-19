@@ -87,7 +87,7 @@ export default function Year({
 
     if (eventYear) {
         return (
-            <div className="main-min">
+            <div>
                 <div className="flex flex-col items-center">
                     <div
                         className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
@@ -98,7 +98,7 @@ export default function Year({
                         </div>
                     </div>
 
-                    <div className="section-padding w-full justify-center items-start flex-col flex gap-16">
+                    <div className="section-padding container-content justify-center items-start flex-col flex gap-16">
                         <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
                             <div className="w-full justify-center items-start flex-col flex gap-16">
                                 <h2>{dictionary.description}</h2>
@@ -135,7 +135,7 @@ export default function Year({
                     </div>
 
                     {eventYear.gallery && eventYear.gallery.size > 0 && (
-                        <div className="section-padding w-full justify-center items-start flex-col flex gap-8">
+                        <div className="section-padding container-content justify-center items-start flex-col flex gap-8">
                             <h3>{dictionary.gallery}</h3>
                             <Gallery
                                 photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({
@@ -150,7 +150,7 @@ export default function Year({
         )
     } else {
         return (
-            <div className="main-min justify-center items-center flex-col flex gap-8">
+            <div className="justify-center items-center flex-col flex gap-8">
                 <h2>Laeb...</h2>
                 <Loading />
             </div>
