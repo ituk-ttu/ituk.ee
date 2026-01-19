@@ -37,7 +37,7 @@
   --animate-bright: bright 1s infinite;
 
   --text-big: clamp(4rem, 8vw + 1rem, 6rem);
-  --text-title: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+  --text-title: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
   --text-lead: clamp(2rem, 3vw + 0.5rem, 2.5rem);
   --text-h2: clamp(1.75rem, 2.5vw + 0.5rem, 2rem);
   --text-h3: clamp(1.25rem, 2vw + 0.25rem, 1.5rem);
@@ -180,4 +180,21 @@
 
 @utility bg-board-member {
   background: linear-gradient(90deg, rgba(75, 0, 110, 0.528) 0.07%, rgba(135, 0, 66, 0.528) 99.94%), #870042;
+}
+
+@utility button-text {
+  font-weight: bold;
+  font-family: var(--font-raleway);
+}
+
+@utility btn-sm {
+  font-size: 0.875rem;
+}
+
+@utility btn-md {
+  font-size: 1rem;
+}
+
+@utility btn-lg {
+  font-size: 1.25rem;
 }
