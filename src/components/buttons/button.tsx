@@ -1,71 +1,122 @@
 "use client";
 
 import React from "react";
-import { useRouter, usePathname } from "next/navigation"; // Use Next.js App Router
+import Link from "next/link";
 
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
-  type?: "button" | "submit" | "reset"; // Specify valid button types
-  variant: "primary" | "secondary" | "tertiary";
-  big?: boolean;
-  active?: boolean;
-  to?: string; // Internal navigation path
-  href?: string; // External link
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  to?: string;
+  href?: string;
   ariaLabel?: string;
-  className?: string; // Allow custom class names to be passed
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // MouseEvent type
+  className?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   text,
-  type = "button", // Default to "button"
-  variant,
-  big = false,
-  active,
+  type = "button",
+  variant = "primary",
+  size = "md",
+  disabled = false,
   to,
   href,
   ariaLabel,
   className = "",
   onClick,
 }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const isActive = pathname.includes(to || ""); // Check if the current path matches the `to` prop
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event); // Pass the event to the `onClick` prop
-    event.preventDefault();
-    if (href) {
-      window.location.href = href; // Redirect to external link
-    } else if (to) {
-      router.push(to); // Internal navigation using Next.js's router
-    }
+  const sizeClasses = {
+    sm: "min-w-24 px-3 py-1.5 btn-sm",
+    md: "min-w-24 px-4 py-2 btn-md",
+    lg: "min-w-24 px-6 py-3 btn-lg",
   };
 
-  const baseClasses = `flex justify-center items-center button-text transition-colors duration-150 ${className}`;
+  const baseClasses = `
+    flex justify-center items-center
+    button-text uppercase
+    rounded overflow-hidden
+    transition-all duration-150 ease-in-out
+    ${sizeClasses[size]}
+    ${disabled ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}
+    ${className}
+  `;
 
   const variantClasses = {
-    primary: `bg-primary shadow-filled rounded text-light hover:bg-secondary focus:bg-light focus:text-primary ${big ? "min-w-32 min-h-16 px-8" : "min-w-32 min-h-12 px-8"
-      }`,
-    secondary: `bg-transparent shadow-filled rounded box-border border-primary border-4 text-light hover:border-light focus:bg-light focus:border-light focus:text-primary ${big ? "min-w-32 min-h-16 px-8" : "min-w-32 min-h-12 px-8"
-      }`,
-    tertiary: `bg-transparent border-b-4 h-12 px-2 ${isActive || active
-      ? "border-primary text-light"
-      : "border-transparent text-light hover:border-light focus:border-primary focus:text-light"
-      }`,
+    primary: `
+      bg-primary text-white
+      ${!disabled && "hover:brightness-[1.2] active:brightness-[0.7]"}
+    `,
+    secondary: `
+      bg-transparent border-4 border-primary text-white
+      ${!disabled && "hover:bg-primary/20 active:bg-primary/30"}
+    `,
+    tertiary: `
+      bg-transparent text-white
+      ${!disabled && "hover:bg-primary/20 active:bg-primary/30"}
+    `,
   };
+
+  const combinedClasses = `${baseClasses} ${variantClasses[variant]}`;
+  const content = children || text;
+
+  if (to) {
+    const isExternal = to.startsWith("http://") || to.startsWith("https://");
+
+    if (isExternal) {
+      return (
+        <a
+          className={combinedClasses}
+          aria-label={ariaLabel || text}
+          href={to}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={disabled ? (e) => e.preventDefault() : onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        >
+          {content}
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        className={combinedClasses}
+        aria-label={ariaLabel || text}
+        href={to}
+        onClick={disabled ? (e) => e.preventDefault() : onClick as React.MouseEventHandler<HTMLAnchorElement>}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  if (href) {
+    return (
+      <a
+        className={combinedClasses}
+        aria-label={ariaLabel || text}
+        href={href}
+        download
+        onClick={disabled ? (e) => e.preventDefault() : onClick as React.MouseEventHandler<HTMLAnchorElement>}
+      >
+        {content}
+      </a>
+    );
+  }
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]}`}
+      className={combinedClasses}
       aria-label={ariaLabel || text}
-      onClick={handleClick}
-      type={type} // Pass the `type` here to the button attribute
+      onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
+      type={type}
+      disabled={disabled}
     >
-      {children || text} {/* Render `children` or `text` */}
+      {content}
     </button>
   );
 };

@@ -93,12 +93,12 @@ export default function Year({
                         className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
                         style={{ backgroundImage: `url(${eventYear.banner})` }}
                     >
-                        <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
-                            <h1 className="big text-center">{currentLocale === "en" ? eventYear.en_title : eventYear.title}</h1>
+                        <div className="section-padding w-full bg-black/50 justify-center items-center flex-row flex">
+                            <h1 className="text-big text-center">{currentLocale === "en" ? eventYear.en_title : eventYear.title}</h1>
                         </div>
                     </div>
 
-                    <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
+                    <div className="section-padding w-full justify-center items-start flex-col flex gap-16">
                         <div className="w-full justify-center items-start flex-col md:flex-row flex gap-16">
                             <div className="w-full justify-center items-start flex-col flex gap-16">
                                 <h2>{dictionary.description}</h2>
@@ -135,7 +135,7 @@ export default function Year({
                     </div>
 
                     {eventYear.gallery && eventYear.gallery.size > 0 && (
-                        <div className="main-padding w-full justify-center items-start flex-col flex gap-8">
+                        <div className="section-padding w-full justify-center items-start flex-col flex gap-8">
                             <h3>{dictionary.gallery}</h3>
                             <Gallery
                                 photos={Array.from(eventYear.gallery.entries()).map(([name, src]) => ({

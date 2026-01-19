@@ -14,8 +14,8 @@ export default function Home() {
         <div>
             <div className="justify-center items-center bg-[url('/headers/liitu.jpg')] bg-center bg-cover flex-row flex">
                 <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-                    <div className="main-padding w-full h-full bg-epic-gradient">
-                        <h1 className="text-center big">{dictionary.header}</h1>
+                    <div className="section-padding w-full h-full bg-epic-gradient">
+                        <h1 className="text-center text-big">{dictionary.header}</h1>
                     </div>
                 </div>
             </div>

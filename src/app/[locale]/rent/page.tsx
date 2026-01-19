@@ -55,13 +55,13 @@ export default function Home() {
     <div className="main-min">
       <div className="justify-center items-center bg-[url('/headers/rent.jpg')] bg-center bg-cover flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-          <div className="main-padding w-full h-full bg-epic-gradient">
-            <h1 className="text-center big">{dictionary.header}</h1>
+          <div className="section-padding w-full h-full bg-epic-gradient">
+            <h1 className="text-center text-big">{dictionary.header}</h1>
           </div>
         </div>
       </div>
 
-      <div className="main-padding gap-16 flex-col flex">
+      <div className="section-padding gap-16 flex-col flex">
         <ol className="flex-col flex gap-8">
           <li>{dictionary.request}<a className="font-bold underline" href="mailto:kontakt@ituk.ee?subject=Tehnika rent - [ürituse nimi]&body=Tervist,%0A%0ASoovin rentida tehnikat üritusele [ürituse nimi] kuupäevadel [kuupäev].%0A%0ALugupidamisega">kontakt@ituk.ee</a></li>
           <li>{dictionary.NB}</li>

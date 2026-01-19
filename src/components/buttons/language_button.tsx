@@ -4,54 +4,47 @@ import React from "react";
 import Estonian from "@/assets/icons/et.svg";
 import English from "@/assets/icons/en.svg";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface LanguageButtonProps {
     onClick?: () => void;
     className?: string;
 }
 
-
 const LanguageButton: React.FC<LanguageButtonProps> = ({
     onClick,
     className = "",
 }) => {
-    const router = useRouter()
+    const router = useRouter();
     const pathname = usePathname();
 
     const changeLanguage = (locale: string) => {
-
         const pathParts = pathname.split("/").filter(Boolean) || [];
 
         if (pathParts[0] === "en" || pathParts[0] === "et") {
-            pathParts[0] = locale; // Replace the current locale
+            pathParts[0] = locale;
         } else {
-            pathParts.unshift(locale); // Prepend the new locale
+            pathParts.unshift(locale);
         }
 
-        console.log(`/${pathParts.join("/")}`);
         router.push(`/${pathParts.join("/")}`);
     };
-
 
     const currentLocale = pathname?.split("/")[1];
 
     return (
-        <div
-            aria-label="Language Button"
-            className="justify-start items-center flex-row flex gap-8"
+        <button
+            aria-label={currentLocale === "en" ? "Switch to Estonian" : "Switch to English"}
+            onClick={() => changeLanguage(currentLocale === "en" ? "et" : "en")}
+            className={`w-8 h-8 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80 ${className}`}
         >
-            {currentLocale === "en" ? (
-                <button aria-label="Estonian" onClick={() => changeLanguage("et")}>
-                    <Image src={Estonian} alt="Switch to Estonian" />
-                </button>
-            ) : (
-                <button aria-label="English" onClick={() => changeLanguage("en")}>
-                    <Image src={English} alt="Switch to English" />
-                </button>
-            )}
-        </div>
+            <Image
+                src={currentLocale === "en" ? Estonian : English}
+                alt={currentLocale === "en" ? "Switch to Estonian" : "Switch to English"}
+                width={32}
+                height={32}
+            />
+        </button>
     );
 };
 

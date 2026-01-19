@@ -89,13 +89,13 @@ export default function Home() {
     <div>
       <div className="bg-[url('/headers/about.jpg')] bg-center bg-cover text-align justify-center items-center flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-          <div className="main-padding w-full h-full bg-epic-gradient">
+          <div className="section-padding w-full h-full bg-epic-gradient">
             <h1 className="text-center big">{dictionary.whatis}</h1>
           </div>
         </div>
       </div>
 
-      <div className="main-padding justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
+      <div className="section-padding justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
         <div className="flex-col flex gap-8">
           <h2>{dictionary.answer}</h2>
           <p>
@@ -110,26 +110,26 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="main-padding bg-primary justify-center items-center lg:items-start gap-16 lg:gap-32 flex-col xs:flex-row flex-wrap flex">
+      <div className="section-padding bg-primary justify-center items-center lg:items-start gap-16 lg:gap-32 flex-col xs:flex-row flex-wrap flex">
         <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="big font-bold">{dictionary.statistics.stat1.title}</span>
+          <span className="text-big font-bold">{dictionary.statistics.stat1.title}</span>
           {dictionary.statistics.stat1.description}
         </p>
         <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="big font-bold">{dictionary.statistics.stat2.title}</span>
+          <span className="text-big font-bold">{dictionary.statistics.stat2.title}</span>
           {dictionary.statistics.stat2.description}
         </p>
         <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="big font-bold">{dictionary.statistics.stat3.title}</span>
+          <span className="text-big font-bold">{dictionary.statistics.stat3.title}</span>
           {dictionary.statistics.stat3.description}
         </p>
         <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="big font-bold">{dictionary.statistics.stat4.title}</span>
+          <span className="text-big font-bold">{dictionary.statistics.stat4.title}</span>
           {dictionary.statistics.stat4.description}
         </p>
       </div>
 
-      <div className="main-padding justify-center items-center gap-16 flex-col md:flex-row flex">
+      <div className="section-padding justify-center items-center gap-16 flex-col md:flex-row flex">
         <div className="w-full md:w-1/2 flex-col flex gap-8">
           <h2>
             {dictionary.structure}
@@ -152,7 +152,7 @@ export default function Home() {
         <Image className="w-full md:w-1/2" src={ituk_struktuur} alt="ITÜKi struktuur 2025" />
       </div>
 
-      <div className="main-padding justify-center items-center text-align gap-16 flex-col flex">
+      <div className="section-padding justify-center items-center text-align gap-16 flex-col flex">
         <h2>{dictionary.historytitle}</h2>
         <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />

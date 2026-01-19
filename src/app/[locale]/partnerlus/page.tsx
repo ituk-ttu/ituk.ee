@@ -11,7 +11,7 @@ import alecoq from "@/assets/images/partners/alecoq.png"
 import paulig from "@/assets/images/partners/paulig.png"
 import dominos from "@/assets/images/partners/dominos.png"
 import { useDictionary } from "@/components/dictionary-provider";
-import Card from "@/components/cards/card"; 
+import Card from "@/components/cards/card";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -60,34 +60,34 @@ export default function Home() {
     <div className="main-min">
       <div className="justify-center items-center bg-[url('/headers/cooperation.jpg')] bg-center bg-cover flex-row flex">
         <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-          <div className="main-padding w-full h-full bg-epic-gradient">
+          <div className="section-padding w-full h-full bg-epic-gradient">
             <h1 className="text-center big">{dictionary.header}</h1>
           </div>
         </div>
       </div>
 
-      <div className="main-padding items-center flex-col flex gap-16">
+      <div className="section-padding items-center flex-col flex gap-16">
         <h2 className="text-center">{dictionary.partners}</h2>
         <div className="w-full justify-center items-center grid-col md:grid-cols-2 grid gap-16">
-          <Link target="_blank" href="https://nortal.com/" className="self-stretch main-padding h-full bg-nortal rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://nortal.com/" className="self-stretch section-padding h-full bg-nortal rounded-2xl flex-col justify-center items-center flex">
             <Image src={nortal} alt="Nortal" />
           </Link>
-          <Link target="_blank" href="https://netgroup.com/" className="self-stretch main-padding h-full bg-netgroup rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://netgroup.com/" className="self-stretch section-padding h-full bg-netgroup rounded-2xl flex-col justify-center items-center flex">
             <Image src={netgroup} alt="Netgroup" />
           </Link>
-          <Link target="_blank" href="https://www.alecoq.ee/" className="self-stretch main-padding h-full bg-alecoq rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://www.alecoq.ee/" className="self-stretch section-padding h-full bg-alecoq rounded-2xl flex-col justify-center items-center flex">
             <Image src={alecoq} alt="A.LeCoq" />
           </Link>
-          <Link target="_blank" href="https://www.pauliggroup.com/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://www.pauliggroup.com/" className="self-stretch section-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
             <Image src={paulig} alt="Paulig" />
           </Link>
-          <Link target="_blank" href="https://dominospizza.ee/" className="self-stretch main-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
+          <Link target="_blank" href="https://dominospizza.ee/" className="self-stretch section-padding h-full bg-paulig rounded-2xl flex-col justify-center items-center flex">
             <Image src={dominos} alt="Domino's" />
           </Link>
         </div>
       </div>
 
-      <div className="main-padding items-center flex-col flex gap-16">
+      <div className="section-padding items-center flex-col flex gap-16">
         <h2 className="text-center break-all">{dictionary.studentorgs}</h2>
         <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
           {studentOrgs.map((partner, index) => (
@@ -96,29 +96,29 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="main-padding bg-primary justify-center items-center gap-16 flex-col xl:flex-row flex">
+      <div className="section-padding bg-primary justify-center items-center gap-16 flex-col xl:flex-row flex">
         <h2 className="text-center w-full">{dictionary.offer}</h2>
         <div className=" justify-between items-center flex-col md:flex-row flex gap-16">
           <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-            <span className="big font-bold">{dictionary.statistics.stat1.title}</span>
+            <span className="text-big font-bold">{dictionary.statistics.stat1.title}</span>
             {dictionary.statistics.stat1.description}
           </p>
           <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-            <span className="big font-bold">{dictionary.statistics.stat2.title}</span>
+            <span className="text-big font-bold">{dictionary.statistics.stat2.title}</span>
             {dictionary.statistics.stat2.description}
           </p>
           <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-            <span className="big font-bold">{dictionary.statistics.stat3.title}</span>
+            <span className="text-big font-bold">{dictionary.statistics.stat3.title}</span>
             {dictionary.statistics.stat3.description}
           </p>
           <p className="items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-            <span className="big font-bold">{dictionary.statistics.stat4.title}</span>
+            <span className="text-big font-bold">{dictionary.statistics.stat4.title}</span>
             {dictionary.statistics.stat4.description}
           </p>
         </div>
       </div>
 
-      <div className="main-padding justify-center items-center gap-16 flex-col flex">
+      <div className="section-padding justify-center items-center gap-16 flex-col flex">
         <h2 className="text-center">{dictionary.wish}</h2>
         <p className="text-center">{dictionary.goal}</p>
         <h3 className="text-center">{dictionary.contact} <a className="contact underline hover:decoration-primary" href="mailto:kontakt@ituk.ee">kontakt@ituk.ee</a> {dictionary.contact2}</h3>

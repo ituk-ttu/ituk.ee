@@ -61,7 +61,7 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
     if (!isOpen) return null;
 
     return (
-        <div className="p-0 2xl:py-24 2xl:px-8 fixed inset-0 bg-dark/90 z-20 flex flex-row items-center justify-center">
+        <div className="p-0 2xl:py-24 2xl:px-8 fixed inset-0 bg-background/90 z-20 flex flex-row items-center justify-center">
             <button onClick={onCloseOverlay} className="pt-8 pr-8 px-4 absolute top-0 right-0" aria-label="Close overlay">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.0585 13.2281L3.33038 0.5L0.501953 3.32843L13.23 16.0565L0.502255 28.7843L3.33068 31.6127L16.0585 18.8849L28.7862 31.6127L31.6147 28.7843L18.8869 16.0565L31.615 3.32846L28.7865 0.500031L16.0585 13.2281Z" fill="#EEEEEE" />
@@ -80,7 +80,7 @@ const GalleryOverlay: React.FC<GalleryOverlayProps> = ({
 
             <div className="w-full items-center justify-center gap-8 flex-col flex">
                 <img
-                    className="w-full h-auto max-w-[100%] max-h-[80vh] object-contain"
+                    className="w-full h-auto max-w-full max-h-[80vh] object-contain"
                     src={photos[currentIndex].src}
                     alt={photos[currentIndex].name}
                 />

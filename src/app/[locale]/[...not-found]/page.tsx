@@ -6,12 +6,12 @@ export default function NotFound() {
   return (
     <div className="bg-[url('/headers/derp.jpg')] bg-top bg-cover text-align justify-center items-center flex-row flex">
       <div className="bg-extra justify-center items-center flex-row flex">
-        <div className="w-screen main-padding bg-epic-gradient justify-center items-center flex-col md:flex-row flex gap-16">
+        <div className="w-screen section-padding bg-epic-gradient justify-center items-center flex-col md:flex-row flex gap-16">
           <div className="w-full md:w-1/3 flex-row justify-center items-end flex">
             <Image className="animate-etator" src={spin_cw.src} width="420" height="420" alt="Spinning Tux" />
           </div>
           <div className="w-full md:w-1/3 flex-col justify-center items-center flex">
-            <h1 className="giant">404</h1>
+            <h1 className="text-big">404</h1>
             <p className="text-center text-3xl">Lehekülge ei leitud, küll aga sa leidsid keerlevad Tuxid!</p>
           </div>
           <div className="w-full md:w-1/3 flex-row justify-center items-end flex">

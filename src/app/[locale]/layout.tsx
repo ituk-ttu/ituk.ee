@@ -20,9 +20,10 @@ const noto_sans_georgian = Noto_Sans_Georgian({
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await props.params;
+  const { locale: localeParam } = await props.params;
+  const locale = localeParam as Locale;
 
   const dictionary = await getDictionary(locale);
   return (
@@ -62,6 +63,7 @@ export default async function RootLayout(props: {
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="ITÜK" />
         <link rel="manifest" href="/favicons/site.webmanifest" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </head>
       <body className="main-min">
         <Navbar dictionary={dictionary.navbar} />

@@ -150,12 +150,12 @@ export default function EventPage({
             className="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
             style={{ backgroundImage: `url(${curEvent.banner})` }}
           >
-            <div className="main-padding w-full bg-black/50 justify-center items-center flex-row flex">
-              <h1 className="big text-center">{currentLocale === "en" ? curEvent.en_name : curEvent.name}</h1>
+            <div className="section-padding w-full bg-black/50 justify-center items-center flex-row flex">
+              <h1 className="text-big text-center">{currentLocale === "en" ? curEvent.en_name : curEvent.name}</h1>
             </div>
           </div>
 
-          <div className="main-padding w-full justify-center items-start flex-col flex gap-16">
+          <div className="section-padding w-full justify-center items-start flex-col flex gap-16">
             <div className="w-full justify-start items-start flex-col md:flex-row flex gap-16">
               <div className="w-full justify-center items-start flex-col flex gap-16">
                 <h2>{dictionary.description}</h2>

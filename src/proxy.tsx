@@ -3,7 +3,7 @@ import { i18nConfig } from "../i18nConfig"
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export function middleware(request: NextRequest): NextResponse {
+export function proxy(request: NextRequest): NextResponse {
     if (request.nextUrl.pathname.startsWith("/admin")) {
         const supplied_token = request.nextUrl.searchParams.get('token');
         const valid_token = process.env.ADMIN_TOKEN

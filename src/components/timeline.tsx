@@ -29,13 +29,13 @@ export default function Timeline({
     return (
       <div key={key} className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
         <Card title={title} image={imagePath} description={description} type="default" />
-        <div className="h-16 bg-light w-1 flex sm:hidden" />
+        <div className="h-16 bg-white w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
-          <div className="flex-grow bg-light w-1"></div>
+          <div className="grow bg-white w-1"></div>
           <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoon">
             <path d="M11.0001 21.6667C16.8911 21.6667 21.6668 16.891 21.6668 11C21.6668 5.10896 16.8911 0.333333 11.0001 0.333333C5.10906 0.333333 0.333433 5.10896 0.333433 11C0.333433 16.891 5.10906 21.6667 11.0001 21.6667ZM11 13H11.0001V9H11V13Z" fill="#EEEEEE" />
           </svg>
-          <div className="flex-grow bg-light w-1"></div>
+          <div className="grow bg-white w-1"></div>
         </div>
         <div className="w-full justify-center flex-col hidden sm:flex">
           <h4>{year?.toLocaleString('et-EE', {
@@ -48,13 +48,13 @@ export default function Timeline({
     return (
       <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row-reverse flex">
         <Card title={title} image={imagePath} description={description} type="default" />
-        <div className="h-16 bg-light w-1 flex sm:hidden" />
+        <div className="h-16 bg-white w-1 flex sm:hidden" />
         <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
-          <div className="flex-grow bg-light w-1"></div>
+          <div className="grow bg-white w-1"></div>
           <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoon">
             <path d="M11.0001 21.6667C16.8911 21.6667 21.6668 16.891 21.6668 11C21.6668 5.10896 16.8911 0.333333 11.0001 0.333333C5.10906 0.333333 0.333433 5.10896 0.333433 11C0.333433 16.891 5.10906 21.6667 11.0001 21.6667ZM11 13H11.0001V9H11V13Z" fill="#EEEEEE" />
           </svg>
-          <div className="flex-grow bg-light w-1"></div>
+          <div className="grow bg-white w-1"></div>
         </div>
         <div className="w-full justify-center items-end flex-col hidden sm:flex">
           <h4>{year?.toLocaleString('et-EE', {

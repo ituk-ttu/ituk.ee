@@ -5,6 +5,7 @@ import { Locale } from "../../../i18nConfig";
 import { getDictionary } from "@/dictionaries/dictionaries";
 import hingematvad from "@/assets/images/hingematvad.jpg";
 import koostoo from "@/assets/images/koostoo.jpg";
+import hero from "@/assets/images/hero.jpg";
 
 export default async function Home(props: {
   params: Promise<{ locale: Locale }>
@@ -14,52 +15,78 @@ export default async function Home(props: {
   const dictionary = (await getDictionary(locale)).home;
   return (
     <div>
+      {/* Hero Section */}
       <div className="relative w-full h-full" aria-label="ITÜK | TalTechi IT-teaduskonna üliõpilaskogu">
-        <video className="absolute top-0 left-0 w-full h-full object-cover" autoPlay loop muted playsInline aria-label="ITÜK läbi aegade">
-          <source src="/itünk.webm" type="video/webm" />
-          <source src="/itünk.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute z-10 top-0 left-0 w-full h-full object-cover bg-[#000000bf]" />
-        <div className="relative z-20 justify-between items-end px-[6.9%] flex-row flex">
+        <Image
+          src={hero}
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute z-10 top-0 left-0 w-full h-full bg-gradient-to-t from-background via-background/80 to-primary/40" />
+        <div className="relative z-20 container-content justify-between items-end flex-row flex">
           <div className="h-full w-screen lg:w-1/2 justify-center py-24 items-start flex-col flex">
             <div className="items-start gap-16 flex-col flex">
-              <div className="bg-primary">
-                <h1 className="font-bold giant lowercase">&gt;itük_</h1>
+              <div className="bg-primary p-4">
+                <h1 className="font-bold text-big lowercase">&gt;itük_</h1>
               </div>
-              <p className="lead font-bold">{dictionary.hero}</p>
+              <p className="text-title font-bold">{dictionary.hero}</p>
               <div className="gap-8 flex-col sm:flex-row flex">
-                <Button variant="primary" big={true} text={dictionary.joinus} to="https://liitu.ituk.ee/" />
-                <Button variant="secondary" big={true} text={dictionary.readaboutus} to="/meist" />
+                <Button variant="primary" size="lg" text={dictionary.joinus} to="https://liitu.ituk.ee/" />
+                <Button variant="secondary" size="lg" text={dictionary.readaboutus} to="/meist" />
               </div>
             </div>
           </div>
-          <div className="hidden lg:w-1/2 justify-end items-end flex-col lg:flex">
+          <div className="hidden lg:w-1/2 justify-end items-end flex-col lg:flex relative">
             <Image src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
 
-      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex shadow-filled" src={hingematvad} alt="ITÜKi liikmed ei mata nii pea hinge!" />
-        <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
-          <div className="p-4 md:p-8 bg-primary flex-col justify-center items-start gap-6 flex">
-            <h2 className="lead">{dictionary.events}</h2>
+      {/* Info Sections */}
+      <div className="section-padding container-content flex flex-col gap-16">
+        {/* Events Section */}
+        <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+          <div className="w-full max-w-[512px] aspect-video relative">
+            <Image
+              className="object-cover rounded"
+              src={hingematvad}
+              alt="ITÜKi liikmed ei mata nii pea hinge!"
+              fill
+              sizes="(max-width: 1024px) 100vw, 512px"
+            />
           </div>
-          <p>{dictionary.eventsdesc}</p>
-          <Button variant="secondary" big={true} text={dictionary.eventsbutton} to="/uritused" />
+          <div className="w-full max-w-[512px] flex flex-col gap-6 items-start">
+            <div className="p-4 bg-primary">
+              <h2>{dictionary.events}</h2>
+            </div>
+            <p>{dictionary.eventsdesc}</p>
+            <Button variant="primary" size="lg" text={dictionary.eventsbutton} to="/uritused" />
+          </div>
         </div>
-      </div>
 
-      <div className="main-padding justify-start items-center flex-col lg:flex-row flex gap-16">
-        <div className="h-full w-full lg:w-1/2 flex-col justify-start items-start flex gap-8">
-          <div className="p-4 md:p-8 bg-primary flex-col justify-center items-start gap-6 flex">
-            <h2 className="lead">{dictionary.coop}</h2>
+        {/* Cooperation Section */}
+        <div className="w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 lg:gap-16">
+          <div className="w-full max-w-[512px] flex flex-col gap-6 items-start">
+            <div className="p-4 bg-primary">
+              <h2>{dictionary.coop}</h2>
+            </div>
+            <p>{dictionary.coopdesc}</p>
+            <Button variant="primary" size="lg" text={dictionary.coopbutton} to="/partnerlus" />
           </div>
-          <p>{dictionary.coopdesc}</p>
-          <Button variant="secondary" big={true} text={dictionary.coopbutton} to="/partnerlus" />
+          <div className="w-full max-w-[512px] aspect-video relative">
+            <Image
+              className="object-cover rounded"
+              src={koostoo}
+              alt="ITÜKi liikmed tegemas omavahelist koostööd"
+              fill
+              sizes="(max-width: 1024px) 100vw, 512px"
+            />
+          </div>
         </div>
-        <Image className="h-full w-full lg:w-1/2 hidden lg:flex shadow-filled" src={koostoo} alt="ITÜKi liikmed tegemas omavahelist koostööd" />
       </div>
-    </div >
+    </div>
   );
 }

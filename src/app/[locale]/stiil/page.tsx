@@ -16,7 +16,7 @@ export default async function Home(props: {
 
     const dictionary = (await getDictionary(locale)).style;
     return (
-        <div className="main-padding flex-col justify-start items-start gap-16 flex">
+        <div className="section-padding flex-col justify-start items-start gap-16 flex">
             <div className="w-full flex-col justify-start items-start gap-8 flex">
                 <h1>{dictionary.title}</h1>
                 <p>{dictionary.last_updated}</p>
@@ -46,7 +46,7 @@ export default async function Home(props: {
             <div className="w-full flex-col justify-start items-start gap-8 flex">
                 <h2>{dictionary.logo.heading}</h2>
                 <p>{dictionary.logo.description}</p>
-                <Button variant="primary" big={true} text={dictionary.logo.download_button} href="/ITUK_stiiliraamat_27012025.zip" />
+                <Button variant="primary" size="lg" text={dictionary.logo.download_button} href="/ITUK_stiiliraamat_27012025.zip" />
                 <h3>{dictionary.logo.internal_use_heading}</h3>
                 <p>{dictionary.logo.internal_use_context}</p>
                 <div className="flex-col justify-start items-start gap-8 flex">
@@ -118,15 +118,15 @@ export default async function Home(props: {
                         <p>{dictionary.colors.primary_color_3_rgb}</p>
                         <p>{dictionary.colors.primary_color_3_cmyk}</p>
                     </div>
-                    <div className="bg-dark w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                    <div className="bg-background w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
                         <p>{dictionary.colors.primary_color_4_hex}</p>
                         <p>{dictionary.colors.primary_color_4_rgb}</p>
                         <p>{dictionary.colors.primary_color_4_cmyk}</p>
                     </div>
-                    <div className="bg-light w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
-                        <p className="text-dark">{dictionary.colors.primary_color_5_hex}</p>
-                        <p className="text-dark">{dictionary.colors.primary_color_5_rgb}</p>
-                        <p className="text-dark">{dictionary.colors.primary_color_5_cmyk}</p>
+                    <div className="bg-white w-full sm:w-1/5 h-full p-4 flex-col justify-start items-start gap-4 flex">
+                        <p className="text-background">{dictionary.colors.primary_color_5_hex}</p>
+                        <p className="text-background">{dictionary.colors.primary_color_5_rgb}</p>
+                        <p className="text-background">{dictionary.colors.primary_color_5_cmyk}</p>
                     </div>
                 </div>
             </div>

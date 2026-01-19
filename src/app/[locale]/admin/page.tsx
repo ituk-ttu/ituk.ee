@@ -260,10 +260,7 @@ export default function Home() {
 
     //firebase authentication functions
 
-    interface ButtonEvent
-        extends React.MouseEvent<HTMLButtonElement, MouseEvent> {
-        preventDefault: () => void;
-    }
+    type ButtonEvent = React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>;
 
     const handleLogout = () => {
         signOut(auth)
@@ -654,7 +651,7 @@ export default function Home() {
 
     if (!loggedIn) {
         return (
-            <div className="main-padding main-min justify-center items-center flex-col flex gap-8">
+            <div className="section-padding main-min justify-center items-center flex-col flex gap-8">
                 <h1>Logi sisse</h1>
                 <form className="items-start justify-center gap-4 flex flex-col">
                     <label><span className="text-secondary">* </span>Meiliaadress</label>
@@ -670,12 +667,12 @@ export default function Home() {
             <div className="main-min">
                 <div className="bg-[url('/headers/derp.jpg')] bg-top bg-cover text-align justify-center items-center flex-row flex">
                     <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-                        <div className="main-padding w-full h-full bg-epic-gradient">
-                            <h1 className="text-center big">Dashboard</h1>
+                        <div className="section-padding w-full h-full bg-epic-gradient">
+                            <h1 className="text-center text-big">Dashboard</h1>
                         </div>
                     </div>
                 </div>
-                <div className="main-padding gap-16 flex-col flex">
+                <div className="section-padding gap-16 flex-col flex">
                     <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                         <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
                         <Button variant="secondary" onClick={() => setPage("uritused")} text="Üritused" />
@@ -849,23 +846,23 @@ export default function Home() {
                                             {logbook.map((log, index) => (
                                                 <ol key={log.key} className="h-full w-60">
                                                     <li
-                                                        className={`relative min-h-60 w-60 p-4 shadow-filled break-words transform transition-transform duration-150 ease-linear ${(() => {
+                                                        className={`relative min-h-60 w-60 p-4 shadow-filled wrap-break-word transform transition-transform duration-150 ease-linear ${(() => {
                                                             if ((index + 1) % 3 === 0) {
-                                                                return "rotate-[6deg] top-[-3px] bg-gray text-light";
+                                                                return "rotate-6 top-[-3px] bg-gray text-white";
                                                             } else if ((index + 1) % 4 === 0) {
-                                                                return "rotate-[-3deg] top-[8px] bg-light text-dark";
+                                                                return "-rotate-3 top-[8px] bg-white text-background";
                                                             } else if ((index + 1) % 5 === 0) {
-                                                                return "rotate-[2deg] top-[2px] bg-[#4dbed2] text-dark";
+                                                                return "rotate-2 top-[2px] bg-[#4dbed2] text-background";
                                                             } else if ((index + 1) % 2 === 0) {
-                                                                return "rotate-[-2deg] top-[4px] bg-yellow-300 text-dark";
+                                                                return "-rotate-2 top-[4px] bg-yellow-300 text-background";
                                                             } else if ((index + 1) % 7 === 0) {
-                                                                return "rotate-[-5deg] top-[7px] bg-[#342b60] text-light";
+                                                                return "rotate-[-5deg] top-[7px] bg-[#342b60] text-white";
                                                             } else if ((index + 1) % 6 === 0) {
-                                                                return "rotate-[-1deg] top-[5px] bg-green-500 text-dark";
+                                                                return "-rotate-1 top-[5px] bg-green-500 text-background";
                                                             } else {
-                                                                return "bg-primary text-light"; // Default case for other list items
+                                                                return "bg-primary text-white"; // Default case for other list items
                                                             }
-                                                        })()} hover:scale-110 hover:rotate-[0deg] z-10`}
+                                                        })()} hover:scale-110 hover:rotate-0 z-10`}
                                                     >
                                                         <h5>{log.author}</h5>
                                                         <p className="text-xs">
