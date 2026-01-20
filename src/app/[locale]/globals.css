@@ -15,14 +15,15 @@
   --color-extra: #87004280;
   --color-nortal: #009639;
   --color-netgroup: #fc3056;
-  --color-alecoq: #eee;
-  --color-paulig: #eee;
+  --color-alecoq: #ffffff;
+  --color-paulig: #ffffff;
+  --color-dominos: #ffffff;
 
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
-  --breakpoint-lg: 1146px;
-  --breakpoint-xl: 1344px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
   --background-image-epic-gradient: linear-gradient(90deg,
@@ -157,6 +158,10 @@
 
 @utility text-small {
   font-size: var(--text-sm);
+}
+
+@utility text-stat {
+  font-size: 4rem;
 }
 
 @utility container-content {

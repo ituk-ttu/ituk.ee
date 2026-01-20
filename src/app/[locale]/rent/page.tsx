@@ -7,6 +7,7 @@ import { DocumentData } from 'firebase/firestore';
 import Card from "@/components/cards/card";
 import { useDictionary } from '@/components/dictionary-provider';
 import { usePathname } from 'next/navigation';
+import PageHeader from "@/components/page-header";
 
 interface Rent {
   name: string;
@@ -53,23 +54,19 @@ export default function Home() {
 
   return (
     <div>
-      <div className="justify-center items-center bg-[url('/headers/rent.jpg')] bg-center bg-cover flex-row flex">
-        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-          <div className="section-padding w-full h-full bg-epic-gradient">
-            <h1 className="text-center text-big">{dictionary.header}</h1>
-          </div>
+      <PageHeader title={dictionary.header} backgroundImage="/headers/rent.jpg" />
+
+      <div className="section-padding container-content gap-16 flex-col lg:flex-row flex">
+        <div className="w-full lg:w-1/3 flex flex-col gap-8">
+          <h2>{dictionary.title}</h2>
+          <p>{dictionary.description}</p>
+          <p>{dictionary.request}<a className="font-bold underline hover:text-primary" href="mailto:kontakt@ituk.ee?subject=Tehnika rent - [ürituse nimi]&body=Tervist,%0A%0ASoovin rentida tehnikat üritusele [ürituse nimi] kuupäevadel [kuupäev].%0A%0ALugupidamisega">kontakt@ituk.ee</a></p>
+          <p className="text-sm text-gray">{dictionary.NB}</p>
         </div>
-      </div>
 
-      <div className="section-padding container-content gap-16 flex-col flex">
-        <ol className="flex-col flex gap-8">
-          <li>{dictionary.request}<a className="font-bold underline" href="mailto:kontakt@ituk.ee?subject=Tehnika rent - [ürituse nimi]&body=Tervist,%0A%0ASoovin rentida tehnikat üritusele [ürituse nimi] kuupäevadel [kuupäev].%0A%0ALugupidamisega">kontakt@ituk.ee</a></li>
-          <li>{dictionary.NB}</li>
-        </ol>
-
-        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
-          {rentables.map((rent) => (
-            <Card title={currentLocale === "en" ? rent.en_name : rent.name} image={rent.imagePath} description={rent.price.toString() + " " + rent.unit} type="default" />
+        <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+          {rentables.map((rent, index) => (
+            <Card key={index} title={currentLocale === "en" ? rent.en_name : rent.name} image={rent.imagePath} listItems={[rent.price.toString() + " " + rent.unit]} type="list" />
           ))}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import SocialIcon from "@/components/icons/SocialIcon";
-import HubButton from "@/components/buttons/HubButton";
+import SocialIcon from "@/components/icons/social-icon";
+import HubButton from "@/components/buttons/hub-button";
 import { getDictionary } from "@/dictionaries/dictionaries";
 
 export default function Footer({

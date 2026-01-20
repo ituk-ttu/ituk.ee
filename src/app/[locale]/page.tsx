@@ -1,5 +1,5 @@
 import Image from "next/image";
-import tux_cover from "@/assets/images/tux_cover.png";
+import tux_cover from "@/assets/images/tux_cover_cropped.png";
 import Button from "@/components/buttons/button";
 import { Locale } from "../../../i18nConfig";
 import { getDictionary } from "@/dictionaries/dictionaries";
@@ -24,9 +24,9 @@ export default async function Home(props: {
           className="object-cover"
           priority
         />
-        <div className="absolute z-10 top-0 left-0 w-full h-full bg-gradient-to-t from-background via-background/80 to-primary/40" />
+        <div className="absolute z-10 top-0 left-0 w-full h-full" style={{ background: 'linear-gradient(180deg, rgba(135, 0, 66, 0.75) 0%, #131313 100%)' }} />
         <div className="relative z-20 container-content justify-between items-end flex-row flex">
-          <div className="h-full w-full lg:w-1/2 justify-center py-24 items-start flex-col flex">
+          <div className="h-full w-full justify-center py-24 items-start flex-col flex">
             <div className="items-start gap-16 flex-col flex">
               <div className="bg-primary p-4">
                 <h1 className="font-bold text-big lowercase">&gt;itük_</h1>
@@ -38,7 +38,7 @@ export default async function Home(props: {
               </div>
             </div>
           </div>
-          <div className="hidden lg:w-1/2 justify-end items-end flex-col lg:flex relative">
+          <div className="hidden lg:w-full justify-end items-end flex-col lg:flex relative">
             <Image src={tux_cover} alt="ITÜKi maskott pingviin Tux 3.0" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
           </div>
@@ -48,7 +48,7 @@ export default async function Home(props: {
       {/* Info Sections */}
       <div className="section-padding container-content flex flex-col gap-16">
         {/* Events Section */}
-        <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+        <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
           <div className="w-full max-w-[512px] aspect-video relative">
             <Image
               className="object-cover rounded"
@@ -68,7 +68,7 @@ export default async function Home(props: {
         </div>
 
         {/* Cooperation Section */}
-        <div className="w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 lg:gap-16">
+        <div className="w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-16">
           <div className="w-full max-w-[512px] flex flex-col gap-6 items-start">
             <div className="p-4 bg-primary">
               <h2>{dictionary.coop}</h2>

@@ -6,7 +6,6 @@ interface TimelineProps {
   title?: string;
   description?: string;
   year?: Date;
-  key?: number;
 }
 
 export default function Timeline({
@@ -15,61 +14,86 @@ export default function Timeline({
   title = "",
   description = "",
   year,
-  key,
 }: TimelineProps) {
+  const yearString = year?.toLocaleString('et-EE', { year: 'numeric' });
+
   if (type === "start") {
     return (
-      <div className="justify-center items-center flex-row flex">
-        <svg width="24" height="64" viewBox="0 0 24 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoone algus">
-          <path d="M14 20L23.547 0H0.452995L10 20H14ZM10 18V64H14V18H10Z" fill="#EEEEEE" />
-        </svg>
-      </div>
-    );
-  } else if (type === "left") {
-    return (
-      <div key={key} className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row flex">
-        <Card title={title} image={imagePath} description={description} type="default" />
-        <div className="h-16 bg-white w-1 flex sm:hidden" />
-        <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
-          <div className="grow bg-white w-1"></div>
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoon">
-            <path d="M11.0001 21.6667C16.8911 21.6667 21.6668 16.891 21.6668 11C21.6668 5.10896 16.8911 0.333333 11.0001 0.333333C5.10906 0.333333 0.333433 5.10896 0.333433 11C0.333433 16.891 5.10906 21.6667 11.0001 21.6667ZM11 13H11.0001V9H11V13Z" fill="#EEEEEE" />
+      <div className="w-full flex flex-col sm:flex-row items-stretch">
+        <div className="w-full sm:w-[calc(50%-2rem)]" />
+        <div className="w-16 flex flex-col items-center shrink-0">
+          <svg width="24" height="48" viewBox="0 0 24 48" fill="white" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoone algus">
+            <path d="M13.5469 20L23.0939 0H-0.000130653L9.54688 20H13.5469ZM11.5469 18H9.54688V64H11.5469H13.5469V18H11.5469Z" fill="currentColor" />
           </svg>
-          <div className="grow bg-white w-1"></div>
         </div>
-        <div className="w-full justify-center flex-col hidden sm:flex">
-          <h4>{year?.toLocaleString('et-EE', {
-            year: 'numeric',
-          })}</h4>
-        </div>
-      </div>
-    );
-  } else if (type === "right") {
-    return (
-      <div className="w-full justify-center items-center sm:items-stretch flex-col sm:flex-row-reverse flex">
-        <Card title={title} image={imagePath} description={description} type="default" />
-        <div className="h-16 bg-white w-1 flex sm:hidden" />
-        <div className="min-w-32 max-w-32 justify-center items-center flex-col hidden sm:flex">
-          <div className="grow bg-white w-1"></div>
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoon">
-            <path d="M11.0001 21.6667C16.8911 21.6667 21.6668 16.891 21.6668 11C21.6668 5.10896 16.8911 0.333333 11.0001 0.333333C5.10906 0.333333 0.333433 5.10896 0.333433 11C0.333433 16.891 5.10906 21.6667 11.0001 21.6667ZM11 13H11.0001V9H11V13Z" fill="#EEEEEE" />
-          </svg>
-          <div className="grow bg-white w-1"></div>
-        </div>
-        <div className="w-full justify-center items-end flex-col hidden sm:flex">
-          <h4>{year?.toLocaleString('et-EE', {
-            year: 'numeric',
-          })}</h4>
-        </div>
-      </div>
-    );
-  } else if (type === "end") {
-    return (
-      <div className="justify-center items-center flex-row flex">
-        <svg width="24" height="64" viewBox="0 0 24 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoone lõpp">
-          <path d="M12 64L23.547 44H0.452995L12 64ZM10 0V46H14V0H10Z" fill="#EEEEEE" />
-        </svg>
+        <div className="w-full sm:w-[calc(50%-2rem)]" />
       </div>
     );
   }
+
+  if (type === "end") {
+    return (
+      <div className="w-full flex flex-col sm:flex-row items-stretch">
+        <div className="w-full sm:w-[calc(50%-2rem)]" />
+        <div className="w-16 flex flex-col items-center shrink-0">
+          <svg width="24" height="48" viewBox="0 0 24 48" fill="white" xmlns="http://www.w3.org/2000/svg" aria-label="Ajajoone lõpp">
+            <path d="M12 48L23.547 28H0.452995L12 48ZM10 0V30H14V0H10Z" fill="currentColor" />
+          </svg>
+        </div>
+        <div className="w-full sm:w-[calc(50%-2rem)]" />
+      </div>
+    );
+  }
+
+  if (type === "left") {
+    return (
+      <div className="w-full flex flex-col sm:flex-row items-stretch">
+        {/* Card on left */}
+        <div className="w-full sm:w-[calc(50%-2rem)] flex justify-center sm:justify-end">
+          <div className="max-w-80">
+            <Card title={title} image={imagePath} description={description} type="default" />
+          </div>
+        </div>
+
+        {/* Timeline center */}
+        <div className="w-16 flex flex-col items-center shrink-0">
+          <div className="w-1 flex-1 bg-white" />
+          <div className="w-4 h-4 rounded-full bg-white shrink-0" />
+          <div className="w-1 flex-1 bg-white" />
+        </div>
+
+        {/* Year on right */}
+        <div className="w-full sm:w-[calc(50%-2rem)] flex items-center justify-center sm:justify-start">
+          <h3 className="text-2xl font-bold">{yearString}</h3>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "right") {
+    return (
+      <div className="w-full flex flex-col sm:flex-row items-stretch">
+        {/* Year on left */}
+        <div className="w-full sm:w-[calc(50%-2rem)] flex items-center justify-center sm:justify-end order-2 sm:order-1">
+          <h3 className="text-2xl font-bold">{yearString}</h3>
+        </div>
+
+        {/* Timeline center */}
+        <div className="w-16 flex flex-col items-center shrink-0 order-1 sm:order-2">
+          <div className="w-1 flex-1 bg-white" />
+          <div className="w-4 h-4 rounded-full bg-white shrink-0" />
+          <div className="w-1 flex-1 bg-white" />
+        </div>
+
+        {/* Card on right */}
+        <div className="w-full sm:w-[calc(50%-2rem)] flex justify-center sm:justify-start order-3">
+          <div className="max-w-80">
+            <Card title={title} image={imagePath} description={description} type="default" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

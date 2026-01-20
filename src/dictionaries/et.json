@@ -9,6 +9,14 @@
     "footer": {
         "style": "Stiiliraamat"
     },
+    "common": {
+        "loading": "Laeb...",
+        "login": "Logi sisse",
+        "email": "Meiliaadress",
+        "password": "Parool",
+        "required": "* ",
+        "timeline_end": "Lõpp"
+    },
     "home": {
         "hero": "Oleme tudengid, kes kannavad teiste häält, edendavad haridust ja toovad tudengiellu unustamatuid elamusi.",
         "joinus": "Liitu meiega",
@@ -33,6 +41,7 @@
             "title": "Sõbrad kogu eluks",
             "description": "ITÜKist leiad endale sõbrad ja mõttekaaslased, kellega koos tulevikule vastu minna ja teha suuri tegusid!"
         },
+        "numbers": "ITÜK numbrites",
         "statistics": {
             "stat1": {
                 "title": "20",
@@ -62,7 +71,8 @@
         "structure2": "Igal kevadel valivad täisliikmed uue esimehe ja aseesimehed, kes moodustavad juhatuse üheks aastaks. Aseesimehed vastutavad erinevate valdkondade eest.",
         "structure3": "Juhatusse kandideerida saavad kõik liikmed olenemata staatusest. Täisliikmeks saavad aga need, kes on osalenud aktiivselt ürituste või muude projektide korraldamisel ja elluviimisel.",
         "historytitle": "ITÜK läbi aegade",
-        "boardtitle": "2024/2025. õppeaasta juhatus"
+        "boardtitle": "2024/2025. õppeaasta juhatus",
+        "timeline_more": "...ja kui tuleb veel huvitavaid asju, siis lisame siia!"
     },
     "events": {
         "education": "Haridus",
@@ -70,7 +80,9 @@
         "other": "Sise- ja muud üritused"
     },
     "rent": {
-        "header": "Tehnika rent",
+        "header": "Teenused ja rent",
+        "title": "Mida ITÜK võib sulle pakkuda?",
+        "description": "ITÜKil on laialdane inventar erinevaid kaableid ja juhtmeid, mis tulevad kasuks igale ürituse korraldajale - lisaks pakume veebiarenduse teenust. Kui on huvi uue kodulehe või kaablite vastu, võta ühendust!",
         "request": "Saada päring meile siit: ",
         "NB": "NB! Hind kehtib ürituse/päeva kohta!"
     },
@@ -112,7 +124,7 @@
         "header": "Koostöö",
         "partners": "Meie suurtoetajad",
         "studentorgs": "Koostöö tudengiorganisatsioonidega",
-        "offer": "Mida ITÜK partnerile pakkuda saab?",
+        "offer": "Mida ITÜK pakkuda saab?",
         "statistics": {
             "stat1": {
                 "title": "1070",

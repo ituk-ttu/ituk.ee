@@ -51,7 +51,7 @@ export default function Card({
 
       {type === "list" && (
         <div className={`w-full h-40 p-3 flex flex-col gap-3 ${contentBg}`}>
-          <h4 className="text-xl uppercase">{title}</h4>
+          <h4 className="text-xl">{title}</h4>
           <ul className="p-sm">
             {listItems.map((item, index) => (
               <li key={index}>{item}</li>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import GalleryCard from "@/components/gallery/gallery_card";
-import GalleryOverlay from "@/components/gallery/gallery_overlay";
+import GalleryCard from "@/components/gallery/gallery-card";
+import GalleryOverlay from "@/components/gallery/gallery-overlay";
 
 interface Photo {
     src: string;

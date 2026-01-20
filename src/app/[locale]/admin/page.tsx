@@ -26,7 +26,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "@/components/buttons/button";
-import AdminCard from "@/components/cards/admin_card";
+import AdminCard from "@/components/cards/admin-card";
 import Card from "@/components/cards/card";
 
 interface BoardMember {
@@ -672,7 +672,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="section-padding container-content gap-16 flex-col flex">
+                <div className="section-padding container-content gap-8 flex-col flex">
                     <div className="w-full justify-center items-center flex-col sm:flex-row flex gap-4">
                         <Button variant="secondary" onClick={() => setPage("juhatus")} text="Juhatus" />
                         <Button variant="secondary" onClick={() => setPage("uritused")} text="Üritused" />
@@ -702,7 +702,7 @@ export default function Home() {
                                                 "/board/2024/2_finants.jpg" jne)
                                             </li>
                                         </ul>
-                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-16">
+                                        <div className="grid min-w-full grid-cols-[repeat(auto-fit,minmax(17.75rem,1fr))] gap-8">
                                             {boardMembers.map((member) => (
                                                 <AdminCard key={member.key} id={member.key} title={member.name} image={member.imagePath} description={member.position} en_description={member.en_position} board="juhatus" email={member.email} onClick={updateMember} onDelete={deleteMember}
                                                 />

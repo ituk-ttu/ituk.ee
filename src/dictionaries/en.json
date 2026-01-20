@@ -3,11 +3,18 @@
         "aboutus": "About us",
         "events": "Events",
         "partners": "Partners",
-        "rent": "Rental",
+        "rent": "Services",
         "join": "Join us"
     },
     "footer": {
         "style": "Style guide"
+    },
+    "common": {
+        "loading": "Loading...",
+        "login": "Log in",
+        "email": "Email address",
+        "password": "Password",
+        "required": "* "
     },
     "home": {
         "hero": "We are students who carry the voice of others, promote education and bring unforgettable experiences to student life.",
@@ -33,6 +40,7 @@
             "title": "Friends for life",
             "description": "From ITÜK, you can find friends and like-minded students, with whom you can take on future challenges and do great deeds with!"
         },
+        "numbers": "ITÜK in numbers",
         "statistics": {
             "stat1": {
                 "title": "20",
@@ -54,7 +62,7 @@
         "structure": "Structure of ITÜK",
         "howmany": "ITÜK has four member statuses:",
         "statuses": {
-            "status1": "Member (Joining the organisation);",
+            "status1": "Junior member (Joining the organisation);",
             "status2": "Full member (Fulfilling the activity criteria);",
             "status3": "Alumni (Leaving the organisation or graduating after being a full member for a year);",
             "status4": "Board member (A member who represents the organisation)."
@@ -62,7 +70,8 @@
         "structure2": "Every spring the full members elect board members and a chairman who make up the organisation board for a year. Board members are responsible for their respective areas.",
         "structure3": "All members of ITÜK can run for the board, no matter their member status. But to become a full member one must actively help with organising and creating events or other projects.",
         "historytitle": "ITÜK through the years",
-        "boardtitle": "Board of the 2024/2025 academic year"
+        "boardtitle": "Board of the 2024/2025 academic year",
+        "timeline_more": "...and if more interesting things happen, we'll add them here!"
     },
     "events": {
         "education": "Education",
@@ -70,7 +79,9 @@
         "other": "Internal and other events"
     },
     "rent": {
-        "header": "Electronics rental",
+        "header": "Services and rental",
+        "title": "What can ITÜK offer you?",
+        "description": "ITÜK has a wide inventory of various cables and wires that come in handy for any event organiser - we also offer web development services. If you're interested in a new website or cables, get in touch!",
         "request": "Make a request here: ",
         "NB": "NB! Price is per event/day!"
     },
@@ -112,7 +123,7 @@
         "header": "Collaboration",
         "partners": "Our main collaborators",
         "studentorgs": "Collaboration with other student organisations",
-        "offer": "What can ITÜK offer their partners?",
+        "offer": "What can ITÜK offer?",
         "statistics": {
             "stat1": {
                 "title": "1070",

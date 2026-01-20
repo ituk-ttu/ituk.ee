@@ -5,8 +5,8 @@ import Image from "next/image";
 import logo_large from "@/assets/logos/ituk_navbar_logo.svg";
 import logo_small from "@/assets/logos/ituk_navbar_symbol.svg";
 import Button from "@/components/buttons/button";
-import HamburgerMenu from "./buttons/HamburgerMenu";
-import LanguageButton from "./buttons/language_button";
+import HamburgerMenu from "./buttons/hamburger-menu";
+import LanguageButton from "./buttons/language-button";
 import { getDictionary } from "@/dictionaries/dictionaries";
 
 export default function Navbar({

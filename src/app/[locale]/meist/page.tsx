@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import Card from "@/components/cards/card";
 import Timeline from "@/components/timeline";
+import PageHeader from "@/components/page-header";
+import Statistics from "@/components/statistics";
 import uritused from "@/assets/images/uritused.jpg";
 import sobrad from "@/assets/images/sobrad.jpg";
 import { useDictionary } from "@/components/dictionary-provider";
 import { usePathname } from "next/navigation";
-import ituk_struktuur from "@/assets/images/itük_struktuur.png";
+import ituk_struktuur from "@/assets/images/ituk_struktuur.png";
 import Image from "next/image";
 
 interface BoardMember {
@@ -87,13 +89,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="bg-[url('/headers/about.jpg')] bg-center bg-cover text-align justify-center items-center flex-row flex">
-        <div className=" w-full h-full bg-extra justify-center items-center flex-row flex">
-          <div className="section-padding w-full h-full bg-epic-gradient">
-            <h1 className="text-center text-big">{dictionary.whatis}</h1>
-          </div>
-        </div>
-      </div>
+      <PageHeader title={dictionary.whatis} backgroundImage="/headers/about.jpg" />
 
       <div className="section-padding container-content justify-center items-center text-align gap-16 flex-col lg:flex-row flex">
         <div className="flex-col flex gap-8">
@@ -104,30 +100,19 @@ export default function Home() {
             {dictionary.answer3}
           </p>
         </div>
-        <div className="h-full justify-center items-stretch flex-col sm:flex-row flex gap-16">
+        <div className="h-full justify-center items-stretch flex-col sm:flex-row flex gap-8">
           <Card image={uritused.src} title={dictionary.card1.title} description={dictionary.card1.description} type="default" />
           <Card image={sobrad.src} title={dictionary.card2.title} description={dictionary.card2.description} type="default" />
         </div>
       </div>
 
-      <div className="section-padding bg-primary justify-center items-center lg:items-start gap-16 lg:gap-32 flex-col xs:flex-row flex-wrap flex">
-        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="text-big font-bold">{dictionary.statistics.stat1.title}</span>
-          {dictionary.statistics.stat1.description}
-        </p>
-        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="text-big font-bold">{dictionary.statistics.stat2.title}</span>
-          {dictionary.statistics.stat2.description}
-        </p>
-        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="text-big font-bold">{dictionary.statistics.stat3.title}</span>
-          {dictionary.statistics.stat3.description}
-        </p>
-        <p className="text-center items-center flex-col flex gap-4 transform transition-transform duration-150 hover:scale-125 hover:select-none">
-          <span className="text-big font-bold">{dictionary.statistics.stat4.title}</span>
-          {dictionary.statistics.stat4.description}
-        </p>
-      </div>
+      <Statistics
+        title={dictionary.numbers} items={[
+          { value: dictionary.statistics.stat1.title, label: dictionary.statistics.stat1.description },
+          { value: dictionary.statistics.stat2.title, label: dictionary.statistics.stat2.description },
+          { value: dictionary.statistics.stat3.title, label: dictionary.statistics.stat3.description },
+          { value: dictionary.statistics.stat4.title, label: dictionary.statistics.stat4.description },
+        ]} />
 
       <div className="section-padding container-content justify-center items-center gap-16 flex-col md:flex-row flex">
         <div className="w-full md:w-1/2 flex-col flex gap-8">
@@ -153,6 +138,12 @@ export default function Home() {
       </div>
 
       <div className="section-padding container-content justify-center items-center text-align gap-16 flex-col flex">
+        <h2>{dictionary.boardtitle}</h2>
+        <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
+          {boardMembers.map((member, index) => (
+            <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} type="board" email={member.email} />
+          ))}
+        </div>
         <h2>{dictionary.historytitle}</h2>
         <div className="flex flex-col justify-center items-center">
           <Timeline type="start" />
@@ -161,12 +152,7 @@ export default function Home() {
           ))}
           <Timeline type="end" />
         </div>
-        <h2>{dictionary.boardtitle}</h2>
-        <div className="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4">
-          {boardMembers.map((member, index) => (
-            <Card key={index} title={member.name} image={member.imagePath} description={currentLocale === "en" ? member.en_position : member.position} type="board" email={member.email} />
-          ))}
-        </div>
+        <h3>...ja kui tuleb veel huvitavaid asju, siis lisame siia!</h3>
       </div>
     </div >
   );
