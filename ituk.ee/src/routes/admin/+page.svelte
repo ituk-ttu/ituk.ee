@@ -6,7 +6,14 @@
         signOut,
         type User,
     } from "firebase/auth";
-    import { auth, db, getBoardMembers, type BoardMember } from "$lib/firebase";
+    import {
+        auth,
+        db,
+        getBoardMembers,
+        getSetting,
+        setSetting,
+        type BoardMember,
+    } from "$lib/firebase";
     import {
         collection,
         getDocs,
@@ -21,6 +28,7 @@
     } from "firebase/firestore";
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
+    import PageHeader from "$lib/components/PageHeader.svelte";
 
     // Auth state
     let user = $state<User | null>(null);
@@ -49,6 +57,10 @@
         imagePath: "",
     });
 
+    // Board year state
+    let boardYear = $state("2024/2025");
+    const yearOptions = ["2024/2025", "2025/2026", "2026/2027"];
+
     onMount(() => {
         const unsubscribe = onAuthStateChanged(auth, (u) => {
             user = u;
@@ -63,6 +75,10 @@
     async function loadData() {
         try {
             boardMembers = await getBoardMembers();
+
+            // Load board year setting
+            const savedYear = await getSetting("boardYear");
+            if (savedYear) boardYear = savedYear;
 
             // Load rentables
             const rentSnapshot = await getDocs(
@@ -228,11 +244,7 @@
         </div>
     {:else}
         <!-- Admin Dashboard -->
-        <div class="bg-[url('/headers/derp.jpg')] bg-top bg-cover">
-            <div class="section-padding w-full bg-epic-gradient">
-                <h1 class="text-center text-big">Dashboard</h1>
-            </div>
-        </div>
+        <PageHeader title="Dashboard" backgroundImage="/headers/derp.jpg" />
 
         <div class="section-padding container-content flex flex-col gap-8">
             <!-- Navigation -->
@@ -268,6 +280,26 @@
                 <!-- Board Members -->
                 <div class="flex flex-col gap-8 items-center">
                     <h2>Juhatuse koosseis</h2>
+
+                    <!-- Board Year Selector -->
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded">
+                        <label for="boardYearSelect" class="font-bold"
+                            >Õppeaasta:</label
+                        >
+                        <select
+                            id="boardYearSelect"
+                            bind:value={boardYear}
+                            onchange={async () => {
+                                await setSetting("boardYear", boardYear);
+                                alert("Õppeaasta salvestatud: " + boardYear);
+                            }}
+                            class="p-2 bg-white/10 rounded text-white"
+                        >
+                            {#each yearOptions as year}
+                                <option value={year}>{year}</option>
+                            {/each}
+                        </select>
+                    </div>
 
                     <ul class="flex flex-col gap-2 text-sm">
                         <li>

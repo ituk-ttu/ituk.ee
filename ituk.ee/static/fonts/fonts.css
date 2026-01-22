@@ -1,0 +1,28 @@
+/* Self-hosted fonts for better performance */
+/* Download fonts from Google Fonts and place woff2 files in this folder */
+
+/* Raleway - Variable font */
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Raleway-VariableFont_wght.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Raleway-Italic-VariableFont_wght.woff2') format('woff2');
+}
+
+/* Noto Sans Georgian - Variable font */
+@font-face {
+    font-family: 'Noto Sans Georgian';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/NotoSansGeorgian-VariableFont_wdth,wght.woff2') format('woff2');
+}

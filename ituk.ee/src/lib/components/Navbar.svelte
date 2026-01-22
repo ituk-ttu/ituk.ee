@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getLocale, setLocale } from "$lib/paraglide/runtime";
 	import * as m from "$lib/paraglide/messages";
 	import Button from "./Button.svelte";
+	import LanguageSwitcher from "./LanguageSwitcher.svelte";
 
 	let isMenuOpen = $state(false);
 
@@ -10,11 +10,6 @@
 		if (typeof document !== "undefined") {
 			document.body.style.overflow = isMenuOpen ? "hidden" : "";
 		}
-	}
-
-	function switchLanguage() {
-		const newLocale = getLocale() === "et" ? "en" : "et";
-		setLocale(newLocale);
 	}
 </script>
 
@@ -79,13 +74,7 @@
 			text={m.navbar_join()}
 			to="https://liitu.ituk.ee/"
 		/>
-		<button
-			class="w-10 h-10 rounded-full bg-primary/20 hover:bg-primary/40 flex items-center justify-center cursor-pointer transition-colors uppercase font-bold"
-			onclick={switchLanguage}
-			aria-label="Vaheta keelt"
-		>
-			{getLocale() === "et" ? "EN" : "ET"}
-		</button>
+		<LanguageSwitcher />
 	</div>
 
 	<!-- Tablet/Mobile nav (<1280px): Join (md+), Language, Hamburger -->
@@ -97,13 +86,7 @@
 			to="https://liitu.ituk.ee/"
 			class="hidden md:flex"
 		/>
-		<button
-			class="w-10 h-10 rounded-full bg-primary/20 hover:bg-primary/40 flex items-center justify-center cursor-pointer transition-colors uppercase font-bold"
-			onclick={switchLanguage}
-			aria-label="Vaheta keelt"
-		>
-			{getLocale() === "et" ? "EN" : "ET"}
-		</button>
+		<LanguageSwitcher />
 		<!-- Hamburger Menu -->
 		<button
 			class="flex flex-col justify-center items-center w-10 h-10 cursor-pointer"

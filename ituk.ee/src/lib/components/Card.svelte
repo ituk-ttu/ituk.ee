@@ -27,14 +27,16 @@
 {#if link}
 	<a href={link} target="_blank" rel="noopener noreferrer">
 		<div
-			class="w-[256px] rounded-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform"
-			class:h-[416px]={type !== "timeline"}
+			class="w-[128px] sm:w-[256px] rounded-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform"
+			class:h-[208px]={type !== "timeline"}
+			class:sm:h-[416px]={type !== "timeline"}
 		>
-			<div class="size-[256px] shrink-0">
+			<div class="size-[128px] sm:size-[256px] shrink-0">
 				<img
 					class="w-full h-full object-cover"
 					src={image}
 					alt={title}
+					loading="lazy"
 				/>
 			</div>
 			{#if type === "timeline"}
@@ -42,19 +44,24 @@
 					<h4 class="h-[56px]">{title}</h4>
 				</div>
 			{:else}
-				<div class="w-full h-40 p-3 flex flex-col gap-3 {contentBg}">
-					<h4>{title}</h4>
-					<p class="text-card">{description}</p>
+				<div
+					class="w-full h-20 sm:h-40 p-2 sm:p-3 flex flex-col {contentBg}"
+				>
+					<h4 class="text-xs sm:text-base">{title}</h4>
+					<p class="text-card text-[10px] sm:text-sm">
+						{description}
+					</p>
 				</div>
 			{/if}
 		</div>
 	</a>
 {:else}
 	<div
-		class="w-[256px] rounded-lg overflow-hidden flex flex-col"
-		class:h-[416px]={type !== "timeline"}
+		class="w-[128px] sm:w-[256px] rounded-lg overflow-hidden flex flex-col"
+		class:h-[208px]={type !== "timeline"}
+		class:sm:h-[416px]={type !== "timeline"}
 	>
-		<div class="size-[256px] shrink-0">
+		<div class="size-[128px] sm:size-[256px] shrink-0">
 			<img class="w-full h-full object-cover" src={image} alt={title} />
 		</div>
 
@@ -64,13 +71,15 @@
 			</div>
 		{:else if type === "board"}
 			<div
-				class="w-full h-40 p-3 flex flex-col justify-between {contentBg}"
+				class="w-full h-20 sm:h-40 p-2 sm:p-3 flex flex-col justify-between {contentBg}"
 			>
-				<div class="flex flex-col gap-3">
-					<h4>{title}</h4>
-					<p class="text-card">{description}</p>
+				<div class="flex flex-col gap-1 sm:gap-3">
+					<h4 class="text-xs sm:text-base">{title}</h4>
+					<p class="text-card text-[10px] sm:text-sm hidden sm:block">
+						{description}
+					</p>
 				</div>
-				<div class="flex items-center gap-4">
+				<div class="hidden sm:flex items-center gap-4">
 					<span class="material-symbols-outlined text-white text-base"
 						>mail</span
 					>
@@ -83,18 +92,22 @@
 				</div>
 			</div>
 		{:else if type === "list"}
-			<div class="w-full h-40 p-3 flex flex-col gap-3 {contentBg}">
-				<h4>{title}</h4>
-				<ul class="text-card">
+			<div
+				class="w-full h-20 sm:h-40 p-2 sm:p-3 flex flex-col gap-1 sm:gap-3 {contentBg}"
+			>
+				<h4 class="text-xs sm:text-base">{title}</h4>
+				<ul class="text-card text-[10px] sm:text-sm">
 					{#each listItems as item}
 						<li>{item}</li>
 					{/each}
 				</ul>
 			</div>
 		{:else}
-			<div class="w-full h-40 p-3 flex flex-col gap-3 {contentBg}">
-				<h4>{title}</h4>
-				<p class="text-card">{description}</p>
+			<div
+				class="w-full h-20 sm:h-40 p-2 sm:p-3 flex flex-col gap-1 sm:gap-3 {contentBg}"
+			>
+				<h4 class="text-xs sm:text-base">{title}</h4>
+				<p class="text-card text-[10px] sm:text-sm">{description}</p>
 			</div>
 		{/if}
 	</div>

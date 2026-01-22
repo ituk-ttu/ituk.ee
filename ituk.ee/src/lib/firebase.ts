@@ -121,3 +121,23 @@ export async function updateDocument(collectionName: string, docId: string, data
 export async function deleteDocument(collectionName: string, docId: string) {
     return deleteDoc(doc(db, collectionName, docId));
 }
+
+// Settings functions
+export async function getSetting(key: string): Promise<string | null> {
+    const docRef = doc(db, 'settings', key);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        return docSnap.data().value as string;
+    }
+    return null;
+}
+
+export async function setSetting(key: string, value: string): Promise<void> {
+    const docRef = doc(db, 'settings', key);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        await updateDoc(docRef, { value });
+    } else {
+        await addDoc(collection(db, 'settings'), { value });
+    }
+}

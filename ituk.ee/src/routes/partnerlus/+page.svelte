@@ -4,6 +4,7 @@
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Statistics from "$lib/components/Statistics.svelte";
     import { getPartners, type Partner } from "$lib/firebase";
+    import SEO from "$lib/components/SEO.svelte";
 
     let studentOrgs = $state<Partner[]>([]);
     let loading = $state(true);
@@ -20,6 +21,8 @@
         }
     });
 </script>
+
+<SEO pageKey="partnerlus" />
 
 <div>
     <PageHeader
@@ -42,6 +45,7 @@
                     src="/images/partners/nortal.png"
                     alt="Nortal"
                     class="object-contain w-full h-full"
+                    loading="lazy"
                 />
             </a>
             <a
@@ -53,6 +57,7 @@
                     src="/images/partners/netgroup.png"
                     alt="Netgroup"
                     class="object-contain w-full h-full"
+                    loading="lazy"
                 />
             </a>
             <a
@@ -64,6 +69,7 @@
                     src="/images/partners/alecoq.png"
                     alt="A.LeCoq"
                     class="object-contain w-full h-full"
+                    loading="lazy"
                 />
             </a>
             <a
@@ -75,6 +81,7 @@
                     src="/images/partners/dominos.png"
                     alt="Domino's"
                     class="object-contain w-full h-full"
+                    loading="lazy"
                 />
             </a>
         </div>
@@ -103,6 +110,7 @@
                             src={org.imagePath}
                             alt={org.name}
                             class="object-contain w-full h-full"
+                            loading="lazy"
                         />
                     </a>
                 {/each}

@@ -5,6 +5,7 @@
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Card from "$lib/components/Card.svelte";
     import { getRentItems, type RentItem } from "$lib/firebase";
+    import SEO from "$lib/components/SEO.svelte";
 
     let rentItems = $state<RentItem[]>([]);
     let loading = $state(true);
@@ -33,6 +34,8 @@
             : item.description;
     }
 </script>
+
+<SEO pageKey="rent" />
 
 <div>
     <PageHeader title={m.rent_header()} backgroundImage="/headers/rent.jpg" />

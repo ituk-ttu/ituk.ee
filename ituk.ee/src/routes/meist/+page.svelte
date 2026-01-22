@@ -5,6 +5,7 @@
     import {
         getBoardMembers,
         getTimelineEvents,
+        getSetting,
         type BoardMember,
         type TimelineEvent,
     } from "$lib/firebase";
@@ -12,18 +13,24 @@
     import Card from "$lib/components/Card.svelte";
     import Statistics from "$lib/components/Statistics.svelte";
     import TimelineDesktop from "$lib/components/TimelineDesktop.svelte";
+    import SEO from "$lib/components/SEO.svelte";
 
     let boardMembers = $state<BoardMember[]>([]);
     let timelineEvents = $state<TimelineEvent[]>([]);
+    let boardYear = $state("2024/2025");
     let loading = $state(true);
     let error = $state<string | null>(null);
 
     onMount(async () => {
         try {
-            [boardMembers, timelineEvents] = await Promise.all([
+            const [members, events, year] = await Promise.all([
                 getBoardMembers(),
                 getTimelineEvents(),
+                getSetting("boardYear"),
             ]);
+            boardMembers = members;
+            timelineEvents = events;
+            if (year) boardYear = year;
         } catch (e) {
             console.error("Error loading data:", e);
             error = "Failed to load data";
@@ -34,6 +41,8 @@
 
     const isEnglish = $derived(getLocale() === "en");
 </script>
+
+<SEO pageKey="meist" />
 
 <div>
     <PageHeader
@@ -121,14 +130,14 @@
     <div
         class="section-padding container-content flex flex-col gap-8 items-center"
     >
-        <h2>{m.aboutus_boardtitle()}</h2>
+        <h2>{m.aboutus_boardtitle({ year: boardYear })}</h2>
         {#if loading}
             <p class="text-gray">{m.common_loading()}</p>
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else}
             <div
-                class="grid w-full grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 justify-items-center"
+                class="grid w-full grid-cols-2 gap-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4 justify-items-center"
             >
                 {#each boardMembers as member}
                     <Card

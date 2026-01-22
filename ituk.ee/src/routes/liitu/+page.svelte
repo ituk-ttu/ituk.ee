@@ -2,7 +2,10 @@
     import * as m from "$lib/paraglide/messages";
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Card from "$lib/components/Card.svelte";
+    import SEO from "$lib/components/SEO.svelte";
 </script>
+
+<SEO pageKey="liitu" />
 
 <div>
     <PageHeader title={m.join_header()} backgroundImage="/headers/liitu.jpg" />

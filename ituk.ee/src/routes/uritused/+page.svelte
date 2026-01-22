@@ -1,6 +1,9 @@
 <script lang="ts">
     import * as m from "$lib/paraglide/messages";
+    import SEO from "$lib/components/SEO.svelte";
 </script>
+
+<SEO pageKey="uritused" />
 
 <div class="items-start flex-col sm:flex-row flex">
     <h1 class="hidden">Üritused</h1>

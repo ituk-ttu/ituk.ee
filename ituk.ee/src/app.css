@@ -133,8 +133,11 @@
         font-size: var(--text-h6);
     }
 
-    ul {
+    ul,
+    ol {
         @apply list-disc pl-5;
+        font-size: 1rem;
+        @apply lg:text-lg;
     }
 
     input,
@@ -174,7 +177,7 @@
 
 @utility text-stat {
     font-family: var(--font-noto);
-    font-size: 3rem;
+    font-size: 4rem;
     color: var(--color-white);
 }
 

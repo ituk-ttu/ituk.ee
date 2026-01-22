@@ -2,7 +2,10 @@
     import * as m from "$lib/paraglide/messages";
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Button from "$lib/components/Button.svelte";
+    import SEO from "$lib/components/SEO.svelte";
 </script>
+
+<SEO pageKey="stiil" />
 
 <div>
     <PageHeader title={m.style_title()} backgroundImage="/headers/style.jpg" />

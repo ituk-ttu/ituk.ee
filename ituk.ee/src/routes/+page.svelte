@@ -1,7 +1,10 @@
 <script lang="ts">
     import * as m from "$lib/paraglide/messages";
     import Button from "$lib/components/Button.svelte";
+    import SEO from "$lib/components/SEO.svelte";
 </script>
+
+<SEO pageKey="home" />
 
 <div>
     <!-- Hero Section -->
@@ -70,6 +73,7 @@
                     class="object-cover rounded w-full h-full"
                     src="/images/hingematvad.jpg"
                     alt="ITÜKi liikmed ei mata nii pea hinge!"
+                    loading="lazy"
                 />
             </div>
             <div class="w-full max-w-[512px] flex flex-col gap-6 items-start">
@@ -107,6 +111,7 @@
                     class="object-cover rounded w-full h-full"
                     src="/images/koostoo.jpg"
                     alt="ITÜKi liikmed tegemas omavahelist koostööd"
+                    loading="lazy"
                 />
             </div>
         </div>
