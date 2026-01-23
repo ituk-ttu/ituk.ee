@@ -92,9 +92,11 @@
     <h2 class="text-center md:text-left">{title}</h2>
     <div class="flex flex-wrap justify-center md:justify-end gap-8">
         {#each items as item, index}
-            <div class="flex flex-col items-center gap-2">
-                <span class="text-stat font-bold">{displayValues[index]}</span>
-                <span class="text-center text-stat-label">{item.label}</span>
+            <div class="flex flex-col items-center gap-4">
+                <span class="text-4xl sm:text-5xl font-bold">
+                    {displayValues[index]}
+                </span>
+                <span class="text-center">{item.label}</span>
             </div>
         {/each}
     </div>

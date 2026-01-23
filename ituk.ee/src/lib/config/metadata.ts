@@ -67,13 +67,6 @@ export const pageMetadata: Record<string, PageMetadata> = {
         description_en: "ITÜK style guide - logos, colors, and brand guidelines.",
         image: "/headers/style.jpg",
     },
-    admin: {
-        title: "Admin | ITÜK",
-        title_en: "Admin | ITÜK",
-        description: "ITÜKi administreerimispaneel.",
-        description_en: "ITÜK administration panel.",
-        image: "/headers/derp.jpg",
-    },
 };
 
 // Helper function to get localized metadata

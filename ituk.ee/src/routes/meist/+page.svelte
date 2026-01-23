@@ -60,7 +60,7 @@
             <p>{m.aboutus_answer3()}</p>
         </div>
         <div
-            class="h-full justify-center items-stretch flex-col sm:flex-row flex gap-8"
+            class="h-full justify-center items-stretch flex-col xs:flex-row flex gap-8"
         >
             <Card
                 image="/images/uritused.jpg"
@@ -122,7 +122,7 @@
                 src="/images/ituk_struktuur_2026.png"
                 alt="ITÜKi struktuur 2026"
             />
-            <p class="opacity-50">{m.aboutus_structure4()}</p>
+            <p class="text-gray">{m.aboutus_structure4()}</p>
         </div>
     </div>
 
@@ -130,14 +130,14 @@
     <div
         class="section-padding container-content flex flex-col gap-8 items-center"
     >
-        <h2>{m.aboutus_boardtitle({ year: boardYear })}</h2>
+        <h2 class="text-center">{m.aboutus_boardtitle({ year: boardYear })}</h2>
         {#if loading}
             <p class="text-gray">{m.common_loading()}</p>
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else}
             <div
-                class="grid w-full grid-cols-2 gap-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4 justify-items-center"
+                class="grid w-full grid-cols-1 gap-4 sm:gap-8 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center"
             >
                 {#each boardMembers as member}
                     <Card
@@ -158,7 +158,7 @@
     <div
         class="section-padding container-content hidden lg:flex flex-col gap-8 items-center"
     >
-        <h2>{m.aboutus_historytitle()}</h2>
+        <h2 class="text-center">{m.aboutus_historytitle()}</h2>
         {#if loading}
             <p class="text-gray">{m.common_loading()}</p>
         {:else if error}
@@ -166,6 +166,8 @@
         {:else}
             <TimelineDesktop items={timelineEvents} />
         {/if}
-        <h3>...ja kui tuleb veel huvitavaid asju, siis lisame siia!</h3>
+        <h3 class="text-center">
+            ...ja kui tuleb veel huvitavaid asju, siis lisame siia!
+        </h3>
     </div>
 </div>
