@@ -22,16 +22,8 @@
         }
     });
 
-    function getLocalizedTitle(item: RentItem): string {
-        return getLocale() === "en" && item.title_en
-            ? item.title_en
-            : item.title;
-    }
-
-    function getLocalizedDescription(item: RentItem): string {
-        return getLocale() === "en" && item.description_en
-            ? item.description_en
-            : item.description;
+    function getLocalizedName(item: RentItem): string {
+        return getLocale() === "en" && item.name_en ? item.name_en : item.name;
     }
 </script>
 
@@ -64,10 +56,10 @@
             >
                 {#each rentItems as item}
                     <Card
-                        title={getLocalizedTitle(item)}
+                        title={getLocalizedName(item)}
                         image={item.imagePath}
-                        description={getLocalizedDescription(item)}
-                        type="default"
+                        listItems={[`${item.price} ${item.unit}`]}
+                        type="list"
                     />
                 {/each}
             </div>

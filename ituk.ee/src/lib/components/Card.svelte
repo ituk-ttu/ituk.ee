@@ -22,6 +22,9 @@
 	const contentBg = $derived(
 		type === "board" ? "bg-primary/50" : "bg-white/[0.03]",
 	);
+
+	// Use placeholder if image is empty or missing
+	const imageSrc = $derived(image || "/images/placeholder.svg");
 </script>
 
 {#if link}
@@ -34,7 +37,7 @@
 			<div class="size-[192px] sm:size-[256px] shrink-0">
 				<img
 					class="w-full h-full object-cover"
-					src={image}
+					src={imageSrc}
 					alt={title}
 				/>
 			</div>
@@ -78,7 +81,11 @@
 		class:sm:h-[416px]={type !== "timeline"}
 	>
 		<div class="size-[192px] sm:size-[256px] shrink-0">
-			<img class="w-full h-full object-cover" src={image} alt={title} />
+			<img
+				class="w-full h-full object-cover"
+				src={imageSrc}
+				alt={title}
+			/>
 		</div>
 
 		{#if type === "timeline"}

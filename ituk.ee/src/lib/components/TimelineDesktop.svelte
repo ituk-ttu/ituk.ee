@@ -54,6 +54,17 @@
     ): TimelineItem[] {
         return rowIndex % 2 === 0 ? row : [...row].reverse();
     }
+
+    // Check if this is a partial odd row (odd row with fewer cards than full)
+    function isPartialOddRow(row: TimelineItem[], rowIndex: number): boolean {
+        return rowIndex % 2 === 1 && row.length < cardsPerRow;
+    }
+
+    // Calculate empty slots needed on left for partial odd rows
+    function getEmptySlots(row: TimelineItem[], rowIndex: number): number {
+        if (!isPartialOddRow(row, rowIndex)) return 0;
+        return cardsPerRow - row.length;
+    }
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -66,6 +77,8 @@
         {@const isFirstRow = rowIndex === 0}
         {@const cardsInRow = row.length}
         {@const displayItems = getRowItems(row, rowIndex)}
+        {@const emptySlots = getEmptySlots(row, rowIndex)}
+        {@const isPartialOdd = isPartialOddRow(row, rowIndex)}
 
         <!-- Row: all elements h-[460px] -->
         <div class="flex items-stretch">
@@ -91,6 +104,28 @@
                         />
                     </svg>
                 </div>
+            {:else if isPartialOdd && isLastRow}
+                <!-- For partial odd last row: end arrow on the left -->
+                <div
+                    class="w-[128px] h-[460px] shrink-0 flex flex-col gap-4 pb-[362px]"
+                >
+                    <div class="flex-1 flex items-end justify-center">
+                        <p class="text-2xl font-bold">{lastYear}</p>
+                    </div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="128"
+                        height="24"
+                        viewBox="0 0 128 24"
+                        fill="#870042"
+                        class="shrink-0"
+                    >
+                        <path
+                            d="M24 14V24L0 12L24 0V10H128V14H24Z"
+                            fill="#870042"
+                        />
+                    </svg>
+                </div>
             {:else if isEvenRow}
                 <!-- Connector down right: vertical down then horizontal right -->
                 <div
@@ -109,6 +144,26 @@
                     <div class="h-1 w-full bg-[#870042]"></div>
                     <div class="w-1 flex-1 bg-[#870042]"></div>
                 </div>
+            {/if}
+
+            <!-- Empty slots for partial odd rows (256px + 128px connectors) -->
+            {#if isPartialOdd}
+                {#each Array(emptySlots) as _, slotIndex}
+                    <!-- Simple 256px horizontal connector (same as between cards) -->
+                    <div class="w-[256px] h-[460px] shrink-0 pt-[75px]">
+                        <div class="h-[22px] flex items-center py-2">
+                            <div class="h-1 w-full bg-[#870042]"></div>
+                        </div>
+                    </div>
+                    <!-- 128px connector between empty slots or to first card -->
+                    {#if slotIndex < emptySlots - 1 || cardsInRow > 0}
+                        <div class="w-[128px] h-[460px] shrink-0 pt-[75px]">
+                            <div class="h-[22px] flex items-center py-2">
+                                <div class="h-1 w-full bg-[#870042]"></div>
+                            </div>
+                        </div>
+                    {/if}
+                {/each}
             {/if}
 
             <!-- Cards and connectors between them -->
@@ -172,8 +227,8 @@
                         />
                     </svg>
                 </div>
-            {:else if isLastRow && !isEvenRow}
-                <!-- End on odd row: year + arrow pointing left -->
+            {:else if isLastRow && !isEvenRow && !isPartialOdd}
+                <!-- End on full odd row: year + arrow pointing left -->
                 <div
                     class="w-[128px] h-[460px] shrink-0 flex flex-col gap-4 pb-[362px]"
                 >
@@ -186,14 +241,23 @@
                         height="24"
                         viewBox="0 0 128 24"
                         fill="#870042"
+                        class="shrink-0"
                     >
                         <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M104 14V24L128 12L104 0V10H0V14H104Z"
+                            d="M108 10L128 0V24L108 14H0V10H108Z"
                             fill="#870042"
                         />
                     </svg>
+                </div>
+            {:else if isLastRow && isPartialOdd}
+                <!-- Partial odd row: down-turn connector from previous row on the right -->
+                <div
+                    class="w-[128px] h-[460px] shrink-0 flex flex-col items-end pb-[372px] pr-[90px]"
+                >
+                    <div class="flex-1 flex flex-col items-end w-full">
+                        <div class="w-1 flex-1 bg-[#870042]"></div>
+                        <div class="h-1 w-full bg-[#870042]"></div>
+                    </div>
                 </div>
             {:else if isEvenRow}
                 <!-- Connector right down: horizontal right then vertical down -->

@@ -145,8 +145,12 @@
             <div class="relative w-full">
                 <img
                     class="w-full"
-                    src="/images/ituk_struktuur_2026.png"
-                    alt="ITÜKi struktuur 2026"
+                    src={isEnglish
+                        ? "/images/ituk_struktuur_2026_en.png"
+                        : "/images/ituk_struktuur_2026.png"}
+                    alt={isEnglish
+                        ? "ITÜK structure 2026"
+                        : "ITÜKi struktuur 2026"}
                 />
                 <div
                     role="presentation"

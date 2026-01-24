@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import * as m from "$lib/paraglide/messages";
+    import { getLocale } from "$lib/paraglide/runtime";
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Statistics from "$lib/components/Statistics.svelte";
+    import Card from "$lib/components/Card.svelte";
     import { getPartners, type Partner } from "$lib/firebase";
     import SEO from "$lib/components/SEO.svelte";
     import { SOCIAL_STATS, EVENTS_PER_YEAR } from "$lib/config/stats";
@@ -21,6 +23,10 @@
             loading = false;
         }
     });
+
+    function getLocalizedName(org: Partner): string {
+        return getLocale() === "en" && org.name_en ? org.name_en : org.name;
+    }
 </script>
 
 <SEO pageKey="partnerlus" />
@@ -100,20 +106,17 @@
         {:else if studentOrgs.length === 0}
             <p class="text-gray">No student organizations found</p>
         {:else}
-            <div class="w-full flex flex-wrap justify-center gap-8">
+            <div
+                class="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4 justify-items-center"
+            >
                 {#each studentOrgs as org}
-                    <a
-                        target="_blank"
-                        href={org.link}
-                        class="w-24 h-24 p-2 bg-white rounded-xl flex justify-center items-center overflow-hidden hover:scale-105 transition-transform"
-                    >
-                        <img
-                            src={org.imagePath}
-                            alt={org.name}
-                            class="object-contain w-full h-full"
-                            loading="lazy"
-                        />
-                    </a>
+                    <Card
+                        link={org.link}
+                        title={getLocalizedName(org)}
+                        image={org.imagePath}
+                        listItems={org.projects}
+                        type="list"
+                    />
                 {/each}
             </div>
         {/if}

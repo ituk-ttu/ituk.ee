@@ -27,7 +27,10 @@
         type DocumentData,
     } from "firebase/firestore";
     import Button from "$lib/components/Button.svelte";
-    import Card from "$lib/components/Card.svelte";
+    import AdminCard from "$lib/components/AdminCard.svelte";
+    import AdminPreviewCard from "$lib/components/AdminPreviewCard.svelte";
+    import InputField from "$lib/components/InputField.svelte";
+    import TextArea from "$lib/components/TextArea.svelte";
     import PageHeader from "$lib/components/PageHeader.svelte";
 
     // Auth state
@@ -47,19 +50,76 @@
     let events = $state<any[]>([]);
     let logbook = $state<any[]>([]);
 
-    // Form state for editing
-    let editingMember = $state<BoardMember | null>(null);
-    let newMember = $state({
-        name: "",
-        position: "",
-        position_en: "",
-        email: "",
-        imagePath: "",
-    });
+    // Form state for adding/editing items
+    let showAddForm = $state<string | null>(null);
+    let selectedBoardMember = $state<BoardMember | null>(null);
+    let selectedEvent = $state<any | null>(null);
+    let selectedRentItem = $state<any | null>(null);
+
+    // Track if current form has unsaved changes
+    let formIsDirty = $state(false);
+
+    // Helper to switch selection with dirty check
+    function selectBoardMember(member: BoardMember | null) {
+        if (
+            formIsDirty &&
+            selectedBoardMember &&
+            member?.id !== selectedBoardMember.id
+        ) {
+            if (
+                !confirm("Sul on salvestamata muudatused. Kas soovid jätkata?")
+            ) {
+                return;
+            }
+        }
+        selectedBoardMember = member;
+        showAddForm = null;
+        formIsDirty = false;
+    }
+
+    function selectEvent(event: any | null) {
+        if (formIsDirty && selectedEvent && event?.id !== selectedEvent.id) {
+            if (
+                !confirm("Sul on salvestamata muudatused. Kas soovid jätkata?")
+            ) {
+                return;
+            }
+        }
+        selectedEvent = event;
+        showAddForm = null;
+        formIsDirty = false;
+    }
+
+    function selectRentItem(item: any | null) {
+        if (
+            formIsDirty &&
+            selectedRentItem &&
+            item?.id !== selectedRentItem.id
+        ) {
+            if (
+                !confirm("Sul on salvestamata muudatused. Kas soovid jätkata?")
+            ) {
+                return;
+            }
+        }
+        selectedRentItem = item;
+        showAddForm = null;
+        formIsDirty = false;
+    }
 
     // Board year state
-    let boardYear = $state("2024/2025");
+    let boardYear = $state("2025/2026");
     const yearOptions = ["2024/2025", "2025/2026", "2026/2027"];
+
+    async function saveBoardYear() {
+        try {
+            await setSetting("boardYear", boardYear);
+            alert("Õppeaasta salvestatud!");
+        } catch (e) {
+            console.error("Error saving board year:", e);
+            alert("Viga õppeaasta salvestamisel");
+        }
+    }
 
     onMount(() => {
         const unsubscribe = onAuthStateChanged(auth, (u) => {
@@ -129,51 +189,87 @@
     }
 
     // Board member CRUD
-    async function saveMember() {
-        if (!newMember.name || !newMember.position) {
-            alert("Please fill in required fields");
-            return;
-        }
+    async function saveBoardMember(data: Record<string, string>) {
         try {
-            if (editingMember?.id) {
-                await updateDoc(doc(db, "board", editingMember.id), newMember);
-                alert("Member updated");
+            const { id, ...memberData } = data;
+            if (id) {
+                await updateDoc(doc(db, "board", id), memberData);
             } else {
-                await addDoc(collection(db, "board"), newMember);
-                alert("Member created");
+                await addDoc(collection(db, "board"), memberData);
             }
-            resetMemberForm();
+            showAddForm = null;
+            selectedBoardMember = null;
             boardMembers = await getBoardMembers();
         } catch (e) {
             console.error("Error saving member:", e);
-            alert("Error saving member");
+            alert("Viga liikme salvestamisel");
         }
     }
 
-    async function deleteMember(id: string) {
-        if (!confirm("Are you sure you want to delete this member?")) return;
+    async function deleteBoardMember(id: string) {
         try {
             await deleteDoc(doc(db, "board", id));
+            selectedBoardMember = null;
             boardMembers = await getBoardMembers();
         } catch (e) {
             console.error("Error deleting member:", e);
         }
     }
 
-    function editMember(member: BoardMember) {
-        editingMember = member;
-        newMember = { ...member };
+    // Event CRUD
+    async function saveEvent(data: Record<string, string>) {
+        try {
+            const { id, ...eventData } = data;
+            if (id) {
+                await updateDoc(doc(db, "events", id), eventData);
+            } else {
+                await addDoc(collection(db, "events"), eventData);
+            }
+            showAddForm = null;
+            selectedEvent = null;
+            loadData();
+        } catch (e) {
+            console.error("Error saving event:", e);
+            alert("Viga ürituse salvestamisel");
+        }
     }
 
-    function resetMemberForm() {
-        editingMember = null;
-        newMember = {
-            name: "",
-            position: "",
-            position_en: "",
-            email: "",
-            imagePath: "",
-        };
+    async function deleteEvent(id: string) {
+        try {
+            await deleteDoc(doc(db, "events", id));
+            selectedEvent = null;
+            loadData();
+        } catch (e) {
+            console.error("Error deleting event:", e);
+        }
+    }
+
+    // Rent CRUD
+    async function saveRentItem(data: Record<string, string>) {
+        try {
+            const { id, ...rentData } = data;
+            if (id) {
+                await updateDoc(doc(db, "rent", id), rentData);
+            } else {
+                await addDoc(collection(db, "rent"), rentData);
+            }
+            showAddForm = null;
+            selectedRentItem = null;
+            loadData();
+        } catch (e) {
+            console.error("Error saving rent item:", e);
+            alert("Viga seadme salvestamisel");
+        }
+    }
+
+    async function deleteRentItem(id: string) {
+        try {
+            await deleteDoc(doc(db, "rent", id));
+            selectedRentItem = null;
+            loadData();
+        } catch (e) {
+            console.error("Error deleting rent item:", e);
+        }
     }
 
     // Logbook
@@ -216,30 +312,24 @@
         >
             <h1>Admin Login</h1>
             <form
-                class="flex flex-col gap-4 w-full max-w-md"
+                class="flex flex-col gap-4 w-full max-w-md bg-white/5 p-6 rounded-lg"
                 onsubmit={handleLogin}
             >
-                <label>
-                    <span class="text-primary">* </span>Email
-                    <input
-                        type="email"
-                        bind:value={email}
-                        required
-                        class="w-full mt-1 p-2 bg-white/10 border border-white/20 rounded"
-                        placeholder="Email address"
-                    />
-                </label>
-                <label>
-                    <span class="text-primary">* </span>Password
-                    <input
-                        type="password"
-                        bind:value={password}
-                        required
-                        class="w-full mt-1 p-2 bg-white/10 border border-white/20 rounded"
-                        placeholder="Password"
-                    />
-                </label>
-                <Button variant="primary" type="submit" text="Login" />
+                <InputField
+                    label="Email"
+                    type="email"
+                    placeholder="admin@ituk.ee"
+                    bind:value={email}
+                    required
+                />
+                <InputField
+                    label="Parool"
+                    type="password"
+                    placeholder="••••••••"
+                    bind:value={password}
+                    required
+                />
+                <Button variant="primary" type="submit" text="Logi sisse" />
             </form>
         </div>
     {:else}
@@ -278,198 +368,465 @@
 
             {#if currentPage === "juhatus"}
                 <!-- Board Members -->
-                <div class="flex flex-col gap-8 items-center">
-                    <h2>Juhatuse koosseis</h2>
+                <div class="flex flex-col gap-8 w-full">
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+                    >
+                        <h2>Juhatuse koosseis</h2>
+                        <Button
+                            variant="primary"
+                            text="+ Lisa uus"
+                            onclick={() =>
+                                (showAddForm =
+                                    showAddForm === "board" ? null : "board")}
+                        />
+                    </div>
+
+                    <!-- Instructions -->
+                    <div
+                        class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
+                    >
+                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>
+                                Pilt croppida ruudukujuliseks, kasutada .jpg
+                                failiformaati
+                            </li>
+                            <li>Kaust: "static/board/(aasta)"</li>
+                            <li>
+                                Järjekord on sorteeritud failinime järgi (nt
+                                "1_esimees.jpg")
+                            </li>
+                        </ul>
+                    </div>
 
                     <!-- Board Year Selector -->
-                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded">
-                        <label for="boardYearSelect" class="font-bold"
-                            >Õppeaasta:</label
+                    <div
+                        class="flex items-center gap-4 bg-white/5 p-4 rounded-lg"
+                    >
+                        <label
+                            for="boardYearSelect"
+                            class="text-sm font-medium"
                         >
+                            Aktiivne õppeaasta:
+                        </label>
                         <select
                             id="boardYearSelect"
                             bind:value={boardYear}
-                            onchange={async () => {
-                                await setSetting("boardYear", boardYear);
-                                alert("Õppeaasta salvestatud: " + boardYear);
-                            }}
-                            class="p-2 bg-white/10 rounded text-white"
+                            class="px-3 py-2 bg-white/10 border border-white/10 rounded text-white focus:outline-none focus:border-primary"
                         >
                             {#each yearOptions as year}
                                 <option value={year}>{year}</option>
                             {/each}
                         </select>
+                        <Button
+                            variant="primary"
+                            text="Salvesta"
+                            onclick={saveBoardYear}
+                        />
                     </div>
 
-                    <ul class="flex flex-col gap-2 text-sm">
-                        <li>
-                            • Pilt croppida ruudukujuliseks, kasutada .jpg
-                            failiformaati
-                        </li>
-                        <li>• Kaust: "static/board/(aasta)"</li>
-                        <li>
-                            • Järjekord on sorteeritud failinime järgi (nt
-                            "1_esimees.jpg")
-                        </li>
-                    </ul>
-
-                    <!-- Add/Edit Form -->
-                    <div class="w-full max-w-md bg-white/5 p-4 rounded">
-                        <h3 class="mb-4">
-                            {editingMember ? "Edit Member" : "Add New Member"}
-                        </h3>
-                        <div class="flex flex-col gap-3">
-                            <input
-                                bind:value={newMember.name}
-                                placeholder="Name"
-                                class="p-2 bg-white/10 rounded"
-                            />
-                            <input
-                                bind:value={newMember.position}
-                                placeholder="Position (ET)"
-                                class="p-2 bg-white/10 rounded"
-                            />
-                            <input
-                                bind:value={newMember.position_en}
-                                placeholder="Position (EN)"
-                                class="p-2 bg-white/10 rounded"
-                            />
-                            <input
-                                bind:value={newMember.email}
-                                placeholder="Email"
-                                class="p-2 bg-white/10 rounded"
-                            />
-                            <input
-                                bind:value={newMember.imagePath}
-                                placeholder="Image Path (e.g. /board/2025/1_name.jpg)"
-                                class="p-2 bg-white/10 rounded"
-                            />
-                            <div class="flex gap-2">
-                                <Button
-                                    variant="primary"
-                                    text="Save"
-                                    onclick={saveMember}
-                                />
-                                {#if editingMember}
-                                    <Button
-                                        variant="secondary"
-                                        text="Cancel"
-                                        onclick={resetMemberForm}
-                                    />
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <!-- List of members -->
+                        <div class="flex-1 flex flex-col gap-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-white/60">
+                                    {boardMembers.length} liiget
+                                </p>
+                                {#if selectedBoardMember}
+                                    <button
+                                        class="text-xs text-white/60 hover:text-white"
+                                        onclick={() => selectBoardMember(null)}
+                                    >
+                                        Tühista valik
+                                    </button>
                                 {/if}
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Member Grid -->
-                    <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-                    >
-                        {#each boardMembers as member}
-                            <div class="relative group">
-                                <Card
-                                    title={member.name}
-                                    image={member.imagePath}
-                                    description={member.position}
-                                    type="board"
-                                    email={member.email}
-                                />
-                                <div
-                                    class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                                >
-                                    <button
-                                        onclick={() => editMember(member)}
-                                        class="bg-primary p-2 rounded text-xs"
-                                        >Edit</button
-                                    >
-                                    <button
-                                        onclick={() => deleteMember(member.id!)}
-                                        class="bg-red-600 p-2 rounded text-xs"
-                                        >Delete</button
-                                    >
-                                </div>
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-2"
+                            >
+                                {#each boardMembers as member}
+                                    <AdminPreviewCard
+                                        title={member.name}
+                                        subtitle={member.position}
+                                        image={member.imagePath}
+                                        selected={selectedBoardMember?.id ===
+                                            member.id}
+                                        onclick={() =>
+                                            selectBoardMember(member)}
+                                    />
+                                {/each}
                             </div>
-                        {/each}
+                        </div>
+
+                        <!-- Edit form (shown when item selected or adding new) -->
+                        <div class="w-full lg:w-80 shrink-0">
+                            {#if showAddForm === "board"}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">
+                                            Lisa uus liige
+                                        </h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() => (showAddForm = null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        type="board"
+                                        onSave={saveBoardMember}
+                                    />
+                                </div>
+                            {:else if selectedBoardMember}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">Muuda liiget</h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() =>
+                                                selectBoardMember(null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        id={selectedBoardMember.id}
+                                        type="board"
+                                        initialData={{
+                                            name:
+                                                selectedBoardMember.name || "",
+                                            position:
+                                                selectedBoardMember.position ||
+                                                "",
+                                            position_en:
+                                                selectedBoardMember.position_en ||
+                                                "",
+                                            email:
+                                                selectedBoardMember.email || "",
+                                            imagePath:
+                                                selectedBoardMember.imagePath ||
+                                                "",
+                                        }}
+                                        onSave={saveBoardMember}
+                                        onDelete={deleteBoardMember}
+                                        onDirtyChange={(dirty) =>
+                                            (formIsDirty = dirty)}
+                                    />
+                                </div>
+                            {:else}
+                                <div
+                                    class="flex items-center justify-center h-48 bg-white/5 rounded-lg text-white/40 text-sm"
+                                >
+                                    Vali liige muutmiseks või lisa uus
+                                </div>
+                            {/if}
+                        </div>
                     </div>
                 </div>
             {:else if currentPage === "uritused"}
                 <!-- Events -->
-                <div class="flex flex-col gap-8 items-center">
-                    <h2>Üritused</h2>
-                    <p class="text-gray">
-                        Events management - full implementation pending
-                    </p>
+                <div class="flex flex-col gap-8 w-full">
                     <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
-                        {#each events as event}
-                            <Card
-                                title={event.name}
-                                image={event.banner}
-                                description={event.description}
-                                type="default"
-                            />
-                        {/each}
+                        <h2>Üritused</h2>
+                        <Button
+                            variant="primary"
+                            text="+ Lisa uus"
+                            onclick={() =>
+                                (showAddForm =
+                                    showAddForm === "event" ? null : "event")}
+                        />
+                    </div>
+
+                    <!-- Instructions -->
+                    <div
+                        class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
+                    >
+                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Kategooriad: meelelahutus, haridus, muu</li>
+                            <li>
+                                Handle peab olema unikaalne URL-sõbralik string
+                                (nt "dont-do-it")
+                            </li>
+                            <li>Banner pilt peaks olema laiusega ~1200px</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <!-- List of events -->
+                        <div class="flex-1 flex flex-col gap-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-white/60">
+                                    {events.length} üritust
+                                </p>
+                                {#if selectedEvent}
+                                    <button
+                                        class="text-xs text-white/60 hover:text-white"
+                                        onclick={() => selectEvent(null)}
+                                    >
+                                        Tühista valik
+                                    </button>
+                                {/if}
+                            </div>
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-2"
+                            >
+                                {#each events as event}
+                                    <AdminPreviewCard
+                                        title={event.name}
+                                        subtitle={event.category}
+                                        image={event.banner}
+                                        selected={selectedEvent?.id ===
+                                            event.id}
+                                        onclick={() => selectEvent(event)}
+                                    />
+                                {/each}
+                            </div>
+                        </div>
+
+                        <!-- Edit form -->
+                        <div class="w-full lg:w-80 shrink-0">
+                            {#if showAddForm === "event"}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">
+                                            Lisa uus üritus
+                                        </h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() => (showAddForm = null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        type="event"
+                                        onSave={saveEvent}
+                                    />
+                                </div>
+                            {:else if selectedEvent}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">Muuda üritust</h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() => selectEvent(null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        id={selectedEvent.id}
+                                        type="event"
+                                        initialData={{
+                                            name: selectedEvent.name || "",
+                                            name_en:
+                                                selectedEvent.name_en || "",
+                                            description:
+                                                selectedEvent.description || "",
+                                            description_en:
+                                                selectedEvent.description_en ||
+                                                "",
+                                            banner: selectedEvent.banner || "",
+                                            category:
+                                                selectedEvent.category || "",
+                                            handle: selectedEvent.handle || "",
+                                        }}
+                                        onSave={saveEvent}
+                                        onDelete={deleteEvent}
+                                        onDirtyChange={(dirty) =>
+                                            (formIsDirty = dirty)}
+                                    />
+                                </div>
+                            {:else}
+                                <div
+                                    class="flex items-center justify-center h-48 bg-white/5 rounded-lg text-white/40 text-sm"
+                                >
+                                    Vali üritus muutmiseks või lisa uus
+                                </div>
+                            {/if}
+                        </div>
                     </div>
                 </div>
             {:else if currentPage === "rent"}
                 <!-- Rentables -->
-                <div class="flex flex-col gap-8 items-center">
-                    <h2>Renditavad seadmed</h2>
-                    <p class="text-gray">
-                        Rent management - full implementation pending
-                    </p>
+                <div class="flex flex-col gap-8 w-full">
                     <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
-                        {#each rentables as item}
-                            <Card
-                                title={item.name}
-                                image={item.imagePath}
-                                description="{item.price}€/{item.unit}"
-                                type="default"
-                            />
-                        {/each}
+                        <h2>Renditavad seadmed</h2>
+                        <Button
+                            variant="primary"
+                            text="+ Lisa uus"
+                            onclick={() =>
+                                (showAddForm =
+                                    showAddForm === "rent" ? null : "rent")}
+                        />
+                    </div>
+
+                    <!-- Instructions -->
+                    <div
+                        class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
+                    >
+                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Pilt peaks olema ruudukujuline</li>
+                            <li>Hind on number (ilma € märgita)</li>
+                            <li>Ühik on nt "päev", "tund", "kord"</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <!-- List of rent items -->
+                        <div class="flex-1 flex flex-col gap-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-white/60">
+                                    {rentables.length} seadet
+                                </p>
+                                {#if selectedRentItem}
+                                    <button
+                                        class="text-xs text-white/60 hover:text-white"
+                                        onclick={() => selectRentItem(null)}
+                                    >
+                                        Tühista valik
+                                    </button>
+                                {/if}
+                            </div>
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-2"
+                            >
+                                {#each rentables as item}
+                                    <AdminPreviewCard
+                                        title={item.name}
+                                        subtitle="{item.price}€/{item.unit}"
+                                        image={item.imagePath}
+                                        selected={selectedRentItem?.id ===
+                                            item.id}
+                                        onclick={() => selectRentItem(item)}
+                                    />
+                                {/each}
+                            </div>
+                        </div>
+
+                        <!-- Edit form -->
+                        <div class="w-full lg:w-80 shrink-0">
+                            {#if showAddForm === "rent"}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">
+                                            Lisa uus seade
+                                        </h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() => (showAddForm = null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        type="rent"
+                                        onSave={saveRentItem}
+                                    />
+                                </div>
+                            {:else if selectedRentItem}
+                                <div class="sticky top-4">
+                                    <div
+                                        class="flex items-center justify-between mb-3"
+                                    >
+                                        <h3 class="font-bold">Muuda seadet</h3>
+                                        <button
+                                            class="text-xs text-white/60 hover:text-white"
+                                            onclick={() => selectRentItem(null)}
+                                        >
+                                            Tühista
+                                        </button>
+                                    </div>
+                                    <AdminCard
+                                        id={selectedRentItem.id}
+                                        type="rent"
+                                        initialData={{
+                                            name: selectedRentItem.name || "",
+                                            name_en:
+                                                selectedRentItem.name_en || "",
+                                            price: String(
+                                                selectedRentItem.price || "",
+                                            ),
+                                            unit: selectedRentItem.unit || "",
+                                            imagePath:
+                                                selectedRentItem.imagePath ||
+                                                "",
+                                        }}
+                                        onSave={saveRentItem}
+                                        onDelete={deleteRentItem}
+                                        onDirtyChange={(dirty) =>
+                                            (formIsDirty = dirty)}
+                                    />
+                                </div>
+                            {:else}
+                                <div
+                                    class="flex items-center justify-center h-48 bg-white/5 rounded-lg text-white/40 text-sm"
+                                >
+                                    Vali seade muutmiseks või lisa uus
+                                </div>
+                            {/if}
+                        </div>
                     </div>
                 </div>
             {:else if currentPage === "logiraamat"}
                 <!-- Logbook -->
-                <div class="flex flex-col gap-8 items-center w-full">
+                <div class="flex flex-col gap-8 w-full">
                     <h2>Logiraamat</h2>
 
-                    <div class="flex flex-col md:flex-row gap-8 w-full">
+                    <div class="flex flex-col lg:flex-row gap-8">
                         <!-- New Entry Form -->
-                        <div class="w-full md:w-1/2 bg-white/5 p-4 rounded">
-                            <h3 class="mb-4">New Entry</h3>
-                            <div class="flex flex-col gap-3">
-                                <input
+                        <div class="w-full lg:w-1/3 bg-white/5 p-6 rounded-lg">
+                            <h3 class="mb-4 font-bold">Uus sissekanne</h3>
+                            <div class="flex flex-col gap-4">
+                                <InputField
+                                    label="Sinu nimi"
+                                    placeholder="Nimi"
                                     bind:value={logAuthor}
-                                    placeholder="Your name"
-                                    class="p-2 bg-white/10 rounded"
+                                    required
                                 />
-                                <textarea
+                                <TextArea
+                                    label="Mida mõtled?"
+                                    placeholder="Kirjuta siia..."
                                     bind:value={logEntry}
-                                    placeholder="What's on your mind?"
-                                    class="p-2 bg-white/10 rounded min-h-32"
-                                ></textarea>
+                                    rows={6}
+                                    required
+                                />
                                 <Button
                                     variant="primary"
-                                    text="Submit"
+                                    text="Postita"
                                     onclick={createLog}
                                 />
                             </div>
                         </div>
 
                         <!-- Welcome Message -->
-                        <div class="w-full md:w-1/2 italic text-sm">
-                            <p>"Tervist!</p>
-                            <p class="mt-2">
+                        <div class="w-full lg:w-2/3 bg-white/5 p-6 rounded-lg">
+                            <p class="italic text-white/80">"Tervist!</p>
+                            <p class="mt-3 text-white/70">
                                 Siin meie kodulehe hetke versiooni arendajad
                                 väikse teadaandega - kui sa veel aru ei ole
                                 saanud, siis sul on erakordne võimalus olla osa
                                 ITÜKi kodulehe administraatoritest!
                             </p>
-                            <p class="mt-2">
+                            <p class="mt-3 italic text-white/80">
                                 Tunne vabalt rantida logiraamatusse, ehk leiad
                                 sealt lohutust ka. ;D"
                             </p>
@@ -478,29 +835,30 @@
 
                     <!-- Log Entries -->
                     <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
                     >
                         {#each logbook as log, index}
                             <div
-                                class="min-h-60 p-4 shadow-filled transform transition-transform hover:scale-105 hover:rotate-0 {(index +
+                                class="min-h-48 p-4 rounded-lg shadow-filled transform transition-transform hover:scale-105 hover:rotate-0 {(index +
                                     1) %
                                     3 ===
                                 0
-                                    ? 'rotate-6 bg-gray text-white'
+                                    ? 'rotate-3 bg-gray text-white'
                                     : (index + 1) % 4 === 0
-                                      ? '-rotate-3 bg-white text-background'
+                                      ? '-rotate-2 bg-white text-background'
                                       : (index + 1) % 5 === 0
-                                        ? 'rotate-2 bg-[#4dbed2] text-background'
+                                        ? 'rotate-1 bg-[#4dbed2] text-background'
                                         : (index + 1) % 2 === 0
-                                          ? '-rotate-2 bg-yellow-300 text-background'
+                                          ? '-rotate-1 bg-yellow-300 text-background'
                                           : 'bg-primary text-white'}"
                             >
-                                <h5 class="font-bold">{log.author}</h5>
-                                <p class="text-xs">
+                                <h5 class="font-bold text-sm">{log.author}</h5>
+                                <p class="text-xs opacity-70 mb-3">
                                     {log.date?.toLocaleString?.("et-EE") || ""}
                                 </p>
-                                <br />
-                                <p class="text-xs">{log.entry}</p>
+                                <p class="text-sm leading-relaxed">
+                                    {log.entry}
+                                </p>
                             </div>
                         {/each}
                     </div>

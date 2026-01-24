@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, type DocumentData } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, where, type DocumentData } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -36,28 +36,46 @@ export interface TimelineEvent {
 
 export interface Event {
     id?: string;
+    handle: string;
+    name: string;
+    name_en: string;
+    description: string;
+    description_en: string;
+    banner: string;
+    category: 'haridus' | 'meelelahutus' | 'muu';
+    gallery?: string[];
+}
+
+export interface EventYear {
+    id?: string;
+    handle: string;
     title: string;
     title_en: string;
     description: string;
     description_en: string;
-    imagePath: string;
-    type: 'education' | 'entertainment' | 'other';
+    extraInformation?: string;
+    extraInformation_en?: string;
+    banner: string;
+    date: string;
+    gallery?: Record<string, string>;
 }
 
 export interface RentItem {
     id?: string;
-    title: string;
-    title_en: string;
-    description: string;
-    description_en: string;
+    name: string;
+    name_en: string;
+    price: number;
+    unit: string;
     imagePath: string;
 }
 
 export interface Partner {
     id?: string;
     name: string;
+    name_en: string;
     imagePath: string;
     link: string;
+    projects?: string[];
 }
 
 // Fetch functions
@@ -91,6 +109,51 @@ export async function getEvents(): Promise<Event[]> {
         id: doc.id,
         ...doc.data()
     })) as Event[];
+}
+
+export async function getEventsByCategory(category: string): Promise<Event[]> {
+    const q = query(collection(db, 'events'), where('category', '==', category));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+    })) as Event[];
+}
+
+export async function getEventByHandle(handle: string): Promise<Event | null> {
+    const q = query(collection(db, 'events'), where('handle', '==', handle));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) return null;
+    return {
+        id: snapshot.docs[0].id,
+        ...snapshot.docs[0].data()
+    } as Event;
+}
+
+export async function getEventYears(eventId: string): Promise<EventYear[]> {
+    const eventRef = doc(db, 'events', eventId);
+    const q = query(collection(eventRef, 'years'), orderBy('date', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+    })) as EventYear[];
+}
+
+export async function getEventYear(eventHandle: string, yearHandle: string): Promise<EventYear | null> {
+    const eventQuery = query(collection(db, 'events'), where('handle', '==', eventHandle));
+    const eventSnapshot = await getDocs(eventQuery);
+    if (eventSnapshot.empty) return null;
+
+    const eventRef = doc(db, 'events', eventSnapshot.docs[0].id);
+    const yearQuery = query(collection(eventRef, 'years'), where('handle', '==', yearHandle));
+    const yearSnapshot = await getDocs(yearQuery);
+    if (yearSnapshot.empty) return null;
+
+    return {
+        id: yearSnapshot.docs[0].id,
+        ...yearSnapshot.docs[0].data()
+    } as EventYear;
 }
 
 export async function getRentItems(): Promise<RentItem[]> {
