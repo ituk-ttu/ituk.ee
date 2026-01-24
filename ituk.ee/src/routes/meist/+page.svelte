@@ -5,7 +5,6 @@
     import {
         getBoardMembers,
         getTimelineEvents,
-        getSetting,
         type BoardMember,
         type TimelineEvent,
     } from "$lib/firebase";
@@ -14,23 +13,47 @@
     import Statistics from "$lib/components/Statistics.svelte";
     import TimelineDesktop from "$lib/components/TimelineDesktop.svelte";
     import SEO from "$lib/components/SEO.svelte";
+    import { getYearsInAction, ABOUT_STATS } from "$lib/config/stats";
+    import TuxGame from "$lib/components/TuxGame.svelte";
+
+    let showTuxGame = $state(false);
+    let tuxHoverTimer: ReturnType<typeof setTimeout> | null = null;
+    let tuxActivated = $state(false);
+
+    function startTuxHover() {
+        if (tuxActivated) return;
+        tuxHoverTimer = setTimeout(() => {
+            tuxActivated = true;
+        }, 1500);
+    }
+
+    function endTuxHover() {
+        if (tuxHoverTimer) {
+            clearTimeout(tuxHoverTimer);
+            tuxHoverTimer = null;
+        }
+    }
+
+    function handleTuxClick() {
+        if (tuxActivated) {
+            showTuxGame = true;
+        }
+    }
 
     let boardMembers = $state<BoardMember[]>([]);
     let timelineEvents = $state<TimelineEvent[]>([]);
-    let boardYear = $state("2024/2025");
+    const boardYear = "2025/2026";
     let loading = $state(true);
     let error = $state<string | null>(null);
 
     onMount(async () => {
         try {
-            const [members, events, year] = await Promise.all([
+            const [members, events] = await Promise.all([
                 getBoardMembers(),
                 getTimelineEvents(),
-                getSetting("boardYear"),
             ]);
             boardMembers = members;
             timelineEvents = events;
-            if (year) boardYear = year;
         } catch (e) {
             console.error("Error loading data:", e);
             error = "Failed to load data";
@@ -82,19 +105,19 @@
         title={m.aboutus_numbers()}
         items={[
             {
-                value: m.aboutus_stat1_title(),
+                value: getYearsInAction(),
                 label: m.aboutus_stat1_description(),
             },
             {
-                value: m.aboutus_stat2_title(),
+                value: ABOUT_STATS.membersAllTime,
                 label: m.aboutus_stat2_description(),
             },
             {
-                value: m.aboutus_stat3_title(),
+                value: ABOUT_STATS.activeMembers,
                 label: m.aboutus_stat3_description(),
             },
             {
-                value: m.aboutus_stat4_title(),
+                value: ABOUT_STATS.goals,
                 label: m.aboutus_stat4_description(),
             },
         ]}
@@ -117,11 +140,25 @@
             <p>{m.aboutus_structure3()}</p>
         </div>
         <div class="w-full md:w-1/2 flex flex-col items-center gap-8">
-            <img
-                class="w-full"
-                src="/images/ituk_struktuur_2026.png"
-                alt="ITÜKi struktuur 2026"
-            />
+            <!-- Structure image with clickable Tux area -->
+            <!-- Original image: Tux at 503,0 to 639,117. Image assumed ~800px wide -->
+            <div class="relative w-full">
+                <img
+                    class="w-full"
+                    src="/images/ituk_struktuur_2026.png"
+                    alt="ITÜKi struktuur 2026"
+                />
+                <div
+                    role="presentation"
+                    onmouseenter={startTuxHover}
+                    onmouseleave={endTuxHover}
+                    onclick={handleTuxClick}
+                    class="absolute left-1/2 -translate-x-1/2 transition-all duration-300 rounded {tuxActivated
+                        ? 'cursor-pointer bg-white/5 hover:bg-white/10'
+                        : 'cursor-default'}"
+                    style="top: 0; width: 17%; height: 18%;"
+                ></div>
+            </div>
             <p class="text-gray">{m.aboutus_structure4()}</p>
         </div>
     </div>
@@ -171,3 +208,7 @@
         </h3>
     </div>
 </div>
+
+{#if showTuxGame}
+    <TuxGame onClose={() => (showTuxGame = false)} />
+{/if}

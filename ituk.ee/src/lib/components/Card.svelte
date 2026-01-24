@@ -41,7 +41,10 @@
 
 			{#if type === "timeline"}
 				<div class="w-full p-4 flex flex-col {contentBg}">
-					<span class="font-raleway font-bold">{title}</span>
+					<span
+						class="font-raleway font-bold text-sm sm:text-h4 h-[58px]"
+						>{title}</span
+					>
 				</div>
 			{:else if type === "list"}
 				<div
@@ -80,7 +83,9 @@
 
 		{#if type === "timeline"}
 			<div class="w-full p-4 flex flex-col {contentBg}">
-				<span class="h-[50px]">{title}</span>
+				<span class="font-raleway font-bold text-sm sm:text-h4 h-[58px]"
+					>{title}</span
+				>
 			</div>
 		{:else if type === "board"}
 			<div

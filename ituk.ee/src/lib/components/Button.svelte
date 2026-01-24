@@ -42,7 +42,7 @@
     };
 
     const baseClasses = $derived(`
-		flex justify-center items-center
+		flex box-border justify-center items-center
 		button-text uppercase
 		rounded overflow-hidden
 		transition-all duration-150 ease-in-out

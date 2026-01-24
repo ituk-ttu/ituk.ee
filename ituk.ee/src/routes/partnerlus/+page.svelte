@@ -5,6 +5,7 @@
     import Statistics from "$lib/components/Statistics.svelte";
     import { getPartners, type Partner } from "$lib/firebase";
     import SEO from "$lib/components/SEO.svelte";
+    import { SOCIAL_STATS, EVENTS_PER_YEAR } from "$lib/config/stats";
 
     let studentOrgs = $state<Partner[]>([]);
     let loading = $state(true);
@@ -39,7 +40,7 @@
             <a
                 target="_blank"
                 href="https://nortal.com/"
-                class="flex-1 h-24 sm:h-32 p-4 bg-nortal rounded-2xl flex justify-center items-center overflow-hidden"
+                class="flex-1 h-24 sm:h-32 p-4 bg-nortal rounded-xl flex justify-center items-center overflow-hidden"
             >
                 <img
                     src="/images/partners/nortal.png"
@@ -51,7 +52,7 @@
             <a
                 target="_blank"
                 href="https://netgroup.com/"
-                class="flex-1 h-24 sm:h-32 p-4 bg-netgroup rounded-2xl flex justify-center items-center overflow-hidden"
+                class="flex-1 h-24 sm:h-32 p-4 bg-netgroup rounded-xl flex justify-center items-center overflow-hidden"
             >
                 <img
                     src="/images/partners/netgroup.png"
@@ -63,7 +64,7 @@
             <a
                 target="_blank"
                 href="https://www.alecoq.ee/"
-                class="flex-1 h-24 sm:h-32 p-4 bg-alecoq rounded-2xl flex justify-center items-center overflow-hidden"
+                class="flex-1 h-24 sm:h-32 p-4 bg-alecoq rounded-xl flex justify-center items-center overflow-hidden"
             >
                 <img
                     src="/images/partners/alecoq.png"
@@ -75,7 +76,7 @@
             <a
                 target="_blank"
                 href="https://dominospizza.ee/"
-                class="flex-1 h-24 sm:h-32 p-4 bg-dominos rounded-2xl flex justify-center items-center overflow-hidden"
+                class="flex-1 h-24 sm:h-32 p-4 bg-dominos rounded-xl flex justify-center items-center overflow-hidden"
             >
                 <img
                     src="/images/partners/dominos.png"
@@ -123,20 +124,24 @@
         title={m.partners_offer()}
         items={[
             {
-                value: m.partners_stat1_title(),
+                value: SOCIAL_STATS.instagram.followers,
                 label: m.partners_stat1_description(),
+                link: SOCIAL_STATS.instagram.link,
             },
             {
-                value: m.partners_stat2_title(),
+                value: SOCIAL_STATS.facebook.followers,
                 label: m.partners_stat2_description(),
+                link: SOCIAL_STATS.facebook.link,
             },
             {
-                value: m.partners_stat3_title(),
+                value: SOCIAL_STATS.discord.members,
                 label: m.partners_stat3_description(),
+                link: SOCIAL_STATS.discord.link,
             },
             {
-                value: m.partners_stat4_title(),
+                value: EVENTS_PER_YEAR,
                 label: m.partners_stat4_description(),
+                link: "/uritused",
             },
         ]}
     />
@@ -161,7 +166,7 @@
             <img
                 src="/images/koostoo.jpg"
                 alt=""
-                class="rounded-2xl object-cover w-full h-72"
+                class="rounded-xl object-cover w-full h-72"
             />
         </div>
     </div>

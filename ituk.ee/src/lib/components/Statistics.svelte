@@ -2,8 +2,9 @@
     import { onMount } from "svelte";
 
     interface StatItem {
-        value: string;
+        value: string | number;
         label: string;
+        link?: string;
     }
 
     interface Props {
@@ -22,7 +23,13 @@
         }
     });
 
-    function parseValue(value: string): { num: number; suffix: string } {
+    function parseValue(value: string | number): {
+        num: number;
+        suffix: string;
+    } {
+        if (typeof value === "number") {
+            return { num: value, suffix: "" };
+        }
         const match = value.match(/^(\d+)(.*)$/);
         if (match) {
             return { num: parseInt(match[1], 10), suffix: match[2] };
@@ -68,7 +75,7 @@
                             if (num > 0) {
                                 animateCount(index, num, suffix);
                             } else {
-                                displayValues[index] = item.value;
+                                displayValues[index] = String(item.value);
                             }
                         });
                     }
@@ -92,12 +99,30 @@
     <h2 class="text-center md:text-left">{title}</h2>
     <div class="flex flex-wrap justify-center md:justify-end gap-8">
         {#each items as item, index}
-            <div class="flex flex-col items-center gap-4">
-                <span class="text-4xl sm:text-5xl font-bold">
-                    {displayValues[index]}
-                </span>
-                <span class="text-center">{item.label}</span>
-            </div>
+            {#if item.link}
+                <a
+                    href={item.link}
+                    target={item.link.startsWith("http") ? "_blank" : undefined}
+                    rel={item.link.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined}
+                    class="flex flex-col items-center gap-4 hover:scale-105 transition-transform cursor-pointer"
+                >
+                    <span class="text-4xl sm:text-5xl font-bold">
+                        {displayValues[index]}
+                    </span>
+                    <span class="text-center">{item.label}</span>
+                </a>
+            {:else}
+                <div
+                    class="flex flex-col items-center gap-4 hover:scale-105 transition-transform"
+                >
+                    <span class="text-4xl sm:text-5xl font-bold">
+                        {displayValues[index]}
+                    </span>
+                    <span class="text-center">{item.label}</span>
+                </div>
+            {/if}
         {/each}
     </div>
 </div>
