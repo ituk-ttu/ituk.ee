@@ -16,7 +16,11 @@
   "dependencies": {
     "http-server": "^0.11.1"
   },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
+  },
   "scripts": {
-    "build": "gulp compile"
+    "build": "gulp compile",
+    "dev": "gulp"
   }
 }
