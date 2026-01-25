@@ -6,7 +6,7 @@
 </script>
 
 <div
-    class="fixed top-20 right-4 z-50 flex flex-col gap-3 w-full max-w-[512px] pointer-events-none sm:right-6"
+    class="fixed top-22 right-4 z-50 flex flex-col gap-3 w-full max-w-[512px] pointer-events-none sm:right-6"
     aria-live="polite"
     aria-label="Notifications"
 >

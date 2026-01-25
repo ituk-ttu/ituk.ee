@@ -6,6 +6,7 @@
     import { getEventYear, type EventYear } from "$lib/firebase";
     import SEO from "$lib/components/SEO.svelte";
     import Loading from "$lib/components/Loading.svelte";
+    import PageHeader from "$lib/components/PageHeader.svelte";
     import Gallery from "$lib/components/Gallery.svelte";
 
     let eventYear = $state<EventYear | null>(null);
@@ -29,28 +30,15 @@
 <SEO pageKey="uritused" />
 
 {#if loading}
-    <div class="flex flex-col items-center justify-center gap-8 min-h-[50vh]">
-        <h2>Laeb...</h2>
-        <Loading />
-    </div>
+    <Loading fullHeight />
 {:else if eventYear}
-    <div class="flex flex-col items-center">
-        <div
-            class="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
-            style="background-image: url({eventYear.banner})"
-        >
-            <div
-                class="section-padding w-full bg-black/50 justify-center items-center flex-row flex"
-            >
-                <h1 class="text-big text-center">
-                    {isEnglish ? eventYear.title_en : eventYear.title}
-                </h1>
-            </div>
-        </div>
+    <div>
+        <PageHeader
+            title={isEnglish ? eventYear.title_en : eventYear.title}
+            backgroundImage={eventYear.banner || "/ituk_placeholder.jpg"}
+        />
 
-        <div
-            class="section-padding container-content justify-center items-start flex-col flex gap-16"
-        >
+        <div class="section-padding container-content flex flex-col gap-16">
             <div
                 class="w-full justify-center items-start flex-col md:flex-row flex gap-16"
             >

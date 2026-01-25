@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, where, type DocumentData } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc, addDoc, updateDoc, deleteDoc, setDoc, where, type DocumentData } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import {
     PUBLIC_FIREBASE_API_KEY,
@@ -38,10 +38,9 @@ export interface BoardMember {
 
 export interface TimelineEvent {
     id?: string;
-    title: string;
-    description: string;
+    name: string;
+    date: Date;
     imagePath: string;
-    year: Date;
 }
 
 export interface Event {
@@ -74,8 +73,8 @@ export interface RentItem {
     id?: string;
     name: string;
     name_en: string;
-    price: number;
-    unit: string;
+    description: string;
+    description_en: string;
     imagePath: string;
 }
 
@@ -86,6 +85,14 @@ export interface Partner {
     imagePath: string;
     link: string;
     projects?: string[];
+}
+
+export interface Sponsor {
+    id?: string;
+    name: string;
+    imagePath: string;
+    link: string;
+    bgColor: string;
 }
 
 // Fetch functions
@@ -99,16 +106,15 @@ export async function getBoardMembers(): Promise<BoardMember[]> {
 }
 
 export async function getTimelineEvents(): Promise<TimelineEvent[]> {
-    const q = query(collection(db, 'timeline-events'), orderBy('year'));
+    const q = query(collection(db, 'timeline-events'), orderBy('date'));
     const snapshot = await getDocs(q);
     return snapshot.docs.map((doc) => {
         const data = doc.data();
         return {
             id: doc.id,
-            title: data.title,
-            description: data.description,
+            name: data.name,
             imagePath: data.imagePath,
-            year: data.year?.toDate?.() || new Date(data.year)
+            date: data.date?.toDate?.() || new Date(data.date)
         };
     }) as TimelineEvent[];
 }
@@ -182,6 +188,14 @@ export async function getPartners(): Promise<Partner[]> {
     })) as Partner[];
 }
 
+export async function getSponsors(): Promise<Sponsor[]> {
+    const snapshot = await getDocs(collection(db, 'sponsors'));
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+    })) as Sponsor[];
+}
+
 // Admin functions
 export async function addDocument(collectionName: string, data: DocumentData) {
     return addDoc(collection(db, collectionName), data);
@@ -207,10 +221,5 @@ export async function getSetting(key: string): Promise<string | null> {
 
 export async function setSetting(key: string, value: string): Promise<void> {
     const docRef = doc(db, 'settings', key);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-        await updateDoc(docRef, { value });
-    } else {
-        await addDoc(collection(db, 'settings'), { value });
-    }
+    await setDoc(docRef, { value });
 }

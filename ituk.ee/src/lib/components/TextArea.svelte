@@ -22,10 +22,10 @@
     }: Props = $props();
 </script>
 
-<label class="flex flex-col gap-1 w-full">
+<label class="flex flex-col gap-2 w-full">
     {#if label}
         <span class="text-sm font-medium text-white">
-            {#if required}<span class="text-primary">* </span>{/if}{label}
+            {#if required}<span class="text-red">* </span>{/if}{label}
         </span>
     {/if}
     <textarea
@@ -35,10 +35,10 @@
         {rows}
         bind:value
         {oninput}
-        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/40
-			focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
-			disabled:opacity-50 disabled:cursor-not-allowed
-			transition-colors duration-200 resize-y min-h-[100px]"
+        class="w-full px-4 py-3 bg-white/5 font-noto text-white rounded-lg placeholder:text-white/40
+            focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
+            disabled:opacity-50 disabled:cursor-not-allowed
+            transition-colors duration-200 resize-y min-h-[100px]"
         class:border-red-500={error}
     ></textarea>
     {#if error}

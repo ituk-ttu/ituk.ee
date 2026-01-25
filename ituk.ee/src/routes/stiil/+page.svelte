@@ -60,11 +60,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
                 <div class="flex flex-col gap-2">
                     <p class="font-bold">{m.style_logo_long_with_taltech()}</p>
-                    <div class="bg-white p-4 rounded">
+                    <div class="p-4">
                         <img
                             src="/logos/style_examples/ituk_long_ttu_red.svg"
                             alt="ITÜK logo with TalTech"
-                            class="w-full"
+                            class="h-full"
                         />
                     </div>
                 </div>
@@ -72,17 +72,17 @@
                     <p class="font-bold">
                         {m.style_logo_long_without_taltech()}
                     </p>
-                    <div class="bg-white p-4 rounded">
+                    <div class="p-4">
                         <img
                             src="/logos/style_examples/ituk_long_nottu_red.svg"
                             alt="ITÜK logo without TalTech"
-                            class="w-full"
+                            class="h-full"
                         />
                     </div>
                 </div>
                 <div class="flex flex-col gap-2">
                     <p class="font-bold">{m.style_logo_icon()}</p>
-                    <div class="bg-white p-4 rounded flex justify-center">
+                    <div class="p-4">
                         <img
                             src="/logos/style_examples/ituk_symbol_red.svg"
                             alt="ITÜK icon"
@@ -92,11 +92,9 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <p class="font-bold">{m.style_logo_icon_without_box()}</p>
-                    <div
-                        class="bg-background border border-white p-4 rounded flex justify-center"
-                    >
+                    <div class="p-4">
                         <img
-                            src="/logos/ituk_symbol_white.svg"
+                            src="/logos/style_examples/ituk_symbol_negative_red.svg"
                             alt="ITÜK icon negative"
                             class="h-24"
                         />
@@ -126,6 +124,13 @@
             <h3>{m.style_protected_heading()}</h3>
             <p>{m.style_protected_description()}</p>
             <p>{m.style_protected_instructions()}</p>
+            <div class="p-4">
+                <img
+                    src="/logos/style_examples/protected.svg"
+                    alt="ITÜK protected area example"
+                    class="h-48"
+                />
+            </div>
         </section>
 
         <!-- Primary Colors Section -->
@@ -138,13 +143,6 @@
                     <div class="bg-white/10 p-2 rounded-b text-sm">
                         <p>HEX: #870042</p>
                         <p>RGB: 135, 0, 66</p>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <div class="w-full h-24 bg-[#ad0054] rounded-t"></div>
-                    <div class="bg-white/10 p-2 rounded-b text-sm">
-                        <p>HEX: #ad0054</p>
-                        <p>RGB: 173, 0, 84</p>
                     </div>
                 </div>
                 <div class="flex flex-col">
@@ -164,10 +162,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="w-full h-24 bg-[#eeeeee] rounded-t"></div>
+                    <div class="w-full h-24 bg-[#ffffff] rounded-t"></div>
                     <div class="bg-white/10 p-2 rounded-b text-sm">
-                        <p>HEX: #eeeeee</p>
-                        <p>RGB: 238, 238, 238</p>
+                        <p>HEX: #ffffff</p>
+                        <p>RGB: 255, 255, 255</p>
                     </div>
                 </div>
             </div>

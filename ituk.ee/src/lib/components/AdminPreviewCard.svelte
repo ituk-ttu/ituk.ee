@@ -10,7 +10,7 @@
     let {
         title,
         subtitle = "",
-        image = "/images/placeholder.svg",
+        image = "/ituk_placeholder.jpg",
         selected = false,
         onclick,
     }: Props = $props();
@@ -27,7 +27,7 @@
             : 'bg-white/5 hover:bg-white/10'}"
     >
         <img
-            src={image || "/images/placeholder.svg"}
+            src={image || "/ituk_placeholder.jpg"}
             alt={title}
             class="w-12 h-12 rounded object-cover shrink-0"
         />

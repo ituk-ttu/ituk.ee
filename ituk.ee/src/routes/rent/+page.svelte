@@ -4,6 +4,7 @@
     import { getLocale } from "$lib/paraglide/runtime";
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Card from "$lib/components/Card.svelte";
+    import Loading from "$lib/components/Loading.svelte";
     import { getRentItems, type RentItem } from "$lib/firebase";
     import SEO from "$lib/components/SEO.svelte";
 
@@ -25,6 +26,12 @@
     function getLocalizedName(item: RentItem): string {
         return getLocale() === "en" && item.name_en ? item.name_en : item.name;
     }
+
+    function getLocalizedDescription(item: RentItem): string {
+        return getLocale() === "en" && item.description_en
+            ? item.description_en
+            : item.description;
+    }
 </script>
 
 <SEO pageKey="rent" />
@@ -45,7 +52,7 @@
         <p class="text-primary font-bold">{m.rent_NB()}</p>
 
         {#if loading}
-            <p class="text-gray">{m.common_loading()}</p>
+            <Loading />
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else if rentItems.length === 0}
@@ -58,7 +65,7 @@
                     <Card
                         title={getLocalizedName(item)}
                         image={item.imagePath}
-                        listItems={[`${item.price} ${item.unit}`]}
+                        listItems={[getLocalizedDescription(item)]}
                         type="list"
                     />
                 {/each}

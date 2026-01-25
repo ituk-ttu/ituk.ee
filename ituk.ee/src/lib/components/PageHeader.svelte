@@ -1,15 +1,17 @@
 <script lang="ts">
     interface Props {
         title: string;
-        backgroundImage: string;
+        backgroundImage?: string;
     }
 
-    let { title, backgroundImage }: Props = $props();
+    let { title, backgroundImage = "/ituk_placeholder.jpg" }: Props = $props();
+
+    const bgImage = $derived(backgroundImage || "/ituk_placeholder.jpg");
 </script>
 
 <div
     class="items-center justify-center h-full w-full bg-center bg-cover flex-row flex"
-    style="background-image: url({backgroundImage})"
+    style="background-image: url({bgImage})"
 >
     <div
         class="w-full h-full bg-extra justify-center items-center flex-row flex"
@@ -18,7 +20,7 @@
             class="section-padding w-full h-full"
             style="background: linear-gradient(180deg, rgba(135, 0, 66, 0.75) 0%, rgba(135, 0, 66, 0.75) 50%, #131313 100%)"
         >
-            <h1 class="text-big text-center">{title}</h1>
+            <h1 class="text-7xl text-center">{title}</h1>
         </div>
     </div>
 </div>

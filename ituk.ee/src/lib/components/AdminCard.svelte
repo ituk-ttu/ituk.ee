@@ -17,10 +17,20 @@
     import InputField from "./InputField.svelte";
     import TextArea from "./TextArea.svelte";
     import Button from "./Button.svelte";
+    import { validate, schemas } from "$lib/admin/validation";
+    import { toasts } from "$lib/stores/toast";
 
     interface Props {
         id?: string;
-        type: "board" | "event" | "eventYear" | "rent" | "image";
+        type:
+            | "board"
+            | "event"
+            | "eventYear"
+            | "rent"
+            | "image"
+            | "sponsor"
+            | "partner"
+            | "timeline";
         initialData?: Record<string, string>;
         onSave?: (data: Record<string, string>) => void;
         onDelete?: (id: string) => void;
@@ -73,6 +83,24 @@
             imagePath: "",
         },
         image: { name: "", imagePath: "" },
+        sponsor: {
+            name: "",
+            imagePath: "/sponsors/nortal.png",
+            link: "",
+            bgColor: "#FFFFFF",
+        },
+        partner: {
+            name: "",
+            name_en: "",
+            imagePath: "",
+            link: "",
+            projects: "",
+        },
+        timeline: {
+            name: "",
+            date: "",
+            imagePath: "",
+        },
     };
 
     // Form state - initialize with defaults to avoid undefined bindings
@@ -103,17 +131,36 @@
         }
     });
 
+    // Validation errors
+    let validationErrors = $state<Record<string, string>>({});
+
     // Image preview
     let imagePreview = $derived(
         formData.imagePath ||
             formData.image ||
             formData.banner ||
-            "/images/placeholder.svg",
+            "/ituk_placeholder.jpg",
     );
 
     function handleSave() {
+        // Validate if schema exists for this type
+        const schema = schemas[type];
+        if (schema) {
+            const result = validate(formData, schema);
+            validationErrors = result.errors;
+            if (!result.valid) {
+                const errorCount = Object.keys(result.errors).length;
+                toasts.warning(
+                    "Valideerimise viga",
+                    `${errorCount} välja vajab parandamist`,
+                );
+                return;
+            }
+        }
+
         if (onSave) {
             onSave({ id, ...formData });
+            validationErrors = {};
         }
     }
 
@@ -128,7 +175,7 @@
     }
 </script>
 
-<div class="w-full rounded-lg overflow-hidden shadow-filled bg-white/5">
+<div class="w-full rounded-lg overflow-hidden bg-white/5">
     <!-- Image Preview -->
     <div class="w-full aspect-square bg-background overflow-hidden">
         <img
@@ -147,40 +194,52 @@
                 label="Ametinimetus"
                 placeholder="Esimees"
                 bind:value={formData.position}
+                error={validationErrors.position}
+                required
             />
             <InputField
                 label="Ametinimetus (EN)"
                 placeholder="Chairman"
                 bind:value={formData.position_en}
+                error={validationErrors.position_en}
+                required
             />
             <InputField
                 label="Täisnimi"
                 placeholder="Nimi Nimetus"
                 bind:value={formData.name}
+                error={validationErrors.name}
                 required
             />
             <InputField
                 label="Pildi link"
                 placeholder="/board/2025/1_esimees.jpg"
                 bind:value={formData.imagePath}
+                error={validationErrors.imagePath}
+                required
             />
             <InputField
                 label="Meiliaadress"
                 placeholder="esimees@ituk.ee"
                 type="email"
                 bind:value={formData.email}
+                error={validationErrors.email}
+                required
             />
         {:else if type === "event"}
             <InputField
                 label="Ürituse nimi"
                 placeholder="Don't Do IT"
                 bind:value={formData.name}
+                error={validationErrors.name}
                 required
             />
             <InputField
                 label="Ürituse nimi (EN)"
                 placeholder="Don't Do IT"
                 bind:value={formData.name_en}
+                error={validationErrors.name_en}
+                required
             />
             <TextArea
                 label="Kirjeldus"
@@ -201,11 +260,15 @@
                 label="Kategooria"
                 placeholder="meelelahutus / haridus / muu"
                 bind:value={formData.category}
+                error={validationErrors.category}
+                required
             />
             <InputField
                 label="Handle"
                 placeholder="dont-do-it"
                 bind:value={formData.handle}
+                error={validationErrors.handle}
+                required
             />
         {:else if type === "eventYear"}
             <InputField
@@ -290,6 +353,91 @@
             <InputField
                 label="Pildi link"
                 placeholder="/gallery/image.jpg"
+                bind:value={formData.imagePath}
+            />
+        {:else if type === "sponsor"}
+            <InputField
+                label="Sponsori nimi"
+                placeholder="Nortal"
+                bind:value={formData.name}
+                required
+            />
+            <InputField
+                label="Logo link"
+                placeholder="/images/partners/nortal.png"
+                bind:value={formData.imagePath}
+                required
+            />
+            <InputField
+                label="Veebileht"
+                placeholder="https://nortal.com/"
+                bind:value={formData.link}
+                required
+            />
+            <InputField
+                label="Taustavärv (hex)"
+                placeholder="#FFFFFF"
+                bind:value={formData.bgColor}
+            />
+        {:else if type === "partner"}
+            <InputField
+                label="Organisatsiooni nimi"
+                placeholder="Tudengite Teaduselts"
+                bind:value={formData.name}
+                required
+            />
+            <InputField
+                label="Nimi (EN)"
+                placeholder="Student Science Society"
+                bind:value={formData.name_en}
+            />
+            <InputField
+                label="Logo link"
+                placeholder="/partners/logo.jpg"
+                bind:value={formData.imagePath}
+                required
+            />
+            <InputField
+                label="Veebileht"
+                placeholder="https://example.com/"
+                bind:value={formData.link}
+                required
+            />
+            <InputField
+                label="Projektid (komadega eraldatud)"
+                placeholder="Projekt 1, Projekt 2"
+                bind:value={formData.projects}
+            />
+        {:else if type === "timeline"}
+            <InputField
+                label="Nimi"
+                placeholder="ITÜK asutamine"
+                bind:value={formData.name}
+                error={validationErrors.name}
+                required
+            />
+            <div class="flex flex-col gap-2">
+                <span class="text-sm font-medium text-white">
+                    <span class="text-primary">* </span>Kuupäev
+                </span>
+                <input
+                    type="date"
+                    bind:value={formData.date}
+                    required
+                    class="w-full px-4 py-3 bg-white/5 font-noto text-white rounded-lg
+                        focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
+                        disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200
+                        {validationErrors.date ? 'border-red-500' : ''}"
+                />
+                {#if validationErrors.date}
+                    <span class="text-xs text-red-500"
+                        >{validationErrors.date}</span
+                    >
+                {/if}
+            </div>
+            <InputField
+                label="Pildi link"
+                placeholder="/timeline/asutamine.jpg"
                 bind:value={formData.imagePath}
             />
         {/if}

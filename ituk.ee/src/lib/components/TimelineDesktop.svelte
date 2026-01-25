@@ -2,9 +2,9 @@
     import Card from "./Card.svelte";
 
     interface TimelineItem {
-        title: string;
+        name: string;
         imagePath: string;
-        year: Date;
+        date: Date;
     }
 
     interface Props {
@@ -43,7 +43,7 @@
 
     // Get first item's year for Start, current year for End
     const firstYear = $derived(
-        items.length > 0 ? formatYear(items[0].year) : "",
+        items.length > 0 ? formatYear(items[0].date) : "",
     );
     const lastYear = new Date().getFullYear().toString();
 
@@ -173,7 +173,7 @@
                     <!-- Date area: flex-1 pushes content to bottom -->
                     <div class="flex-1 flex items-end justify-center">
                         <p class="text-2xl font-bold">
-                            {formatDate(item.year)}
+                            {formatDate(item.date)}
                         </p>
                     </div>
                     <!-- Line with dot: h-24 -->
@@ -189,7 +189,7 @@
                     </div>
                     <!-- Card -->
                     <Card
-                        title={item.title}
+                        title={item.name}
                         image={item.imagePath}
                         type="timeline"
                     />

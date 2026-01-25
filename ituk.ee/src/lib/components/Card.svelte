@@ -24,7 +24,7 @@
 	);
 
 	// Use placeholder if image is empty or missing
-	const imageSrc = $derived(image || "/images/placeholder.svg");
+	const imageSrc = $derived(image || "/ituk_placeholder.jpg");
 </script>
 
 {#if link}

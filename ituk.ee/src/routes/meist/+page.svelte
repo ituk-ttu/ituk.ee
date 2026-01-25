@@ -12,10 +12,16 @@
     import PageHeader from "$lib/components/PageHeader.svelte";
     import Card from "$lib/components/Card.svelte";
     import Statistics from "$lib/components/Statistics.svelte";
+    import Loading from "$lib/components/Loading.svelte";
     import TimelineDesktop from "$lib/components/TimelineDesktop.svelte";
     import SEO from "$lib/components/SEO.svelte";
-    import { getYearsInAction, ABOUT_STATS } from "$lib/config/stats";
+    import { getYearsInAction } from "$lib/config/stats";
     import TuxGame from "$lib/components/TuxGame.svelte";
+
+    // Statistics with defaults
+    let statMembersAllTime = $state("1200+");
+    let statActiveMembers = $state("45");
+    let statGoals = $state("1");
 
     let showTuxGame = $state(false);
     let tuxHoverTimer: ReturnType<typeof setTimeout> | null = null;
@@ -49,14 +55,30 @@
 
     onMount(async () => {
         try {
-            const [members, events, year] = await Promise.all([
+            const [
+                members,
+                events,
+                year,
+                savedMembersAllTime,
+                savedActiveMembers,
+                savedGoals,
+            ] = await Promise.all([
                 getBoardMembers(),
                 getTimelineEvents(),
                 getSetting("boardYear"),
+                getSetting("statMembersAllTime"),
+                getSetting("statActiveMembers"),
+                getSetting("statGoals"),
             ]);
-            boardMembers = members.filter((m) => m.year === year || !m.year);
+            const activeYear = year || "2025/2026";
+            boardMembers = members.filter(
+                (m) => m.year === activeYear || !m.year,
+            );
             timelineEvents = events;
-            if (year) boardYear = year;
+            boardYear = activeYear;
+            if (savedMembersAllTime) statMembersAllTime = savedMembersAllTime;
+            if (savedActiveMembers) statActiveMembers = savedActiveMembers;
+            if (savedGoals) statGoals = savedGoals;
         } catch (e) {
             console.error("Error loading data:", e);
             error = "Failed to load data";
@@ -112,15 +134,15 @@
                 label: m.aboutus_stat1_description(),
             },
             {
-                value: ABOUT_STATS.membersAllTime,
+                value: statMembersAllTime,
                 label: m.aboutus_stat2_description(),
             },
             {
-                value: ABOUT_STATS.activeMembers,
+                value: statActiveMembers,
                 label: m.aboutus_stat3_description(),
             },
             {
-                value: ABOUT_STATS.goals,
+                value: statGoals,
                 label: m.aboutus_stat4_description(),
             },
         ]}
@@ -176,7 +198,7 @@
     >
         <h2 class="text-center">{m.aboutus_boardtitle({ year: boardYear })}</h2>
         {#if loading}
-            <p class="text-gray">{m.common_loading()}</p>
+            <Loading />
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else}
@@ -204,7 +226,7 @@
     >
         <h2 class="text-center">{m.aboutus_historytitle()}</h2>
         {#if loading}
-            <p class="text-gray">{m.common_loading()}</p>
+            <Loading />
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else}
