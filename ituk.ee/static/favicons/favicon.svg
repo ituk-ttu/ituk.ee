@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100" height="100"><svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V100H100V0H0ZM13 21.9999L52.0293 44.5332V51.4668L13 73.9999V58.3984L31.0137 48L13 37.5996V21.9999ZM52.0293 73.9999H87V87H52.0293V73.9999Z" fill="#870042" style="--darkreader-inline-fill: #6c0035;" data-darkreader-inline-fill=""></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M52.0293 74V87H87V74H52.0293Z" fill="#EEEEEE" style="--darkreader-inline-fill: #222426;" data-darkreader-inline-fill=""></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M13 22V37.5996L31.0137 48L13 58.3984V74L52.0293 51.4668V44.5332L13 22Z" fill="#EEEEEE" style="--darkreader-inline-fill: var(--darkreader-background-eeeeee, #222426);" data-darkreader-inline-fill=""></path>
-</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
-@media (prefers-color-scheme: dark) { :root { filter: none; } }
-</style></svg>
