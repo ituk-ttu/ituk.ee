@@ -11,6 +11,13 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci
 
+# Install production dependencies (for runtime image)
+FROM base AS prod-deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm ci --omit=dev
+
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -32,6 +39,7 @@ RUN adduser --system --uid 1001 sveltekit
 # Copy built application
 COPY --from=builder --chown=sveltekit:nodejs /app/build ./build
 COPY --from=builder --chown=sveltekit:nodejs /app/package.json ./
+COPY --from=prod-deps --chown=sveltekit:nodejs /app/node_modules ./node_modules
 
 USER sveltekit
 
