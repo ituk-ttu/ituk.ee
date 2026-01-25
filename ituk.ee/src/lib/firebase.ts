@@ -223,3 +223,34 @@ export async function setSetting(key: string, value: string): Promise<void> {
     const docRef = doc(db, 'settings', key);
     await setDoc(docRef, { value });
 }
+
+// Leaderboard types and functions for Tux game
+export interface LeaderboardEntry {
+    id?: string;
+    name: string;
+    score: number;
+    timestamp: Date;
+}
+
+export async function getLeaderboard(limit: number = 10): Promise<LeaderboardEntry[]> {
+    const q = query(
+        collection(db, 'leaderboard'),
+        orderBy('score', 'desc')
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.slice(0, limit).map(doc => ({
+        id: doc.id,
+        name: doc.data().name as string,
+        score: doc.data().score as number,
+        timestamp: doc.data().timestamp?.toDate() || new Date()
+    }));
+}
+
+export async function addLeaderboardEntry(name: string, score: number): Promise<string> {
+    const docRef = await addDoc(collection(db, 'leaderboard'), {
+        name: name.toUpperCase(),
+        score,
+        timestamp: new Date()
+    });
+    return docRef.id;
+}

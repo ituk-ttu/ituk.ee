@@ -26,3 +26,12 @@
     font-display: swap;
     src: url('/fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf') format('truetype');
 }
+
+/* Arcade Classic - Retro pixel font for Tux game */
+@font-face {
+    font-family: 'ArcadeClassic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/ARCADECLASSIC.TTF') format('truetype');
+}

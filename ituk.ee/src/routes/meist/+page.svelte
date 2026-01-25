@@ -26,11 +26,16 @@
     let showTuxGame = $state(false);
     let tuxHoverTimer: ReturnType<typeof setTimeout> | null = null;
     let tuxActivated = $state(false);
+    let glassesLanded = $state(false);
 
     function startTuxHover() {
         if (tuxActivated) return;
         tuxHoverTimer = setTimeout(() => {
             tuxActivated = true;
+            // Trigger glasses landing animation after a brief delay
+            setTimeout(() => {
+                glassesLanded = true;
+            }, 50);
         }, 1500);
     }
 
@@ -182,11 +187,24 @@
                     onmouseenter={startTuxHover}
                     onmouseleave={endTuxHover}
                     onclick={handleTuxClick}
-                    class="absolute left-1/2 -translate-x-1/2 transition-all duration-300 rounded {tuxActivated
-                        ? 'cursor-pointer bg-white/5 hover:bg-white/10'
+                    class="absolute left-1/2 -translate-x-1/2 transition-all duration-300 {tuxActivated
+                        ? 'cursor-pointer'
                         : 'cursor-default'}"
                     style="top: 0; width: 17%; height: 18%;"
-                ></div>
+                >
+                    <!-- Glasses that fly in from the top when activated -->
+                    {#if tuxActivated}
+                        <img
+                            src="/tux/glasses.svg"
+                            alt=""
+                            class="absolute z-30 pointer-events-none transition-all duration-700 ease-out
+                                {glassesLanded
+                                ? 'opacity-100'
+                                : 'opacity-0 -translate-y-20'}"
+                            style="left: 3%; bottom: 3%; width: 90%; max-width: 64px; height: auto; max-height: 10px;"
+                        />
+                    {/if}
+                </div>
             </div>
             <p class="text-gray">{m.aboutus_structure4()}</p>
         </div>

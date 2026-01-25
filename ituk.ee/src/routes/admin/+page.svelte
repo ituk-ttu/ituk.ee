@@ -71,8 +71,25 @@
         | "sponsorid"
         | "partnerid"
         | "logiraamat"
+        | "leaderboard"
         | ""
     >("");
+
+    // Leaderboard state
+    import { getLeaderboard, type LeaderboardEntry } from "$lib/firebase";
+    let leaderboardEntries = $state<LeaderboardEntry[]>([]);
+    let leaderboardLoading = $state(false);
+
+    async function loadLeaderboard() {
+        leaderboardLoading = true;
+        try {
+            leaderboardEntries = await getLeaderboard(50);
+        } catch (e) {
+            console.error("Error loading leaderboard:", e);
+            toasts.error("Viga", "Edetabeli laadimisel tekkis viga");
+        }
+        leaderboardLoading = false;
+    }
 
     // Data
     let boardMembers = $state<BoardMember[]>([]);
@@ -804,6 +821,14 @@
                     variant="secondary"
                     text="Logiraamat"
                     onclick={() => (currentPage = "logiraamat")}
+                />
+                <Button
+                    variant="secondary"
+                    text="Edetabel"
+                    onclick={() => {
+                        currentPage = "leaderboard";
+                        loadLeaderboard();
+                    }}
                 />
                 <Button
                     variant="primary"
@@ -1967,6 +1992,62 @@
                             </div>
                         {/each}
                     </div>
+                </div>
+            {:else if currentPage === "leaderboard"}
+                <!-- Leaderboard Management -->
+                <div class="flex flex-col gap-8 w-full">
+                    <h2>Tux Game Edetabel</h2>
+
+                    <div class="flex gap-4 flex-wrap">
+                        <Button
+                            variant="secondary"
+                            text="Värskenda"
+                            onclick={loadLeaderboard}
+                        />
+                    </div>
+
+                    {#if leaderboardLoading}
+                        <Loading />
+                    {:else if leaderboardEntries.length === 0}
+                        <p class="text-gray">
+                            Edetabelis pole veel kirjeid. Kliki "Lisa TUX kirje"
+                            et luua esimene kirje.
+                        </p>
+                    {:else}
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="border-b border-gray">
+                                    <tr>
+                                        <th class="p-2">#</th>
+                                        <th class="p-2">Nimi</th>
+                                        <th class="p-2">Skoor</th>
+                                        <th class="p-2">Kuupäev</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {#each leaderboardEntries as entry, i (entry.id)}
+                                        <tr
+                                            class="border-b border-gray/20 {i ===
+                                            0
+                                                ? 'text-yellow-400'
+                                                : ''}"
+                                        >
+                                            <td class="p-2">{i + 1}</td>
+                                            <td class="p-2 font-bold"
+                                                >{entry.name}</td
+                                            >
+                                            <td class="p-2">{entry.score}</td>
+                                            <td class="p-2 text-sm text-gray"
+                                                >{entry.timestamp?.toLocaleString?.(
+                                                    "et-EE",
+                                                ) || ""}</td
+                                            >
+                                        </tr>
+                                    {/each}
+                                </tbody>
+                            </table>
+                        </div>
+                    {/if}
                 </div>
             {:else}
                 <!-- Default welcome -->

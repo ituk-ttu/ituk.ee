@@ -1,9 +1,17 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import * as m from "$lib/paraglide/messages";
-    import Button from "$lib/components/Button.svelte";
-    import Toggle from "$lib/components/Toggle.svelte";
-    import Slider from "$lib/components/Slider.svelte";
+    import {
+        getLeaderboard,
+        addLeaderboardEntry,
+        type LeaderboardEntry,
+    } from "$lib/firebase";
+    import {
+        ArcadeButton,
+        ArcadeButtonSmall,
+        ArcadeText,
+        ArcadeDpad,
+    } from "$lib/components/arcade";
 
     interface Props {
         onClose: () => void;
@@ -16,21 +24,34 @@
     let isClosing = $state(false);
     let showExplosion = $state(false);
     let explosionFrame = $state(0);
-    const EXPLOSION_FRAMES = 18; // Number of frames in sprite sheet (horizontal)
-    const EXPLOSION_FRAME_MS = 80; // Duration per frame
+    const EXPLOSION_FRAMES = 18;
+    const EXPLOSION_FRAME_MS = 80;
 
     // Game states
-    type GameScreen = "menu" | "settings" | "playing" | "gameover";
+    type GameScreen =
+        | "menu"
+        | "settings"
+        | "playing"
+        | "gameover"
+        | "leaderboard"
+        | "enterinit"
+        | "credits";
     let screen = $state<GameScreen>("menu");
+
+    // Leaderboard
+    let leaderboard = $state<LeaderboardEntry[]>([]);
+    let loadingLeaderboard = $state(false);
+    let playerInitials = $state(["A", "A", "A"]);
+    let currentInitialIndex = $state(0);
+    let isNewHighScore = $state(false);
+    let playerRank = $state(0);
 
     // Settings
     type Difficulty = "easy" | "medium" | "hard";
-
-    // Difficulty labels for translations
-    const DIFFICULTY_LABELS: Record<Difficulty, () => string> = {
-        easy: () => m.tux_easy(),
-        medium: () => m.tux_medium(),
-        hard: () => m.tux_hard(),
+    const DIFFICULTY_LABELS: Record<Difficulty, string> = {
+        easy: "EASY",
+        medium: "MEDIUM",
+        hard: "HARD",
     };
     let difficulty = $state<Difficulty>("medium");
     let hasWalls = $state(false);
@@ -132,8 +153,9 @@
             sounds[name] = audio;
         });
 
-        // Load music and start playing on menu
-        musicAudio = new Audio("/tux/sounds/music.mp3");
+        // Load music and start playing on menu (1/1000 chance for music2)
+        const musicFile = Math.random() < 0.001 ? "music2.mp3" : "music.mp3";
+        musicAudio = new Audio(`/tux/sounds/${musicFile}`);
         musicAudio.preload = "auto";
         musicAudio.loop = true;
         musicAudio.volume = (masterVolume / 100) * (musicVolume / 100);
@@ -341,8 +363,7 @@
         draw();
     }
 
-    function endGame() {
-        screen = "gameover";
+    async function endGame() {
         showExplosion = true;
         explosionFrame = 0;
         playSfx("gameover");
@@ -364,9 +385,86 @@
                 explosionFrame = 0;
             }
         }, EXPLOSION_FRAME_MS);
+
+        // Check if score qualifies for leaderboard
+        try {
+            const entries = await getLeaderboard(10);
+            leaderboard = entries;
+            const lowestScore =
+                entries.length < 10
+                    ? 0
+                    : entries[entries.length - 1]?.score || 0;
+            if (score > lowestScore || entries.length < 10) {
+                isNewHighScore = true;
+                playerRank = entries.filter((e) => e.score > score).length + 1;
+                playerInitials = ["A", "A", "A"];
+                currentInitialIndex = 0;
+                screen = "enterinit";
+            } else {
+                isNewHighScore = false;
+                screen = "gameover";
+            }
+        } catch {
+            isNewHighScore = false;
+            screen = "gameover";
+        }
+    }
+
+    async function submitHighScore() {
+        const name = playerInitials.join("");
+        try {
+            await addLeaderboardEntry(name, score);
+            leaderboard = await getLeaderboard(10);
+        } catch (e) {
+            console.error("Error submitting score:", e);
+        }
+        screen = "gameover";
+    }
+
+    function cycleInitial(direction: 1 | -1) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const currentChar = playerInitials[currentInitialIndex];
+        const currentIndex = chars.indexOf(currentChar);
+        const newIndex =
+            (currentIndex + direction + chars.length) % chars.length;
+        playerInitials[currentInitialIndex] = chars[newIndex];
+    }
+
+    async function loadLeaderboardData() {
+        loadingLeaderboard = true;
+        try {
+            leaderboard = await getLeaderboard(14);
+        } catch (e) {
+            console.error("Error loading leaderboard:", e);
+        }
+        loadingLeaderboard = false;
     }
 
     function handleKeydown(e: KeyboardEvent) {
+        // Handle initials entry screen
+        if (screen === "enterinit") {
+            e.preventDefault();
+            switch (e.key) {
+                case "ArrowUp":
+                    cycleInitial(1);
+                    break;
+                case "ArrowDown":
+                    cycleInitial(-1);
+                    break;
+                case "ArrowLeft":
+                    currentInitialIndex = Math.max(0, currentInitialIndex - 1);
+                    break;
+                case "ArrowRight":
+                    currentInitialIndex = Math.min(2, currentInitialIndex + 1);
+                    break;
+                case "Enter":
+                case " ":
+                    submitHighScore();
+                    break;
+            }
+            return;
+        }
+
         if (screen === "gameover") {
             if (e.key === " " || e.key === "Enter") {
                 startGame();
@@ -469,220 +567,420 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-    class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 touch-manipulation
+    class="fixed inset-0 bg-black flex items-center justify-center z-40 p-4 touch-manipulation
         transition-opacity duration-500 {isVisible && !isClosing
         ? 'opacity-100'
         : 'opacity-0'}"
     role="dialog"
     aria-modal="true"
-    aria-label={m.tux_title()}
+    aria-label="TUX GAME"
     tabindex="-1"
     onclick={handleBackdropClick}
     onkeydown={(e) => e.key === "Escape" && closeGame()}
 >
     <div
-        class="bg-background rounded-xl p-4 flex flex-col gap-3 max-h-[90vh] overflow-y-auto
-            transition-transform duration-500 origin-center
-            {isVisible && !isClosing ? 'tux-spin-in' : 'tux-spin-out'}"
-        style="width: {canvasSize + 32}px;"
+        class="bg-black border-4 border-white p-4 flex flex-col gap-3 max-h-[90vh] overflow-y-auto
+            {isVisible && !isClosing ? 'opacity-100' : 'opacity-0'}"
+        style="width: {canvasSize + 48}px; min-width: 320px;"
     >
         <!-- Header -->
-        <div class="flex justify-between items-center">
-            <h3 class="text-lg font-bold">{m.tux_title()}</h3>
-            <button
-                onclick={closeGame}
-                class="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors rounded-full hover:bg-white/10"
-                aria-label="Close"
-            >
-                <span class="material-symbols-outlined">close</span>
-            </button>
+        <div
+            class="flex justify-between items-center border-b-2 border-white pb-2"
+        >
+            <ArcadeText tag="h3" class="text-white">TUX GAME</ArcadeText>
+            <ArcadeButtonSmall onclick={closeGame}>X</ArcadeButtonSmall>
         </div>
 
         <!-- Menu Screen -->
         {#if screen === "menu"}
             <div class="flex flex-col items-center gap-4 py-4">
-                <p class="text-6xl">🐧</p>
-                <p class="text-center text-sm">
-                    {m.tux_description()}
-                </p>
-                <div class="flex flex-col gap-2">
-                    <Button text={m.tux_play()} onclick={startGame} size="lg" />
-                    <Button
-                        text={m.tux_settings()}
+                <img src="/tux/images/tux.png" alt="Tux" class="w-16 h-16" />
+                <ArcadeText tag="h3" class="text-center text-white"
+                    >CATCH LINUX DISTROS AND GROW YOUR ARMY</ArcadeText
+                >
+                <div class="flex flex-col gap-3 w-full">
+                    <ArcadeButton onclick={startGame}>PLAY</ArcadeButton>
+                    <ArcadeButton
                         onclick={() => {
                             playSfx("click");
                             screen = "settings";
-                        }}
-                        variant="tertiary"
-                        size="md"
-                    />
+                        }}>SETTINGS</ArcadeButton
+                    >
+                    <ArcadeButton
+                        onclick={() => {
+                            playSfx("click");
+                            loadLeaderboardData();
+                            screen = "leaderboard";
+                        }}>HIGH SCORES</ArcadeButton
+                    >
+                    <ArcadeButton
+                        onclick={() => {
+                            playSfx("click");
+                            screen = "credits";
+                        }}>CREDITS</ArcadeButton
+                    >
                 </div>
-                <p class="text-xs text-gray">
-                    {m.tux_highscore({ score: highScore })}
-                </p>
+                <ArcadeText tag="p" class="text-white"
+                    >BEST {highScore}</ArcadeText
+                >
             </div>
 
             <!-- Settings Screen -->
         {:else if screen === "settings"}
             <div class="flex flex-col gap-3">
+                <ArcadeText tag="h1" class="text-white text-center"
+                    >SETTINGS</ArcadeText
+                >
+
                 <!-- Audio Settings -->
-                <div class="flex flex-col gap-1 pt-2 border-t border-gray/20">
-                    <span class="text-xs text-gray font-bold"
-                        >{m.tux_audio()}</span
-                    >
-                    <div class="flex flex-col gap-1">
-                        <span class="text-xs text-gray"
-                            >{m.tux_master_volume({
-                                level: masterVolume,
-                            })}</span
+                <div class="flex flex-col gap-2 border-t-2 border-white pt-2">
+                    <ArcadeText tag="h3" class="text-white">AUDIO</ArcadeText>
+                    <div class="flex justify-between items-center">
+                        <ArcadeText tag="h3" class="text-white"
+                            >MASTER {masterVolume}</ArcadeText
                         >
-                        <Slider
-                            bind:value={masterVolume}
-                            step={10}
-                            onchange={saveAudioSettings}
-                            ariaLabel="Master volume"
-                        />
+                        <div class="flex gap-1">
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    masterVolume = Math.max(
+                                        0,
+                                        masterVolume - 10,
+                                    );
+                                    saveAudioSettings();
+                                }}>-</ArcadeButtonSmall
+                            >
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    masterVolume = Math.min(
+                                        100,
+                                        masterVolume + 10,
+                                    );
+                                    saveAudioSettings();
+                                }}>+</ArcadeButtonSmall
+                            >
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <span class="text-xs text-gray"
-                            >{m.tux_music_volume({ level: musicVolume })}</span
+                    <div class="flex justify-between items-center">
+                        <ArcadeText tag="h3" class="text-white"
+                            >MUSIC {musicVolume}</ArcadeText
                         >
-                        <Slider
-                            bind:value={musicVolume}
-                            step={10}
-                            onchange={saveAudioSettings}
-                            ariaLabel="Music volume"
-                        />
+                        <div class="flex gap-1">
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    musicVolume = Math.max(0, musicVolume - 10);
+                                    saveAudioSettings();
+                                }}>-</ArcadeButtonSmall
+                            >
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    musicVolume = Math.min(
+                                        100,
+                                        musicVolume + 10,
+                                    );
+                                    saveAudioSettings();
+                                }}>+</ArcadeButtonSmall
+                            >
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <span class="text-xs text-gray"
-                            >{m.tux_sfx_volume({ level: sfxVolume })}</span
+                    <div class="flex justify-between items-center">
+                        <ArcadeText tag="h3" class="text-white"
+                            >SFX {sfxVolume}</ArcadeText
                         >
-                        <Slider
-                            bind:value={sfxVolume}
-                            step={10}
-                            onchange={saveAudioSettings}
-                            ariaLabel="Effects volume"
-                        />
+                        <div class="flex gap-1">
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    sfxVolume = Math.max(0, sfxVolume - 10);
+                                    saveAudioSettings();
+                                }}>-</ArcadeButtonSmall
+                            >
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    sfxVolume = Math.min(100, sfxVolume + 10);
+                                    saveAudioSettings();
+                                }}>+</ArcadeButtonSmall
+                            >
+                        </div>
                     </div>
                 </div>
 
                 <!-- Difficulty -->
-                <div class="flex flex-col gap-1">
-                    <span class="text-xs text-gray">{m.tux_speed()}</span>
+                <div class="flex flex-col gap-2 border-t-2 border-white pt-2">
+                    <ArcadeText tag="h3" class="text-white">SPEED</ArcadeText>
                     <div class="flex gap-1">
                         {#each ["easy", "medium", "hard"] as diff (diff)}
-                            <Button
+                            <ArcadeButton
                                 onclick={() => {
                                     playSfx("click");
                                     difficulty = diff as Difficulty;
                                 }}
-                                variant={difficulty === diff
-                                    ? "primary"
-                                    : "secondary"}
-                                size="md"
-                                text={DIFFICULTY_LABELS[diff as Difficulty]()}
-                            />
+                                active={difficulty === diff}
+                                class="flex-1"
+                                >{DIFFICULTY_LABELS[
+                                    diff as Difficulty
+                                ]}</ArcadeButton
+                            >
                         {/each}
                     </div>
                 </div>
 
                 <!-- Walls -->
-                <div class="flex items-center justify-between">
-                    <span class="text-xs">{m.tux_walls()}</span>
-                    <Toggle
-                        checked={hasWalls}
-                        onchange={(v) => {
+                <div
+                    class="flex items-center justify-between border-t-2 border-white pt-2"
+                >
+                    <ArcadeText tag="h3" class="text-white">WALLS</ArcadeText>
+                    <ArcadeButtonSmall
+                        onclick={() => {
                             playSfx("click");
-                            hasWalls = v;
+                            hasWalls = !hasWalls;
                         }}
-                        ariaLabel="Toggle walls"
-                    />
+                        active={hasWalls}
+                        >{hasWalls ? "ON" : "OFF"}</ArcadeButtonSmall
+                    >
                 </div>
 
                 <!-- Fish Count -->
-                <div class="flex flex-col gap-1">
-                    <span class="text-xs text-gray"
-                        >{m.tux_fishcount({ count: fishCount })}</span
+                <div class="flex items-center justify-between">
+                    <ArcadeText tag="h3" class="text-white"
+                        >FISH {fishCount}</ArcadeText
                     >
-                    <Slider
-                        bind:value={fishCount}
-                        min={1}
-                        max={69}
-                        ariaLabel="Fish count"
-                    />
+                    <div class="flex gap-1">
+                        <ArcadeButtonSmall
+                            onclick={() => {
+                                fishCount = Math.max(1, fishCount - 1);
+                            }}>-</ArcadeButtonSmall
+                        >
+                        <ArcadeButtonSmall
+                            onclick={() => {
+                                fishCount = Math.min(69, fishCount + 1);
+                            }}>+</ArcadeButtonSmall
+                        >
+                    </div>
                 </div>
 
                 <!-- Golden Fish -->
                 <div class="flex items-center justify-between">
-                    <span class="text-xs">{m.tux_goldenfish()}</span>
-                    <Toggle
-                        checked={goldenFishEnabled}
-                        onchange={(v) => {
+                    <ArcadeText tag="h3" class="text-white"
+                        >GOLDEN FISH</ArcadeText
+                    >
+                    <ArcadeButtonSmall
+                        onclick={() => {
                             playSfx("click");
-                            goldenFishEnabled = v;
+                            goldenFishEnabled = !goldenFishEnabled;
                         }}
-                        ariaLabel="Toggle golden fish"
-                    />
+                        active={goldenFishEnabled}
+                        >{goldenFishEnabled ? "ON" : "OFF"}</ArcadeButtonSmall
+                    >
                 </div>
 
-                <Button
-                    text={m.tux_back()}
+                <ArcadeButton
+                    class="mt-2"
                     onclick={() => {
                         playSfx("click");
                         screen = "menu";
-                    }}
-                    variant="secondary"
-                    size="sm"
-                />
+                    }}>BACK</ArcadeButton
+                >
+            </div>
+
+            <!-- Leaderboard Screen -->
+        {:else if screen === "leaderboard"}
+            <div class="flex flex-col gap-2">
+                <ArcadeText tag="h3" class="text-white text-center"
+                    >HIGH SCORES</ArcadeText
+                >
+
+                {#if loadingLeaderboard}
+                    <ArcadeText tag="p" class="text-white text-center"
+                        >LOADING...</ArcadeText
+                    >
+                {:else if leaderboard.length === 0}
+                    <ArcadeText tag="p" class="text-white text-center"
+                        >NO SCORES YET</ArcadeText
+                    >
+                {:else}
+                    <div class="border-2 border-white p-2">
+                        <ArcadeText
+                            tag="div"
+                            class="flex justify-between text-white border-b border-white pb-1 mb-1"
+                        >
+                            <span class="w-12">RANK</span>
+                            <span class="w-16">NAME</span>
+                            <span class="flex-1 text-right">SCORE</span>
+                        </ArcadeText>
+                        {#each leaderboard as entry, i (entry.id)}
+                            <ArcadeText
+                                tag="div"
+                                class="flex justify-between {i === 0
+                                    ? 'text-yellow-400'
+                                    : 'text-white'}"
+                            >
+                                <span class="w-12"
+                                    >{i === 0
+                                        ? "1ST"
+                                        : i === 1
+                                          ? "2ND"
+                                          : i === 2
+                                            ? "3RD"
+                                            : `${i + 1}TH`}</span
+                                >
+                                <span class="w-16">{entry.name}</span>
+                                <span class="flex-1 text-right"
+                                    >{entry.score}</span
+                                >
+                            </ArcadeText>
+                        {/each}
+                    </div>
+                {/if}
+
+                <ArcadeButton
+                    class="mt-2"
+                    onclick={() => {
+                        playSfx("click");
+                        screen = "menu";
+                    }}>BACK</ArcadeButton
+                >
             </div>
 
             <!-- Playing Screen -->
         {:else if screen === "playing"}
-            <div class="flex justify-between text-xs">
-                <span>{m.tux_score({ score })}</span>
-                <span>{m.tux_highscore({ score: highScore })}</span>
-            </div>
+            <ArcadeText tag="div" class="flex justify-between text-white">
+                <span>SCORE {score}</span>
+                <span>BEST {highScore}</span>
+            </ArcadeText>
 
             <div class="flex justify-center">
                 <canvas
                     bind:this={canvas}
                     width={canvasSize}
                     height={canvasSize}
-                    class="rounded border border-gray"
+                    class="border-2 border-white"
                 ></canvas>
             </div>
 
-            <p class="text-center text-xs text-gray hidden sm:block">
-                {m.tux_controls()}
-            </p>
+            <ArcadeText tag="p" class="text-center text-white hidden sm:block"
+                >WASD OR ARROWS TO MOVE</ArcadeText
+            >
 
             <!-- Mobile D-Pad Controls -->
-            <div
-                class="flex flex-col items-center gap-1 sm:hidden touch-manipulation select-none"
-            >
-                <button
-                    onclick={() => changeDirection("up")}
-                    class="w-12 h-12 bg-gray/30 rounded active:bg-primary flex items-center justify-center text-xl touch-manipulation"
-                    aria-label="Up">▲</button
+            <ArcadeDpad
+                onUp={() => changeDirection("up")}
+                onDown={() => changeDirection("down")}
+                onLeft={() => changeDirection("left")}
+                onRight={() => changeDirection("right")}
+            />
+
+            <!-- Enter Initials Screen -->
+        {:else if screen === "enterinit"}
+            <div class="flex flex-col items-center gap-4 py-4">
+                <ArcadeText tag="p" class="text-yellow-400 text-lg text-center"
+                    >NEW HIGH SCORE!</ArcadeText
                 >
-                <div class="flex gap-1">
-                    <button
-                        onclick={() => changeDirection("left")}
-                        class="w-12 h-12 bg-gray/30 rounded active:bg-primary flex items-center justify-center text-xl touch-manipulation"
-                        aria-label="Left">◀</button
-                    >
-                    <div class="w-12 h-12"></div>
-                    <button
-                        onclick={() => changeDirection("right")}
-                        class="w-12 h-12 bg-gray/30 rounded active:bg-primary flex items-center justify-center text-xl touch-manipulation"
-                        aria-label="Right">▶</button
-                    >
+                <ArcadeText tag="p" class="text-white text-3xl"
+                    >{score}</ArcadeText
+                >
+                <ArcadeText tag="p" class="text-white"
+                    >({playerRank}{playerRank === 1
+                        ? "ST"
+                        : playerRank === 2
+                          ? "ND"
+                          : playerRank === 3
+                            ? "RD"
+                            : "TH"})</ArcadeText
+                >
+
+                <!-- Initials Entry -->
+                <div class="flex gap-4 my-4">
+                    {#each playerInitials as initial, i (i)}
+                        <div class="flex flex-col items-center gap-1">
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    currentInitialIndex = i;
+                                    cycleInitial(1);
+                                }}>▲</ArcadeButtonSmall
+                            >
+                            <ArcadeText
+                                class="text-3xl bg-transparent border-0 border-b-4 px-2 cursor-pointer {currentInitialIndex ===
+                                i
+                                    ? 'text-yellow-400 border-yellow-400'
+                                    : 'text-white border-white'}"
+                                onclick={() => (currentInitialIndex = i)}
+                                >{initial}</ArcadeText
+                            >
+                            <ArcadeButtonSmall
+                                onclick={() => {
+                                    currentInitialIndex = i;
+                                    cycleInitial(-1);
+                                }}>▼</ArcadeButtonSmall
+                            >
+                        </div>
+                    {/each}
                 </div>
-                <button
-                    onclick={() => changeDirection("down")}
-                    class="w-12 h-12 bg-gray/30 rounded active:bg-primary flex items-center justify-center text-xl touch-manipulation"
-                    aria-label="Down">▼</button
+
+                <ArcadeText tag="p" class="text-white"
+                    >ENTER YOUR INITIALS</ArcadeText
+                >
+
+                <ArcadeButton onclick={submitHighScore}>SUBMIT</ArcadeButton>
+            </div>
+
+            <!-- Credits Screen -->
+        {:else if screen === "credits"}
+            <div class="flex flex-col gap-4 py-4">
+                <ArcadeText tag="p" class="text-white text-center text-lg"
+                    >CREDITS</ArcadeText
+                >
+
+                <div class="border-t-2 border-white pt-3">
+                    <ArcadeText tag="p" class="text-yellow-400"
+                        >MUSIC</ArcadeText
+                    >
+                    <div class="mt-2 flex flex-col gap-1">
+                        <ArcadeText tag="p" class="text-white"
+                            >THEFATRAT UNITY</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white"
+                            >THEFATRAT UNITY X MEGALOVANIA</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-gray"
+                            >REMIX BY LITERALLYNOONE</ArcadeText
+                        >
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-white pt-3">
+                    <ArcadeText tag="p" class="text-yellow-400"
+                        >FISH LINUX DISTROS</ArcadeText
+                    >
+                    <div class="mt-2 grid grid-cols-2 gap-1">
+                        <ArcadeText tag="p" class="text-white"
+                            >FEDORA</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white"
+                            >DEBIAN</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white"
+                            >UBUNTU</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white">MINT</ArcadeText>
+                        <ArcadeText tag="p" class="text-white">ARCH</ArcadeText>
+                        <ArcadeText tag="p" class="text-white"
+                            >TEMPLEOS</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white">POP</ArcadeText>
+                        <ArcadeText tag="p" class="text-white">NIXOS</ArcadeText
+                        >
+                        <ArcadeText tag="p" class="text-white">SUSE</ArcadeText>
+                        <ArcadeText tag="p" class="text-white"
+                            >STEAMOS</ArcadeText
+                        >
+                    </div>
+                </div>
+
+                <ArcadeButton
+                    class="mt-2"
+                    onclick={() => {
+                        playSfx("click");
+                        screen = "menu";
+                    }}>BACK</ArcadeButton
                 >
             </div>
 
@@ -704,65 +1002,32 @@
                         ></div>
                     </div>
                 {/if}
-                <p class="text-5xl">💀</p>
-                <p class="text-lg font-bold">{m.tux_gameover()}</p>
-                <p class="text-2xl font-bold text-primary">{score}</p>
-                <p class="text-xs text-gray">
-                    {score > highScore
-                        ? m.tux_newhighscore()
-                        : m.tux_highscore({ score: highScore })}
-                </p>
-                <div class="flex gap-2">
-                    <Button
-                        text={m.tux_playagain()}
-                        onclick={startGame}
-                        size="md"
-                        class="flex-1"
-                    />
-                    <Button
-                        text={m.tux_menu()}
+                <ArcadeText tag="p" class="text-white text-2xl"
+                    >GAME OVER</ArcadeText
+                >
+                <ArcadeText tag="p" class="text-yellow-400 text-3xl"
+                    >{score}</ArcadeText
+                >
+                <ArcadeText tag="p" class="text-white"
+                    >BEST {highScore}</ArcadeText
+                >
+                <div class="flex flex-col gap-2 w-full mt-2">
+                    <ArcadeButton onclick={startGame}>PLAY AGAIN</ArcadeButton>
+                    <ArcadeButton
+                        onclick={() => {
+                            playSfx("click");
+                            loadLeaderboardData();
+                            screen = "leaderboard";
+                        }}>HIGH SCORES</ArcadeButton
+                    >
+                    <ArcadeButton
                         onclick={() => {
                             playSfx("click");
                             screen = "menu";
-                        }}
-                        variant="tertiary"
-                        size="md"
-                        class="flex-1"
-                    />
+                        }}>MENU</ArcadeButton
+                    >
                 </div>
             </div>
         {/if}
     </div>
 </div>
-
-<style>
-    @keyframes spinIn {
-        from {
-            transform: scale(0) rotate(-360deg);
-            opacity: 0;
-        }
-        to {
-            transform: scale(1) rotate(0deg);
-            opacity: 1;
-        }
-    }
-
-    @keyframes spinOut {
-        from {
-            transform: scale(1) rotate(0deg);
-            opacity: 1;
-        }
-        to {
-            transform: scale(0) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-    .tux-spin-in {
-        animation: spinIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .tux-spin-out {
-        animation: spinOut 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
-    }
-</style>
