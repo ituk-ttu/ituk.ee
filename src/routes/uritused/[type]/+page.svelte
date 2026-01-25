@@ -14,25 +14,23 @@
     let category = $derived($page.params.type ?? "");
     let isEnglish = $derived(getLocale() === "en");
 
-    const categoryTitles: Record<
-        string,
-        { et: string; en: string; image: string }
-    > = {
-        haridus: {
-            et: "Hariduslikud üritused",
-            en: "Educational events",
-            image: "/headers/haridus.jpg",
-        },
-        meelelahutus: {
-            et: "Meelelahutuslikud üritused",
-            en: "Entertainment events",
-            image: "/headers/meelelahutus.jpg",
-        },
-        muu: {
-            et: "Sise- ja muud üritused",
-            en: "Internal and other events",
-            image: "/headers/sisekad.jpg",
-        },
+    const categoryImages: Record<string, string> = {
+        haridus: "/headers/haridus.jpg",
+        meelelahutus: "/headers/meelelahutus.jpg",
+        muu: "/headers/sisekad.jpg",
+    };
+
+    const getCategoryTitle = (cat: string): string => {
+        switch (cat) {
+            case "haridus":
+                return m.events_category_education();
+            case "meelelahutus":
+                return m.events_category_entertainment();
+            case "muu":
+                return m.events_category_other();
+            default:
+                return cat;
+        }
     };
 
     onMount(async () => {
@@ -50,9 +48,8 @@
 
 <div>
     <PageHeader
-        title={categoryTitles[category]?.[isEnglish ? "en" : "et"] ?? category}
-        backgroundImage={categoryTitles[category]?.image ||
-            "/ituk_placeholder.jpg"}
+        title={getCategoryTitle(category)}
+        backgroundImage={categoryImages[category] || "/ituk_placeholder.jpg"}
     />
 
     {#if loading}

@@ -87,7 +87,7 @@
         {#if loading}
             <Loading />
         {:else if sponsors.length === 0}
-            <p class="text-gray">No sponsors found</p>
+            <p class="text-gray">{m.common_no_sponsors()}</p>
         {:else}
             <div
                 class="w-full flex flex-col sm:flex-row items-stretch gap-8 flex-wrap justify-center"
@@ -121,7 +121,7 @@
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else if studentOrgs.length === 0}
-            <p class="text-gray">No student organizations found</p>
+            <p class="text-gray">{m.common_no_studentorgs()}</p>
         {:else}
             <div
                 class="grid min-w-full grid-cols-1 gap-8 xs:grid-cols-2 lg:grid-cols-4 justify-items-center"

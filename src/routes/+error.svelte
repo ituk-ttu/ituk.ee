@@ -1,6 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { dev } from "$app/environment";
+    import * as m from "$lib/paraglide/messages";
 
     // Cast error to include stack for debugging
     let errorStack = $derived(
@@ -29,10 +30,9 @@
                 <h1 class="text-7xl">{$page.status}</h1>
                 <p class="text-center text-2xl">
                     {#if $page.status === 404}
-                        Lehekülge ei leitud, küll aga sa leidsid keerlevad
-                        Tuxid!
+                        {m.error_404()}
                     {:else}
-                        Midagi läks valesti. Proovi hiljem uuesti.
+                        {m.error_generic()}
                     {/if}
                 </p>
                 {#if dev && $page.error}

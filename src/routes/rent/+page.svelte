@@ -56,7 +56,7 @@
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else if rentItems.length === 0}
-            <p class="text-gray">No rental items available</p>
+            <p class="text-gray">{m.common_no_rent()}</p>
         {:else}
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center"

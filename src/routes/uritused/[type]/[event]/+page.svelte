@@ -100,6 +100,6 @@
     </div>
 {:else}
     <div class="flex flex-col items-center justify-center gap-8 min-h-[50vh]">
-        <p class="text-gray">Event not found</p>
+        <p class="text-gray">{m.common_event_not_found()}</p>
     </div>
 {/if}

@@ -251,7 +251,7 @@
             <TimelineDesktop items={timelineEvents} />
         {/if}
         <h3 class="text-center">
-            ...ja kui tuleb veel huvitavaid asju, siis lisame siia!
+            {m.aboutus_timeline_more()}
         </h3>
     </div>
 </div>

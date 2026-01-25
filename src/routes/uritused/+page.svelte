@@ -7,7 +7,7 @@
 <SEO pageKey="uritused" />
 
 <div class="items-start flex-col sm:flex-row flex">
-    <h1 class="hidden">Üritused</h1>
+    <h1 class="hidden">{m.events_header()}</h1>
     <div class="w-full sm:w-1/3">
         <ImageButton
             href="/uritused/haridus"
