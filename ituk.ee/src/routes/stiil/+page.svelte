@@ -8,7 +8,7 @@
 <SEO pageKey="stiil" />
 
 <div>
-    <PageHeader title={m.style_title()} backgroundImage="/headers/style.jpg" />
+    <PageHeader title={m.style_title()} backgroundImage="/headers/meist.jpg" />
 
     <div class="section-padding container-content flex flex-col gap-16">
         <p class="text-gray text-center">{m.style_last_updated()}</p>
@@ -62,7 +62,7 @@
                     <p class="font-bold">{m.style_logo_long_with_taltech()}</p>
                     <div class="bg-white p-4 rounded">
                         <img
-                            src="/logos/ituk_taltech_color.svg"
+                            src="/logos/style_examples/ituk_long_ttu_red.svg"
                             alt="ITÜK logo with TalTech"
                             class="w-full"
                         />
@@ -74,7 +74,7 @@
                     </p>
                     <div class="bg-white p-4 rounded">
                         <img
-                            src="/logos/ituk_color.svg"
+                            src="/logos/style_examples/ituk_long_nottu_red.svg"
                             alt="ITÜK logo without TalTech"
                             class="w-full"
                         />
@@ -84,7 +84,7 @@
                     <p class="font-bold">{m.style_logo_icon()}</p>
                     <div class="bg-white p-4 rounded flex justify-center">
                         <img
-                            src="/logos/ituk_symbol_color.svg"
+                            src="/logos/style_examples/ituk_symbol_red.svg"
                             alt="ITÜK icon"
                             class="h-24"
                         />

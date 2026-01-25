@@ -65,7 +65,7 @@ export const pageMetadata: Record<string, PageMetadata> = {
         title_en: "Style Guide | ITÜK",
         description: "ITÜKi stiiliraamat - logod, värvid ja brändijuhised.",
         description_en: "ITÜK style guide - logos, colors, and brand guidelines.",
-        image: "/headers/style.jpg",
+        image: "/headers/meist.jpg",
     },
 };
 
