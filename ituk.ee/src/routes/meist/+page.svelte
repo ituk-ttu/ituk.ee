@@ -5,6 +5,7 @@
     import {
         getBoardMembers,
         getTimelineEvents,
+        getSetting,
         type BoardMember,
         type TimelineEvent,
     } from "$lib/firebase";
@@ -42,18 +43,20 @@
 
     let boardMembers = $state<BoardMember[]>([]);
     let timelineEvents = $state<TimelineEvent[]>([]);
-    const boardYear = "2025/2026";
+    let boardYear = $state("2025/2026");
     let loading = $state(true);
     let error = $state<string | null>(null);
 
     onMount(async () => {
         try {
-            const [members, events] = await Promise.all([
+            const [members, events, year] = await Promise.all([
                 getBoardMembers(),
                 getTimelineEvents(),
+                getSetting("boardYear"),
             ]);
-            boardMembers = members;
+            boardMembers = members.filter((m) => m.year === year || !m.year);
             timelineEvents = events;
+            if (year) boardYear = year;
         } catch (e) {
             console.error("Error loading data:", e);
             error = "Failed to load data";

@@ -24,6 +24,7 @@ export interface BoardMember {
     position_en: string;
     email: string;
     imagePath: string;
+    year?: string;
 }
 
 export interface TimelineEvent {

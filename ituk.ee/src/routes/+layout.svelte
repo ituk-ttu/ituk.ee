@@ -2,6 +2,7 @@
 	import "../app.css";
 	import Navbar from "$lib/components/Navbar.svelte";
 	import Footer from "$lib/components/Footer.svelte";
+	import ToastContainer from "$lib/components/ToastContainer.svelte";
 
 	let { children } = $props();
 </script>
@@ -17,6 +18,7 @@
 
 <div class="flex flex-col min-h-screen">
 	<Navbar />
+	<ToastContainer />
 	<main class="flex-1">
 		{@render children()}
 	</main>

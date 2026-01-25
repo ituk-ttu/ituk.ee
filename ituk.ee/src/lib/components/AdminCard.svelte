@@ -65,7 +65,13 @@
             date: "",
             handle: "",
         },
-        rent: { name: "", name_en: "", price: "", unit: "", imagePath: "" },
+        rent: {
+            name: "",
+            name_en: "",
+            description: "",
+            description_en: "",
+            imagePath: "",
+        },
         image: { name: "", imagePath: "" },
     };
 
@@ -261,15 +267,14 @@
                 bind:value={formData.name_en}
             />
             <InputField
-                label="Hind"
-                placeholder="5"
-                type="number"
-                bind:value={formData.price}
+                label="Kirjeldus"
+                placeholder="5€/päev"
+                bind:value={formData.description}
             />
             <InputField
-                label="Ühik"
-                placeholder="päev"
-                bind:value={formData.unit}
+                label="Kirjeldus (EN)"
+                placeholder="5€/day"
+                bind:value={formData.description_en}
             />
             <InputField
                 label="Pildi link"

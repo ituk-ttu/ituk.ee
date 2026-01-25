@@ -32,6 +32,7 @@
     import InputField from "$lib/components/InputField.svelte";
     import TextArea from "$lib/components/TextArea.svelte";
     import PageHeader from "$lib/components/PageHeader.svelte";
+    import { toasts } from "$lib/stores/toast";
 
     // Auth state
     let user = $state<User | null>(null);
@@ -108,16 +109,35 @@
     }
 
     // Board year state
-    let boardYear = $state("2025/2026");
-    const yearOptions = ["2024/2025", "2025/2026", "2026/2027"];
+    let boardYear = $state("2025/2026"); // Active year (saved to Firebase)
+    let viewYear = $state("2025/2026"); // Year being viewed/edited in admin
+    const yearOptions = ["2023/2024", "2024/2025", "2025/2026", "2026/2027"];
+
+    // Filtered board members by viewYear
+    let filteredBoardMembers = $derived(
+        boardMembers.filter(
+            (m) => m.year === viewYear || (!m.year && viewYear === boardYear),
+        ),
+    );
+
+    // Event category filter
+    let eventCategoryFilter = $state<string>("all");
+    let eventCategories = $derived([
+        ...new Set(events.map((e) => e.category).filter(Boolean)),
+    ]);
+    let filteredEvents = $derived(
+        eventCategoryFilter === "all"
+            ? events
+            : events.filter((e) => e.category === eventCategoryFilter),
+    );
 
     async function saveBoardYear() {
         try {
             await setSetting("boardYear", boardYear);
-            alert("Õppeaasta salvestatud!");
+            toasts.success("Salvestatud", "Õppeaasta edukalt salvestatud!");
         } catch (e) {
             console.error("Error saving board year:", e);
-            alert("Viga õppeaasta salvestamisel");
+            toasts.error("Viga", "Õppeaasta salvestamisel tekkis viga");
         }
     }
 
@@ -179,8 +199,9 @@
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
+            toasts.success("Sisse logitud", "Tere tulemast tagasi!");
         } catch (error: any) {
-            alert("Login failed: " + error.message);
+            toasts.error("Sisselogimine ebaõnnestus", error.message);
         }
     }
 
@@ -192,17 +213,20 @@
     async function saveBoardMember(data: Record<string, string>) {
         try {
             const { id, ...memberData } = data;
+            // Always include the year field
+            const dataWithYear = { ...memberData, year: viewYear };
             if (id) {
-                await updateDoc(doc(db, "board", id), memberData);
+                await updateDoc(doc(db, "board", id), dataWithYear);
             } else {
-                await addDoc(collection(db, "board"), memberData);
+                await addDoc(collection(db, "board"), dataWithYear);
             }
             showAddForm = null;
             selectedBoardMember = null;
             boardMembers = await getBoardMembers();
+            toasts.success("Salvestatud", "Liige edukalt salvestatud!");
         } catch (e) {
             console.error("Error saving member:", e);
-            alert("Viga liikme salvestamisel");
+            toasts.error("Viga", "Liikme salvestamisel tekkis viga");
         }
     }
 
@@ -228,9 +252,10 @@
             showAddForm = null;
             selectedEvent = null;
             loadData();
+            toasts.success("Salvestatud", "Üritus edukalt salvestatud!");
         } catch (e) {
             console.error("Error saving event:", e);
-            alert("Viga ürituse salvestamisel");
+            toasts.error("Viga", "Ürituse salvestamisel tekkis viga");
         }
     }
 
@@ -256,9 +281,10 @@
             showAddForm = null;
             selectedRentItem = null;
             loadData();
+            toasts.success("Salvestatud", "Seade edukalt salvestatud!");
         } catch (e) {
             console.error("Error saving rent item:", e);
-            alert("Viga seadme salvestamisel");
+            toasts.error("Viga", "Seadme salvestamisel tekkis viga");
         }
     }
 
@@ -278,7 +304,7 @@
 
     async function createLog() {
         if (!logAuthor || !logEntry) {
-            alert("Please fill in all fields");
+            toasts.warning("Tähelepanu", "Palun täida kõik väljad");
             return;
         }
         try {
@@ -288,7 +314,7 @@
                 entry: logEntry,
                 date: Timestamp.fromDate(new Date()),
             });
-            alert("Log entry created");
+            toasts.success("Loodud", "Logiraamatu sissekanne edukalt lisatud!");
             logAuthor = "";
             logEntry = "";
             loadData();
@@ -400,30 +426,49 @@
                         </ul>
                     </div>
 
-                    <!-- Board Year Selector -->
+                    <!-- Board Year Selectors -->
                     <div
-                        class="flex items-center gap-4 bg-white/5 p-4 rounded-lg"
+                        class="flex flex-col sm:flex-row gap-4 bg-white/5 p-4 rounded-lg"
                     >
-                        <label
-                            for="boardYearSelect"
-                            class="text-sm font-medium"
-                        >
-                            Aktiivne õppeaasta:
-                        </label>
-                        <select
-                            id="boardYearSelect"
-                            bind:value={boardYear}
-                            class="px-3 py-2 bg-white/10 border border-white/10 rounded text-white focus:outline-none focus:border-primary"
-                        >
-                            {#each yearOptions as year}
-                                <option value={year}>{year}</option>
-                            {/each}
-                        </select>
-                        <Button
-                            variant="primary"
-                            text="Salvesta"
-                            onclick={saveBoardYear}
-                        />
+                        <div class="flex items-center gap-3">
+                            <label
+                                for="boardYearSelect"
+                                class="text-sm font-medium whitespace-nowrap"
+                            >
+                                Aktiivne aasta:
+                            </label>
+                            <select
+                                id="boardYearSelect"
+                                bind:value={boardYear}
+                                class="px-3 py-2 bg-white/10 border border-white/10 rounded text-white focus:outline-none focus:border-primary"
+                            >
+                                {#each yearOptions as year}
+                                    <option value={year}>{year}</option>
+                                {/each}
+                            </select>
+                            <Button
+                                variant="primary"
+                                text="Salvesta"
+                                onclick={saveBoardYear}
+                            />
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <label
+                                for="viewYearSelect"
+                                class="text-sm font-medium whitespace-nowrap"
+                            >
+                                Vaata aastat:
+                            </label>
+                            <select
+                                id="viewYearSelect"
+                                bind:value={viewYear}
+                                class="px-3 py-2 bg-white/10 border border-white/10 rounded text-white focus:outline-none focus:border-primary"
+                            >
+                                {#each yearOptions as year}
+                                    <option value={year}>{year}</option>
+                                {/each}
+                            </select>
+                        </div>
                     </div>
 
                     <div class="flex flex-col lg:flex-row gap-6">
@@ -431,7 +476,7 @@
                         <div class="flex-1 flex flex-col gap-2">
                             <div class="flex items-center justify-between mb-2">
                                 <p class="text-sm text-white/60">
-                                    {boardMembers.length} liiget
+                                    {filteredBoardMembers.length} liiget ({viewYear})
                                 </p>
                                 {#if selectedBoardMember}
                                     <button
@@ -445,7 +490,7 @@
                             <div
                                 class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-2"
                             >
-                                {#each boardMembers as member}
+                                {#each filteredBoardMembers as member}
                                     <AdminPreviewCard
                                         title={member.name}
                                         subtitle={member.position}
@@ -460,7 +505,9 @@
                         </div>
 
                         <!-- Edit form (shown when item selected or adding new) -->
-                        <div class="w-full lg:w-80 shrink-0">
+                        <div
+                            class="w-full lg:w-[320px] lg:min-w-[320px] shrink-0"
+                        >
                             {#if showAddForm === "board"}
                                 <div class="sticky top-4">
                                     <div
@@ -560,12 +607,31 @@
                         </ul>
                     </div>
 
+                    <!-- Category Filter -->
+                    <div
+                        class="flex items-center gap-3 bg-white/5 p-4 rounded-lg"
+                    >
+                        <label for="categoryFilter" class="text-sm font-medium">
+                            Filtreeri kategooria järgi:
+                        </label>
+                        <select
+                            id="categoryFilter"
+                            bind:value={eventCategoryFilter}
+                            class="px-3 py-2 bg-white/10 border border-white/10 rounded text-white focus:outline-none focus:border-primary"
+                        >
+                            <option value="all">Kõik</option>
+                            {#each eventCategories as cat}
+                                <option value={cat}>{cat}</option>
+                            {/each}
+                        </select>
+                    </div>
+
                     <div class="flex flex-col lg:flex-row gap-6">
                         <!-- List of events -->
                         <div class="flex-1 flex flex-col gap-2">
                             <div class="flex items-center justify-between mb-2">
                                 <p class="text-sm text-white/60">
-                                    {events.length} üritust
+                                    {filteredEvents.length} üritust
                                 </p>
                                 {#if selectedEvent}
                                     <button
@@ -579,7 +645,7 @@
                             <div
                                 class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[600px] overflow-y-auto pr-2"
                             >
-                                {#each events as event}
+                                {#each filteredEvents as event}
                                     <AdminPreviewCard
                                         title={event.name}
                                         subtitle={event.category}
@@ -593,7 +659,9 @@
                         </div>
 
                         <!-- Edit form -->
-                        <div class="w-full lg:w-80 shrink-0">
+                        <div
+                            class="w-full lg:w-[320px] lg:min-w-[320px] shrink-0"
+                        >
                             {#if showAddForm === "event"}
                                 <div class="sticky top-4">
                                     <div
@@ -683,8 +751,10 @@
                         <p class="font-medium text-white mb-2">Juhised:</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Pilt peaks olema ruudukujuline</li>
-                            <li>Hind on number (ilma € märgita)</li>
-                            <li>Ühik on nt "päev", "tund", "kord"</li>
+                            <li>
+                                Kirjeldus võib sisaldada hinda ja ühikut (nt
+                                "5€/päev")
+                            </li>
                         </ul>
                     </div>
 
@@ -710,7 +780,7 @@
                                 {#each rentables as item}
                                     <AdminPreviewCard
                                         title={item.name}
-                                        subtitle="{item.price}€/{item.unit}"
+                                        subtitle={item.description || ""}
                                         image={item.imagePath}
                                         selected={selectedRentItem?.id ===
                                             item.id}
@@ -721,7 +791,9 @@
                         </div>
 
                         <!-- Edit form -->
-                        <div class="w-full lg:w-80 shrink-0">
+                        <div
+                            class="w-full lg:w-[320px] lg:min-w-[320px] shrink-0"
+                        >
                             {#if showAddForm === "rent"}
                                 <div class="sticky top-4">
                                     <div
@@ -762,10 +834,12 @@
                                             name: selectedRentItem.name || "",
                                             name_en:
                                                 selectedRentItem.name_en || "",
-                                            price: String(
-                                                selectedRentItem.price || "",
-                                            ),
-                                            unit: selectedRentItem.unit || "",
+                                            description:
+                                                selectedRentItem.description ||
+                                                "",
+                                            description_en:
+                                                selectedRentItem.description_en ||
+                                                "",
                                             imagePath:
                                                 selectedRentItem.imagePath ||
                                                 "",
