@@ -1,17 +1,8 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import * as m from "$lib/paraglide/messages";
-    import {
-        getLeaderboard,
-        addLeaderboardEntry,
-        type LeaderboardEntry,
-    } from "$lib/firebase";
-    import {
-        ArcadeButton,
-        ArcadeButtonSmall,
-        ArcadeText,
-        ArcadeDpad,
-    } from "$lib/components/arcade";
+    import {addLeaderboardEntry, getLeaderboard, type LeaderboardEntry,} from "$lib/firebase";
+    import {ArcadeButton, ArcadeButtonSmall, ArcadeDpad, ArcadeText,} from "$lib/components/arcade";
 
     interface Props {
         onClose: () => void;
@@ -84,7 +75,8 @@
     type Fish = Point & { golden?: boolean; variant?: number };
     let snake: Point[] = [];
     let direction: Point = { x: 1, y: 0 };
-    let nextDirection: Point = { x: 1, y: 0 };
+    let queuedPerpendicular: Point | null = null;
+    let queuedParallel: Point | null = null;
     let fishes: Fish[] = [];
 
     // Audio elements
@@ -116,8 +108,7 @@
 
     function playMusic(action: "start" | "stop") {
         if (!musicAudio) return;
-        const volume = (masterVolume / 100) * (musicVolume / 100);
-        musicAudio.volume = volume;
+        musicAudio.volume = (masterVolume / 100) * (musicVolume / 100);
         if (action === "start") {
             musicAudio.loop = true;
             musicAudio.play().catch(() => {});
@@ -344,7 +335,14 @@
     function update() {
         if (screen !== "playing") return;
 
-        direction = nextDirection;
+        if (queuedPerpendicular) {
+            direction = queuedPerpendicular;
+            queuedPerpendicular = queuedParallel;
+            queuedParallel = null;
+        } else if (queuedParallel) {
+            direction = queuedParallel;
+            queuedParallel = null;
+        }
 
         let newX = snake[0].x + direction.x;
         let newY = snake[0].y + direction.y;
@@ -469,6 +467,33 @@
         loadingLeaderboard = false;
     }
 
+    type DirectionInput = "up" | "down" | "left" | "right";
+
+    const DIRECTION_VECTORS: Record<DirectionInput, Point> = {
+        up: { x: 0, y: -1 },
+        down: { x: 0, y: 1 },
+        left: { x: -1, y: 0 },
+        right: { x: 1, y: 0 },
+    };
+
+    function queueDirectionInput(input: DirectionInput) {
+        if (screen !== "playing") return;
+
+        const inputVector = DIRECTION_VECTORS[input];
+        const currentAxis = direction.x !== 0 ? "x" : "y";
+        const inputAxis = inputVector.x !== 0 ? "x" : "y";
+
+        if (inputAxis !== currentAxis) {
+            queuedPerpendicular = inputVector;
+            queuedParallel = null;
+            return;
+        }
+
+        if (!queuedPerpendicular) return;
+
+        queuedParallel = inputVector;
+    }
+
     function handleKeydown(e: KeyboardEvent) {
         // Handle initials entry screen
         if (screen === "enterinit") {
@@ -508,22 +533,22 @@
             case "ArrowUp":
             case "w":
             case "W":
-                if (direction.y !== 1) nextDirection = { x: 0, y: -1 };
+                queueDirectionInput("up");
                 break;
             case "ArrowDown":
             case "s":
             case "S":
-                if (direction.y !== -1) nextDirection = { x: 0, y: 1 };
+                queueDirectionInput("down");
                 break;
             case "ArrowLeft":
             case "a":
             case "A":
-                if (direction.x !== 1) nextDirection = { x: -1, y: 0 };
+                queueDirectionInput("left");
                 break;
             case "ArrowRight":
             case "d":
             case "D":
-                if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
+                queueDirectionInput("right");
                 break;
         }
     }
@@ -534,7 +559,8 @@
             { x: Math.floor(GRID_SIZE / 2), y: Math.floor(GRID_SIZE / 2) },
         ];
         direction = { x: 1, y: 0 };
-        nextDirection = { x: 1, y: 0 };
+        queuedPerpendicular = null;
+        queuedParallel = null;
         score = 0;
         initFishes();
         screen = "playing";
@@ -571,24 +597,6 @@
         localStorage.setItem("tuxMusicVolume", String(musicVolume));
         localStorage.setItem("tuxSfxVolume", String(sfxVolume));
         updateMusicVolume();
-    }
-
-    function changeDirection(dir: "up" | "down" | "left" | "right") {
-        if (screen !== "playing") return;
-        switch (dir) {
-            case "up":
-                if (direction.y !== 1) nextDirection = { x: 0, y: -1 };
-                break;
-            case "down":
-                if (direction.y !== -1) nextDirection = { x: 0, y: 1 };
-                break;
-            case "left":
-                if (direction.x !== 1) nextDirection = { x: -1, y: 0 };
-                break;
-            case "right":
-                if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
-                break;
-        }
     }
 </script>
 
@@ -907,10 +915,10 @@
 
             <!-- Mobile D-Pad Controls -->
             <ArcadeDpad
-                onUp={() => changeDirection("up")}
-                onDown={() => changeDirection("down")}
-                onLeft={() => changeDirection("left")}
-                onRight={() => changeDirection("right")}
+                onUp={() => queueDirectionInput("up")}
+                onDown={() => queueDirectionInput("down")}
+                onLeft={() => queueDirectionInput("left")}
+                onRight={() => queueDirectionInput("right")}
             />
 
             <!-- Enter Initials Screen -->
