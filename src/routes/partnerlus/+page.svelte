@@ -90,13 +90,13 @@
             <p class="text-gray">{m.common_no_sponsors()}</p>
         {:else}
             <div
-                class="w-full flex flex-col sm:flex-row items-stretch gap-8 flex-wrap justify-center"
+                class="w-full flex flex-col sm:flex-row items-center gap-8 flex-wrap justify-center"
             >
                 {#each sponsors as sponsor}
                     <a
                         target="_blank"
                         href={sponsor.link}
-                        class="flex-1 min-w-[200px] max-w-[300px] h-24 sm:h-32 p-4 rounded-xl flex justify-center items-center overflow-hidden transition-transform duration-200 hover:scale-105"
+                        class="w-[200px] sm:w-[300px] h-24 sm:h-32 p-4 rounded-xl flex justify-center items-center overflow-hidden transition-transform duration-200 hover:scale-105"
                         style="background-color: {sponsor.bgColor}"
                     >
                         <img

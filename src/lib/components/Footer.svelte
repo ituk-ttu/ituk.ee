@@ -65,7 +65,7 @@
 </script>
 
 <footer
-	class="z-50 w-full py-[clamp(2rem,4vw,4rem)] px-[clamp(1rem,4vw,4rem)] bg-background shadow-filled flex flex-col sm:flex-row flex-wrap justify-between items-center gap-8 sm:gap-16"
+	class="z-40 w-full py-[clamp(2rem,4vw,4rem)] px-[clamp(1rem,4vw,4rem)] bg-background shadow-filled flex flex-col sm:flex-row flex-wrap justify-between items-center gap-8 sm:gap-16"
 >
 	<!-- Contact Info -->
 	<div class="flex flex-col gap-4 items-start">

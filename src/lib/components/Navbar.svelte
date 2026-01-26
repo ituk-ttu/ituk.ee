@@ -114,7 +114,7 @@
 	<!-- Mobile menu overlay -->
 	{#if isMenuOpen}
 		<div
-			class="fixed inset-0 top-[88px] bg-background/95 z-30 flex flex-col items-center justify-center gap-8"
+			class="fixed inset-0 top-[88px] bg-background/95 z-[60] flex flex-col items-center justify-center gap-8"
 			onclick={toggleMenu}
 			onkeydown={(e) => e.key === "Escape" && toggleMenu()}
 			role="button"
