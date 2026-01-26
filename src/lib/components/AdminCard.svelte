@@ -191,6 +191,13 @@
     >
         {#if type === "board"}
             <InputField
+                label="Täisnimi"
+                placeholder="Nimi Nimetus"
+                bind:value={formData.name}
+                error={validationErrors.name}
+                required
+            />
+            <InputField
                 label="Ametinimetus"
                 placeholder="Esimees"
                 bind:value={formData.position}
@@ -205,10 +212,11 @@
                 required
             />
             <InputField
-                label="Täisnimi"
-                placeholder="Nimi Nimetus"
-                bind:value={formData.name}
-                error={validationErrors.name}
+                label="Meiliaadress"
+                placeholder="esimees@ituk.ee"
+                type="email"
+                bind:value={formData.email}
+                error={validationErrors.email}
                 required
             />
             <InputField
@@ -216,14 +224,6 @@
                 placeholder="/board/2025/1_esimees.jpg"
                 bind:value={formData.imagePath}
                 error={validationErrors.imagePath}
-                required
-            />
-            <InputField
-                label="Meiliaadress"
-                placeholder="esimees@ituk.ee"
-                type="email"
-                bind:value={formData.email}
-                error={validationErrors.email}
                 required
             />
         {:else if type === "event"}

@@ -92,7 +92,6 @@ export const schemas: Record<string, ValidationSchema> = {
         position_en: { required: true, minLength: 2 },
         email: { required: true, isEmail: true },
         imagePath: { required: true },
-        year: { required: true },
     },
     timeline: {
         name: { required: true, minLength: 2, maxLength: 200 },

@@ -1,8 +1,17 @@
 <script lang="ts">
-    import {onMount} from "svelte";
+    import { onMount } from "svelte";
     import * as m from "$lib/paraglide/messages";
-    import {addLeaderboardEntry, getLeaderboard, type LeaderboardEntry,} from "$lib/firebase";
-    import {ArcadeButton, ArcadeButtonSmall, ArcadeDpad, ArcadeText,} from "$lib/components/arcade";
+    import {
+        addLeaderboardEntry,
+        getLeaderboard,
+        type LeaderboardEntry,
+    } from "$lib/firebase";
+    import {
+        ArcadeButton,
+        ArcadeButtonSmall,
+        ArcadeDpad,
+        ArcadeText,
+    } from "$lib/components/arcade";
 
     interface Props {
         onClose: () => void;
@@ -442,10 +451,12 @@
         try {
             await addLeaderboardEntry(name, score);
             leaderboard = await getLeaderboard(10);
+            screen = "leaderboard";
         } catch (e) {
             console.error("Error submitting score:", e);
+            // Still go to gameover on error
+            screen = "gameover";
         }
-        screen = "gameover";
     }
 
     function cycleInitial(direction: 1 | -1) {

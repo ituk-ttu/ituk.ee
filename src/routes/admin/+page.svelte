@@ -283,7 +283,41 @@
     // Board year state
     let boardYear = $state("2025/2026"); // Active year (saved to Firebase)
     let viewYear = $state("2025/2026"); // Year being viewed/edited in admin
-    const yearOptions = ["2023/2024", "2024/2025", "2025/2026", "2026/2027"];
+
+    // Helper to get current academic year string (e.g., "2025/2026" if we're in fall 2025 or spring 2026)
+    function getCurrentAcademicYear(): string {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth(); // 0-11
+        // Academic year starts in September (month 8)
+        if (month >= 8) {
+            return `${year}/${year + 1}`;
+        } else {
+            return `${year - 1}/${year}`;
+        }
+    }
+
+    // Dynamic year options: extract unique years from board members + current year range
+    let yearOptions = $derived(() => {
+        const currentAcademicYear = getCurrentAcademicYear();
+        const currentStartYear = parseInt(currentAcademicYear.split("/")[0]);
+
+        // Generate range: current year - 1 to current year + 1
+        const rangeYears = [
+            `${currentStartYear - 1}/${currentStartYear}`,
+            `${currentStartYear}/${currentStartYear + 1}`,
+            `${currentStartYear + 1}/${currentStartYear + 2}`,
+        ];
+
+        // Get unique years from existing board members
+        const existingYears = [
+            ...new Set(boardMembers.map((m) => m.year).filter(Boolean)),
+        ] as string[];
+
+        // Combine and sort
+        const allYears = [...new Set([...rangeYears, ...existingYears])];
+        return allYears.sort();
+    });
 
     // Filtered board members by viewYear
     let filteredBoardMembers = $derived(
@@ -765,7 +799,7 @@
                 onsubmit={handleLogin}
             >
                 <InputField
-                    label="Email"
+                    label="E-mail"
                     type="email"
                     placeholder="admin@ituk.ee"
                     bind:value={email}
@@ -849,7 +883,7 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Info:</p>
+                        <p>Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Need andmed kuvatakse veebilehe jaluses</li>
                             <li>
@@ -944,7 +978,7 @@
                     <div class="bg-white/5 p-6 rounded-lg flex flex-col gap-6">
                         <div>
                             <h3>Statistika</h3>
-                            <p class="text-sm text-white/70 mt-1">
+                            <p>
                                 Need numbrid ja kirjeldused kuvatakse "Meist" ja
                                 "Partnerlus" lehel.
                             </p>
@@ -952,13 +986,13 @@
 
                         <!-- About page stats -->
                         <div class="border-t border-white/10 pt-4">
-                            <h4 class="text-sm font-medium mb-3">Meist leht</h4>
+                            <h4 class="mb-4">Meist leht</h4>
                             <div
                                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
                             >
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Liikmeid läbi aegade"
+                                        label="Statistika 1"
                                         placeholder="1200+"
                                         bind:value={statMembersAllTime}
                                     />
@@ -975,7 +1009,7 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Aktiivseid liikmeid"
+                                        label="Statistika 2"
                                         placeholder="45"
                                         bind:value={statActiveMembers}
                                     />
@@ -992,7 +1026,7 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Eesmärke"
+                                        label="Statistika 3"
                                         placeholder="1"
                                         bind:value={statGoals}
                                     />
@@ -1012,15 +1046,13 @@
 
                         <!-- Partnership page stats -->
                         <div class="border-t border-white/10 pt-4">
-                            <h4 class="text-sm font-medium mb-3">
-                                Partnerlus leht
-                            </h4>
+                            <h4 class="mb-4">Partnerlus leht</h4>
                             <div
                                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
                             >
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Instagram jälgijad"
+                                        label="Statistika 1"
                                         placeholder="1170"
                                         bind:value={statInstagramFollowers}
                                     />
@@ -1037,7 +1069,7 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Facebook jälgijad"
+                                        label="Statistika 2"
                                         placeholder="2000"
                                         bind:value={statFacebookFollowers}
                                     />
@@ -1054,7 +1086,7 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Discord liikmeid"
+                                        label="Statistika 3"
                                         placeholder="450"
                                         bind:value={statDiscordMembers}
                                     />
@@ -1071,7 +1103,7 @@
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <InputField
-                                        label="Üritusi aastas"
+                                        label="Statistika 4"
                                         placeholder="30+"
                                         bind:value={statEventsPerYear}
                                     />
@@ -1118,30 +1150,51 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <p class="font-bold mb-2">Juhised</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>
+                                <strong>Aktiivne aasta</strong> - see aasta kuvatakse
+                                avalikul lehel "Meist" → "Juhatus"
+                            </li>
+                            <li>
+                                <strong>Vaata aastat</strong> - vali, millist aastat
+                                soovid siin adminpaneelis vaadata/muuta
+                            </li>
+                            <li>
+                                Uus liige lisatakse automaatselt "Vaata aastat"
+                                valitud aastasse
+                            </li>
+                        </ul>
+                        <p class="font-bold mb-2">Pildid</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>
                                 Pilt croppida ruudukujuliseks, kasutada .jpg
                                 failiformaati
                             </li>
-                            <li>Kaust: "static/board/(aasta)"</li>
                             <li>
-                                Järjekord on sorteeritud failinime järgi (nt
-                                "1_esimees.jpg")
+                                Kaust: <code class="bg-white/10 px-1 rounded"
+                                    >static/board/(aasta)/</code
+                                >
+                            </li>
+                            <li>
+                                Järjekord on sorteeritud failinime järgi (nt <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >1_esimees.jpg</code
+                                >)
                             </li>
                         </ul>
                     </div>
 
                     <!-- Board Year Selectors -->
                     <div
-                        class="flex flex-col sm:flex-row gap-4 bg-white/5 p-4 rounded-lg items-end"
+                        class="flex flex-col sm:flex-row gap-4 bg-white/5 p-4 rounded-lg items-end flex-wrap"
                     >
                         <div class="flex items-end gap-3">
-                            <div class="w-40">
+                            <div class="w-48">
                                 <Dropdown
                                     label="Aktiivne aasta"
                                     bind:value={boardYear}
-                                    options={yearOptions.map((y) => ({
+                                    options={yearOptions().map((y) => ({
                                         value: y,
                                         label: y,
                                     }))}
@@ -1153,11 +1206,11 @@
                                 onclick={saveBoardYear}
                             />
                         </div>
-                        <div class="w-40">
+                        <div class="w-48">
                             <Dropdown
                                 label="Vaata aastat"
                                 bind:value={viewYear}
-                                options={yearOptions.map((y) => ({
+                                options={yearOptions().map((y) => ({
                                     value: y,
                                     label: y,
                                 }))}
@@ -1203,7 +1256,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Lisa uus liige</h3>
+                                    <h3>Lisa uus liige</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => (showAddForm = null)}
@@ -1219,7 +1272,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda liiget</h3>
+                                    <h3>Muuda liiget</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => selectBoardMember(null)}
@@ -1256,7 +1309,7 @@
                     <div
                         class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
-                        <h2>Ajalugu (Timeline)</h2>
+                        <h2>Ajajoon</h2>
                         <Button
                             variant="primary"
                             text="+ Lisa uus"
@@ -1271,10 +1324,28 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Info:</p>
+                        <p class="font-bold mb-2">Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Ajalugu kuvatakse "Meist" lehel</li>
-                            <li>Sündmused sorteeritakse aasta järgi</li>
+                            <li>
+                                Ajalugu kuvatakse avalikul lehel "Meist" →
+                                "Ajalugu"
+                            </li>
+                            <li>
+                                Sündmused sorteeritakse kuupäeva järgi (vanim →
+                                uusim)
+                            </li>
+                            <li>
+                                Kuupäeva formaat: <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >MM/DD/YYYY</code
+                                > (nt 01/24/2005)
+                            </li>
+                            <li>
+                                Pilt: ruudukujuline, kaust <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >static/timeline-events/</code
+                                >
+                            </li>
                         </ul>
                     </div>
 
@@ -1316,7 +1387,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Lisa uus sündmus</h3>
+                                    <h3>Lisa uus sündmus</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => (showAddForm = null)}
@@ -1331,7 +1402,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda sündmust</h3>
+                                    <h3>Muuda sündmust</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() =>
@@ -1378,14 +1449,35 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <p class="font-bold mb-2">Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Kategooriad: meelelahutus, haridus, muu</li>
+                            <li>
+                                Kategooriad: <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >meelelahutus</code
+                                >,
+                                <code class="bg-white/10 px-1 rounded"
+                                    >haridus</code
+                                >,
+                                <code class="bg-white/10 px-1 rounded">muu</code
+                                >
+                            </li>
                             <li>
                                 Handle peab olema unikaalne URL-sõbralik string
-                                (nt "dont-do-it")
+                                (nt <code class="bg-white/10 px-1 rounded"
+                                    >dont-do-it</code
+                                >)
                             </li>
-                            <li>Banner pilt peaks olema laiusega ~1200px</li>
+                            <li>
+                                Üritusel võib olla mitu aastat (nt Don't Do IT
+                                2023, 2024...)
+                            </li>
+                            <li>
+                                Banner pilt: ~1200px lai, kaust <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >static/events/(handle)/</code
+                                >
+                            </li>
                         </ul>
                     </div>
 
@@ -1440,7 +1532,7 @@
                     {#if showAddForm === "event"}
                         <div class="max-w-md">
                             <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-bold">Lisa uus üritus</h3>
+                                <h3>Lisa uus üritus</h3>
                                 <button
                                     class="text-xs text-white/60 hover:text-white"
                                     onclick={() => (showAddForm = null)}
@@ -1456,7 +1548,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda üritust</h3>
+                                    <h3>Muuda üritust</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => selectEvent(null)}
@@ -1489,7 +1581,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold text-sm">
+                                    <h3>
                                         Aastad ({eventYears.length})
                                     </h3>
                                     <button
@@ -1541,9 +1633,7 @@
                                     <div
                                         class="flex items-center justify-between mb-3"
                                     >
-                                        <h3 class="font-bold text-sm">
-                                            Lisa uus aasta
-                                        </h3>
+                                        <h3>Lisa uus aasta</h3>
                                         <button
                                             class="text-xs text-white/60 hover:text-white"
                                             onclick={() => (showAddForm = null)}
@@ -1560,9 +1650,7 @@
                                     <div
                                         class="flex items-center justify-between mb-3"
                                     >
-                                        <h3 class="font-bold text-sm">
-                                            Muuda aastat
-                                        </h3>
+                                        <h3>Muuda aastat</h3>
                                         <button
                                             class="text-xs text-white/60 hover:text-white"
                                             onclick={() =>
@@ -1626,12 +1714,21 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <p class="font-bold mb-2">Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Pilt peaks olema ruudukujuline</li>
+                            <li>Kuvatakse avalikul lehel "Rent"</li>
+                            <li>
+                                Pilt: ruudukujuline, kaust <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >static/rent/</code
+                                >
+                            </li>
                             <li>
                                 Kirjeldus võib sisaldada hinda ja ühikut (nt
                                 "5€/päev")
+                            </li>
+                            <li>
+                                Rentimise sooviks tuleb kasutajal saata e-mail
                             </li>
                         </ul>
                     </div>
@@ -1673,7 +1770,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Lisa uus seade</h3>
+                                    <h3>Lisa uus seade</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => (showAddForm = null)}
@@ -1685,7 +1782,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda seadet</h3>
+                                    <h3>Muuda seadet</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => selectRentItem(null)}
@@ -1736,14 +1833,25 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <p class="font-bold mb-2">Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>
-                                Logo peaks olema PNG formaadis läbipaistva
-                                taustaga
+                                Kuvatakse avalikul lehel "Partnerlus" → "Meie
+                                suurtoetajad"
                             </li>
-                            <li>Kaust: "static/images/partners/"</li>
-                            <li>Taustavärv hex formaadis (nt #FFFFFF)</li>
+                            <li>
+                                Logo: PNG läbipaistva taustaga, kaust <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >static/sponsors/</code
+                                >
+                            </li>
+                            <li>
+                                Taustavärv hex formaadis (nt <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >#FFFFFF</code
+                                >) - kasutatakse logo taustana
+                            </li>
+                            <li>Link: sponsori koduleht (avaneb uues aknas)</li>
                         </ul>
                     </div>
 
@@ -1775,7 +1883,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Lisa sponsor</h3>
+                                    <h3>Lisa sponsor</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => (showAddForm = null)}
@@ -1790,7 +1898,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda sponsorit</h3>
+                                    <h3>Muuda sponsorit</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => selectSponsor(null)}
@@ -1824,7 +1932,7 @@
                     <div
                         class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
-                        <h2>Partnerid (Tudengorganisatsioonid)</h2>
+                        <h2>Partnerid (Tudengiorganisatsioonid)</h2>
                         <Button
                             variant="primary"
                             text="+ Lisa uus"
@@ -1839,11 +1947,23 @@
                     <div
                         class="bg-white/5 p-4 rounded-lg text-sm text-white/70"
                     >
-                        <p class="font-medium text-white mb-2">Juhised:</p>
+                        <p class="font-bold mb-2">Juhised</p>
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Logo peaks olema ruudukujuline</li>
-                            <li>Kaust: "static/partners/"</li>
-                            <li>Projektid eraldada komadega</li>
+                            <li>
+                                Kuvatakse avalikul lehel "Partnerlus" →
+                                "Tudengiorganisatsioonid"
+                            </li>
+                            <li>
+                                Logo: ruudukujuline, kaust <code
+                                    class="bg-white/10 px-1 rounded"
+                                    >static/partners/</code
+                                >
+                            </li>
+                            <li>
+                                Projektid eraldada komadega (nt "Projekt1,
+                                Projekt2")
+                            </li>
+                            <li>Link: partneri koduleht (avaneb uues aknas)</li>
                         </ul>
                     </div>
 
@@ -1875,7 +1995,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Lisa partner</h3>
+                                    <h3>Lisa partner</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => (showAddForm = null)}
@@ -1890,7 +2010,7 @@
                                 <div
                                     class="flex items-center justify-between mb-3"
                                 >
-                                    <h3 class="font-bold">Muuda partnerit</h3>
+                                    <h3>Muuda partnerit</h3>
                                     <button
                                         class="text-xs text-white/60 hover:text-white"
                                         onclick={() => selectPartner(null)}
@@ -1928,7 +2048,7 @@
                     <div class="flex flex-col lg:flex-row gap-8">
                         <!-- New Entry Form -->
                         <div class="w-full lg:w-1/3 bg-white/5 p-6 rounded-lg">
-                            <h3 class="mb-4 font-bold">Uus sissekanne</h3>
+                            <h3 class="mb-4">Uus sissekanne</h3>
                             <div class="flex flex-col gap-4">
                                 <InputField
                                     label="Sinu nimi"
@@ -1953,16 +2073,16 @@
 
                         <!-- Welcome Message -->
                         <div class="w-full lg:w-2/3 bg-white/5 p-6 rounded-lg">
-                            <p class="italic text-white/80">"Tervist!</p>
-                            <p class="mt-3 text-white/70">
-                                Siin meie kodulehe hetke versiooni arendajad
-                                väikse teadaandega - kui sa veel aru ei ole
-                                saanud, siis sul on erakordne võimalus olla osa
-                                ITÜKi kodulehe administraatoritest!
-                            </p>
-                            <p class="mt-3 italic text-white/80">
-                                Tunne vabalt rantida logiraamatusse, ehk leiad
-                                sealt lohutust ka. ;D"
+                            <p class="italic text-white/80">
+                                "Tervist!
+                                <br /><br />
+                                Siin meie kodulehe hetke versiooni arendajad väikse
+                                teadaandega - kui sa veel aru ei ole saanud, siis
+                                sul on erakordne võimalus olla osa ITÜKi kodulehe
+                                administraatoritest!
+                                <br /><br />
+                                Tunne vabalt rantida logiraamatusse, ehk leiad sealt
+                                lohutust ka. ;D"
                             </p>
                         </div>
                     </div>
@@ -2013,10 +2133,7 @@
                     {#if leaderboardLoading}
                         <Loading />
                     {:else if leaderboardEntries.length === 0}
-                        <p class="text-gray">
-                            Edetabelis pole veel kirjeid. Kliki "Lisa TUX kirje"
-                            et luua esimene kirje.
-                        </p>
+                        <p class="text-gray">Edetabelis pole veel kirjeid.</p>
                     {:else}
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">

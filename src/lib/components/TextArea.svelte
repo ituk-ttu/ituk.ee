@@ -25,7 +25,7 @@
 <label class="flex flex-col gap-2 w-full">
     {#if label}
         <span class="text-sm font-medium text-white">
-            {#if required}<span class="text-red">* </span>{/if}{label}
+            {#if required}<span class="text-red-500">*&nbsp;</span>{/if}{label}
         </span>
     {/if}
     <textarea

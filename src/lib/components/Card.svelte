@@ -28,7 +28,12 @@
 </script>
 
 {#if link}
-	<a href={link} target="_blank" rel="noopener noreferrer">
+	<a
+		href={link}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="block transition-transform duration-200 hover:scale-105"
+	>
 		<div
 			class="w-[192px] sm:w-[256px] rounded-lg overflow-hidden flex flex-col"
 			class:h-[312px]={type !== "timeline"}

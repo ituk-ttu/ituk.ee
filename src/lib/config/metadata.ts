@@ -13,7 +13,7 @@ export interface PageMetadata {
 export const siteMetadata = {
     siteName: "ITÜK",
     siteUrl: "https://ituk.ee",
-    defaultImage: "/images/hero.jpg",
+    defaultImage: "/banners/ituk_banner.jpg",
     defaultType: "website",
 };
 
@@ -23,49 +23,49 @@ export const pageMetadata: Record<string, PageMetadata> = {
         title_en: "ITÜK | TalTech School of IT Student Council",
         description: "ITÜK on TalTech IT-teaduskonna üliõpilaskogu - tudengite organisatsioon, mis korraldab üritusi ja esindab üliõpilaste huve.",
         description_en: "ITÜK is the TalTech School of IT Student Council - a student organization that organizes events and represents student interests.",
-        image: "/images/hero.jpg",
+        image: "/banners/ituk_banner.jpg",
     },
     meist: {
         title: "Meist | ITÜK",
-        title_en: "About Us | ITÜK",
+        title_en: "About | ITÜK",
         description: "Tutvu ITÜKi struktuuriga, juhatusega ja ajalooga. ITÜK on TalTech IT-teaduskonna üliõpilaskogu.",
         description_en: "Learn about ITÜK's structure, board, and history. ITÜK is the TalTech School of IT Student Council.",
-        image: "/headers/meist.jpg",
+        image: "/banners/meist_banner.jpg",
     },
     liitu: {
         title: "Liitu | ITÜK",
         title_en: "Join Us | ITÜK",
         description: "Liitu ITÜKiga ja saa osa põnevatest üritustest, koolitustest ja võrgustikust. Ootame kõiki TalTech IT-teaduskonna tudengeid!",
         description_en: "Join ITÜK and be part of exciting events, trainings, and networking. We welcome all TalTech School of IT students!",
-        image: "/headers/liitu.jpg",
+        image: "/banners/ituk_banner.jpg",
     },
     partnerlus: {
-        title: "Partnerlus | ITÜK",
-        title_en: "Partnership | ITÜK",
+        title: "Koostöö | ITÜK",
+        title_en: "Cooperation | ITÜK",
         description: "ITÜKi partnerid ja koostöövõimalused. Tutvu meie partneritega ja võta ühendust koostööks.",
         description_en: "ITÜK partners and collaboration opportunities. Meet our partners and contact us for cooperation.",
-        image: "/headers/cooperation.jpg",
+        image: "/banners/partnerlus_banner.jpg",
     },
     rent: {
         title: "Rent | ITÜK",
         title_en: "Rental | ITÜK",
         description: "ITÜKi renditeenused - laenuta kaableid, juhtmeid ja muid tarvikuid ürituste korraldamiseks.",
         description_en: "ITÜK rental services - borrow cables, wires, and other supplies for organizing events.",
-        image: "/headers/rent.jpg",
+        image: "/banners/rent_banner.jpg",
     },
     uritused: {
         title: "Üritused | ITÜK",
         title_en: "Events | ITÜK",
         description: "ITÜKi üritused - haridus, meelelahutus ja siseüritused. Vaata, mida me korraldame!",
         description_en: "ITÜK events - education, entertainment, and internal events. See what we organize!",
-        image: "/headers/haridus.jpg",
+        image: "/banners/uritused_banner.jpg",
     },
     stiil: {
         title: "Stiiliraamat | ITÜK",
         title_en: "Style Guide | ITÜK",
         description: "ITÜKi stiiliraamat - logod, värvid ja brändijuhised.",
         description_en: "ITÜK style guide - logos, colors, and brand guidelines.",
-        image: "/headers/meist.jpg",
+        image: "/banners/meist_banner.jpg",
     },
 };
 
