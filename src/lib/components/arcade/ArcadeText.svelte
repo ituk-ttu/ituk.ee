@@ -10,12 +10,12 @@
 
     // Sizes based on tag
     const tagSizes: Record<string, string> = {
-        h1: "text-2xl",
-        h2: "text-xl",
-        h3: "text-lg",
-        p: "text-base",
-        div: "text-base",
-        span: "text-base",
+        h1: "text-lg",
+        h2: "text-md",
+        h3: "text-base",
+        p: "text-sm",
+        div: "text-sm",
+        span: "text-ssm",
     };
 
     let {

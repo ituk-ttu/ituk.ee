@@ -22,7 +22,7 @@
     type="button"
     {onclick}
     {disabled}
-    class="font-['ArcadeClassic',monospace] border-2 border-white py-1 px-2 text-base font-normal cursor-pointer transition-none min-w-8 disabled:opacity-50 disabled:cursor-not-allowed {active
+    class="font-['ArcadeClassic',monospace] border-2 border-white pt-1 pb-1.5 pl-1 pr-0.5 text-xs font-normal cursor-pointer transition-none min-w-8 disabled:opacity-50 disabled:cursor-not-allowed {active
         ? 'bg-white text-black'
         : 'bg-black text-white hover:bg-white hover:text-black'} {className}"
 >

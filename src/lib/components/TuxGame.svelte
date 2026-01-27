@@ -269,11 +269,11 @@
         if (!ctx) return;
 
         // Clear canvas
-        ctx.fillStyle = "#131313";
+        ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, canvasSize, canvasSize);
 
         // Draw grid lines (subtle)
-        ctx.strokeStyle = "#222";
+        ctx.strokeStyle = "#333";
         ctx.lineWidth = 1;
         for (let i = 0; i <= GRID_SIZE; i++) {
             ctx.beginPath();
@@ -289,8 +289,8 @@
         // Draw walls if enabled
         if (hasWalls) {
             ctx.strokeStyle = "#870042";
-            ctx.lineWidth = 3;
-            ctx.strokeRect(1, 1, canvasSize - 2, canvasSize - 2);
+            ctx.lineWidth = 8;
+            ctx.strokeRect(0, 0, canvasSize, canvasSize);
         }
 
         // Draw fishes
@@ -632,10 +632,8 @@
         style="width: {canvasSize + 48}px; min-width: 320px;"
     >
         <!-- Header -->
-        <div
-            class="flex justify-between items-center border-b-2 border-white pb-2"
-        >
-            <ArcadeText tag="h3" class="text-white">{m.tux_title()}</ArcadeText>
+        <div class="flex justify-between items-center pb-2">
+            <ArcadeText tag="p" class="text-white">{m.tux_title()}</ArcadeText>
             <ArcadeButtonSmall onclick={closeGame}>X</ArcadeButtonSmall>
         </div>
 
@@ -677,18 +675,18 @@
 
             <!-- Settings Screen -->
         {:else if screen === "settings"}
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-4">
                 <ArcadeText tag="h1" class="text-white text-center"
                     >{m.tux_settings()}</ArcadeText
                 >
 
                 <!-- Audio Settings -->
-                <div class="flex flex-col gap-2 border-t-2 border-white pt-2">
+                <div class="flex flex-col gap-2 pt-2">
                     <ArcadeText tag="h3" class="text-white"
                         >{m.tux_audio()}</ArcadeText
                     >
                     <div class="flex justify-between items-center">
-                        <ArcadeText tag="h3" class="text-white"
+                        <ArcadeText tag="p" class="text-white"
                             >{m.tux_master({ level: masterVolume })}</ArcadeText
                         >
                         <div class="flex gap-1">
@@ -713,7 +711,7 @@
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <ArcadeText tag="h3" class="text-white"
+                        <ArcadeText tag="p" class="text-white"
                             >{m.tux_music({ level: musicVolume })}</ArcadeText
                         >
                         <div class="flex gap-1">
@@ -735,7 +733,7 @@
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <ArcadeText tag="h3" class="text-white"
+                        <ArcadeText tag="p" class="text-white"
                             >{m.tux_sfx({ level: sfxVolume })}</ArcadeText
                         >
                         <div class="flex gap-1">
@@ -756,7 +754,7 @@
                 </div>
 
                 <!-- Difficulty -->
-                <div class="flex flex-col gap-2 border-t-2 border-white pt-2">
+                <div class="flex flex-col gap-2 pt-2">
                     <ArcadeText tag="h3" class="text-white"
                         >{m.tux_speed()}</ArcadeText
                     >
@@ -778,10 +776,8 @@
                 </div>
 
                 <!-- Walls -->
-                <div
-                    class="flex items-center justify-between border-t-2 border-white pt-2"
-                >
-                    <ArcadeText tag="h3" class="text-white"
+                <div class="flex items-center justify-between pt-2">
+                    <ArcadeText tag="p" class="text-white"
                         >{m.tux_walls()}</ArcadeText
                     >
                     <ArcadeButtonSmall
@@ -798,7 +794,7 @@
 
                 <!-- Fish Count -->
                 <div class="flex items-center justify-between">
-                    <ArcadeText tag="h3" class="text-white"
+                    <ArcadeText tag="p" class="text-white"
                         >{m.tux_fish({ count: fishCount })}</ArcadeText
                     >
                     <div class="flex gap-1">
@@ -817,7 +813,7 @@
 
                 <!-- Golden Fish -->
                 <div class="flex items-center justify-between">
-                    <ArcadeText tag="h3" class="text-white"
+                    <ArcadeText tag="p" class="text-white"
                         >{m.tux_goldenfish()}</ArcadeText
                     >
                     <ArcadeButtonSmall
@@ -857,14 +853,18 @@
                         >{m.tux_noscores()}</ArcadeText
                     >
                 {:else}
-                    <div class="border-2 border-white p-2">
+                    <div class="p-2">
                         <ArcadeText
                             tag="div"
-                            class="flex justify-between text-white border-b border-white pb-1 mb-1"
+                            class="flex justify-between text-white pb-1 mb-1"
                         >
-                            <span class="w-12">{m.tux_rank()}</span>
-                            <span class="w-16">{m.tux_name()}</span>
-                            <span class="flex-1 text-right"
+                            <span class="w-20 flex-initial text-right"
+                                >{m.tux_rank()}</span
+                            >
+                            <span class="w-20 flex-initial text-right"
+                                >{m.tux_name()}</span
+                            >
+                            <span class="w-full flex-1 text-center"
                                 >{m.tux_score({ score: "" })}</span
                             >
                         </ArcadeText>
@@ -875,7 +875,7 @@
                                     ? 'text-yellow-400'
                                     : 'text-white'}"
                             >
-                                <span class="w-12"
+                                <span class="w-20 flex-initial text-right"
                                     >{i === 0
                                         ? m.tux_rank_1st()
                                         : i === 1
@@ -886,8 +886,10 @@
                                                   rank: i + 1,
                                               })}</span
                                 >
-                                <span class="w-16">{entry.name}</span>
-                                <span class="flex-1 text-right"
+                                <span class="w-20 flex-initial text-right"
+                                    >{entry.name}</span
+                                >
+                                <span class="w-full flex-1 text-center"
                                     >{entry.score}</span
                                 >
                             </ArcadeText>
@@ -916,7 +918,7 @@
                     bind:this={canvas}
                     width={canvasSize}
                     height={canvasSize}
-                    class="border-2 border-white"
+                    class="border-4 border-white"
                 ></canvas>
             </div>
 
@@ -960,7 +962,8 @@
                                 }}>▲</ArcadeButtonSmall
                             >
                             <ArcadeText
-                                class="bg-transparent border-0 border-b-4 px-2 cursor-pointer {currentInitialIndex ===
+                                tag="p"
+                                class="bg-transparent border-0 border-b-4 px-2 pb-1 cursor-pointer {currentInitialIndex ===
                                 i
                                     ? 'text-yellow-400 border-yellow-400'
                                     : 'text-white border-white'}"
@@ -993,7 +996,7 @@
                     >{m.tux_credits()}</ArcadeText
                 >
 
-                <div class="border-t-2 border-white pt-3">
+                <div class="pt-3">
                     <ArcadeText tag="p" class="text-yellow-400"
                         >{m.tux_credits_music()}</ArcadeText
                     >
@@ -1010,7 +1013,7 @@
                     </div>
                 </div>
 
-                <div class="border-t-2 border-white pt-3">
+                <div class="pt-3">
                     <ArcadeText tag="p" class="text-yellow-400"
                         >{m.tux_credits_fish()}</ArcadeText
                     >
