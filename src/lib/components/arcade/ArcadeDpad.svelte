@@ -9,7 +9,7 @@
     let { onUp, onDown, onLeft, onRight }: Props = $props();
 
     const btnClass =
-        "font-['ArcadeClassic',monospace] w-16 h-16 bg-black text-white border-4 border-white text-xl cursor-pointer flex items-center justify-center touch-manipulation active:bg-white active:text-black";
+        "font-['ArcadeClassic',monospace] w-16 h-16 pl-1 pb-1 bg-black text-white border-4 border-white text-xl cursor-pointer flex items-center justify-center touch-manipulation active:bg-white active:text-black";
 </script>
 
 <div
