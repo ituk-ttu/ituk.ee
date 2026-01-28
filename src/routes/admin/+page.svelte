@@ -81,6 +81,10 @@
     import { getLeaderboard, type LeaderboardEntry } from "$lib/firebase";
     let leaderboardEntries = $state<LeaderboardEntry[]>([]);
     let leaderboardLoading = $state(false);
+    let deleteConfirmDialog = $state<{
+        show: boolean;
+        entry: LeaderboardEntry | null;
+    }>({ show: false, entry: null });
 
     async function loadLeaderboard() {
         leaderboardLoading = true;
@@ -91,6 +95,30 @@
             toasts.error("Viga", "Edetabeli laadimisel tekkis viga");
         }
         leaderboardLoading = false;
+    }
+
+    function openDeleteConfirm(entry: LeaderboardEntry) {
+        deleteConfirmDialog = { show: true, entry };
+    }
+
+    function closeDeleteConfirm() {
+        deleteConfirmDialog = { show: false, entry: null };
+    }
+
+    async function confirmDeleteLeaderboardEntry() {
+        if (!deleteConfirmDialog.entry?.id) return;
+
+        try {
+            await deleteDoc(
+                doc(db, "leaderboard", deleteConfirmDialog.entry.id),
+            );
+            toasts.success("Kustutatud", "Edetabeli sissekanne on kustutatud");
+            closeDeleteConfirm();
+            await loadLeaderboard();
+        } catch (e) {
+            console.error("Error deleting leaderboard entry:", e);
+            toasts.error("Viga", "Kustutamisel tekkis viga");
+        }
     }
 
     // Data
@@ -2143,6 +2171,7 @@
                                         <th class="p-2">Nimi</th>
                                         <th class="p-2">Skoor</th>
                                         <th class="p-2">Kuupäev</th>
+                                        <th class="p-2">Tegevused</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -2163,6 +2192,16 @@
                                                     "et-EE",
                                                 ) || ""}</td
                                             >
+                                            <td class="p-2">
+                                                <Button
+                                                    variant="secondary"
+                                                    text="Kustuta"
+                                                    onclick={() =>
+                                                        openDeleteConfirm(
+                                                            entry,
+                                                        )}
+                                                />
+                                            </td>
                                         </tr>
                                     {/each}
                                 </tbody>
@@ -2181,3 +2220,47 @@
         </div>
     {/if}
 </div>
+
+<!-- Delete Confirmation Dialog -->
+{#if deleteConfirmDialog.show}
+    <div
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="delete-dialog-title"
+        tabindex="-1"
+        onclick={(e) => {
+            if (e.target === e.currentTarget) closeDeleteConfirm();
+        }}
+        onkeydown={(e) => {
+            if (e.key === "Escape") closeDeleteConfirm();
+        }}
+    >
+        <div
+            class="bg-background border border-white/10 rounded-lg p-6 max-w-md w-full"
+        >
+            <h3 id="delete-dialog-title" class="text-xl font-bold mb-4">
+                Kinnita kustutamine
+            </h3>
+            <p class="mb-6 text-white/80">
+                Kas oled kindel, et soovid kustutada edetabeli sissekande <strong
+                    >{deleteConfirmDialog.entry?.name}</strong
+                >
+                (skoor: {deleteConfirmDialog.entry?.score})?
+            </p>
+            <div class="flex gap-3 justify-end">
+                <Button
+                    variant="secondary"
+                    text="Tühista"
+                    onclick={closeDeleteConfirm}
+                />
+                <button
+                    class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded transition-colors font-medium"
+                    onclick={confirmDeleteLeaderboardEntry}
+                >
+                    Kustuta
+                </button>
+            </div>
+        </div>
+    </div>
+{/if}
