@@ -959,7 +959,7 @@
                                 onclick={() => {
                                     currentInitialIndex = i;
                                     cycleInitial(1);
-                                }}>▲</ArcadeButtonSmall
+                                }}>^</ArcadeButtonSmall
                             >
                             <ArcadeText
                                 tag="p"
@@ -974,7 +974,7 @@
                                 onclick={() => {
                                     currentInitialIndex = i;
                                     cycleInitial(-1);
-                                }}>▼</ArcadeButtonSmall
+                                }}>v</ArcadeButtonSmall
                             >
                         </div>
                     {/each}
@@ -984,9 +984,14 @@
                     >{m.tux_enterinitials()}</ArcadeText
                 >
 
-                <ArcadeButton onclick={submitHighScore}
-                    >{m.tux_submit()}</ArcadeButton
-                >
+                <div class="flex flex-col w-full gap-2">
+                    <ArcadeButton onclick={submitHighScore}
+                        >{m.tux_submit()}</ArcadeButton
+                    >
+                    <ArcadeButton onclick={() => (screen = "menu")}
+                        >{m.tux_back()}</ArcadeButton
+                    >
+                </div>
             </div>
 
             <!-- Credits Screen -->
