@@ -49,6 +49,40 @@ var app = new Vue({
         }).then(function (response) {
             this.events = response.body.items;
         });
+
+        this.events = [
+            {
+                "summary": "Kevadsport",
+                "location": "IT Kolledži kõrval muruplatsil",
+                "start": {
+                    "dateTime": "2026-05-07T12:00:00.000Z"
+                },
+                "end": {
+                    "dateTime": "2026-05-07T20:00:00.000Z"
+                }
+            },
+            {
+                "summary": "TipiLAN",
+                "location": "Peamaja",
+                "description": "https://tipilan.ee",
+                "start": {
+                    "dateTime": "2026-09-11T10:00:00.000Z"
+                },
+                "end": {
+                    "dateTime": "2026-09-13T20:00:00.000Z"
+                }
+            },
+            {
+                "summary": "Tudengibaar",
+                "location": "IT Kolledž",
+                "start": {
+                    "dateTime": "2026-12-04T16:00:00.000Z"
+                },
+                "end": {
+                    "dateTime": "2026-12-05T00:00:00.000Z"
+                }
+            },
+        ]
         this.$http.get("https://blog.ituk.ee/ghost/api/v2/content/posts/?key=40f4bf1195234ef97153aea589&limit=3").then(function (response) {
             this.blogPosts = response.body.posts;
         });
