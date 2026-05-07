@@ -1,0 +1,37 @@
+/* Self-hosted fonts for better performance */
+/* Download fonts from Google Fonts and place ttf files in this folder */
+
+/* Raleway - Variable font */
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+/* Noto Sans Georgian - Variable font */
+@font-face {
+    font-family: 'Noto Sans Georgian';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+/* Arcade Classic - Retro pixel font for Tux game */
+@font-face {
+    font-family: 'ArcadeClassic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/arcade-classic-v2.ttf') format('truetype');
+}
