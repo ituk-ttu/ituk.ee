@@ -37,7 +37,7 @@
                             variant="primary"
                             size="lg"
                             text={m.home_joinus()}
-                            to="https://liitu.ituk.ee/"
+                            to="https://forms.gle/ci5MnseRW3PB1fes6"
                         />
                         <Button
                             variant="secondary"
