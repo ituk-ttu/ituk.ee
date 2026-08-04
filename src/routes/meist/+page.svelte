@@ -111,6 +111,14 @@
             <h2>{m.aboutus_answer()}</h2>
             <p>{m.aboutus_answer2()}</p>
             <p>{m.aboutus_answer3()}</p>
+            <p>
+                <a
+                    href="/infoohtud"
+                    class="text-primary underline hover:brightness-125"
+                >
+                    {m.infoevenings_aboutus()}
+                </a>
+            </p>
         </div>
         <div
             class="h-full justify-center items-stretch flex-col xs:flex-row flex gap-8"

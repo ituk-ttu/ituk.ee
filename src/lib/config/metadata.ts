@@ -60,6 +60,13 @@ export const pageMetadata: Record<string, PageMetadata> = {
         description_en: "ITÜK events - education, entertainment, and internal events. See what we organize!",
         image: "/banners/uritused_banner.jpg",
     },
+    infoohtud: {
+        title: "Infoõhtud | ITÜK",
+        title_en: "Info Evenings | ITÜK",
+        description: "ITÜKi infoõhtud - tule tutvu ITÜKiga ja saa teada, mida me teeme.",
+        description_en: "ITÜK info evenings - come meet ITÜK and find out what we do.",
+        image: "/banners/meist_banner.jpg",
+    },
     stiil: {
         title: "Stiiliraamat | ITÜK",
         title_en: "Style Guide | ITÜK",
