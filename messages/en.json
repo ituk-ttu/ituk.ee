@@ -281,5 +281,12 @@
 	"admin_toast_year_error": "Error saving academic year",
 	"admin_toast_log_saved": "Logbook entry added successfully!",
 	"admin_toast_log_error": "Error adding logbook entry",
-	"admin_toast_fill_fields": "Please fill in all fields"
+	"admin_toast_fill_fields": "Please fill in all fields",
+	"infoohtud_title": "Info Evenings",
+	"infoohtud_intro1": "Info evenings are the easiest way to get to know ITÜK. We give an overview of what the School of IT Student Council does over the academic year, introduce TalTech student life more broadly – including the Rector's Cup – and talk about how you can get involved in organising things yourself. First-year students especially are welcome, but the door is open to all students of the faculty, whatever year you're in!",
+	"infoohtud_intro2": "The most valuable thing you can get from an info evening is the connections you make: fellow students starting at the same time as you, and members from older years you can ask for advice about your studies and about ITÜK. Getting involved in project teams gives you real organising experience from your very first semester, and memories that stick around. There are four info evenings this year - join whichever suits you best. Details for each one are in its corresponding Facebook event.",
+	"infoohtud_events_heading": "Dates",
+	"infoohtud_location_tba": "Location to be announced",
+	"infoohtud_fb_link": "Facebook event",
+	"infoevenings_aboutus": "Get to know us at one of our info evenings"
 }

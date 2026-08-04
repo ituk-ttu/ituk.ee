@@ -280,5 +280,12 @@
 	"admin_toast_year_error": "Õppeaasta salvestamisel tekkis viga",
 	"admin_toast_log_saved": "Logiraamatu sissekanne edukalt lisatud!",
 	"admin_toast_log_error": "Logiraamatu sissekande lisamisel tekkis viga",
-	"admin_toast_fill_fields": "Palun täida kõik väljad"
+	"admin_toast_fill_fields": "Palun täida kõik väljad",
+	"infoohtud_title": "Infoõhtud",
+	"infoohtud_intro1": "Infoõhtud on kõige lihtsam viis ITÜKiga tuttavaks saada. Anname ülevaate sellest, mida IT-teaduskonna üliõpilaskogu õppeaasta jooksul teeb, tutvustame TalTechi tudengielu laiemalt – sealhulgas Rektori Karikat – ja räägime, kuidas sa ise korraldamises kaasa lööma pääsed. Ootame eelkõige esmakursuslasi, kuid oodatud on kõik teaduskonna tudengid olenemata kursusest!",
+	"infoohtud_intro2": "Kõige väärtustlikum asi, mida infoõhtu jooksul saad, on tutvused: nii kaastudengid, kes alustavad sinuga samal ajal, kui ka vanemate kursuste liikmed, kellelt küsida nõu õppetöö ja ITÜKi kohta. Projektimeeskondades kaasa löömine annab päris korralduskogemuse juba esimesest semestrist ja mälestused, mis nii pea ei unune. Infoõhtud toimuvad see aasta neljal korral - ühine sellega, mis sulle kõige paremini sobib. Täpsem info iga infoõhtu kohta on vastaval Facebooki sündmusel.",
+	"infoohtud_events_heading": "Toimumisajad",
+	"infoohtud_location_tba": "Asukoht täpsustamisel",
+	"infoohtud_fb_link": "Facebooki sündmus",
+	"infoevenings_aboutus": "Tule saa meiega tuttavaks mõnel meie infoõhtul"
 }
