@@ -18,7 +18,8 @@
 	let socialFacebook = $state("https://www.facebook.com/ituk.taltech/");
 	let socialInstagram = $state("https://www.instagram.com/ituk.taltech/");
 	let socialGithub = $state("https://www.github.com/ituk-ttu/");
-	let hubLink = $state("https://hub.ituk.ee/");
+	let socialTikTok = $state("https://tiktok.com/@ituk_taltech");
+	let hubLink = $state("https://hub3.ituk.ee/");
 
 	onMount(async () => {
 		try {
@@ -33,6 +34,7 @@
 				savedFacebook,
 				savedInstagram,
 				savedGithub,
+				savedTikTok,
 				savedHub,
 			] = await Promise.all([
 				getSetting("contactEmail"),
@@ -45,6 +47,7 @@
 				getSetting("socialFacebook"),
 				getSetting("socialInstagram"),
 				getSetting("socialGithub"),
+				getSetting("socialTikTok"),
 				getSetting("hubLink"),
 			]);
 			if (savedEmail) contactEmail = savedEmail;
@@ -57,6 +60,7 @@
 			if (savedFacebook) socialFacebook = savedFacebook;
 			if (savedInstagram) socialInstagram = savedInstagram;
 			if (savedGithub) socialGithub = savedGithub;
+			if (savedTikTok) socialTikTok = savedTikTok;
 			if (savedHub) hubLink = savedHub;
 		} catch (e) {
 			console.error("Error loading footer settings:", e);
@@ -152,8 +156,22 @@
 					class="w-6 h-6 hover:opacity-80 transition-opacity"
 				/>
 			</a>
+			<div class="w-[2px] h-6 bg-white"></div>
+			<a
+					href={socialTikTok}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="TikTok"
+			>
+				<img
+						src="/icons/tiktok.svg"
+						alt="TikTok"
+						class="w-6 h-6 hover:opacity-80 transition-opacity"
+				/>
+			</a>
+
 		</div>
-		<div class="flex items-center justify-between w-full gap-6">
+		<div class="flex items-center gap-6">
 			<a
 				href={hubLink}
 				target="_blank"

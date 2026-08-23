@@ -72,7 +72,7 @@
 			variant="primary"
 			size="lg"
 			text={m.navbar_join()}
-			to="https://liitu.ituk.ee/"
+			to="https://hub3.ituk.ee/liitu"
 		/>
 		<LanguageSwitcher />
 	</div>
@@ -83,7 +83,7 @@
 			variant="primary"
 			size="lg"
 			text={m.navbar_join()}
-			to="https://liitu.ituk.ee/"
+			to="https://hub3.ituk.ee/liitu"
 			class="hidden md:flex"
 		/>
 		<LanguageSwitcher />
@@ -148,7 +148,7 @@
 				variant="primary"
 				size="lg"
 				text={m.navbar_join()}
-				to="https://liitu.ituk.ee/"
+				to="https://hub3.ituk.ee/liitu"
 				class="md:hidden"
 			/>
 		</div>
