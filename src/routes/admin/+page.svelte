@@ -143,7 +143,7 @@
     let socialFacebook = $state("https://www.facebook.com/ituk.taltech/");
     let socialInstagram = $state("https://www.instagram.com/ituk.taltech/");
     let socialGithub = $state("https://www.github.com/ituk-ttu/");
-    let hubLink = $state("https://hub.ituk.ee/");
+    let hubLink = $state("https://hub3.ituk.ee/");
 
     // Statistics - values
     let statMembersAllTime = $state("1200+");
@@ -996,7 +996,7 @@
                             />
                             <InputField
                                 label="HUB link"
-                                placeholder="https://hub.ituk.ee/"
+                                placeholder="https://hub3.ituk.ee/"
                                 bind:value={hubLink}
                             />
                         </div>
