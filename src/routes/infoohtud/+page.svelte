@@ -52,6 +52,7 @@
     <div class="section-padding container-content flex flex-col gap-8">
         <p>{m.infoohtud_intro1()}</p>
         <p>{m.infoohtud_intro2()}</p>
+        <p>{m.infoohtud_intro3()}</p>
 
         <h2>{m.infoohtud_events_heading()}</h2>
         <ul class="list-none pl-0 flex flex-col gap-4">
