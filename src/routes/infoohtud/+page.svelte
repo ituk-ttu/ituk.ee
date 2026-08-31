@@ -12,28 +12,28 @@
             location: "Akadeemia tee 15a, ICT-315",
             facebook: "https://fb.me/e/9H0AUReW9",
             time: "19:00 - 22:00",
-            end: "2026-08-26T20:00:00+03:00"
+            end: "2026-08-27T22:00:00+03:00"
         },
         {
             date: m.infoohtu_date2(),
             location: "Akadeemia tee 15a, ICT-315",
             facebook: "https://fb.me/e/5NDXGGKRW",
             time: "19:00 - 22:00",
-            end: "2026-09-03T20:00:00+03:00"
+            end: "2026-09-03T22:00:00+03:00"
         },
         {
             date: m.infoohtu_date3(),
             location: "Peatus, Telliskivi",
             facebook: "https://fb.me/e/7bub45Nm6",
             time: "19:00 - 22:00",
-            end: "2026-09-10T20:00:00+03:00"
+            end: "2026-09-10T22:00:00+03:00"
         },
         {
             date: m.infoohtu_date4(),
             location: "Akadeemia tee 15a, ICT-315",
             facebook: "https://fb.me/e/byXO8YPgw",
             time: "18:00 - 22:00",
-            end: "2026-09-24T20:00:00+03:00"
+            end: "2026-09-24T22:00:00+03:00"
         },
     ];
 
@@ -53,7 +53,6 @@
         <p>{m.infoohtud_intro1()}</p>
         <p>{m.infoohtud_intro2()}</p>
         <p>{m.infoohtud_intro3()}</p>
-
 
         <h2>{m.infoohtud_events_heading()}</h2>
         <ul class="list-none pl-0 flex flex-col gap-4">
